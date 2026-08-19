@@ -265,22 +265,22 @@
                 <!-- Search & Filters Container -->
                 <div class="bg-[#FFFFFF] rounded-2xl border border-[#E8E4DD] p-4 sm:p-6 lg:p-7 shadow-2xs space-y-4 sm:space-y-5">
                     
-                    <!-- Search Input -->
-                    <div class="relative flex items-center">
-                        <div class="absolute inset-y-0 left-0 pl-3.5 sm:pl-5 flex items-center pointer-events-none text-[#71717A]">
+                    <!-- Search Input (Fixed Mobile Spacing & Zero Overlap) -->
+                    <div class="relative flex items-center w-full">
+                        <div class="absolute left-3.5 sm:left-4.5 flex items-center pointer-events-none text-[#71717A]">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                         </div>
                         <input 
                             type="text" 
                             id="keywordInput" 
-                            placeholder="請輸入建案名稱、建設公司、代表人..." 
-                            class="w-full pl-9.5 sm:pl-14 pr-18 sm:pr-28 py-2.5 sm:py-3.5 text-xs sm:text-base bg-[#FAF9F7] border border-[#E2DDD5] rounded-xl sm:rounded-2xl text-[#18181B] placeholder-[#9E988D] focus:outline-hidden focus:border-[#18181B] focus:bg-[#FFFFFF] transition-all shadow-2xs"
+                            placeholder="搜尋建案、建商、代表人..." 
+                            class="w-full pl-10.5 sm:pl-13 pr-18 sm:pr-24 py-2.5 sm:py-3.5 text-xs sm:text-sm md:text-base bg-[#FAF9F7] border border-[#E2DDD5] rounded-xl sm:rounded-2xl text-[#18181B] placeholder-[#9E988D] focus:outline-hidden focus:border-[#18181B] focus:bg-[#FFFFFF] transition-all shadow-2xs"
                             oninput="onSearchInput()"
                             onkeydown="if(event.key==='Enter') onSearchClick()"
                         />
                         <button 
                             onclick="onSearchClick()"
-                            class="absolute right-1.5 sm:right-2 px-3.5 sm:px-6 py-1.5 sm:py-2 bg-[#18181B] hover:bg-[#27272A] text-white font-bold text-xs sm:text-sm rounded-lg sm:rounded-xl transition shadow-xs flex items-center gap-1 cursor-pointer"
+                            class="absolute right-1.5 sm:right-2 px-3.5 sm:px-5 py-1.5 sm:py-2 bg-[#18181B] hover:bg-[#27272A] text-white font-bold text-xs sm:text-sm rounded-lg sm:rounded-xl transition shadow-xs flex items-center gap-1 cursor-pointer"
                         >
                             檢索
                         </button>
