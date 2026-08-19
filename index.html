@@ -173,34 +173,36 @@
     <!-- Top Navigation / Header -->
     <header class="bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E8E4DD] sticky top-0 z-30 shadow-2xs">
         <div class="fluid-container">
-            <div class="flex items-center justify-between h-20 py-3">
-                <!-- Title & Update Date (Clean Header without icon) -->
-                <div>
-                    <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-[#18181B] flex items-center gap-2.5">
-                        宜蘭建案查詢系統
-                        <span class="text-xs font-semibold text-[#71717A] bg-[#F4F1EB] px-2.5 py-0.5 rounded-full border border-[#E5E0D6] hidden md:inline-block font-mono">
-                            更新日期：2026/08/19
-                        </span>
-                    </h1>
-                    <p class="text-xs sm:text-sm text-[#71717A] hidden sm:block mt-0.5">
-                        內政部預售屋備查資料庫 · 整合 577 筆建案、4,908 筆地號與建商負責人名冊
-                    </p>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between py-2.5 sm:py-3 gap-2.5 sm:gap-3">
+                <!-- Title & Update Date -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-lg sm:text-2xl font-bold tracking-tight text-[#18181B] flex items-center gap-2">
+                            宜蘭建案查詢系統
+                            <span class="text-[11px] sm:text-xs font-semibold text-[#71717A] bg-[#F4F1EB] px-2 py-0.5 rounded-full border border-[#E5E0D6] font-mono">
+                                2026/08/19 更新
+                            </span>
+                        </h1>
+                        <p class="text-xs text-[#71717A] hidden md:block mt-0.5">
+                            內政部預售屋備查資料庫 · 整合 577 筆建案、4,908 筆地號與建商負責人名冊
+                        </p>
+                    </div>
                 </div>
 
-                <!-- Navigation Tabs -->
-                <div class="flex items-center space-x-2.5 shrink-0">
-                    <button id="tabSearchBtn" onclick="switchView('search')" class="px-4 py-2.5 text-sm font-semibold rounded-xl bg-[#18181B] text-[#FAF8F5] flex items-center gap-2 transition shadow-xs">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <!-- Navigation Tabs (Optimized for Mobile Touch) -->
+                <div class="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0 w-full sm:w-auto">
+                    <button id="tabSearchBtn" onclick="switchView('search')" class="flex-1 sm:flex-none justify-center px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#18181B] text-[#FAF8F5] flex items-center gap-1.5 transition shadow-xs">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                         <span>建案檢索</span>
                     </button>
                     
-                    <button id="tabBuildersBtn" onclick="switchView('builders')" class="px-4 py-2.5 text-sm font-semibold rounded-xl bg-[#FFFFFF] text-[#52525B] hover:text-[#18181B] hover:bg-[#F4F1EB] border border-[#E2DDD5] flex items-center gap-2 transition">
-                        <svg class="w-4 h-4 text-[#71717A]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    <button id="tabBuildersBtn" onclick="switchView('builders')" class="flex-1 sm:flex-none justify-center px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#FFFFFF] text-[#52525B] hover:text-[#18181B] hover:bg-[#F4F1EB] border border-[#E2DDD5] flex items-center gap-1.5 transition">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#71717A]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                         <span>建商名冊</span>
                     </button>
 
-                    <button id="tabStatsBtn" onclick="switchView('stats')" class="px-4 py-2.5 text-sm font-semibold rounded-xl bg-[#FFFFFF] text-[#52525B] hover:text-[#18181B] hover:bg-[#F4F1EB] border border-[#E2DDD5] flex items-center gap-2 transition">
-                        <svg class="w-4 h-4 text-[#71717A]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                    <button id="tabStatsBtn" onclick="switchView('stats')" class="flex-1 sm:flex-none justify-center px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#FFFFFF] text-[#52525B] hover:text-[#18181B] hover:bg-[#F4F1EB] border border-[#E2DDD5] flex items-center gap-1.5 transition">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#71717A]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
                         <span>數據圖鑑</span>
                     </button>
                 </div>
