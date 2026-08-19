@@ -69458,7 +69458,6 @@
             const content = document.getElementById('modalContent');
             const bInfo = buildersMap[p.builder] || {};
 
-            // 簡易格式化使用分區標示 (例如: 都市土地:住宅區、非都市:特定農業區 甲種建築用地)
             let zoningSummary = p.useZoning || '未載明';
             const z = p.zoningInfo || {};
             const plan = z.planType || '';
@@ -69474,114 +69473,114 @@
             const mapSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((p.town || '宜蘭縣') + ' ' + (p.location || p.mainLand || ''))}`;
 
             content.innerHTML = `
-                <!-- Modal Header -->
-                <div class="bg-[#18181B] text-white p-6 sm:p-7 rounded-t-2xl flex items-start justify-between">
-                    <div>
-                        <div class="flex items-center gap-2.5 mb-2.5 flex-wrap">
-                            <span class="px-3 py-0.8 rounded-lg text-xs font-bold bg-white/20 text-white border border-white/20">
+                <!-- Modal Header (Fixed Top) -->
+                <div class="bg-[#18181B] text-white p-4.5 sm:p-7 flex items-start justify-between shrink-0">
+                    <div class="min-w-0 pr-3">
+                        <div class="flex items-center gap-2 mb-2 flex-wrap">
+                            <span class="px-2.5 py-0.5 rounded-lg text-xs font-bold bg-white/20 text-white border border-white/20">
                                 ${p.town || '宜蘭縣'}
                             </span>
-                            <span class="px-3 py-0.8 rounded-lg text-xs font-semibold bg-white/10 text-white/90 border border-white/10 font-mono">
+                            <span class="px-2.5 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-white/10 text-white/90 border border-white/10 font-mono">
                                 備查序號：${p.numberCode || '--'}
                             </span>
                         </div>
-                        <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">${escapeHtml(p.caseName || '未命名建案')}</h3>
-                        <p class="text-sm text-white/80 mt-1.5">起造人：${escapeHtml(p.builder || '未提供')}</p>
+                        <h3 class="text-xl sm:text-3xl font-bold tracking-tight text-white truncate leading-tight">${escapeHtml(p.caseName || '未命名建案')}</h3>
+                        <p class="text-xs sm:text-sm text-white/80 mt-1 truncate">起造人：${escapeHtml(p.builder || '未提供')}</p>
                     </div>
-                    <button onclick="closeDetailModal()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition shrink-0">
-                        <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <button onclick="closeDetailModal()" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition shrink-0">
+                        <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
                 </div>
 
-                <!-- Modal Body (Clean & Compact Spec Sheet Layout) -->
-                <div class="p-6 sm:p-7 space-y-6 text-sm sm:text-base text-[#18181B]">
+                <!-- Modal Body (Independently Scrollable on Mobile) -->
+                <div class="p-4 sm:p-7 space-y-4 sm:space-y-6 text-xs sm:text-sm text-[#18181B] overflow-y-auto custom-scrollbar flex-1">
                     
                     <!-- Section 1: Company Profile -->
-                    <div class="bg-[#FAF9F7] rounded-2xl border border-[#E8E4DD] p-5 sm:p-6">
-                        <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#71717A] mb-3.5">
+                    <div class="bg-[#FAF9F7] rounded-2xl border border-[#E8E4DD] p-4 sm:p-6">
+                        <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#71717A] mb-3">
                             起造公司與負責人商工檔案
                         </h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-sm">
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD]">
-                                <span class="text-[#71717A] text-xs block mb-1">負責人 / 代表人</span>
-                                <span class="font-bold text-[#8C532B] text-lg">${escapeHtml(bInfo.representative || '自然人起造 / 查證中')}</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD]">
+                                <span class="text-[#71717A] text-xs block mb-0.5">負責人 / 代表人</span>
+                                <span class="font-bold text-[#8C532B] text-base sm:text-lg">${escapeHtml(bInfo.representative || '自然人起造 / 查證中')}</span>
                             </div>
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD]">
-                                <span class="text-[#71717A] text-xs block mb-1">統一編號 / 登記現況</span>
-                                <span class="font-mono font-bold text-base">${bInfo.unifiedNo || '-'} (${bInfo.status || '核准設立'})</span>
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD]">
+                                <span class="text-[#71717A] text-xs block mb-0.5">統一編號 / 登記現況</span>
+                                <span class="font-mono font-bold text-sm sm:text-base">${bInfo.unifiedNo || '-'} (${bInfo.status || '核准設立'})</span>
                             </div>
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD]">
-                                <span class="text-[#71717A] text-xs block mb-1">登記資本額</span>
-                                <span class="font-semibold text-base">${bInfo.capital || '未提供'}</span>
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD]">
+                                <span class="text-[#71717A] text-xs block mb-0.5">登記資本額</span>
+                                <span class="font-semibold text-sm sm:text-base">${bInfo.capital || '未提供'}</span>
                             </div>
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD]">
-                                <span class="text-[#71717A] text-xs block mb-1">公司登記地址</span>
-                                <span class="font-medium text-xs sm:text-sm text-[#52525B]">${escapeHtml(bInfo.address || '未提供')}</span>
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD]">
+                                <span class="text-[#71717A] text-xs block mb-0.5">公司登記地址</span>
+                                <span class="font-medium text-xs sm:text-sm text-[#52525B] leading-relaxed">${escapeHtml(bInfo.address || '未提供')}</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Section 2: Building Specs & Concise Zoning (Integrated Clean Spec Cards) -->
-                    <div class="bg-[#FAF9F7] rounded-2xl border border-[#E8E4DD] p-5 sm:p-6">
-                        <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#71717A] mb-3.5">
+                    <!-- Section 2: Building Specs & Concise Zoning -->
+                    <div class="bg-[#FAF9F7] rounded-2xl border border-[#E8E4DD] p-4 sm:p-6">
+                        <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#71717A] mb-3">
                             建案規格與使用分區
                         </h4>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3.5 text-sm">
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD]">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD]">
                                 <span class="text-[#71717A] text-xs block">申報總戶數</span>
-                                <span class="font-bold font-mono text-lg text-[#18181B] mt-0.5 block">${p.household ? p.household + ' 戶' : '未填'}</span>
+                                <span class="font-bold font-mono text-base sm:text-lg text-[#18181B] mt-0.5 block">${p.household ? p.household + ' 戶' : '未填'}</span>
                             </div>
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD] sm:col-span-2">
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD] sm:col-span-2">
                                 <span class="text-[#71717A] text-xs block">使用分區</span>
-                                <span class="font-bold text-[#18181B] text-base mt-0.5 block truncate text-[#8C532B]" title="${escapeHtml(zoningSummary)}">${escapeHtml(zoningSummary)}</span>
+                                <span class="font-bold text-[#8C532B] text-sm sm:text-base mt-0.5 block" title="${escapeHtml(zoningSummary)}">${escapeHtml(zoningSummary)}</span>
                             </div>
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD]">
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD]">
                                 <span class="text-[#71717A] text-xs block">主要用途</span>
-                                <span class="font-semibold text-[#18181B] text-sm mt-0.5 block">${escapeHtml(p.mainUse || '住宅用')}</span>
+                                <span class="font-semibold text-[#18181B] text-xs sm:text-sm mt-0.5 block">${escapeHtml(p.mainUse || '住宅用')}</span>
                             </div>
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD]">
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD]">
                                 <span class="text-[#71717A] text-xs block">主要建材結構</span>
-                                <span class="font-semibold text-[#18181B] text-sm mt-0.5 block">${escapeHtml(p.mainMaterial || '鋼筋混凝土(RC)')}</span>
+                                <span class="font-semibold text-[#18181B] text-xs sm:text-sm mt-0.5 block">${escapeHtml(p.mainMaterial || '鋼筋混凝土(RC)')}</span>
                             </div>
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD]">
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD]">
                                 <span class="text-[#71717A] text-xs block">建照核發日期</span>
-                                <span class="font-bold font-mono text-[#18181B] text-sm mt-0.5 block">${p.permitDate || '--'}</span>
+                                <span class="font-bold font-mono text-[#18181B] text-xs sm:text-sm mt-0.5 block">${p.permitDate || '--'}</span>
                             </div>
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD]">
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD]">
                                 <span class="text-[#71717A] text-xs block">申報備查日期</span>
-                                <span class="font-mono text-[#52525B] text-sm mt-0.5 block">${p.declareDate || '--'}</span>
+                                <span class="font-mono text-[#52525B] text-xs sm:text-sm mt-0.5 block">${p.declareDate || '--'}</span>
                             </div>
-                            <div class="bg-white p-4 rounded-xl border border-[#E8E4DD] sm:col-span-2">
+                            <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E4DD] sm:col-span-2">
                                 <span class="text-[#71717A] text-xs block">建照字號 / 第一次登記</span>
-                                <span class="font-mono text-[#52525B] text-xs sm:text-sm mt-0.5 block truncate">${p.permitNo || '--'} · ${p.firstRegDate ? '登記日 ' + p.firstRegDate : '尚未登記'}</span>
+                                <span class="font-mono text-[#52525B] text-xs sm:text-sm mt-0.5 block leading-relaxed">${p.permitNo || '--'} · ${p.firstRegDate ? '登記日 ' + p.firstRegDate : '尚未登記'}</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Section 3: Lands List -->
-                    <div class="bg-[#FAF9F7] p-5 rounded-xl border border-[#E8E4DD]">
-                        <div class="flex items-center justify-between mb-3">
+                    <div class="bg-[#FAF9F7] p-4 sm:p-5 rounded-xl border border-[#E8E4DD]">
+                        <div class="flex items-center justify-between mb-2.5">
                             <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#71717A]">
-                                坐落基地地號清單 (共 ${(p.allLands || []).length} 筆)
+                                坐落基地地號清單 (${(p.allLands || []).length} 筆)
                             </h4>
                             <a href="${mapSearchUrl}" target="_blank" class="text-xs sm:text-sm font-bold text-[#8C532B] hover:underline flex items-center gap-1">
-                                開啟 Google 地圖 →
+                                Google 地圖 →
                             </a>
                         </div>
-                        <div class="flex flex-wrap gap-2 max-h-36 overflow-y-auto p-3 bg-white rounded-xl border border-[#E8E4DD]">
-                            ${(p.allLands || [p.mainLand]).filter(Boolean).map(l => `<span class="text-xs sm:text-sm font-mono bg-[#FAF9F7] px-2.5 py-1 rounded-md border border-[#E2DDD5] text-[#18181B]">${escapeHtml(l)}</span>`).join('')}
+                        <div class="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto p-2.5 bg-white rounded-xl border border-[#E8E4DD]">
+                            ${(p.allLands || [p.mainLand]).filter(Boolean).map(l => `<span class="text-xs font-mono bg-[#FAF9F7] px-2 py-0.5 rounded-md border border-[#E2DDD5] text-[#18181B]">${escapeHtml(l)}</span>`).join('')}
                         </div>
                     </div>
 
                 </div>
 
-                <!-- Modal Footer -->
-                <div class="bg-[#F7F4EE] px-6 sm:px-7 py-4.5 rounded-b-2xl border-t border-[#E8E4DD] flex items-center justify-between">
-                    <button onclick="copyProjectSummary()" class="px-4.5 py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-white border border-[#E2DDD5] text-[#18181B] hover:bg-[#FAF9F7] transition shadow-2xs flex items-center gap-2">
-                        <svg class="w-4 h-4 text-[#71717A]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                        複製建案簡介
+                <!-- Modal Footer (Fixed Bottom) -->
+                <div class="bg-[#F7F4EE] px-4 sm:px-7 py-3 sm:py-4 border-t border-[#E8E4DD] flex items-center justify-between gap-3 shrink-0">
+                    <button onclick="copyProjectSummary()" class="flex-1 sm:flex-initial px-3.5 sm:px-4.5 py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-white border border-[#E2DDD5] text-[#18181B] hover:bg-[#FAF9F7] transition shadow-2xs flex items-center justify-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-[#71717A]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <span>複製簡介</span>
                     </button>
-                    <button onclick="closeDetailModal()" class="px-6 py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#18181B] text-white hover:bg-[#27272A] transition shadow-xs">
+                    <button onclick="closeDetailModal()" class="flex-1 sm:flex-initial px-5 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#18181B] text-white hover:bg-[#27272A] transition shadow-xs text-center">
                         關閉
                     </button>
                 </div>
