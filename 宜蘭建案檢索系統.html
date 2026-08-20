@@ -261,13 +261,13 @@
     <!-- Main Content Container -->
     <main class="fluid-container py-6 flex-1 w-full">
 
-        <!-- KPI Metrics Banner (簡潔流體卡片) -->
+        <!-- KPI Metrics Banner (簡潔流體卡片 - 隨篩選條件動態連動) -->
         <section class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4.5 mb-6">
             
             <!-- 1. 建案備查總數 -->
-            <div class="bg-[#FFFFFF] p-4 sm:p-5 rounded-2xl border border-[#DCD4C5] shadow-xs flex items-center justify-between">
+            <div class="bg-[#FFFFFF] p-4 sm:p-5 rounded-2xl border border-[#DCD4C5] shadow-xs flex items-center justify-between transition-all duration-200">
                 <div>
-                    <p class="text-xs font-semibold text-[#6E675B] uppercase tracking-wider">建案備查總數</p>
+                    <p id="kpiLabelTotalCases" class="text-xs font-semibold text-[#6E675B] uppercase tracking-wider truncate max-w-[140px] sm:max-w-none">建案備查總數</p>
                     <h3 id="kpiTotalCases" class="text-2xl sm:text-3xl font-serif-tc font-bold text-[#1C1B18] mt-0.5">--</h3>
                 </div>
                 <div class="w-10 h-10 rounded-xl bg-[#F7EFE8] text-[#7A5338] flex items-center justify-center border border-[#DECDBE] shrink-0">
@@ -276,11 +276,11 @@
             </div>
 
             <!-- 2. 實登已售總戶數 -->
-            <div class="bg-[#FFFFFF] p-4 sm:p-5 rounded-2xl border border-[#DCD4C5] shadow-xs flex items-center justify-between">
+            <div class="bg-[#FFFFFF] p-4 sm:p-5 rounded-2xl border border-[#DCD4C5] shadow-xs flex items-center justify-between transition-all duration-200">
                 <div>
                     <p class="text-xs font-semibold text-[#6E675B] uppercase tracking-wider flex items-center gap-1">
-                        <span>實登已售總戶數</span>
-                        <span id="kpiOverallSalesRate" class="text-[11px] font-bold text-[#4A5D44] bg-[#EEF4EC] px-1.5 py-0.2 rounded-md">--%</span>
+                        <span id="kpiLabelSoldUnits">實登已售總戶數</span>
+                        <span id="kpiOverallSalesRate" class="text-[11px] font-bold text-[#4A5D44] bg-[#EEF4EC] px-1.5 py-0.2 rounded-md transition-all">--%</span>
                     </p>
                     <h3 id="kpiTotalSoldUnits" class="text-2xl sm:text-3xl font-serif-tc font-bold text-[#4A5D44] mt-0.5">--</h3>
                 </div>
@@ -289,10 +289,10 @@
                 </div>
             </div>
 
-            <!-- 3. 全縣實登平均單價 -->
-            <div class="bg-[#FFFFFF] p-4 sm:p-5 rounded-2xl border border-[#DCD4C5] shadow-xs flex items-center justify-between">
+            <!-- 3. 實登平均單價 -->
+            <div class="bg-[#FFFFFF] p-4 sm:p-5 rounded-2xl border border-[#DCD4C5] shadow-xs flex items-center justify-between transition-all duration-200">
                 <div>
-                    <p class="text-xs font-semibold text-[#6E675B] uppercase tracking-wider">全縣實登平均單價</p>
+                    <p id="kpiLabelAvgPrice" class="text-xs font-semibold text-[#6E675B] uppercase tracking-wider truncate max-w-[140px] sm:max-w-none">實登平均單價</p>
                     <h3 id="kpiAvgUnitPrice" class="text-2xl sm:text-3xl font-serif-tc font-bold text-[#7A5338] mt-0.5">--</h3>
                 </div>
                 <div class="w-10 h-10 rounded-xl bg-[#F8F3E6] text-[#8C6D2B] flex items-center justify-center border border-[#E5D7B3] shrink-0">
@@ -300,10 +300,10 @@
                 </div>
             </div>
 
-            <!-- 4. 全縣申報總戶數 -->
-            <div class="bg-[#FFFFFF] p-4 sm:p-5 rounded-2xl border border-[#DCD4C5] shadow-xs flex items-center justify-between">
+            <!-- 4. 申報總戶數 -->
+            <div class="bg-[#FFFFFF] p-4 sm:p-5 rounded-2xl border border-[#DCD4C5] shadow-xs flex items-center justify-between transition-all duration-200">
                 <div>
-                    <p class="text-xs font-semibold text-[#6E675B] uppercase tracking-wider">全縣申報總戶數</p>
+                    <p id="kpiLabelTotalHouseholds" class="text-xs font-semibold text-[#6E675B] uppercase tracking-wider truncate max-w-[140px] sm:max-w-none">申報總戶數</p>
                     <h3 id="kpiTotalHouseholds" class="text-2xl sm:text-3xl font-serif-tc font-bold text-[#1C1B18] mt-0.5">--</h3>
                     <p id="kpiTotalHouseholdsSub" class="text-[11px] text-[#4A5D44] font-semibold">已銷售 -- 戶</p>
                 </div>
@@ -220708,7 +220708,7 @@
             const norm = normalizeSmartText(str).replace(/[-_－—·\s]/g, '');
             const parts = norm.split(/(\d+)/).filter(Boolean);
             return parts.map(p => {
-                if (/^\d+$/.test(p)) {
+                if (/^d+$/.test(p)) {
                     return { isNum: true, val: parseInt(p, 10) };
                 }
                 return { isNum: false, val: p.toLowerCase() };
@@ -220769,29 +220769,66 @@
         function initData(data) {
             allProjects = data;
             filteredProjects = [...allProjects];
-            buildKPIs();
             buildTownPills();
             populateBuilderDropdown();
             renderBuildersView();
             performSearch();
         }
 
-        function buildKPIs() {
-            document.getElementById('kpiTotalCases').innerText = allProjects.length.toLocaleString() + ' 筆';
+        function updateDynamicKPIs(data) {
+            const list = data || filteredProjects || allProjects;
+            const totalCases = list.length;
+            document.getElementById('kpiTotalCases').innerText = totalCases.toLocaleString() + ' 筆';
             
-            const totalPlannedUnits = allProjects.reduce((acc, p) => acc + (p.household || 0), 0);
-            const totalSold = allProjects.reduce((acc, p) => acc + (p.salesStats?.soldUnits || 0), 0);
+            const totalPlannedUnits = list.reduce((acc, p) => acc + (p.household || 0), 0);
+            const totalSold = list.reduce((acc, p) => acc + (p.salesStats?.soldUnits || 0), 0);
             
             document.getElementById('kpiTotalSoldUnits').innerText = totalSold.toLocaleString() + ' 戶';
-            const overallRate = totalPlannedUnits > 0 ? ((totalSold / totalPlannedUnits) * 100).toFixed(1) : '0';
-            document.getElementById('kpiOverallSalesRate').innerText = `全縣 ${overallRate}%`;
+            const rateVal = totalPlannedUnits > 0 ? ((totalSold / totalPlannedUnits) * 100).toFixed(1) : '0';
 
-            const validPrices = allProjects.filter(p => p.salesStats?.avgPricePerPing > 0).map(p => p.salesStats.avgPricePerPing);
-            const countyAvgPrice = validPrices.length > 0 ? (validPrices.reduce((a, b) => a + b, 0) / validPrices.length).toFixed(1) : '--';
-            document.getElementById('kpiAvgUnitPrice').innerText = countyAvgPrice + ' 萬/坪';
+            // Determine active scope label
+            const scopeParts = [];
+            if (selectedTown && selectedTown !== '全部') {
+                scopeParts.push(selectedTown);
+            }
+            const permitYear = document.getElementById('filterPermitYear')?.value;
+            if (permitYear) {
+                scopeParts.push(`${permitYear}年`);
+            }
+            const builder = document.getElementById('filterBuilder')?.value;
+            if (builder) {
+                const shortBuilder = builder.length > 6 ? builder.slice(0, 6) + '…' : builder;
+                scopeParts.push(shortBuilder);
+            }
+            const keyword = (document.getElementById('globalKeyword')?.value || '').trim();
+            if (keyword && scopeParts.length === 0) {
+                scopeParts.push(`「${keyword.length > 5 ? keyword.slice(0, 5) + '…' : keyword}」`);
+            }
+
+            const isFiltered = scopeParts.length > 0;
+            const scopeText = isFiltered ? scopeParts.join(' · ') : '全縣';
+
+            document.getElementById('kpiOverallSalesRate').innerText = `${scopeText} ${rateVal}%`;
+
+            // Dynamic card headers
+            const labelTotalCases = document.getElementById('kpiLabelTotalCases');
+            if (labelTotalCases) labelTotalCases.innerText = isFiltered ? `${scopeText} 建案數` : '建案備查總數';
+
+            const labelSoldUnits = document.getElementById('kpiLabelSoldUnits');
+            if (labelSoldUnits) labelSoldUnits.innerText = isFiltered ? `${scopeText} 已售` : '實登已售總戶數';
+
+            const labelAvgPrice = document.getElementById('kpiLabelAvgPrice');
+            if (labelAvgPrice) labelAvgPrice.innerText = isFiltered ? `${scopeText} 均價` : '實登平均單價';
+
+            const labelHouseholds = document.getElementById('kpiLabelTotalHouseholds');
+            if (labelHouseholds) labelHouseholds.innerText = isFiltered ? `${scopeText} 申報戶數` : '申報總戶數';
+
+            const validPrices = list.filter(p => p.salesStats?.avgPricePerPing > 0).map(p => p.salesStats.avgPricePerPing);
+            const avgPrice = validPrices.length > 0 ? (validPrices.reduce((a, b) => a + b, 0) / validPrices.length).toFixed(1) : '--';
+            document.getElementById('kpiAvgUnitPrice').innerText = (avgPrice !== '--') ? `${avgPrice} 萬/坪` : '--';
 
             document.getElementById('kpiTotalHouseholds').innerText = totalPlannedUnits.toLocaleString() + ' 戶';
-            document.getElementById('kpiTotalHouseholdsSub').innerText = `已銷售 ${totalSold.toLocaleString()} 戶`;
+            document.getElementById('kpiTotalHouseholdsSub').innerText = `已銷售 ${totalSold.toLocaleString()} 戶 (佔 ${rateVal}%)`;
         }
 
         function buildTownPills() {
@@ -221066,6 +221103,7 @@
 
             updateSortUI();
             performSortAndRender();
+            updateDynamicKPIs(filteredProjects);
             if (currentView === 'stats') renderStatsCharts();
         }
 
