@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宜蘭縣預售屋建案備查與實價登錄銷售檢索系統</title>
+    <title>宜蘭建案備查檢索</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -211,47 +211,35 @@
     <!-- Top Navigation / Header -->
     <header class="bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#DCD4C5] sticky top-0 z-30 shadow-xs">
         <div class="fluid-container">
-            <div class="flex items-center justify-between h-18 sm:h-20 py-2.5">
-                <!-- Logo & Title -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#1C1B18] flex items-center justify-center text-[#FAF8F5] font-serif-tc font-black text-lg sm:text-xl shadow-sm border border-[#38342D] shrink-0">
-                        宜
-                    </div>
-                    <div>
-                        <h1 class="text-base sm:text-2xl font-serif-tc font-black tracking-wide text-[#1C1B18]">
-                            宜蘭縣建案備查與實價登錄檢索系統
-                        </h1>
-                        <p class="text-xs sm:text-sm text-[#6E675B] hidden md:block font-normal">
-                            整合預售屋申報備查、實價登錄銷售率、成交單價區間與建商負責人資料庫
-                        </p>
-                    </div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between py-2.5 sm:py-3 gap-2.5 sm:gap-3">
+                <!-- Title & Update Date (No '宜' icon) -->
+                <div>
+                    <h1 class="text-lg sm:text-2xl font-bold tracking-tight text-[#1C1B18] flex items-center gap-2.5 flex-wrap">
+                        <span>宜蘭建案備查檢索</span>
+                        <span class="text-xs font-semibold text-[#71717A] bg-[#F4F1EB] px-2.5 py-0.5 rounded-full border border-[#E5E0D6] font-mono">
+                            資料更新日期：2026/08/20
+                        </span>
+                    </h1>
+                    <p class="text-xs sm:text-sm text-[#6E675B] hidden md:block font-medium mt-0.5">
+                        全縣 577 筆建案備查資料庫 · 整合實價登錄成交行情、360 家建商商工登記資料
+                    </p>
                 </div>
 
-                <!-- Navigation Tabs & Actions -->
-                <div class="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
-                    <!-- 1. 建案檢索 Tab -->
-                    <button id="tabSearchBtn" onclick="switchView('search')" class="px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#1C1B18] text-[#FAF8F5] flex items-center gap-1.5 transition shadow-xs">
-                        <svg class="w-4 h-4 text-[#E5C392]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <!-- Navigation Tabs (Export Excel button removed) -->
+                <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0 w-full sm:w-auto">
+                    <button id="tabSearchBtn" onclick="switchView('search')" class="flex-1 sm:flex-none justify-center px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#1C1B18] text-[#FAF8F5] flex items-center gap-1.5 transition shadow-xs">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                         <span>建案檢索</span>
                     </button>
                     
-                    <!-- 2. 建商名冊 Tab -->
-                    <button id="tabBuildersBtn" onclick="switchView('builders')" class="px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center gap-1.5 transition">
-                        <svg class="w-4 h-4 text-[#7A5338]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    <button id="tabBuildersBtn" onclick="switchView('builders')" class="flex-1 sm:flex-none justify-center px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#FFFFFF] text-[#6E675B] hover:text-[#1C1B18] hover:bg-[#FAF8F5] border border-[#DCD4C5] flex items-center gap-1.5 transition">
+                        <svg class="w-4 h-4 text-[#7A7366]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                         <span>建商名冊</span>
                     </button>
 
-                    <!-- 3. 行情統計 Tab -->
-                    <button id="tabStatsBtn" onclick="switchView('stats')" class="px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center gap-1.5 transition">
-                        <svg class="w-4 h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
-                        <span class="hidden sm:inline">行情統計</span>
-                        <span class="sm:hidden">統計</span>
-                    </button>
-
-                    <!-- Export Excel -->
-                    <button onclick="exportCurrentViewToExcel()" title="匯出 Excel" class="px-3 sm:px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#FFFFFF] text-[#3E523A] border border-[#C5D4C2] hover:bg-[#EEF4EC] flex items-center gap-1.5 transition shadow-xs">
-                        <svg class="w-4 h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
-                        <span class="hidden sm:inline">匯出</span>
+                    <button id="tabStatsBtn" onclick="switchView('stats')" class="flex-1 sm:flex-none justify-center px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#FFFFFF] text-[#6E675B] hover:text-[#1C1B18] hover:bg-[#FAF8F5] border border-[#DCD4C5] flex items-center gap-1.5 transition">
+                        <svg class="w-4 h-4 text-[#7A7366]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                        <span>行情圖鑑</span>
                     </button>
                 </div>
             </div>
@@ -442,15 +430,7 @@
                     <div>
                         <label class="block text-xs font-semibold text-[#38342D] mb-1">建照核發年份</label>
                         <select id="filterPermitYear" class="w-full text-xs bg-[#FAF8F5] border border-[#D0C7B8] rounded-lg p-2 text-[#1C1B18]" onchange="performSearch()">
-                            <option value="">全部年份</option>
-                            <option value="115">民國 115 年</option>
-                            <option value="114">民國 114 年</option>
-                            <option value="113">民國 113 年</option>
-                            <option value="112">民國 112 年</option>
-                            <option value="111">民國 111 年</option>
-                            <option value="110">民國 110 年</option>
-                            <option value="109">民國 109 年</option>
-                            <option value="108">民國 108 年</option>
+                            <option value="">全部年份 (不限)</option>
                         </select>
                     </div>
                     <div>
@@ -614,10 +594,7 @@
                                 清冊模式
                             </button>
                         </div>
-                        <button onclick="exportBuildersDatabaseToExcel()" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-[#FFFFFF] text-[#3E523A] border border-[#C5D4C2] hover:bg-[#EEF4EC] flex items-center gap-1 transition shadow-xs">
-                            <svg class="w-3.5 h-3.5 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
-                            <span>匯出名冊</span>
-                        </button>
+                        
                     </div>
                 </div>
 
@@ -667,6 +644,26 @@
 
         <!-- VIEW 3: STATISTICS DASHBOARD VIEW (行情數據圖鑑) -->
         <div id="statsView" class="hidden space-y-6">
+            <!-- Annual Cases Trend Card (各年度建案數量統計) -->
+            <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-[#EBE5DA]">
+                    <div>
+                        <h3 class="text-sm sm:text-base font-serif-tc font-bold text-[#1C1B18] flex items-center gap-2">
+                            <svg class="w-4 h-4 text-[#7A5338]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            <span>各年度建案申報與核發數量統計</span>
+                            <span class="text-xs font-normal text-[#6E675B]">(歷年建案推案趨勢)</span>
+                        </h3>
+                        <p class="text-xs text-[#6E675B] mt-0.5">全縣 577 筆建案依建照核發年份分佈統計，掌握宜蘭各年度推案數量高峰走勢</p>
+                    </div>
+                    <div id="annualSummaryPills" class="flex flex-wrap gap-1.5">
+                        <!-- Populated dynamically with yearly case count pills -->
+                    </div>
+                </div>
+                <div class="h-64 sm:h-72">
+                    <canvas id="chartYearCases"></canvas>
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <!-- Town Distribution Chart -->
                 <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
@@ -190884,6 +190881,7 @@
             if (window.YILAN_BUILDERS_DATA) {
                 allBuilders = window.YILAN_BUILDERS_DATA;
                 filteredBuilders = [...allBuilders];
+            applyBuildersSort();
                 allBuilders.forEach(b => {
                     buildersMap[b.builderName] = b;
                     if (b.matchedName) buildersMap[b.matchedName] = b;
@@ -190900,6 +190898,7 @@
             filteredProjects = [...allProjects];
             buildTownPills();
             populateBuilderDropdown();
+            populateYearDropdown();
             renderBuildersView();
             performSearch();
         }
@@ -190987,6 +190986,25 @@
             selectedTown = town;
             buildTownPills();
             performSearch();
+        }
+
+        function populateYearDropdown() {
+            const yearSelect = document.getElementById('filterPermitYear');
+            if (!yearSelect) return;
+            yearSelect.innerHTML = '<option value="">全部年份 (不限)</option>';
+            const yearCounts = {};
+            allProjects.forEach(p => {
+                if (p.permitYearRoc) {
+                    yearCounts[p.permitYearRoc] = (yearCounts[p.permitYearRoc] || 0) + 1;
+                }
+            });
+            const sortedYears = Object.keys(yearCounts).map(Number).sort((a, b) => b - a);
+            sortedYears.forEach(y => {
+                const opt = document.createElement('option');
+                opt.value = y;
+                opt.textContent = `民國 ${y} 年 (${yearCounts[y]}案)`;
+                yearSelect.appendChild(opt);
+            });
         }
 
         function populateBuilderDropdown() {
@@ -191492,7 +191510,90 @@
                 tableBox.classList.remove('hidden');
                 cardsBox.classList.add('hidden');
             }
+            applyBuildersSort();
             renderBuildersView();
+        }
+
+        let builderSortKey = 'caseCount';
+        let builderSortDir = 'desc';
+
+        function parseCapitalNum(str) {
+            if (!str) return 0;
+            const num = String(str).replace(/[^\d]/g, '');
+            return num ? parseInt(num, 10) : 0;
+        }
+
+        function sortBuilders(key) {
+            if (builderSortKey === key) {
+                builderSortDir = builderSortDir === 'desc' ? 'asc' : 'desc';
+            } else {
+                builderSortKey = key;
+                if (key === 'caseCount' || key === 'totalHouseholds' || key === 'capital') {
+                    builderSortDir = 'desc';
+                } else {
+                    builderSortDir = 'asc';
+                }
+            }
+            applyBuildersSort();
+            applyBuildersSort();
+            renderBuildersView();
+        }
+
+        function applyBuildersSort() {
+            const key = builderSortKey;
+            const dir = builderSortDir;
+
+            // Update Header Arrows
+            const allKeys = ['builderName', 'representative', 'unifiedNo', 'caseCount', 'totalHouseholds', 'capital'];
+            allKeys.forEach(k => {
+                const arrow = document.getElementById(`b_arrow_${k}`);
+                if (arrow) {
+                    arrow.textContent = '↕';
+                    arrow.className = 'font-mono text-xs text-[#8C8275]';
+                }
+                const btn = document.getElementById(`bsort_${k}`);
+                if (btn) {
+                    btn.className = "px-2.5 py-1 rounded-lg font-medium bg-[#FFFFFF] text-[#423E37] border border-[#DCD4C5] hover:bg-[#FAF8F5] shrink-0";
+                }
+            });
+
+            const activeArrow = document.getElementById(`b_arrow_${key}`);
+            if (activeArrow) {
+                activeArrow.textContent = dir === 'desc' ? '▼' : '▲';
+                activeArrow.className = 'font-mono text-xs text-[#8C532B] font-bold';
+            }
+
+            const activeBtn = document.getElementById(`bsort_${key}`);
+            if (activeBtn) {
+                activeBtn.className = "px-2.5 py-1 rounded-lg font-bold bg-[#1C1B18] text-white shrink-0 shadow-3xs";
+                const labelMap = {
+                    caseCount: '推案量',
+                    totalHouseholds: '總戶數',
+                    capital: '資本額',
+                    builderName: '公司名稱'
+                };
+                if (labelMap[key]) {
+                    activeBtn.textContent = `${labelMap[key]} ${dir === 'desc' ? '▼' : '▲'}`;
+                }
+            }
+
+            filteredBuilders.sort((a, b) => {
+                let res = 0;
+                if (key === 'builderName') {
+                    res = (a.builderName || '').localeCompare(b.builderName || '', 'zh-Hant');
+                } else if (key === 'representative') {
+                    res = (a.representative || '').localeCompare(b.representative || '', 'zh-Hant');
+                } else if (key === 'unifiedNo') {
+                    res = (a.unifiedNo || '').localeCompare(b.unifiedNo || '');
+                } else if (key === 'capital') {
+                    res = parseCapitalNum(a.capital) - parseCapitalNum(b.capital);
+                } else if (key === 'caseCount') {
+                    res = (a.caseCount || 0) - (b.caseCount || 0);
+                } else if (key === 'totalHouseholds') {
+                    res = (a.totalHouseholds || 0) - (b.totalHouseholds || 0);
+                }
+                return dir === 'desc' ? -res : res;
+            });
         }
 
         function renderBuildersView() {
@@ -191626,12 +191727,14 @@
             const kw = (document.getElementById('builderKeyword').value || '').trim().toLowerCase();
             if (!kw) {
                 filteredBuilders = [...allBuilders];
+            applyBuildersSort();
             } else {
                 filteredBuilders = allBuilders.filter(b => {
                     const searchStr = `${b.builderName} ${b.representative || ''} ${b.unifiedNo || ''} ${b.address || ''} ${(b.towns || []).join(' ')}`.toLowerCase();
                     return searchStr.includes(kw);
                 });
             }
+            applyBuildersSort();
             renderBuildersView();
         }
 
@@ -192007,6 +192110,64 @@
             Chart.defaults.color = '#5C564C';
             Chart.defaults.font.size = 12;
 
+            // 0. 各年度建案數量統計 (Annual Cases Trend)
+            const yearCounts = {};
+            allProjects.forEach(p => {
+                const y = p.permitYearRoc || '其他年份';
+                yearCounts[y] = (yearCounts[y] || 0) + 1;
+            });
+            const validYears = Object.keys(yearCounts).filter(y => !isNaN(Number(y))).map(Number).sort((a, b) => a - b);
+            
+            // Populate annual pills
+            const pillsContainer = document.getElementById('annualSummaryPills');
+            if (pillsContainer) {
+                pillsContainer.innerHTML = validYears.slice().reverse().map(y => `
+                    <span class="px-2.5 py-1 bg-[#FAF4EF] text-[#8C532B] font-mono text-xs font-bold rounded-lg border border-[#E8DCD1] shadow-3xs">
+                        ${y}年: <span class="text-[#1C1B18]">${yearCounts[y]}案</span>
+                    </span>
+                `).join('');
+            }
+
+            if (chartInstances.yearCases) chartInstances.yearCases.destroy();
+            const ctxYear = document.getElementById('chartYearCases')?.getContext('2d');
+            if (ctxYear) {
+                chartInstances.yearCases = new Chart(ctxYear, {
+                    type: 'bar',
+                    data: {
+                        labels: validYears.map(y => `民國 ${y} 年`),
+                        datasets: [{
+                            label: '核發建案數量 (案)',
+                            data: validYears.map(y => yearCounts[y]),
+                            backgroundColor: '#8C532B',
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `建案數量: ${context.parsed.y} 案`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: { 
+                                beginAtZero: true, 
+                                grid: { color: '#EAE4D8' }, 
+                                border: { dash: [4, 4] },
+                                ticks: { stepSize: 20 }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
             // 1. 各鄉鎮推案量
             const townCounts = {};
             allProjects.forEach(p => {
@@ -192160,4 +192321,23 @@
         }
     </script>
 </body>
-</html>
+</html// Populate Year Dropdown with case counts
+            const yearSelect = document.getElementById('filterPermitYear');
+            if (yearSelect) {
+                yearSelect.innerHTML = '<option value="">全部年份 (不限)</option>';
+                const yearCounts = {};
+                allProjects.forEach(p => {
+                    if (p.permitYearRoc) {
+                        yearCounts[p.permitYearRoc] = (yearCounts[p.permitYearRoc] || 0) + 1;
+                    }
+                });
+                const sortedYears = Object.keys(yearCounts).map(Number).sort((a, b) => b - a);
+                sortedYears.forEach(y => {
+                    const opt = document.createElement('option');
+                    opt.value = y;
+                    opt.textContent = `民國 ${y} 年 (${yearCounts[y]}案)`;
+                    yearSelect.appendChild(opt);
+                });
+            }
+
+            >
