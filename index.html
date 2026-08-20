@@ -190998,7 +190998,7 @@
                     yearCounts[p.permitYearRoc] = (yearCounts[p.permitYearRoc] || 0) + 1;
                 }
             });
-            const sortedYears = Object.keys(yearCounts).map(Number).sort((a, b) => b - a);
+            const sortedYears = Object.keys(yearCounts).map(Number).filter(y => y >= 100).sort((a, b) => b - a);
             sortedYears.forEach(y => {
                 const opt = document.createElement('option');
                 opt.value = y;
@@ -192116,7 +192116,7 @@
                 const y = p.permitYearRoc || '其他年份';
                 yearCounts[y] = (yearCounts[y] || 0) + 1;
             });
-            const validYears = Object.keys(yearCounts).filter(y => !isNaN(Number(y))).map(Number).sort((a, b) => a - b);
+            const validYears = Object.keys(yearCounts).filter(y => !isNaN(Number(y)) && Number(y) >= 100).map(Number).sort((a, b) => a - b);
             
             // Populate annual pills
             const pillsContainer = document.getElementById('annualSummaryPills');
@@ -192331,7 +192331,7 @@
                         yearCounts[p.permitYearRoc] = (yearCounts[p.permitYearRoc] || 0) + 1;
                     }
                 });
-                const sortedYears = Object.keys(yearCounts).map(Number).sort((a, b) => b - a);
+                const sortedYears = Object.keys(yearCounts).map(Number).filter(y => y >= 100).sort((a, b) => b - a);
                 sortedYears.forEach(y => {
                     const opt = document.createElement('option');
                     opt.value = y;
