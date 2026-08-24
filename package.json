@@ -1,0 +1,16 @@
+{
+  "name": "yilan-buildings",
+  "version": "1.0.0",
+  "description": "宜蘭縣預售屋建案備查與實價登錄銷售檢索系統",
+  "main": "scripts/run_pipeline.js",
+  "scripts": {
+    "update": "node scripts/run_pipeline.js",
+    "build:html": "node scripts/generate_html.js",
+    "match": "node scripts/match_strict_precision.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "iconv-lite": "^0.6.3",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  }
+}
