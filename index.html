@@ -671,16 +671,16 @@
         <!-- VIEW 3: STATISTICS DASHBOARD VIEW (行情數據圖鑑) -->
         <div id="statsView" class="hidden space-y-6">
             
-            <!-- TOP 10 RECENT HOT-SELLING PROJECTS TABLE (本週/近期實登最新十大熱銷建案榜) -->
+            <!-- TOP 10 RECENT HOT-SELLING PROJECTS TABLE (近三個月實登最新十大熱銷建案榜) -->
             <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
                 <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
                     <div>
                         <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
                             <span class="text-xl">🔥</span>
-                            <span>宜蘭最新實價登錄 · 十大熱銷代表建案榜</span>
+                            <span>宜蘭最新實價登錄 · 近三個月十大熱銷建案榜</span>
                         </h3>
                         <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
-                            統計 115 年度最新揭露之實價登錄買賣交易動態，依近期實登成交量與去化進度排序
+                            統計近 3 個月內最新揭露之實價登錄成交動態，依近三個月新增去化量與成交熱度排序
                         </p>
                     </div>
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0]">
@@ -698,7 +698,7 @@
                                 <th class="py-3 px-3.5 whitespace-nowrap">建案名稱</th>
                                 <th class="py-3 px-3 whitespace-nowrap">起造建商</th>
                                 <th class="py-3 px-3 text-center whitespace-nowrap">最新成交日</th>
-                                <th class="py-3 px-3 text-center whitespace-nowrap">115年新增實登</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">近3個月新增實登</th>
                                 <th class="py-3 px-3 text-center whitespace-nowrap">累計銷售進度</th>
                                 <th class="py-3 px-3 text-center font-bold text-[#7A5338] whitespace-nowrap">實登成交均價</th>
                                 <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">🌱 基地購地地價</th>
@@ -188223,18 +188223,44 @@
             if (!tbody) return;
             tbody.innerHTML = '';
 
+            function rocToDate(rocStr) {
+                if (!rocStr) return null;
+                const parts = rocStr.split('/');
+                if (parts.length < 3) return null;
+                const yr = parseInt(parts[0]) + 1911;
+                const m = parseInt(parts[1]) - 1;
+                const d = parseInt(parts[2]);
+                return new Date(yr, m, d);
+            }
+
+            // Find global max transaction date across all projects
+            let maxDate = new Date(2000, 0, 1);
+            allProjects.forEach(p => {
+                (p.salesStats?.transactions || []).forEach(t => {
+                    const d = rocToDate(t.dateRoc);
+                    if (d && d > maxDate) maxDate = d;
+                });
+            });
+
+            // 3 months cutoff (90 days before latest transaction date in dataset)
+            const cutoffDate = new Date(maxDate.getTime() - 90 * 24 * 60 * 60 * 1000);
+
             const candidates = [];
 
             allProjects.forEach(p => {
                 const s = p.salesStats;
                 if (!s || !s.transactions) return;
 
-                const tx115 = s.transactions.filter(t => t.dateRoc && t.dateRoc.startsWith('115'));
-                if (tx115.length > 0) {
+                const recentTx = s.transactions.filter(t => {
+                    const d = rocToDate(t.dateRoc);
+                    return d && d >= cutoffDate;
+                });
+
+                if (recentTx.length > 0) {
                     candidates.push({
                         project: p,
-                        count115: tx115.length,
-                        latestDate: tx115[0].dateRoc,
+                        recentCount: recentTx.length,
+                        latestDate: recentTx[0].dateRoc,
                         soldUnits: s.soldUnits,
                         totalHouseholds: s.totalHouseholds,
                         salesRate: s.salesRate,
@@ -188245,7 +188271,7 @@
             });
 
             candidates.sort((a, b) => {
-                if (b.count115 !== a.count115) return b.count115 - a.count115;
+                if (b.recentCount !== a.recentCount) return b.recentCount - a.recentCount;
                 return (b.latestDate || '').localeCompare(a.latestDate || '');
             });
 
@@ -188288,7 +188314,7 @@
                     </td>
                     <td class="py-3 px-3 text-center whitespace-nowrap">
                         <span class="inline-flex items-center gap-1 font-mono font-bold text-xs bg-[#EEF4EC] text-[#2C4A24] px-2 py-0.5 rounded-full border border-[#BDD9B4]">
-                            +${item.count115} 筆
+                            +${item.recentCount} 筆
                         </span>
                     </td>
                     <td class="py-3 px-3 text-center whitespace-nowrap">
