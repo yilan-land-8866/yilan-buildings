@@ -673,6 +673,48 @@
 
         <!-- VIEW 3: STATISTICS DASHBOARD VIEW (行情數據圖鑑) -->
         <div id="statsView" class="hidden space-y-6">
+            
+            <!-- TOP 10 RECENT HOT-SELLING PROJECTS TABLE (本週/近期實登最新十大熱銷建案榜) -->
+            <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
+                <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
+                            <span class="text-xl">🔥</span>
+                            <span>宜蘭最新實價登錄 · 十大熱銷代表建案榜</span>
+                        </h3>
+                        <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
+                            統計 115 年度最新揭露之實價登錄買賣交易動態，依近期實登成交量與去化進度排序
+                        </p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0]">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#4A5D44] animate-pulse"></span>
+                        即時動態更新
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto rounded-xl border border-[#EBE5DA]">
+                    <table class="w-full text-left text-xs sm:text-sm text-[#24211D]">
+                        <thead class="bg-[#F2ECE1] text-[#38342D] font-serif-tc font-bold border-b border-[#DCD4C5]">
+                            <tr>
+                                <th class="py-3 px-3 text-center">排名</th>
+                                <th class="py-3 px-3 whitespace-nowrap">鄉鎮</th>
+                                <th class="py-3 px-3.5 whitespace-nowrap">建案名稱</th>
+                                <th class="py-3 px-3 whitespace-nowrap">起造建商</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">最新成交日</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">115年新增實登</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">累計銷售進度</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#7A5338] whitespace-nowrap">實登成交均價</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">🌱 基地購地地價</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">詳情</th>
+                            </tr>
+                        </thead>
+                        <tbody id="topHotProjectsTableBody" class="divide-y divide-[#EBE5DA]">
+                            <!-- Populated dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <!-- Town Distribution Chart -->
                 <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
@@ -188179,7 +188221,103 @@
             }
         }
 
+        function renderTopHotSellingProjects() {
+            const tbody = document.getElementById('topHotProjectsTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const candidates = [];
+
+            allProjects.forEach(p => {
+                const s = p.salesStats;
+                if (!s || !s.transactions) return;
+
+                const tx115 = s.transactions.filter(t => t.dateRoc && t.dateRoc.startsWith('115'));
+                if (tx115.length > 0) {
+                    candidates.push({
+                        project: p,
+                        count115: tx115.length,
+                        latestDate: tx115[0].dateRoc,
+                        soldUnits: s.soldUnits,
+                        totalHouseholds: s.totalHouseholds,
+                        salesRate: s.salesRate,
+                        isSoldOut: s.isSoldOut,
+                        avgPrice: s.avgPricePerPing
+                    });
+                }
+            });
+
+            candidates.sort((a, b) => {
+                if (b.count115 !== a.count115) return b.count115 - a.count115;
+                return (b.latestDate || '').localeCompare(a.latestDate || '');
+            });
+
+            const top10 = candidates.slice(0, 10);
+
+            top10.forEach((item, idx) => {
+                const p = item.project;
+                const s = p.salesStats;
+                const l = p.landStats || {};
+                const bInfo = buildersMap[p.builder];
+                const townColor = townColors[p.town] || 'bg-[#FFFFFF] text-[#38342D] border-[#DCD4C5]';
+
+                let rankBadge = `<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">${idx + 1}</span>`;
+                if (idx === 0) rankBadge = `<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>`;
+                else if (idx === 1) rankBadge = `<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>`;
+                else if (idx === 2) rankBadge = `<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>`;
+
+                const repLabel = bInfo?.representative ? `<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">${bInfo.representative}</span>` : '';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-[#F7F3EB] transition-colors cursor-pointer group';
+                tr.onclick = () => openDetailModal(p.id);
+
+                tr.innerHTML = `
+                    <td class="py-3 px-3 text-center whitespace-nowrap font-mono">${rankBadge}</td>
+                    <td class="py-3 px-3 whitespace-nowrap">
+                        <span class="badge border ${townColor} text-xs px-2 py-0.2 font-serif-tc font-bold">
+                            ${p.town || '宜蘭縣'}
+                        </span>
+                    </td>
+                    <td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">
+                        ${escapeHtml(p.caseName || '未命名')}
+                    </td>
+                    <td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">
+                        <span>${escapeHtml(p.builder || '--')}</span>
+                        ${repLabel}
+                    </td>
+                    <td class="py-3 px-3 text-center font-mono font-medium text-xs text-[#5C564C] whitespace-nowrap">
+                        ${item.latestDate || '--'}
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <span class="inline-flex items-center gap-1 font-mono font-bold text-xs bg-[#EEF4EC] text-[#2C4A24] px-2 py-0.5 rounded-full border border-[#BDD9B4]">
+                            +${item.count115} 筆
+                        </span>
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <div class="font-mono text-xs font-semibold text-[#1C1B18]">${s.soldUnits} / ${s.totalHouseholds} 戶</div>
+                        <div class="text-[10.5px] font-bold ${item.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]'}">
+                            ${item.isSoldOut ? '完銷 100%' : `${s.salesRate}%`}
+                        </div>
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <span class="font-serif-tc font-bold text-xs sm:text-sm text-[#7A5338]">${s.avgPricePerPing ? s.avgPricePerPing + ' 萬/坪' : '--'}</span>
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        ${l.hasLandData ? `<span class="font-mono font-bold text-xs text-[#2C4A24]">${l.avgLandPricePerPing} 萬/坪</span>` : `<span class="text-xs text-[#A8A090]">--</span>`}
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <button onclick="openDetailModal('${p.id}'); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">
+                            詳情 ➔
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
         function renderStatsCharts() {
+            renderTopHotSellingProjects();
             if (typeof Chart === 'undefined') return;
 
             Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
