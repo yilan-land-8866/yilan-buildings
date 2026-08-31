@@ -211,52 +211,49 @@
     <!-- Top Navigation / Header -->
     <header class="bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#DCD4C5] sticky top-0 z-30 shadow-xs">
         <div class="fluid-container">
-            <div class="flex items-center justify-between h-18 sm:h-20 py-2.5">
-                <!-- Logo & Title -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#1C1B18] flex items-center justify-center text-[#FAF8F5] font-serif-tc font-black text-lg sm:text-xl shadow-sm border border-[#38342D] shrink-0">
-                        宜
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <h1 class="text-base sm:text-2xl font-serif-tc font-black tracking-wide text-[#1C1B18]">
-                                宜蘭縣建案備查與實價登錄檢索系統
-                            </h1>
-                            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0] shadow-2xs">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#4A5D44] animate-pulse"></span>
-                                資料更新日期：2026/08/31
-                            </span>
-                        </div>
-                        <p class="text-xs sm:text-sm text-[#6E675B] hidden md:block font-normal mt-0.5">
+            <div class="flex items-center justify-between min-h-[3.8rem] sm:h-20 py-2 sm:py-2.5 gap-2">
+                <!-- Title & Date Badge (圖式已移除，釋放手機橫向空間) -->
+                <div class="min-w-0 flex-1">
+                    <h1 class="text-sm sm:text-2xl font-serif-tc font-black tracking-tight sm:tracking-wide text-[#1C1B18] leading-tight truncate sm:overflow-visible">
+                        宜蘭縣建案備查與實價登錄檢索系統
+                    </h1>
+                    <div class="flex items-center gap-2 mt-0.5 sm:mt-1 flex-wrap">
+                        <span class="inline-flex items-center gap-1 px-2 py-0.2 sm:py-0.5 rounded-md text-[10.5px] sm:text-xs font-mono font-semibold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0] shrink-0">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#4A5D44] animate-pulse"></span>
+                            更新：2026/08/31
+                        </span>
+                        <p class="text-xs sm:text-sm text-[#6E675B] hidden md:block font-normal truncate">
                             整合預售屋申報備查、實價登錄銷售率、成交單價區間、基地購地成本與建商負責人資料庫
                         </p>
                     </div>
                 </div>
 
                 <!-- Navigation Tabs & Actions -->
-                <div class="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
+                <div class="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0">
                     <!-- 1. 建案檢索 Tab -->
-                    <button id="tabSearchBtn" onclick="switchView('search')" class="px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#1C1B18] text-[#FAF8F5] flex items-center gap-1.5 transition shadow-xs">
-                        <svg class="w-4 h-4 text-[#E5C392]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                        <span>建案檢索</span>
+                    <button id="tabSearchBtn" onclick="switchView('search')" class="px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl bg-[#1C1B18] text-[#FAF8F5] flex items-center gap-1 sm:gap-1.5 transition shadow-xs">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#E5C392]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <span class="hidden sm:inline">建案檢索</span>
+                        <span class="sm:hidden">檢索</span>
                     </button>
                     
                     <!-- 2. 建商名冊 Tab -->
-                    <button id="tabBuildersBtn" onclick="switchView('builders')" class="px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center gap-1.5 transition">
-                        <svg class="w-4 h-4 text-[#7A5338]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                        <span>建商名冊</span>
+                    <button id="tabBuildersBtn" onclick="switchView('builders')" class="px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center gap-1 sm:gap-1.5 transition">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7A5338]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                        <span class="hidden sm:inline">建商名冊</span>
+                        <span class="sm:hidden">建商</span>
                     </button>
 
                     <!-- 3. 行情統計 Tab -->
-                    <button id="tabStatsBtn" onclick="switchView('stats')" class="px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center gap-1.5 transition">
-                        <svg class="w-4 h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+                    <button id="tabStatsBtn" onclick="switchView('stats')" class="px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center gap-1 sm:gap-1.5 transition">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
                         <span class="hidden sm:inline">行情統計</span>
                         <span class="sm:hidden">統計</span>
                     </button>
 
                     <!-- Export Excel -->
-                    <button onclick="exportCurrentViewToExcel()" title="匯出 Excel" class="px-3 sm:px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#FFFFFF] text-[#3E523A] border border-[#C5D4C2] hover:bg-[#EEF4EC] flex items-center gap-1.5 transition shadow-xs">
-                        <svg class="w-4 h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+                    <button onclick="exportCurrentViewToExcel()" title="匯出 Excel" class="px-2.5 sm:px-3.5 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl bg-[#FFFFFF] text-[#3E523A] border border-[#C5D4C2] hover:bg-[#EEF4EC] flex items-center gap-1 sm:gap-1.5 transition shadow-xs">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
                         <span class="hidden sm:inline">匯出</span>
                     </button>
                 </div>
