@@ -771,14 +771,14 @@
                     <div>
                         <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
                             <span class="text-xl">🆕</span>
-                            <span>一、最新預售屋申報備查建案登錄</span>
+                            <span>一、最新預售屋申報備查建案登錄 (近 1 個月內)</span>
                         </h3>
                         <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
-                            依宜蘭縣政府與內政部最新核准申報備查日期排序，點擊建案卡片可即刻查看完整履歷分區與銷況
+                            依宜蘭縣政府與內政部最新核准申報備查日期排序，精準呈現近 1 個月（30 天）內最新核准之預售建案，點擊建案卡片可即刻查看完整履歷分區與銷況
                         </p>
                     </div>
                     <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#F4F1EA] text-[#5C564C] border border-[#DCD4C5]">
-                        收錄 115 年最新備查代表案
+                        收錄近 1 個月最新備查案
                     </span>
                 </div>
 
@@ -188424,8 +188424,9 @@
                 if (d && d > maxDeclareDate) maxDeclareDate = d;
             });
 
-            // 3 months cutoff (90 days before latest declare date in dataset)
-            const cutoffDeclare = new Date(maxDeclareDate.getTime() - 90 * 24 * 60 * 60 * 1000);
+            // 1 month cutoff (30 days before latest declare date in dataset)
+            // 1 month cutoff (30 days before latest declare date in dataset)
+            const cutoffDeclare = new Date(maxDeclareDate.getTime() - 30 * 24 * 60 * 60 * 1000);
 
             // Filter projects declared within the past 3 months
             const recentProjects = allProjects.filter(p => {
