@@ -696,47 +696,6 @@ const htmlTemplate = `<!DOCTYPE html>
         <!-- VIEW 3: STATISTICS DASHBOARD VIEW (行情數據圖鑑) -->
         <div id="statsView" class="hidden space-y-6">
             
-            <!-- TOP 10 RECENT HOT-SELLING PROJECTS TABLE (近三個月實登最新十大熱銷建案榜) -->
-            <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
-                <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
-                    <div>
-                        <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
-                            <span class="text-xl">🔥</span>
-                            <span>宜蘭最新實價登錄 · 近三個月十大熱銷建案榜</span>
-                        </h3>
-                        <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
-                            統計近 3 個月內最新揭露之實價登錄成交動態，依近三個月新增去化量與成交熱度排序
-                        </p>
-                    </div>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0]">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#4A5D44] animate-pulse"></span>
-                        即時動態更新
-                    </span>
-                </div>
-
-                <div class="overflow-x-auto rounded-xl border border-[#EBE5DA]">
-                    <table class="w-full text-left text-xs sm:text-sm text-[#24211D]">
-                        <thead class="bg-[#F2ECE1] text-[#38342D] font-serif-tc font-bold border-b border-[#DCD4C5]">
-                            <tr>
-                                <th class="py-3 px-3 text-center">排名</th>
-                                <th class="py-3 px-3 whitespace-nowrap">鄉鎮</th>
-                                <th class="py-3 px-3.5 whitespace-nowrap">建案名稱</th>
-                                <th class="py-3 px-3 whitespace-nowrap">起造建商</th>
-                                <th class="py-3 px-3 text-center whitespace-nowrap">最新成交日</th>
-                                <th class="py-3 px-3 text-center whitespace-nowrap">近3個月新增實登</th>
-                                <th class="py-3 px-3 text-center whitespace-nowrap">累計銷售進度</th>
-                                <th class="py-3 px-3 text-center font-bold text-[#7A5338] whitespace-nowrap">實登成交均價</th>
-                                <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">🌱 基地購地地價</th>
-                                <th class="py-3 px-3 text-center whitespace-nowrap">詳情</th>
-                            </tr>
-                        </thead>
-                        <tbody id="topHotProjectsTableBody" class="divide-y divide-[#EBE5DA]">
-                            <!-- Populated dynamically by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <!-- Town Distribution Chart -->
                 <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
@@ -2184,19 +2143,48 @@ const htmlTemplate = `<!DOCTYPE html>
             // Render Section 3: Top 10 Hot Selling Projects
             renderTopHotSellingProjects('updateTopHotProjectsTableBody');
 
-            // Render Section 1: Latest Declared Pre-sale Projects
-            const sortedProjects = [...allProjects].sort((a, b) => {
+            // Helper to parse ROC date string
+            function parseRocDate(rocStr) {
+                if (!rocStr) return null;
+                const clean = String(rocStr).replace(/\D/g, '');
+                if (clean.length === 7) {
+                    return new Date(parseInt(clean.slice(0, 3)) + 1911, parseInt(clean.slice(3, 5)) - 1, parseInt(clean.slice(5, 7)));
+                } else if (clean.length === 6) {
+                    return new Date(parseInt(clean.slice(0, 2)) + 1911, parseInt(clean.slice(2, 4)) - 1, parseInt(clean.slice(4, 6)));
+                }
+                return null;
+            }
+
+            // Find global max declare date across all projects
+            let maxDeclareDate = new Date(2000, 0, 1);
+            allProjects.forEach(p => {
+                const d = parseRocDate(p.declareDateRaw || p.declareDate);
+                if (d && d > maxDeclareDate) maxDeclareDate = d;
+            });
+
+            // 3 months cutoff (90 days before latest declare date in dataset)
+            const cutoffDeclare = new Date(maxDeclareDate.getTime() - 90 * 24 * 60 * 60 * 1000);
+
+            // Filter projects declared within the past 3 months
+            const recentProjects = allProjects.filter(p => {
+                const d = parseRocDate(p.declareDateRaw || p.declareDate);
+                return d && d >= cutoffDeclare;
+            });
+
+            recentProjects.sort((a, b) => {
                 const da = String(a.declareDateRaw || a.declareDate || '');
                 const db = String(b.declareDateRaw || b.declareDate || '');
                 return db.localeCompare(da);
             });
 
-            // Filter latest 15 projects
-            const latestProjects = sortedProjects.slice(0, 15);
+            // Update header count card
+            const projCountEl = document.getElementById('updateNewProjectsCount');
+            if (projCountEl) projCountEl.innerText = recentProjects.length + ' 案';
+
             const grid = document.getElementById('updateNewProjectsGrid');
             if (grid) {
                 grid.innerHTML = '';
-                latestProjects.forEach(p => {
+                recentProjects.forEach(p => {
                     const bInfo = buildersMap[p.builder] || {};
                     const rep = bInfo.rep ? ' (' + bInfo.rep + ')' : '';
                     const s = p.salesStats || {};
@@ -2334,10 +2322,8 @@ const htmlTemplate = `<!DOCTYPE html>
         }
 
         function renderTopHotSellingProjects(targetTableId) {
-            if (!targetTableId) targetTableId = 'topHotProjectsTableBody';
-            const tableBody = document.getElementById(targetTableId);
-            if (!tableBody) return;
-            const tbody = document.getElementById('topHotProjectsTableBody');
+            if (!targetTableId) targetTableId = 'updateTopHotProjectsTableBody';
+            const tbody = document.getElementById(targetTableId);
             if (!tbody) return;
             tbody.innerHTML = '';
 
@@ -2458,7 +2444,6 @@ const htmlTemplate = `<!DOCTYPE html>
         }
 
         function renderStatsCharts() {
-            renderTopHotSellingProjects();
             if (typeof Chart === 'undefined') return;
 
             Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
