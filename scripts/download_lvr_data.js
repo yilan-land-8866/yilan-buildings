@@ -16,7 +16,13 @@ const rawBFile = path.join(outputDir, 'raw_transactions_b.json');
 function downloadZip(url) {
     return new Promise((resolve) => {
         const client = url.startsWith('https') ? https : http;
-        const req = client.get(url, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }, timeout: 30000 }, (res) => {
+        const req = client.get(url, { 
+            headers: { 
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+                'Referer': 'https://plvr.land.moi.gov.tw/DownloadOpenData'
+            }, 
+            timeout: 30000 
+        }, (res) => {
             if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
                 return downloadZip(res.headers.location).then(resolve);
             }
@@ -134,7 +140,7 @@ async function fetchLatestTransactions() {
     // Also download current latest active period
     try {
         process.stdout.write(`  抓取當期最新實價登錄 (lvr_landcsv.zip)... `);
-        const currentUrl = `https://plvr.land.moi.gov.tw/DownloadOpenData`;
+        const currentUrl = 'https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landCSV.zip';
         const resCurr = await downloadZip(currentUrl);
         if (resCurr && (resCurr.textA || resCurr.textB)) {
             const rowsA = parseCSV(resCurr.textA);

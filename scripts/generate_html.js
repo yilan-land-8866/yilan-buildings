@@ -226,46 +226,49 @@ const htmlTemplate = `<!DOCTYPE html>
     <!-- Top Navigation / Header -->
     <header class="bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#DCD4C5] sticky top-0 z-30 shadow-xs">
         <div class="fluid-container">
-            <div class="flex items-center justify-between h-18 sm:h-20 py-2.5">
-                <!-- Logo & Title -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#1C1B18] flex items-center justify-center text-[#FAF8F5] font-serif-tc font-black text-lg sm:text-xl shadow-sm border border-[#38342D] shrink-0">
-                        宜
-                    </div>
-                    <div>
-                        <h1 class="text-base sm:text-2xl font-serif-tc font-black tracking-wide text-[#1C1B18]">
-                            宜蘭縣建案備查與實價登錄檢索系統
-                        </h1>
-                        <p class="text-xs sm:text-sm text-[#6E675B] hidden md:block font-normal">
-                            整合預售屋申報備查、實價登錄銷售率、成交單價區間與建商負責人資料庫
+            <div class="flex items-center justify-between min-h-[3.8rem] sm:h-20 py-2 sm:py-2.5 gap-2">
+                <!-- Title & Date Badge (圖式已移除，釋放手機橫向空間) -->
+                <div class="min-w-0 flex-1">
+                    <h1 class="text-sm sm:text-2xl font-serif-tc font-black tracking-tight sm:tracking-wide text-[#1C1B18] leading-tight truncate sm:overflow-visible">
+                        宜蘭縣建案備查與實價登錄檢索系統
+                    </h1>
+                    <div class="flex items-center gap-2 mt-0.5 sm:mt-1 flex-wrap">
+                        <span class="inline-flex items-center gap-1 px-2 py-0.2 sm:py-0.5 rounded-md text-[10.5px] sm:text-xs font-mono font-semibold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0] shrink-0">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#4A5D44] animate-pulse"></span>
+                            更新：2026/09/07
+                        </span>
+                        <p class="text-xs sm:text-sm text-[#6E675B] hidden md:block font-normal truncate">
+                            整合預售屋申報備查、實價登錄銷售率、成交單價區間、基地購地成本與建商負責人資料庫
                         </p>
                     </div>
                 </div>
 
                 <!-- Navigation Tabs & Actions -->
-                <div class="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
+                <div class="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0">
                     <!-- 1. 建案檢索 Tab -->
-                    <button id="tabSearchBtn" onclick="switchView('search')" class="px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#1C1B18] text-[#FAF8F5] flex items-center gap-1.5 transition shadow-xs">
-                        <svg class="w-4 h-4 text-[#E5C392]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                        <span>建案檢索</span>
+                    <button id="tabSearchBtn" onclick="switchView('search')" class="px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl bg-[#1C1B18] text-[#FAF8F5] flex items-center gap-1 sm:gap-1.5 transition shadow-xs">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#E5C392]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <span class="hidden sm:inline">建案檢索</span>
+                        <span class="sm:hidden">檢索</span>
                     </button>
                     
                     <!-- 2. 建商名冊 Tab -->
-                    <button id="tabBuildersBtn" onclick="switchView('builders')" class="px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center gap-1.5 transition">
-                        <svg class="w-4 h-4 text-[#7A5338]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                        <span>建商名冊</span>
+                    <button id="tabBuildersBtn" onclick="switchView('builders')" class="px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center gap-1 sm:gap-1.5 transition">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7A5338]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                        <span class="hidden sm:inline">建商名冊</span>
+                        <span class="sm:hidden">建商</span>
                     </button>
 
                     <!-- 3. 行情統計 Tab -->
-                    <button id="tabStatsBtn" onclick="switchView('stats')" class="px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center gap-1.5 transition">
-                        <svg class="w-4 h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+                    <button id="tabStatsBtn" onclick="switchView('stats')" class="px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center gap-1 sm:gap-1.5 transition">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
                         <span class="hidden sm:inline">行情統計</span>
                         <span class="sm:hidden">統計</span>
                     </button>
 
                     <!-- Export Excel -->
-                    <button onclick="exportCurrentViewToExcel()" title="匯出 Excel" class="px-3 sm:px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#FFFFFF] text-[#3E523A] border border-[#C5D4C2] hover:bg-[#EEF4EC] flex items-center gap-1.5 transition shadow-xs">
-                        <svg class="w-4 h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+                    <button onclick="exportCurrentViewToExcel()" title="匯出 Excel" class="px-2.5 sm:px-3.5 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl bg-[#FFFFFF] text-[#3E523A] border border-[#C5D4C2] hover:bg-[#EEF4EC] flex items-center gap-1 sm:gap-1.5 transition shadow-xs">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
                         <span class="hidden sm:inline">匯出</span>
                     </button>
                 </div>
@@ -682,6 +685,48 @@ const htmlTemplate = `<!DOCTYPE html>
 
         <!-- VIEW 3: STATISTICS DASHBOARD VIEW (行情數據圖鑑) -->
         <div id="statsView" class="hidden space-y-6">
+            
+            <!-- TOP 10 RECENT HOT-SELLING PROJECTS TABLE (近三個月實登最新十大熱銷建案榜) -->
+            <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
+                <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
+                            <span class="text-xl">🔥</span>
+                            <span>宜蘭最新實價登錄 · 近三個月十大熱銷建案榜</span>
+                        </h3>
+                        <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
+                            統計近 3 個月內最新揭露之實價登錄成交動態，依近三個月新增去化量與成交熱度排序
+                        </p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0]">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#4A5D44] animate-pulse"></span>
+                        即時動態更新
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto rounded-xl border border-[#EBE5DA]">
+                    <table class="w-full text-left text-xs sm:text-sm text-[#24211D]">
+                        <thead class="bg-[#F2ECE1] text-[#38342D] font-serif-tc font-bold border-b border-[#DCD4C5]">
+                            <tr>
+                                <th class="py-3 px-3 text-center">排名</th>
+                                <th class="py-3 px-3 whitespace-nowrap">鄉鎮</th>
+                                <th class="py-3 px-3.5 whitespace-nowrap">建案名稱</th>
+                                <th class="py-3 px-3 whitespace-nowrap">起造建商</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">最新成交日</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">近3個月新增實登</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">累計銷售進度</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#7A5338] whitespace-nowrap">實登成交均價</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">🌱 基地購地地價</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">詳情</th>
+                            </tr>
+                        </thead>
+                        <tbody id="topHotProjectsTableBody" class="divide-y divide-[#EBE5DA]">
+                            <!-- Populated dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <!-- Town Distribution Chart -->
                 <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
@@ -734,9 +779,9 @@ const htmlTemplate = `<!DOCTYPE html>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#FFFFFF] border-t border-[#DCD4C5] py-6 mt-12 text-center text-xs text-[#6E675B] no-print">
+    <footer class="bg-[#FFFFFF] border-t border-[#DCD4C5] py-6 mt-12 text-center text-xs text-[#6E675B] no-print space-y-1">
         <p class="font-serif-tc font-bold text-[#38342D] tracking-wide">宜蘭縣建案備查與實價登錄銷售檢索系統</p>
-        <p class="mt-0.5 text-xs text-[#7A7366] font-normal">資料來源：內政部不動產交易實價查詢服務網 ＆ 經濟部商工登記資料庫</p>
+        <p class="text-xs text-[#7A7366]">資料來源：內政部不動產交易實價查詢服務網 ＆ 經濟部商工登記資料庫 · 最新更新日期：<b class="text-[#2C4A24] font-mono font-bold">2026/08/31</b></p>
     </footer>
 
     <!-- DETAIL MODAL -->
@@ -2250,7 +2295,129 @@ const htmlTemplate = `<!DOCTYPE html>
             }
         }
 
+        function renderTopHotSellingProjects() {
+            const tbody = document.getElementById('topHotProjectsTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            function rocToDate(rocStr) {
+                if (!rocStr) return null;
+                const parts = rocStr.split('/');
+                if (parts.length < 3) return null;
+                const yr = parseInt(parts[0]) + 1911;
+                const m = parseInt(parts[1]) - 1;
+                const d = parseInt(parts[2]);
+                return new Date(yr, m, d);
+            }
+
+            // Find global max transaction date across all projects
+            let maxDate = new Date(2000, 0, 1);
+            allProjects.forEach(p => {
+                (p.salesStats?.transactions || []).forEach(t => {
+                    const d = rocToDate(t.dateRoc);
+                    if (d && d > maxDate) maxDate = d;
+                });
+            });
+
+            // 3 months cutoff (90 days before latest transaction date in dataset)
+            const cutoffDate = new Date(maxDate.getTime() - 90 * 24 * 60 * 60 * 1000);
+
+            const candidates = [];
+
+            allProjects.forEach(p => {
+                const s = p.salesStats;
+                if (!s || !s.transactions) return;
+
+                const recentTx = s.transactions.filter(t => {
+                    const d = rocToDate(t.dateRoc);
+                    return d && d >= cutoffDate;
+                });
+
+                if (recentTx.length > 0) {
+                    candidates.push({
+                        project: p,
+                        recentCount: recentTx.length,
+                        latestDate: recentTx[0].dateRoc,
+                        soldUnits: s.soldUnits,
+                        totalHouseholds: s.totalHouseholds,
+                        salesRate: s.salesRate,
+                        isSoldOut: s.isSoldOut,
+                        avgPrice: s.avgPricePerPing
+                    });
+                }
+            });
+
+            candidates.sort((a, b) => {
+                if (b.recentCount !== a.recentCount) return b.recentCount - a.recentCount;
+                return (b.latestDate || '').localeCompare(a.latestDate || '');
+            });
+
+            const top10 = candidates.slice(0, 10);
+
+            top10.forEach((item, idx) => {
+                const p = item.project;
+                const s = p.salesStats;
+                const l = p.landStats || {};
+                const bInfo = buildersMap[p.builder];
+                const townColor = townColors[p.town] || 'bg-[#FFFFFF] text-[#38342D] border-[#DCD4C5]';
+
+                let rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">\${idx + 1}</span>\`;
+                if (idx === 0) rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>\`;
+                else if (idx === 1) rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>\`;
+                else if (idx === 2) rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>\`;
+
+                const repLabel = bInfo?.representative ? \`<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">\${bInfo.representative}</span>\` : '';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-[#F7F3EB] transition-colors cursor-pointer group';
+                tr.onclick = () => openDetailModal(p.id);
+
+                tr.innerHTML = \`
+                    <td class="py-3 px-3 text-center whitespace-nowrap font-mono">\${rankBadge}</td>
+                    <td class="py-3 px-3 whitespace-nowrap">
+                        <span class="badge border \${townColor} text-xs px-2 py-0.2 font-serif-tc font-bold">
+                            \${p.town || '宜蘭縣'}
+                        </span>
+                    </td>
+                    <td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">
+                        \${escapeHtml(p.caseName || '未命名')}
+                    </td>
+                    <td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">
+                        <span>\${escapeHtml(p.builder || '--')}</span>
+                        \${repLabel}
+                    </td>
+                    <td class="py-3 px-3 text-center font-mono font-medium text-xs text-[#5C564C] whitespace-nowrap">
+                        \${item.latestDate || '--'}
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <span class="inline-flex items-center gap-1 font-mono font-bold text-xs bg-[#EEF4EC] text-[#2C4A24] px-2 py-0.5 rounded-full border border-[#BDD9B4]">
+                            +\${item.recentCount} 筆
+                        </span>
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <div class="font-mono text-xs font-semibold text-[#1C1B18]">\${s.soldUnits} / \${s.totalHouseholds} 戶</div>
+                        <div class="text-[10.5px] font-bold \${item.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]'}">
+                            \${item.isSoldOut ? '完銷 100%' : \`\${s.salesRate}%\`}
+                        </div>
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <span class="font-serif-tc font-bold text-xs sm:text-sm text-[#7A5338]">\${s.avgPricePerPing ? s.avgPricePerPing + ' 萬/坪' : '--'}</span>
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        \${l.hasLandData ? \`<span class="font-mono font-bold text-xs text-[#2C4A24]">\${l.avgLandPricePerPing} 萬/坪</span>\` : \`<span class="text-xs text-[#A8A090]">--</span>\`}
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <button onclick="openDetailModal('\${p.id}'); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">
+                            詳情 ➔
+                        </button>
+                    </td>
+                \`;
+                tbody.appendChild(tr);
+            });
+        }
+
         function renderStatsCharts() {
+            renderTopHotSellingProjects();
             if (typeof Chart === 'undefined') return;
 
             Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
