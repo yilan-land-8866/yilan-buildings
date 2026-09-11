@@ -218,7 +218,7 @@
                 <div class="flex items-center justify-between min-w-0 flex-1">
                     <div class="min-w-0">
                         <div class="flex items-center gap-2 flex-wrap">
-                            <h1 class="text-sm sm:text-xl md:text-2xl font-serif-tc font-black tracking-tight sm:tracking-wide text-[#1C1B18] leading-tight truncate">
+                            <h1 class="text-base sm:text-2xl md:text-3xl font-serif-tc font-black tracking-tight sm:tracking-wide text-[#1C1B18] leading-tight truncate">
                                 宜蘭縣建案備查與實價登錄檢索
                             </h1>
                             <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] sm:text-xs font-mono font-semibold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0] shrink-0">
@@ -260,12 +260,11 @@
                         <span class="sm:hidden">統計</span>
                     </button>
 
-                    <!-- 4. 本期更新 (2026/09/07) Tab -->
+                    <!-- 4. 排行榜 Tab -->
                     <button id="tabUpdateBtn" onclick="switchView('update')" class="px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl text-[#38342D] hover:bg-[#EAE4D8] border border-[#DCD4C5] bg-[#FFFFFF] flex items-center justify-center gap-1 sm:gap-1.5 transition">
-                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C98A2C]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
-                        <span class="hidden sm:inline">本期更新</span>
-                        <span class="sm:hidden">更新</span>
-                        <span class="px-1 py-0.2 rounded-full text-[9px] font-mono font-bold bg-[#FEF3C7] text-[#92400E] ml-0.5 border border-[#FDE68A]">NEW</span>
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C98A2C]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.496m5.007 0a2.25 2.25 0 002.25-2.25V5.25A2.25 2.25 0 0014.503 3H9.496a2.25 2.25 0 00-2.25 2.25v7.875a2.25 2.25 0 002.25 2.25z"/></svg>
+                        <span>排行榜</span>
+                        <span class="px-1 py-0.2 rounded-full text-[9px] font-mono font-bold bg-[#FEF3C7] text-[#92400E] ml-0.5 border border-[#FDE68A]">TOP</span>
                     </button>
 
                     <!-- Desktop Export Excel Button -->
@@ -738,53 +737,16 @@
         </div>
 
     
-        <!-- VIEW 4: WEEKLY UPDATE VIEW (本期更新 2026/09/07) -->
+        <!-- VIEW 4: RANKING & UPDATE VIEW (排行榜) -->
         <div id="updateView" class="hidden space-y-6">
-            
-            <!-- Banner Header -->
-            <div class="bg-gradient-to-r from-[#24211D] to-[#38342D] text-[#FAF8F5] p-5 sm:p-7 rounded-2xl sm:rounded-3xl shadow-sm border border-[#4A443A] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                    <div class="flex items-center gap-2 mb-1 flex-wrap">
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#D4AF37]/25 text-[#F5DEB3] border border-[#D4AF37]/40 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#E5C392] animate-pulse"></span>
-                            本期速報 · 2026/09/11
-                        </span>
-                        <span class="text-xs text-[#B8B1A5]">內政部實價登錄與建案備查全量更新</span>
-                    </div>
-                    <h2 class="text-lg sm:text-2xl font-serif-tc font-black tracking-wide text-[#FAF8F5]">
-                        宜蘭預售建案與實價登錄 · 本期最新速報
-                    </h2>
-                    <p class="text-xs sm:text-sm text-[#D6CEBF] mt-1 font-normal">
-                        精選呈現近三個月十大熱銷指標案、最新核准備查 5 大建案與最新揭露 30 筆成交實價登錄明細
-                    </p>
-                </div>
-                <div class="flex items-center gap-3 sm:gap-4 shrink-0 flex-wrap">
-                    <div class="bg-[#FFFFFF]/10 backdrop-blur-xs px-3.5 py-2 rounded-xl border border-[#FFFFFF]/15 text-center">
-                        <div class="text-[11px] text-[#C2BBAE]">熱銷榜建案</div>
-                        <div class="text-lg font-mono font-bold text-[#FAF8F5]">10 案</div>
-                    </div>
-                    <div class="bg-[#FFFFFF]/10 backdrop-blur-xs px-3.5 py-2 rounded-xl border border-[#FFFFFF]/15 text-center">
-                        <div class="text-[11px] text-[#C2BBAE]">最新備查建案</div>
-                        <div class="text-lg font-mono font-bold text-[#FAF8F5]" id="updateNewProjectsCount">5 案</div>
-                    </div>
-                    <div class="bg-[#FFFFFF]/10 backdrop-blur-xs px-3.5 py-2 rounded-xl border border-[#FFFFFF]/15 text-center">
-                        <div class="text-[11px] text-[#C2BBAE]">最新成交實登</div>
-                        <div class="text-lg font-mono font-bold text-[#E5C392]" id="updateNewTxCount">30 筆</div>
-                    </div>
-                    <div class="bg-[#FFFFFF]/10 backdrop-blur-xs px-3.5 py-2 rounded-xl border border-[#FFFFFF]/15 text-center">
-                        <div class="text-[11px] text-[#C2BBAE]">最高成交單價</div>
-                        <div class="text-lg font-mono font-bold text-[#86EFAC]" id="updateMaxPrice">-- 萬/坪</div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- SECTION 1: 宜蘭最新實價登錄 · 近期十大熱銷建案榜 (Top 10) -->
+            <!-- SECTION 1: 十大熱銷建案排行榜 -->
             <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
                 <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
                     <div>
                         <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
                             <span class="text-xl">🔥</span>
-                            <span>一、宜蘭最新實價登錄 · 近期十大熱銷建案榜 (Top 10)</span>
+                            <span>十大熱銷建案排行榜</span>
                         </h3>
                         <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
                             統計近 3 個月（90 天）內實價登錄去化量最多之十大代表建案，實時呈現宜蘭房市最熱銷主力
@@ -819,20 +781,61 @@
                 </div>
             </div>
 
-            <!-- SECTION 2: 最新預售屋申報備查建案登錄 (近期五案) -->
+            <!-- SECTION 2: 成交單價前十名建案 -->
+            <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
+                <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
+                            <span class="text-xl">💎</span>
+                            <span>成交單價前十名建案</span>
+                        </h3>
+                        <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
+                            依全縣建案實價登錄之成交平均單價排序，呈現宜蘭房市身價最高、行情領先之十大指標建案
+                        </p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#FAF5EB] text-[#7A5338] border border-[#E5D7B3]">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#8C6D2B] animate-pulse"></span>
+                        單價行情 Top 10
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto rounded-xl border border-[#EBE5DA]">
+                    <table class="w-full text-left text-xs sm:text-sm text-[#24211D]">
+                        <thead class="bg-[#F2ECE1] text-[#38342D] font-serif-tc font-bold border-b border-[#DCD4C5]">
+                            <tr>
+                                <th class="py-3 px-3 text-center">排名</th>
+                                <th class="py-3 px-3 whitespace-nowrap">鄉鎮</th>
+                                <th class="py-3 px-3.5 whitespace-nowrap">建案名稱</th>
+                                <th class="py-3 px-3 whitespace-nowrap">起造建商</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#7A5338] whitespace-nowrap">實登平均單價</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#1C1B18] whitespace-nowrap">最高成交單價</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">單價成交區間</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">累計銷售進度</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">🌱 基地購地地價</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">詳情</th>
+                            </tr>
+                        </thead>
+                        <tbody id="updateTopPriceProjectsTableBody" class="divide-y divide-[#EBE5DA]">
+                            <!-- Populated dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECTION 3: 最新備查建案登錄 -->
             <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
                 <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
                     <div>
                         <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
                             <span class="text-xl">🆕</span>
-                            <span>二、最新預售屋申報備查建案登錄 (近期五案)</span>
+                            <span>最新備查建案登錄</span>
                         </h3>
                         <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
                             依宜蘭縣政府與內政部最新核准申報備查日期排序，精選最新核准之 5 大預售建案，點擊建案卡片可即刻查看完整履歷分區與銷況
                         </p>
                     </div>
                     <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#F4F1EA] text-[#5C564C] border border-[#DCD4C5]">
-                        收錄最新備查 5 案
+                        最新備查 5 案
                     </span>
                 </div>
 
@@ -841,13 +844,13 @@
                 </div>
             </div>
 
-            <!-- SECTION 3: 本期最新成交實價登錄明細 (近期 30 筆) -->
+            <!-- SECTION 4: 最新成交實價登錄 -->
             <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
                 <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
                     <div>
                         <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
                             <span class="text-xl">📈</span>
-                            <span>三、本期最新成交實價登錄明細 (近期 30 筆)</span>
+                            <span>最新成交實價登錄</span>
                         </h3>
                         <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
                             內政部最新揭露之預售屋買賣交易明細，依成交日期遞減排序精選最新 30 筆
@@ -189533,6 +189536,7 @@
         function renderWeeklyUpdateView() {
             // 1. Render Section 1: Top 10 Hot Selling Projects
             renderTopHotSellingProjects('updateTopHotProjectsTableBody');
+            renderTopPriceProjects('updateTopPriceProjectsTableBody');
 
             // 2. Render Section 2: Recent 5 Pre-sale Buildcases (固定近期五案)
             const sortedByDeclare = [...allProjects].filter(p => p.declareDateRaw || p.declareDate);
@@ -189543,9 +189547,7 @@
             });
             const recentProjects = sortedByDeclare.slice(0, 5);
 
-            // Update header count card
-            const projCountEl = document.getElementById('updateNewProjectsCount');
-            if (projCountEl) projCountEl.innerText = recentProjects.length + ' 案';
+
 
             const grid = document.getElementById('updateNewProjectsGrid');
             if (grid) {
@@ -189678,19 +189680,83 @@
                     txTableBody.appendChild(row);
                 });
             }
-
-            // Update stats counter cards in banner
-            const countEl = document.getElementById('updateNewTxCount');
-            if (countEl) countEl.innerText = recentTx.length + ' 筆';
-            
-            const maxPriceEl = document.getElementById('updateMaxPrice');
-            if (maxPriceEl && recentTx.length > 0) {
-                const maxP = Math.max(...recentTx.map(t => t.pricePerPing || 0).filter(p => p > 0));
-                maxPriceEl.innerText = maxP > 0 ? maxP + ' 萬/坪' : '--';
-            }
         }
 
-        function renderTopHotSellingProjects(targetTableId) {
+        
+                function renderTopPriceProjects(targetTableId) {
+            if (!targetTableId) targetTableId = 'updateTopPriceProjectsTableBody';
+            const tbody = document.getElementById(targetTableId);
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const candidates = allProjects.filter(p => p.salesStats && p.salesStats.avgPricePerPing > 0);
+            candidates.sort((a, b) => b.salesStats.avgPricePerPing - a.salesStats.avgPricePerPing);
+
+            const top10 = candidates.slice(0, 10);
+
+            top10.forEach((p, idx) => {
+                const s = p.salesStats;
+                const l = p.landStats || {};
+                const bInfo = buildersMap[p.builder];
+                const townColor = townColors[p.town] || 'bg-[#FFFFFF] text-[#38342D] border-[#DCD4C5]';
+
+                let rankBadge = `<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">${idx + 1}</span>`;
+                if (idx === 0) rankBadge = `<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>`;
+                else if (idx === 1) rankBadge = `<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>`;
+                else if (idx === 2) rankBadge = `<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>`;
+
+                const rep = (bInfo?.representative || bInfo?.rep) ? `<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">${bInfo.representative || bInfo.rep}</span>` : '';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-[#F7F3EB] transition-colors cursor-pointer group';
+                tr.onclick = () => openDetailModal(p.id);
+
+                const priceRangeStr = (s.minPricePerPing && s.maxPricePerPing && s.minPricePerPing !== s.maxPricePerPing)
+                    ? `${s.minPricePerPing} ~ ${s.maxPricePerPing} 萬/坪`
+                    : (s.avgPricePerPing ? `${s.avgPricePerPing} 萬/坪` : '--');
+
+                tr.innerHTML = `
+                    <td class="py-3 px-3 text-center whitespace-nowrap font-mono">${rankBadge}</td>
+                    <td class="py-3 px-3 whitespace-nowrap">
+                        <span class="badge border ${townColor} text-xs px-2 py-0.2 font-serif-tc font-bold">
+                            ${p.town || '宜蘭縣'}
+                        </span>
+                    </td>
+                    <td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">
+                        ${escapeHtml(p.caseName || '未命名')}
+                    </td>
+                    <td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">
+                        <span>${escapeHtml(p.builder || '--')}</span>
+                        ${rep}
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <span class="font-serif-tc font-black text-sm sm:text-base text-[#7A5338]">${s.avgPricePerPing ? s.avgPricePerPing + ' 萬/坪' : '--'}</span>
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <span class="font-mono font-bold text-xs sm:text-sm text-[#1C1B18]">${s.maxPricePerPing ? s.maxPricePerPing + ' 萬/坪' : '--'}</span>
+                    </td>
+                    <td class="py-3 px-3 text-center font-mono text-xs text-[#5C564C] whitespace-nowrap">
+                        ${priceRangeStr}
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <div class="font-mono text-xs font-semibold text-[#1C1B18]">${s.soldUnits} / ${p.household || s.totalHouseholds} 戶</div>
+                        <div class="text-[10.5px] font-bold ${s.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]'}">
+                            ${s.isSoldOut ? '完銷 100%' : `${s.salesRate}%`}
+                        </div>
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        ${l.hasLandData ? `<span class="font-mono font-bold text-xs text-[#2C4A24]">${l.avgLandPricePerPing} 萬/坪</span>` : `<span class="text-xs text-[#A8A090]">--</span>`}
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        <button onclick="openDetailModal('${p.id}'); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">
+                            詳情 ➔
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+function renderTopHotSellingProjects(targetTableId) {
             if (!targetTableId) targetTableId = 'updateTopHotProjectsTableBody';
             const tbody = document.getElementById(targetTableId);
             if (!tbody) return;
@@ -189970,7 +190036,47 @@
             try {
                 const wb = XLSX.utils.book_new();
                 if (currentView === 'update') {
-                    // Export Update summary
+                    // Export Rankings and Updates
+                    const hotCandidates = [];
+                    allProjects.forEach(p => {
+                        const s = p.salesStats;
+                        if (!s || !s.transactions) return;
+                        hotCandidates.push({
+                            project: p,
+                            recentCount: s.transactions.length,
+                            soldUnits: s.soldUnits,
+                            totalHouseholds: p.household || s.totalHouseholds,
+                            salesRate: s.salesRate,
+                            avgPrice: s.avgPricePerPing
+                        });
+                    });
+                    hotCandidates.sort((a, b) => b.recentCount - a.recentCount);
+                    const topHotRows = hotCandidates.slice(0, 10).map((item, idx) => ({
+                        '排名': idx + 1,
+                        '鄉鎮市': item.project.town,
+                        '建案名稱': item.project.caseName,
+                        '起造建商': item.project.builder,
+                        '實登已售戶數': item.soldUnits,
+                        '規劃總戶數': item.totalHouseholds,
+                        '銷售率(%)': item.salesRate,
+                        '實登均價(萬/坪)': item.avgPrice || '--'
+                    }));
+                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(topHotRows), '十大熱銷建案榜');
+
+                    const priceCandidates = allProjects.filter(p => p.salesStats && p.salesStats.avgPricePerPing > 0);
+                    priceCandidates.sort((a, b) => b.salesStats.avgPricePerPing - a.salesStats.avgPricePerPing);
+                    const topPriceRows = priceCandidates.slice(0, 10).map((p, idx) => ({
+                        '排名': idx + 1,
+                        '鄉鎮市': p.town,
+                        '建案名稱': p.caseName,
+                        '起造建商': p.builder,
+                        '實登平均單價(萬/坪)': p.salesStats.avgPricePerPing,
+                        '最高成交單價(萬/坪)': p.salesStats.maxPricePerPing || '--',
+                        '規劃總戶數': p.household,
+                        '銷售率(%)': p.salesStats.salesRate
+                    }));
+                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(topPriceRows), '成交單價前十名建案');
+
                     const sortedByDeclare = [...allProjects].filter(p => p.declareDateRaw || p.declareDate);
                     sortedByDeclare.sort((a, b) => String(b.declareDateRaw || b.declareDate || '').localeCompare(String(a.declareDateRaw || a.declareDate || '')));
                     const top5 = sortedByDeclare.slice(0, 5).map(p => ({
@@ -189983,7 +190089,7 @@
                         '基地座落': p.mainLand,
                         '建照字號': p.permitNo
                     }));
-                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(top5), '近期五案最新備查');
+                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(top5), '最新備查五案');
 
                     const allTx = [];
                     allProjects.forEach(p => (p.salesStats?.transactions || []).forEach(t => allTx.push({
@@ -189999,9 +190105,9 @@
                         '車位': t.parking
                     })));
                     allTx.sort((a, b) => String(b['成交日期'] || '').localeCompare(String(a['成交日期'] || '')));
-                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(allTx.slice(0, 30)), '近期30筆成交實登');
+                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(allTx.slice(0, 30)), '最新成交30筆');
 
-                    XLSX.writeFile(wb, '宜蘭建案_本期最新速報.xlsx');
+                    XLSX.writeFile(wb, '宜蘭建案_房市排行榜.xlsx');
                 } else if (currentView === 'builders') {
                     const rows = Object.entries(buildersMap).map(([name, info]) => ({
                         '建商名稱': name,
