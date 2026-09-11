@@ -240,7 +240,7 @@ const htmlTemplate = `<!DOCTYPE html>
                             </h1>
                             <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] sm:text-xs font-mono font-semibold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0] shrink-0">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#4A5D44] animate-pulse"></span>
-                                更新：2026/09/07
+                                更新：2026/09/11
                             </span>
                         </div>
                         <p class="text-xs sm:text-sm text-[#6E675B] hidden md:block font-normal truncate mt-0.5">
@@ -764,7 +764,7 @@ const htmlTemplate = `<!DOCTYPE html>
                     <div class="flex items-center gap-2 mb-1 flex-wrap">
                         <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#D4AF37]/25 text-[#F5DEB3] border border-[#D4AF37]/40 flex items-center gap-1.5">
                             <span class="w-1.5 h-1.5 rounded-full bg-[#E5C392] animate-pulse"></span>
-                            本期週報 · 2026/09/07
+                            本期速報 · 2026/09/11
                         </span>
                         <span class="text-xs text-[#B8B1A5]">內政部實價登錄與建案備查全量更新</span>
                     </div>
