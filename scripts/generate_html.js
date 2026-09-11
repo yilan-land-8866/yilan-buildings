@@ -757,7 +757,7 @@ const htmlTemplate = `<!DOCTYPE html>
         <!-- VIEW 4: RANKING & UPDATE VIEW (排行榜) -->
         <div id="updateView" class="hidden space-y-6">
 
-            <!-- SECTION 1: 十大熱銷建案排行榜 -->
+            <!-- SECTION 1: 十大熱銷建案排行榜 (近6個月更新日回推) -->
             <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
                 <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
                     <div>
@@ -766,12 +766,12 @@ const htmlTemplate = `<!DOCTYPE html>
                             <span>十大熱銷建案排行榜</span>
                         </h3>
                         <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
-                            統計近 3 個月（90 天）內實價登錄去化量最多之十大代表建案，實時呈現宜蘭房市最熱銷主力
+                            統計以系統更新日回推近 6 個月內實價登錄去化量最多之十大代表建案，實時呈現宜蘭房市最熱銷主力
                         </p>
                     </div>
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0]">
                         <span class="w-1.5 h-1.5 rounded-full bg-[#4A5D44] animate-pulse"></span>
-                        熱銷去化 Top 10
+                        近 6 個月熱銷 Top 10
                     </span>
                 </div>
 
@@ -779,12 +779,12 @@ const htmlTemplate = `<!DOCTYPE html>
                     <table class="w-full text-left text-xs sm:text-sm text-[#24211D]">
                         <thead class="bg-[#F2ECE1] text-[#38342D] font-serif-tc font-bold border-b border-[#DCD4C5]">
                             <tr>
-                                <th class="py-3 px-3 text-center">排名</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">排名</th>
                                 <th class="py-3 px-3 whitespace-nowrap">鄉鎮</th>
                                 <th class="py-3 px-3.5 whitespace-nowrap">建案名稱</th>
                                 <th class="py-3 px-3 whitespace-nowrap">起造建商</th>
                                 <th class="py-3 px-3 text-center whitespace-nowrap">最新成交日</th>
-                                <th class="py-3 px-3 text-center whitespace-nowrap">近3個月新增實登</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">近6個月新增實登</th>
                                 <th class="py-3 px-3 text-center whitespace-nowrap">累計銷售進度</th>
                                 <th class="py-3 px-3 text-center font-bold text-[#7A5338] whitespace-nowrap">實登成交均價</th>
                                 <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">🌱 基地購地地價</th>
@@ -2480,17 +2480,18 @@ const htmlTemplate = `<!DOCTYPE html>
                 return new Date(yr, m, d);
             }
 
-            // Find global max transaction date across all projects
-            let maxDate = new Date(2000, 0, 1);
-            allProjects.forEach(p => {
-                (p.salesStats?.transactions || []).forEach(t => {
-                    const d = rocToDate(t.dateRoc);
-                    if (d && d > maxDate) maxDate = d;
-                });
-            });
+            // 取得系統更新基準日（以頁面頂部更新日期為準）
+            let baseUpdateDate = new Date();
+            const headerBadge = Array.from(document.querySelectorAll('header span')).find(el => el.textContent.includes('更新：'));
+            if (headerBadge) {
+                const m = headerBadge.textContent.match(/(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/);
+                if (m) {
+                    baseUpdateDate = new Date(parseInt(m[1]), parseInt(m[2]) - 1, parseInt(m[3]));
+                }
+            }
 
-            // 3 months cutoff (90 days before latest transaction date in dataset)
-            const cutoffDate = new Date(maxDate.getTime() - 90 * 24 * 60 * 60 * 1000);
+            // 近 6 個月統計截止點（以更新日回推 6 個月）
+            const cutoffDate = new Date(baseUpdateDate.getFullYear(), baseUpdateDate.getMonth() - 6, baseUpdateDate.getDate());
 
             const candidates = [];
 
@@ -2509,7 +2510,7 @@ const htmlTemplate = `<!DOCTYPE html>
                         recentCount: recentTx.length,
                         latestDate: recentTx[0].dateRoc,
                         soldUnits: s.soldUnits,
-                        totalHouseholds: s.totalHouseholds,
+                        totalHouseholds: p.household || s.totalHouseholds,
                         salesRate: s.salesRate,
                         isSoldOut: s.isSoldOut,
                         avgPrice: s.avgPricePerPing
@@ -2528,60 +2529,59 @@ const htmlTemplate = `<!DOCTYPE html>
                 const p = item.project;
                 const s = p.salesStats;
                 const l = p.landStats || {};
-                const bInfo = buildersMap[p.builder];
+                const bInfo = buildersMap[p.builder] || {};
                 const townColor = townColors[p.town] || 'bg-[#FFFFFF] text-[#38342D] border-[#DCD4C5]';
 
-                let rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">\${idx + 1}</span>\`;
-                if (idx === 0) rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>\`;
-                else if (idx === 1) rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>\`;
-                else if (idx === 2) rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>\`;
+                let rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">' + (idx + 1) + '</span>';
+                if (idx === 0) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>';
+                else if (idx === 1) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>';
+                else if (idx === 2) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>';
 
-                const repLabel = bInfo?.representative ? \`<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">\${bInfo.representative}</span>\` : '';
+                const rep = (bInfo.representative || bInfo.rep) ? ('<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">' + escapeHtml(bInfo.representative || bInfo.rep) + '</span>') : '';
 
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-[#F7F3EB] transition-colors cursor-pointer group';
                 tr.onclick = () => openDetailModal(p.id);
 
-                tr.innerHTML = \`
-                    <td class="py-3 px-3 text-center whitespace-nowrap font-mono">\${rankBadge}</td>
-                    <td class="py-3 px-3 whitespace-nowrap">
-                        <span class="badge border \${townColor} text-xs px-2 py-0.2 font-serif-tc font-bold">
-                            \${p.town || '宜蘭縣'}
-                        </span>
-                    </td>
-                    <td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">
-                        \${escapeHtml(p.caseName || '未命名')}
-                    </td>
-                    <td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">
-                        <span>\${escapeHtml(p.builder || '--')}</span>
-                        \${repLabel}
-                    </td>
-                    <td class="py-3 px-3 text-center font-mono font-medium text-xs text-[#5C564C] whitespace-nowrap">
-                        \${item.latestDate || '--'}
-                    </td>
-                    <td class="py-3 px-3 text-center whitespace-nowrap">
-                        <span class="inline-flex items-center gap-1 font-mono font-bold text-xs bg-[#EEF4EC] text-[#2C4A24] px-2 py-0.5 rounded-full border border-[#BDD9B4]">
-                            +\${item.recentCount} 筆
-                        </span>
-                    </td>
-                    <td class="py-3 px-3 text-center whitespace-nowrap">
-                        <div class="font-mono text-xs font-semibold text-[#1C1B18]">\${s.soldUnits} / \${s.totalHouseholds} 戶</div>
-                        <div class="text-[10.5px] font-bold \${item.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]'}">
-                            \${item.isSoldOut ? '完銷 100%' : \`\${s.salesRate}%\`}
-                        </div>
-                    </td>
-                    <td class="py-3 px-3 text-center whitespace-nowrap">
-                        <span class="font-serif-tc font-bold text-xs sm:text-sm text-[#7A5338]">\${s.avgPricePerPing ? s.avgPricePerPing + ' 萬/坪' : '--'}</span>
-                    </td>
-                    <td class="py-3 px-3 text-center whitespace-nowrap">
-                        \${l.hasLandData ? \`<span class="font-mono font-bold text-xs text-[#2C4A24]">\${l.avgLandPricePerPing} 萬/坪</span>\` : \`<span class="text-xs text-[#A8A090]">--</span>\`}
-                    </td>
-                    <td class="py-3 px-3 text-center whitespace-nowrap">
-                        <button onclick="openDetailModal('\${p.id}'); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">
-                            詳情 ➔
-                        </button>
-                    </td>
-                \`;
+                const landSubtext = l.hasLandData ? ('<span class="font-mono font-bold text-xs text-[#2C4A24]">' + l.avgLandPricePerPing + ' 萬/坪</span>') : '<span class="text-xs text-[#A8A090]">--</span>';
+                const salesRateClass = item.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]';
+                const salesRateText = item.isSoldOut ? '完銷 100%' : (s.salesRate + '%');
+
+                tr.innerHTML = 
+                    '<td class="py-3 px-3 text-center whitespace-nowrap font-mono">' + rankBadge + '</td>' +
+                    '<td class="py-3 px-3 whitespace-nowrap">' +
+                        '<span class="badge border ' + townColor + ' text-xs px-2 py-0.2 font-serif-tc font-bold">' +
+                            escapeHtml(p.town || '宜蘭縣') +
+                        '</span>' +
+                    '</td>' +
+                    '<td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">' +
+                        escapeHtml(p.caseName || '未命名') +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">' +
+                        '<span>' + escapeHtml(p.builder || '--') + '</span>' +
+                        rep +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap font-mono text-xs text-[#38342D]">' +
+                        escapeHtml(item.latestDate || '--') +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-mono font-black text-xs sm:text-sm text-[#2C4A24] bg-[#EEF5EC] px-2.5 py-1 rounded-full border border-[#BDD9B4]">+' + item.recentCount + ' 戶</span>' +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<div class="font-mono text-xs font-semibold text-[#1C1B18]">' + s.soldUnits + ' / ' + (p.household || s.totalHouseholds) + ' 戶</div>' +
+                        '<div class="text-[10.5px] font-bold ' + salesRateClass + '">' + salesRateText + '</div>' +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-serif-tc font-bold text-xs sm:text-sm text-[#7A5338]">' + (s.avgPricePerPing ? s.avgPricePerPing + ' 萬/坪' : '--') + '</span>' +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        landSubtext +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<button onclick="openDetailModal(' + p.id + '); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">' +
+                            '詳情 ➔' +
+                        '</button>' +
+                    '</td>';
                 tbody.appendChild(tr);
             });
         }
