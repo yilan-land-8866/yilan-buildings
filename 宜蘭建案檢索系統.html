@@ -823,7 +823,7 @@
                 </div>
             </div>
 
-            <!-- SECTION 3: 最新備查建案登錄 -->
+            <!-- SECTION 3: 最新備查建案登錄 (依序五名 表格版) -->
             <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
                 <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
                     <div>
@@ -832,16 +832,36 @@
                             <span>最新備查建案登錄</span>
                         </h3>
                         <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
-                            依宜蘭縣政府與內政部最新核准申報備查日期排序，精選最新核准之 5 大預售建案，點擊建案卡片可即刻查看完整履歷分區與銷況
+                            依宜蘭縣政府與內政部最新核准申報備查日期排序，精選最新核准申報之 5 大指標建案（依序五名）
                         </p>
                     </div>
                     <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#F4F1EA] text-[#5C564C] border border-[#DCD4C5]">
-                        最新備查 5 案
+                        最新備查前 5 案
                     </span>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6" id="updateNewProjectsGrid">
-                    <!-- Populated dynamically by JavaScript -->
+                <div class="overflow-x-auto rounded-xl border border-[#EBE5DA]">
+                    <table class="w-full text-left text-xs sm:text-sm text-[#24211D]">
+                        <thead class="bg-[#F2ECE1] text-[#38342D] font-serif-tc font-bold border-b border-[#DCD4C5]">
+                            <tr>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">排名</th>
+                                <th class="py-3 px-3 whitespace-nowrap">鄉鎮</th>
+                                <th class="py-3 px-3.5 whitespace-nowrap">建案名稱</th>
+                                <th class="py-3 px-3 whitespace-nowrap">起造建商</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#1C1B18] whitespace-nowrap">申報備查日</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">建照核准日</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#7A5338] whitespace-nowrap">規劃總戶數</th>
+                                <th class="py-3 px-3 whitespace-nowrap">建造執照字號</th>
+                                <th class="py-3 px-3 whitespace-nowrap">基地座落地號</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">實登去化進度</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">🌱 基地購地地價</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">詳情</th>
+                            </tr>
+                        </thead>
+                        <tbody id="updateNewProjectsTableBody" class="divide-y divide-[#EBE5DA]">
+                            <!-- Populated dynamically by JavaScript -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -189539,7 +189559,7 @@
             renderTopHotSellingProjects('updateTopHotProjectsTableBody');
             renderTopPriceProjects('updateTopPriceProjectsTableBody');
 
-            // 2. Render Section 2: Recent 5 Pre-sale Buildcases (固定近期五案 - 響應式雙欄/全幅焦點排版)
+            // 2. Render Section 3: Recent 5 Pre-sale Buildcases (最新備查建案登錄 依序五名 表格版)
             const sortedByDeclare = [...allProjects].filter(p => p.declareDateRaw || p.declareDate);
             sortedByDeclare.sort((a, b) => {
                 const da = String(a.declareDateRaw || a.declareDate || '');
@@ -189548,242 +189568,81 @@
             });
             const recentProjects = sortedByDeclare.slice(0, 5);
 
-            const grid = document.getElementById('updateNewProjectsGrid');
-            if (grid) {
-                grid.innerHTML = '';
+            const tableBody = document.getElementById('updateNewProjectsTableBody');
+            if (tableBody) {
+                tableBody.innerHTML = '';
                 recentProjects.forEach((p, idx) => {
                     const bInfo = buildersMap[p.builder] || {};
-                    const rep = (bInfo.representative || bInfo.rep) ? ' (' + (bInfo.representative || bInfo.rep) + ')' : '';
+                    const rep = (bInfo.representative || bInfo.rep) ? ('<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">' + escapeHtml(bInfo.representative || bInfo.rep) + '</span>') : '';
                     const s = p.salesStats || {};
                     const l = p.landStats || {};
                     const hasSales = s.hasSalesData && s.soldUnits > 0;
                     const townColor = townColors[p.town] || 'bg-[#FFFFFF] text-[#38342D] border-[#DCD4C5]';
 
-                    const isFirst = idx === 0;
-                    const rankLabel = isFirst ? '🏆 最新備查首案' : '最新備查第 ' + (idx + 1) + ' 案';
-                    const rankBadgeClass = isFirst
-                        ? 'bg-[#FEF3C7] text-[#92400E] border-[#FDE68A] font-bold'
-                        : 'bg-[#F4F1EA] text-[#5C564C] border-[#DCD4C5] font-semibold';
+                    let rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">' + (idx + 1) + '</span>';
+                    if (idx === 0) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>';
+                    else if (idx === 1) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>';
+                    else if (idx === 2) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>';
 
                     let salesTag = '';
                     if (hasSales) {
-                        salesTag = '<span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#BDD9B4]">已售 ' + s.soldUnits + '/' + (p.household || s.totalHouseholds) + '戶 (' + s.salesRate + '%)</span>';
+                        salesTag = '<div class="font-mono text-xs font-semibold text-[#1C1B18]">' + s.soldUnits + ' / ' + (p.household || s.totalHouseholds) + ' 戶</div>' +
+                                   '<div class="text-[10.5px] font-bold ' + (s.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]') + '">' + (s.isSoldOut ? '完銷 100%' : (s.salesRate + '%')) + '</div>';
                     } else {
-                        salesTag = '<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#FAF8F5] text-[#7A7366] border border-[#E8E2D5]">尚無成交揭露</span>';
+                        salesTag = '<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-[#FAF8F5] text-[#7A7366] border border-[#DCD4C5]">尚無成交揭露</span>';
                     }
 
-                    const landTag = (l && l.hasLandData)
-                        ? '<span class="inline-flex items-center gap-1 text-[11px] font-bold text-[#2C4A24] bg-[#EEF5EC] px-2 py-0.5 rounded border border-[#BDD9B4]">🌱 購地 ' + l.avgLandPricePerPing + '萬/坪</span>'
-                        : '';
+                    const landSubtext = l.hasLandData ? ('<span class="font-mono font-bold text-xs text-[#2C4A24]">' + l.avgLandPricePerPing + ' 萬/坪</span>') : '<span class="text-xs text-[#A8A090]">--</span>';
 
-                    const card = document.createElement('div');
-                    
-                    if (isFirst) {
-                        // Card 1: Featured Newest Project (Full width across 2 columns on tablet/desktop)
-                        card.className = 'md:col-span-2 bg-[#FAF8F5] hover:bg-[#FAF6EF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 border-[#D8CBB7] hover:border-[#7A5338] shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between group';
-                        card.onclick = () => openDetailModal(p.id);
-                        card.innerHTML = 
-                            '<div>' +
-                                '<!-- Top Badges Row -->' +
-                                '<div class="flex items-center justify-between gap-2 flex-wrap pb-3 border-b border-[#EAE4D8]">' +
-                                    '<div class="flex items-center gap-2">' +
-                                        '<span class="px-2.5 py-1 rounded-lg text-xs font-mono border ' + rankBadgeClass + ' flex items-center gap-1">' +
-                                            rankLabel +
-                                        '</span>' +
-                                        '<span class="px-2.5 py-1 text-xs font-serif-tc font-bold rounded-lg border ' + townColor + '">' +
-                                            escapeHtml(p.town || '宜蘭縣') +
-                                        '</span>' +
-                                    '</div>' +
-                                    '<div class="flex items-center gap-2 flex-wrap">' +
-                                        landTag +
-                                        salesTag +
-                                    '</div>' +
-                                '</div>' +
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-[#F7F3EB] transition-colors cursor-pointer group';
+                    row.onclick = () => openDetailModal(p.id);
 
-                                '<!-- Responsive Body: Stacked on Mobile, 2-Column Grid on Desktop -->' +
-                                '<div class="grid grid-cols-1 lg:grid-cols-12 gap-5 mt-4">' +
-                                    '<!-- Left Column: Identity & Builder -->' +
-                                    '<div class="lg:col-span-5 flex flex-col justify-between">' +
-                                        '<div>' +
-                                            '<h4 class="text-lg sm:text-xl md:text-2xl font-serif-tc font-black text-[#1C1B18] group-hover:text-[#7A5338] transition-colors leading-tight mb-2">' +
-                                                escapeHtml(p.caseName) +
-                                            '</h4>' +
-                                            '<div class="text-xs sm:text-sm text-[#5C564C] flex items-center gap-1.5 mb-3 flex-wrap">' +
-                                                '<span class="font-medium text-[#7A5338]">起造建商:</span>' +
-                                                '<span class="font-semibold text-[#1C1B18]">' + escapeHtml(p.builder || '--') + '</span>' +
-                                                (rep ? '<span class="text-xs text-[#7A7366]">' + escapeHtml(rep) + '</span>' : '') +
-                                            '</div>' +
-                                            '<p class="text-xs text-[#7A7366] leading-relaxed hidden sm:block">' +
-                                                '本案為近期全縣最新核准申報備查之指標建案，座落於' + escapeHtml(p.town || '') + '，規劃總戶數 ' + (p.household || '--') + ' 戶。' +
-                                            '</p>' +
-                                        '</div>' +
-                                    '</div>' +
-
-                                    '<!-- Right Column: 4 Stat Tiles & Location/Permit -->' +
-                                    '<div class="lg:col-span-7 space-y-3">' +
-                                        '<!-- 4 Key Stat Tiles -->' +
-                                        '<div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">' +
-                                            '<div class="bg-[#FFFFFF] p-3 rounded-xl border border-[#EBE5DA] shadow-2xs">' +
-                                                '<div class="text-[11px] text-[#7A7366] font-medium mb-1 flex items-center gap-1">' +
-                                                    '<span>📋</span> 申報備查日' +
-                                                '</div>' +
-                                                '<div class="font-mono font-black text-xs sm:text-sm text-[#1C1B18]">' +
-                                                    escapeHtml(p.declareDate || p.declareDateRaw || '--') +
-                                                '</div>' +
-                                            '</div>' +
-                                            '<div class="bg-[#FFFFFF] p-3 rounded-xl border border-[#EBE5DA] shadow-2xs">' +
-                                                '<div class="text-[11px] text-[#7A7366] font-medium mb-1 flex items-center gap-1">' +
-                                                    '<span>🏢</span> 規劃總戶數' +
-                                                '</div>' +
-                                                '<div class="font-mono font-black text-xs sm:text-sm text-[#7A5338]">' +
-                                                    (p.household || '--') + ' <span class="text-[10.5px] font-normal text-[#7A7366]">戶</span>' +
-                                                '</div>' +
-                                            '</div>' +
-                                            '<div class="bg-[#FFFFFF] p-3 rounded-xl border border-[#EBE5DA] shadow-2xs">' +
-                                                '<div class="text-[11px] text-[#7A7366] font-medium mb-1 flex items-center gap-1">' +
-                                                    '<span>📅</span> 建照核准日' +
-                                                '</div>' +
-                                                '<div class="font-mono font-bold text-xs sm:text-sm text-[#38342D]">' +
-                                                    escapeHtml(p.permitDate || p.permitDateRaw || '--') +
-                                                '</div>' +
-                                            '</div>' +
-                                            '<div class="bg-[#FFFFFF] p-3 rounded-xl border border-[#EBE5DA] shadow-2xs">' +
-                                                '<div class="text-[11px] text-[#7A7366] font-medium mb-1 flex items-center gap-1">' +
-                                                    '<span>📈</span> 實登銷售率' +
-                                                '</div>' +
-                                                '<div class="font-mono font-bold text-xs sm:text-sm ' + (hasSales ? 'text-[#2C4A24]' : 'text-[#7A7366]') + '">' +
-                                                    (hasSales ? s.salesRate + '%' : '尚未揭露') +
-                                                '</div>' +
-                                            '</div>' +
-                                        '</div>' +
-
-                                        '<!-- Location & Permit details (Spacious Full-Width Box) -->' +
-                                        '<div class="bg-[#FFFFFF] p-3 rounded-xl border border-[#EBE5DA] text-xs space-y-1.5">' +
-                                            '<div class="flex items-start gap-2">' +
-                                                '<span class="text-[#7A7366] shrink-0 font-medium flex items-center gap-1">' +
-                                                    '<span>📍</span> 基地座落:' +
-                                                '</span>' +
-                                                '<span class="font-medium text-[#1C1B18] break-words">' +
-                                                    escapeHtml(p.mainLand || '尚未載明') +
-                                                '</span>' +
-                                            '</div>' +
-                                            '<div class="flex items-start sm:items-center justify-between gap-2 pt-1.5 border-t border-[#F0EAE1] flex-col sm:flex-row">' +
-                                                '<div class="flex items-center gap-1.5 text-[#7A7366]">' +
-                                                    '<span>📜 建照字號:</span>' +
-                                                    '<span class="font-mono text-[#38342D]">' + escapeHtml(p.permitNo || '--') + '</span>' +
-                                                '</div>' +
-                                            '</div>' +
-                                        '</div>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>' +
-
-                            '<!-- Footer Action Row -->' +
-                            '<div class="flex items-center justify-between pt-3 mt-4 border-t border-[#EAE4D8] text-xs">' +
-                                '<span class="text-[#8C8477]">點擊卡片查看完整建案履歷與土地分區</span>' +
-                                '<span class="font-bold text-[#7A5338] group-hover:text-[#4A2F1C] flex items-center gap-1 bg-[#F7EFE8] px-3.5 py-1.5 rounded-xl border border-[#DECDBE] group-hover:bg-[#EFE5DA] transition">' +
-                                    '查看建案完整履歷 ➔' +
-                                '</span>' +
-                            '</div>';
-                    } else {
-                        // Cards 2 to 5: Standard Grid Cards (1 column each on md/lg)
-                        card.className = 'md:col-span-1 bg-[#FAF8F5] hover:bg-[#FAF6EF] p-5 rounded-2xl border border-[#E8E2D5] hover:border-[#4A5D44] shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between group';
-                        card.onclick = () => openDetailModal(p.id);
-                        card.innerHTML = 
-                            '<div>' +
-                                '<!-- Top Header Row -->' +
-                                '<div class="flex items-center justify-between gap-2 flex-wrap mb-2.5">' +
-                                    '<div class="flex items-center gap-2">' +
-                                        '<span class="px-2.5 py-0.5 rounded-lg text-xs font-mono border ' + rankBadgeClass + '">' +
-                                            rankLabel +
-                                        '</span>' +
-                                        '<span class="px-2.5 py-0.5 text-xs font-serif-tc font-bold rounded-lg border ' + townColor + '">' +
-                                            escapeHtml(p.town || '宜蘭縣') +
-                                        '</span>' +
-                                    '</div>' +
-                                    salesTag +
-                                '</div>' +
-
-                                '<!-- Project Name -->' +
-                                '<h4 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] group-hover:text-[#4A5D44] transition-colors leading-snug mb-1.5 line-clamp-1">' +
-                                    escapeHtml(p.caseName) +
-                                '</h4>' +
-
-                                '<!-- Builder & Rep -->' +
-                                '<div class="text-xs text-[#5C564C] flex items-center gap-1.5 mb-3.5 flex-wrap">' +
-                                    '<span class="font-medium text-[#7A5338]">起造:</span>' +
-                                    '<span class="font-semibold text-[#1C1B18]">' + escapeHtml(p.builder || '--') + '</span>' +
-                                    (rep ? '<span class="text-xs text-[#7A7366]">' + escapeHtml(rep) + '</span>' : '') +
-                                    landTag +
-                                '</div>' +
-
-                                '<!-- 2x2 Key Figures Grid (Spacious tiles, zero cramping) -->' +
-                                '<div class="grid grid-cols-2 gap-2.5 mb-3">' +
-                                    '<div class="bg-[#FFFFFF] p-2.5 sm:p-3 rounded-xl border border-[#EBE5DA] shadow-2xs">' +
-                                        '<div class="text-[11px] text-[#7A7366] font-medium mb-1 flex items-center gap-1">' +
-                                            '<span>📋</span> 申報備查日' +
-                                        '</div>' +
-                                        '<div class="font-mono font-black text-xs sm:text-sm text-[#1C1B18]">' +
-                                            escapeHtml(p.declareDate || p.declareDateRaw || '--') +
-                                        '</div>' +
-                                    '</div>' +
-                                    '<div class="bg-[#FFFFFF] p-2.5 sm:p-3 rounded-xl border border-[#EBE5DA] shadow-2xs">' +
-                                        '<div class="text-[11px] text-[#7A7366] font-medium mb-1 flex items-center gap-1">' +
-                                            '<span>🏢</span> 規劃總戶數' +
-                                        '</div>' +
-                                        '<div class="font-mono font-black text-xs sm:text-sm text-[#7A5338]">' +
-                                            (p.household || '--') + ' <span class="text-[10.5px] font-normal text-[#7A7366]">戶</span>' +
-                                        '</div>' +
-                                    '</div>' +
-                                    '<div class="bg-[#FFFFFF] p-2.5 sm:p-3 rounded-xl border border-[#EBE5DA] shadow-2xs">' +
-                                        '<div class="text-[11px] text-[#7A7366] font-medium mb-1 flex items-center gap-1">' +
-                                            '<span>📅</span> 建照核准日' +
-                                        '</div>' +
-                                        '<div class="font-mono font-bold text-xs sm:text-sm text-[#38342D]">' +
-                                            escapeHtml(p.permitDate || p.permitDateRaw || '--') +
-                                        '</div>' +
-                                    '</div>' +
-                                    '<div class="bg-[#FFFFFF] p-2.5 sm:p-3 rounded-xl border border-[#EBE5DA] shadow-2xs">' +
-                                        '<div class="text-[11px] text-[#7A7366] font-medium mb-1 flex items-center gap-1">' +
-                                            '<span>📈</span> 實登銷售率' +
-                                        '</div>' +
-                                        '<div class="font-mono font-bold text-xs sm:text-sm ' + (hasSales ? 'text-[#2C4A24]' : 'text-[#7A7366]') + '">' +
-                                            (hasSales ? s.salesRate + '%' : '尚未揭露') +
-                                        '</div>' +
-                                    '</div>' +
-                                '</div>' +
-
-                                '<!-- Location & Permit details box (Full width) -->' +
-                                '<div class="bg-[#FFFFFF] p-3 rounded-xl border border-[#EBE5DA] text-xs space-y-1.5">' +
-                                    '<div class="flex items-start gap-2">' +
-                                        '<span class="text-[#7A7366] shrink-0 font-medium flex items-center gap-1">' +
-                                            '<span>📍</span> 基地:' +
-                                        '</span>' +
-                                        '<span class="font-medium text-[#1C1B18] break-words line-clamp-1 group-hover:line-clamp-none transition-all">' +
-                                            escapeHtml(p.mainLand || '尚未載明') +
-                                        '</span>' +
-                                    '</div>' +
-                                    '<div class="flex items-center gap-1.5 pt-1.5 border-t border-[#F0EAE1] text-[#7A7366]">' +
-                                        '<span>📜 建照:</span>' +
-                                        '<span class="font-mono text-[#38342D] truncate">' + escapeHtml(p.permitNo || '--') + '</span>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>' +
-
-                            '<!-- Footer Action Row -->' +
-                            '<div class="flex items-center justify-between pt-3 mt-3 border-t border-[#EAE4D8] text-xs">' +
-                                '<span class="text-[11px] text-[#8C8477]">詳情與分區</span>' +
-                                '<span class="font-bold text-[#4A5D44] group-hover:text-[#2C4A24] flex items-center gap-1 bg-[#EEF4EC] px-3 py-1 rounded-lg border border-[#C5D9C0] group-hover:bg-[#E0ECD9] transition">' +
-                                    '建案詳情 ➔' +
-                                '</span>' +
-                            '</div>';
-                    }
-
-                    grid.appendChild(card);
+                    row.innerHTML = 
+                        '<td class="py-3 px-3 text-center whitespace-nowrap font-mono">' + rankBadge + '</td>' +
+                        '<td class="py-3 px-3 whitespace-nowrap">' +
+                            '<span class="badge border ' + townColor + ' text-xs px-2 py-0.2 font-serif-tc font-bold">' +
+                                escapeHtml(p.town || '宜蘭縣') +
+                            '</span>' +
+                        '</td>' +
+                        '<td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">' +
+                            escapeHtml(p.caseName || '未命名') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">' +
+                            '<span>' + escapeHtml(p.builder || '--') + '</span>' +
+                            rep +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap font-mono font-black text-xs sm:text-sm text-[#1C1B18]">' +
+                            escapeHtml(p.declareDate || p.declareDateRaw || '--') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap font-mono text-xs text-[#38342D]">' +
+                            escapeHtml(p.permitDate || p.permitDateRaw || '--') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap font-mono font-black text-xs sm:text-sm text-[#7A5338]">' +
+                            (p.household || '--') + ' 戶' +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-xs font-mono text-[#5C564C] whitespace-nowrap">' +
+                            escapeHtml(p.permitNo || '--') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-xs text-[#38342D] max-w-[200px] truncate" title="' + escapeHtml(p.mainLand || '') + '">' +
+                            escapeHtml(p.mainLand || '未載明') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                            salesTag +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                            landSubtext +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                            '<button onclick="openDetailModal(' + p.id + '); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">' +
+                                '詳情 ➔' +
+                            '</button>' +
+                        '</td>';
+                    tableBody.appendChild(row);
                 });
             }
 
-            // 3. Render Section 3: Recent 30 Transactions (固定近期30筆)
+            // 3. Render Section 4: Recent 30 Transactions (固定近期30筆)
             const allTx = [];
             allProjects.forEach(p => {
                 const s = p.salesStats || {};
@@ -189808,7 +189667,7 @@
                 txTableBody.innerHTML = '';
                 recentTx.forEach(t => {
                     const bInfo = buildersMap[t.builder] || {};
-                    const rep = (bInfo.representative || bInfo.rep) ? ' (' + (bInfo.representative || bInfo.rep) + ')' : '';
+                    const rep = (bInfo.representative || bInfo.rep) ? (' (' + (bInfo.representative || bInfo.rep) + ')') : '';
                     
                     const row = document.createElement('tr');
                     row.className = 'hover:bg-[#FAF8F5] transition text-xs sm:text-sm';
@@ -190250,6 +190109,207 @@
         }
 
         
+        
+        function openDetailModal(id) {
+            const p = allProjects.find(item => String(item.id) === String(id) || item.id === id);
+            if (!p) return;
+            activeModalProject = p;
+
+            const z = p.zoningInfo || {};
+            const bInfo = buildersMap[p.builder];
+            const s = p.salesStats || {};
+            const hasSales = s.hasSalesData && s.soldUnits > 0;
+
+            const townElem = document.getElementById('modalTownBadge');
+            if (townElem) townElem.innerText = p.town || '宜蘭縣';
+            const planElem = document.getElementById('modalPlanBadge');
+            if (planElem) planElem.innerText = z.planTypeShort || '土地分區';
+            const numElem = document.getElementById('modalNumberCode');
+            if (numElem) numElem.innerText = p.numberCode ? ('備查編號: ' + p.numberCode) : '';
+            const caseElem = document.getElementById('modalCaseName');
+            if (caseElem) caseElem.innerText = p.caseName || '未命名建案';
+            const builderHdr = document.getElementById('modalBuilderHeader');
+            if (builderHdr) builderHdr.innerText = '起造人：' + (p.builder || '未提供');
+            
+            const statusBadge = document.getElementById('modalSalesStatusBadge');
+            const progBar = document.getElementById('modalProgressBar');
+            if (hasSales) {
+                const sCount = document.getElementById('modalSalesCountText');
+                if (sCount) sCount.innerText = '實登已售 ' + s.soldUnits + ' / ' + (s.totalHouseholds || p.household || s.soldUnits) + ' 戶';
+                const sRate = document.getElementById('modalSalesRateText');
+                if (sRate) sRate.innerText = s.salesRate + '%';
+                if (progBar) progBar.style.width = s.salesRate + '%';
+                
+                if (statusBadge) {
+                    if (s.salesRate >= 90) {
+                        statusBadge.className = 'px-2.5 py-0.5 text-xs font-bold rounded-full bg-[#EEF4EC] text-[#2C4A24] border border-[#BDD9B4]';
+                        statusBadge.innerText = s.salesRate >= 100 ? '已完銷 100%' : '熱銷完銷倒數';
+                        if (progBar) progBar.className = 'h-full bg-[#4A5D44] progress-bar-fill rounded-full';
+                    } else {
+                        statusBadge.className = 'px-2.5 py-0.5 text-xs font-bold rounded-full bg-[#F7EFE8] text-[#7A5338] border border-[#DECDBE]';
+                        statusBadge.innerText = '熱烈銷售中';
+                        if (progBar) progBar.className = 'h-full bg-[#7A5338] progress-bar-fill rounded-full';
+                    }
+                }
+
+                const avgP = document.getElementById('modalAvgPricePing');
+                if (avgP) avgP.innerText = (s.avgPricePerPing ? s.avgPricePerPing + ' 萬/坪' : '--');
+                const rangeP = document.getElementById('modalPriceRangePing');
+                if (rangeP) rangeP.innerText = (s.minPricePerPing && s.maxPricePerPing) ? (s.minPricePerPing + ' ~ ' + s.maxPricePerPing + ' 萬/坪') : '--';
+                const totalP = document.getElementById('modalAvgTotalPrice');
+                if (totalP) totalP.innerText = s.avgTotalPrice ? (Math.round(s.avgTotalPrice).toLocaleString() + ' 萬元') : '--';
+                const dateP = document.getElementById('modalLatestTransDate');
+                if (dateP) dateP.innerText = s.latestTransactionDate || '--';
+            } else {
+                const sCount = document.getElementById('modalSalesCountText');
+                if (sCount) sCount.innerText = '實登已售 0 / ' + (p.household || s.totalHouseholds || '0') + ' 戶';
+                const sRate = document.getElementById('modalSalesRateText');
+                if (sRate) sRate.innerText = '0%';
+                if (progBar) {
+                    progBar.style.width = '0%';
+                    progBar.className = 'h-full bg-[#7A5338] progress-bar-fill rounded-full';
+                }
+                if (statusBadge) {
+                    statusBadge.className = 'px-2.5 py-0.5 text-xs font-bold rounded-full bg-[#FAF8F5] text-[#7A7366] border border-[#DCD4C5]';
+                    statusBadge.innerText = '尚無實登交易';
+                }
+
+                const avgP = document.getElementById('modalAvgPricePing');
+                if (avgP) avgP.innerText = '--';
+                const rangeP = document.getElementById('modalPriceRangePing');
+                if (rangeP) rangeP.innerText = '--';
+                const totalP = document.getElementById('modalAvgTotalPrice');
+                if (totalP) totalP.innerText = '--';
+                const dateP = document.getElementById('modalLatestTransDate');
+                if (dateP) dateP.innerText = '尚無成交';
+            }
+
+            // Populate Transactions Ledger Table
+            const txBody = document.getElementById('modalTransactionsTableBody');
+            if (txBody) {
+                txBody.innerHTML = '';
+                const txList = s.transactions || [];
+                const txCountBadge = document.getElementById('modalTransCountBadge');
+                if (txCountBadge) txCountBadge.innerText = txList.length + ' 筆交易';
+
+                if (txList.length === 0) {
+                    txBody.innerHTML = '<tr><td colspan="8" class="text-center py-5 text-[#7A7366]">目前尚未有實價登錄成交明細紀錄</td></tr>';
+                } else {
+                    txList.slice(0, 60).forEach(tx => {
+                        const row = document.createElement('tr');
+                        row.className = 'hover:bg-[#FAF8F5] transition text-xs';
+                        row.innerHTML = 
+                            '<td class="py-2 px-2.5 font-mono font-medium text-[#1C1B18] whitespace-nowrap">' + (tx.dateRoc || '--') + '</td>' +
+                            '<td class="py-2 px-2.5 font-medium text-[#38342D] max-w-xs truncate" title="' + escapeHtml(tx.unit) + '">' + escapeHtml(tx.unit || '未揭示') + '</td>' +
+                            '<td class="py-2 px-2 text-center font-mono text-[#6E675B]">' + (tx.floor ? tx.floor + 'F' : '--') + '</td>' +
+                            '<td class="py-2 px-2 text-right font-mono">' + (tx.areaPing ? tx.areaPing + ' 坪' : '--') + '</td>' +
+                            '<td class="py-2 px-2 text-right font-mono font-bold text-[#7A5338]">' + (tx.pricePerPing ? tx.pricePerPing + ' 萬' : '--') + '</td>' +
+                            '<td class="py-2 px-2 text-right font-mono font-bold text-[#1C1B18]">' + (tx.totalPrice ? tx.totalPrice.toLocaleString() + ' 萬' : '--') + '</td>' +
+                            '<td class="py-2 px-2 text-center text-[#6E675B] whitespace-nowrap">' + escapeHtml(tx.layout || '--') + '</td>' +
+                            '<td class="py-2 px-2 text-[#7A7366] text-[10.5px] whitespace-nowrap">' + escapeHtml(tx.parking || '無車位') + '</td>';
+                        txBody.appendChild(row);
+                    });
+                }
+            }
+
+            // Populate Land Acquisition Stats (基地原始購地實價紀錄)
+            const l = p.landStats || {};
+            const landBody = document.getElementById('modalLandTableBody');
+            if (landBody) {
+                landBody.innerHTML = '';
+                const landBadge = document.getElementById('modalLandTxCountBadge');
+                const avgLandP = document.getElementById('modalAvgLandPrice');
+                const totalLandC = document.getElementById('modalTotalLandCost');
+                const totalLandA = document.getElementById('modalTotalLandArea');
+                const latestLandD = document.getElementById('modalLatestLandDate');
+
+                if (l.hasLandData && l.txCount > 0) {
+                    if (landBadge) landBadge.innerText = l.txCount + ' 筆購地交易';
+                    if (avgLandP) avgLandP.innerText = l.avgLandPricePerPing + ' 萬/坪';
+                    if (totalLandC) totalLandC.innerText = l.totalLandCostWan ? (l.totalLandCostWan.toLocaleString() + ' 萬元') : '--';
+                    if (totalLandA) totalLandA.innerText = l.totalLandAreaPing ? (l.totalLandAreaPing.toLocaleString() + ' 坪') : '--';
+                    if (latestLandD) latestLandD.innerText = l.latestLandDate || '--';
+
+                    (l.transactions || []).forEach(tx => {
+                        const row = document.createElement('tr');
+                        row.className = 'hover:bg-[#FAF8F5] transition text-xs';
+                        row.innerHTML = 
+                            '<td class="py-2 px-2.5 font-mono font-medium text-[#1C1B18] whitespace-nowrap">' + (tx.dateRoc || '--') + '</td>' +
+                            '<td class="py-2 px-2.5 font-medium text-[#38342D] max-w-xs truncate" title="' + escapeHtml(tx.landParcel) + '">' + escapeHtml(tx.landParcel || '未揭示') + '</td>' +
+                            '<td class="py-2 px-2 text-right font-mono">' + (tx.areaPing ? tx.areaPing + ' 坪' : '--') + '</td>' +
+                            '<td class="py-2 px-2 text-right font-mono font-bold text-[#2C4A24]">' + (tx.pricePerPing ? tx.pricePerPing + ' 萬' : '--') + '</td>' +
+                            '<td class="py-2 px-2 text-right font-mono font-bold text-[#1C1B18]">' + (tx.totalPrice ? tx.totalPrice.toLocaleString() + ' 萬' : '--') + '</td>' +
+                            '<td class="py-2 px-2 text-[#7A7366] text-[10.5px] max-w-xs truncate" title="' + escapeHtml(tx.note || '') + '">' + escapeHtml(tx.note || '無特殊備註') + '</td>';
+                        landBody.appendChild(row);
+                    });
+                } else {
+                    if (landBadge) landBadge.innerText = '無購地揭露';
+                    if (avgLandP) avgLandP.innerText = '--';
+                    if (totalLandC) totalLandC.innerText = '--';
+                    if (totalLandA) totalLandA.innerText = '--';
+                    if (latestLandD) latestLandD.innerText = '無紀錄';
+                    landBody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-[#7A7366]">實價登錄暫無此基地在建照核發前之土地獨立買賣揭露紀錄（可能為地主合建、自地自建或早期取得）</td></tr>';
+                }
+            }
+
+            // Builder Info
+            const bRep = document.getElementById('modalBuilderRep');
+            const bUni = document.getElementById('modalBuilderUni');
+            const bCap = document.getElementById('modalBuilderCap');
+            const bAddr = document.getElementById('modalBuilderAddr');
+            if (bInfo) {
+                if (bRep) bRep.innerText = bInfo.representative || '自然人/未提供';
+                if (bUni) bUni.innerText = (bInfo.unifiedNo || '無統編') + ' (' + (bInfo.status || '核准設立') + ')';
+                if (bCap) bCap.innerText = bInfo.capital || '未提供';
+                if (bAddr) bAddr.innerText = bInfo.address || '未提供公司地址';
+            } else {
+                if (bRep) bRep.innerText = p.builder || '未提供';
+                if (bUni) bUni.innerText = '未建立工商登記';
+                if (bCap) bCap.innerText = '未提供';
+                if (bAddr) bAddr.innerText = '未提供';
+            }
+
+            const mH = document.getElementById('modalHousehold');
+            if (mH) mH.innerText = p.household ? (p.household + ' 戶') : '未填寫';
+            const mHSub = document.getElementById('modalHouseholdSoldSub');
+            if (mHSub) mHSub.innerText = hasSales ? ('已銷售 ' + s.soldUnits + ' 戶 (去化率 ' + s.salesRate + '%)') : '尚無實登交易';
+            
+            const mUse = document.getElementById('modalMainUse');
+            if (mUse) mUse.innerText = p.normalizedUse || '住宅';
+            const mMat = document.getElementById('modalMaterial');
+            if (mMat) mMat.innerText = p.normalizedMaterial || 'RC';
+            const mPDate = document.getElementById('modalPermitDate');
+            if (mPDate) mPDate.innerText = p.permitDate || '未填寫';
+            const mDDate = document.getElementById('modalDeclareDate');
+            if (mDDate) mDDate.innerText = p.declareDate || '未填寫';
+            const mFDate = document.getElementById('modalFirstRegDate');
+            if (mFDate) mFDate.innerText = p.firstRegDate || '尚未登記';
+            
+            const mStreet = document.getElementById('modalStreetLocation');
+            if (mStreet) mStreet.innerText = '坐落位置：' + (p.town || '') + ' ' + (p.location || '無街道路名');
+            const mLand = document.getElementById('modalMainLand');
+            if (mLand) mLand.innerText = '基地地號：' + (p.mainLand || '無');
+
+            const mapLink = document.getElementById('modalMapLink');
+            if (mapLink) {
+                const mapQuery = encodeURIComponent('宜蘭縣 ' + (p.town || '') + ' ' + (p.location || p.mainLand || p.caseName));
+                mapLink.href = 'https://www.google.com/maps/search/?api=1&query=' + mapQuery;
+            }
+
+            const modal = document.getElementById('detailModal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detailModal');
+            if (modal) modal.classList.add('hidden');
+            activeModalProject = null;
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
         function exportCurrentViewToExcel() {
             if (typeof XLSX === 'undefined') {
                 alert('Excel 匯出元件載入中，請稍候重試');
