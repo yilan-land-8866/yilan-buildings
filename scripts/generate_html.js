@@ -798,7 +798,7 @@ const htmlTemplate = `<!DOCTYPE html>
                 </div>
             </div>
 
-            <!-- SECTION 2: 成交單價前十名建案 -->
+            <!-- SECTION 2: 成交單價前十名建案 (以單價中位數排名) -->
             <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
                 <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
                     <div>
@@ -807,12 +807,12 @@ const htmlTemplate = `<!DOCTYPE html>
                             <span>成交單價前十名建案</span>
                         </h3>
                         <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
-                            依全縣建案實價登錄之成交平均單價排序，呈現宜蘭房市身價最高、行情領先之十大指標建案
+                            依全縣建案實價登錄之成交單價中位數排序（排除極端高低樓層偏差），並詳列成交單價區間、成交總價區間與成交時間
                         </p>
                     </div>
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#FAF5EB] text-[#7A5338] border border-[#E5D7B3]">
                         <span class="w-1.5 h-1.5 rounded-full bg-[#8C6D2B] animate-pulse"></span>
-                        單價行情 Top 10
+                        單價中位數 Top 10
                     </span>
                 </div>
 
@@ -820,13 +820,14 @@ const htmlTemplate = `<!DOCTYPE html>
                     <table class="w-full text-left text-xs sm:text-sm text-[#24211D]">
                         <thead class="bg-[#F2ECE1] text-[#38342D] font-serif-tc font-bold border-b border-[#DCD4C5]">
                             <tr>
-                                <th class="py-3 px-3 text-center">排名</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">排名</th>
                                 <th class="py-3 px-3 whitespace-nowrap">鄉鎮</th>
                                 <th class="py-3 px-3.5 whitespace-nowrap">建案名稱</th>
                                 <th class="py-3 px-3 whitespace-nowrap">起造建商</th>
-                                <th class="py-3 px-3 text-center font-bold text-[#7A5338] whitespace-nowrap">實登平均單價</th>
-                                <th class="py-3 px-3 text-center font-bold text-[#1C1B18] whitespace-nowrap">最高成交單價</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">成交時間</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#7A5338] whitespace-nowrap">單價中位數 (排名)</th>
                                 <th class="py-3 px-3 text-center whitespace-nowrap">單價成交區間</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#1C1B18] whitespace-nowrap">成交總價區間</th>
                                 <th class="py-3 px-3 text-center whitespace-nowrap">累計銷售進度</th>
                                 <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">🌱 基地購地地價</th>
                                 <th class="py-3 px-3 text-center whitespace-nowrap">詳情</th>
@@ -2484,74 +2485,127 @@ const htmlTemplate = `<!DOCTYPE html>
             if (!tbody) return;
             tbody.innerHTML = '';
 
-            const candidates = allProjects.filter(p => p.salesStats && p.salesStats.avgPricePerPing > 0);
-            candidates.sort((a, b) => b.salesStats.avgPricePerPing - a.salesStats.avgPricePerPing);
+            function calculateMedian(arr) {
+                if (!arr || arr.length === 0) return 0;
+                const sorted = [...arr].sort((a, b) => a - b);
+                const mid = Math.floor(sorted.length / 2);
+                if (sorted.length % 2 !== 0) {
+                    return Math.round(sorted[mid] * 10) / 10;
+                } else {
+                    return Math.round(((sorted[mid - 1] + sorted[mid]) / 2) * 10) / 10;
+                }
+            }
+
+            // 計算各建案成交單價中位數
+            allProjects.forEach(p => {
+                const s = p.salesStats;
+                if (s && s.transactions && s.transactions.length > 0) {
+                    const prices = s.transactions.map(t => Number(t.pricePerPing)).filter(v => !isNaN(v) && v > 0);
+                    s.medianPricePerPing = calculateMedian(prices);
+                } else if (s && s.avgPricePerPing) {
+                    s.medianPricePerPing = s.avgPricePerPing;
+                } else if (s) {
+                    s.medianPricePerPing = 0;
+                }
+            });
+
+            const candidates = allProjects.filter(p => p.salesStats && p.salesStats.medianPricePerPing > 0);
+            // 以成交單價中位數排名 (若相同以平均單價次之排序)
+            candidates.sort((a, b) => {
+                if (b.salesStats.medianPricePerPing !== a.salesStats.medianPricePerPing) {
+                    return b.salesStats.medianPricePerPing - a.salesStats.medianPricePerPing;
+                }
+                return (b.salesStats.avgPricePerPing || 0) - (a.salesStats.avgPricePerPing || 0);
+            });
 
             const top10 = candidates.slice(0, 10);
 
             top10.forEach((p, idx) => {
                 const s = p.salesStats;
                 const l = p.landStats || {};
-                const bInfo = buildersMap[p.builder];
+                const bInfo = buildersMap[p.builder] || {};
                 const townColor = townColors[p.town] || 'bg-[#FFFFFF] text-[#38342D] border-[#DCD4C5]';
 
-                let rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">\${idx + 1}</span>\`;
-                if (idx === 0) rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>\`;
-                else if (idx === 1) rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>\`;
-                else if (idx === 2) rankBadge = \`<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>\`;
+                let rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">' + (idx + 1) + '</span>';
+                if (idx === 0) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>';
+                else if (idx === 1) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>';
+                else if (idx === 2) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>';
 
-                const rep = (bInfo?.representative || bInfo?.rep) ? \`<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">\${bInfo.representative || bInfo.rep}</span>\` : '';
+                const rep = (bInfo.representative || bInfo.rep) ? '<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">' + escapeHtml(bInfo.representative || bInfo.rep) + '</span>' : '';
 
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-[#F7F3EB] transition-colors cursor-pointer group';
                 tr.onclick = () => openDetailModal(p.id);
 
+                // 單價區間
                 const priceRangeStr = (s.minPricePerPing && s.maxPricePerPing && s.minPricePerPing !== s.maxPricePerPing)
-                    ? \`\${s.minPricePerPing} ~ \${s.maxPricePerPing} 萬/坪\`
-                    : (s.avgPricePerPing ? \`\${s.avgPricePerPing} 萬/坪\` : '--');
+                    ? (s.minPricePerPing + ' ~ ' + s.maxPricePerPing + ' 萬/坪')
+                    : (s.medianPricePerPing ? (s.medianPricePerPing + ' 萬/坪') : '--');
 
-                tr.innerHTML = \`
-                    <td class="py-3 px-3 text-center whitespace-nowrap font-mono">\${rankBadge}</td>
-                    <td class="py-3 px-3 whitespace-nowrap">
-                        <span class="badge border \${townColor} text-xs px-2 py-0.2 font-serif-tc font-bold">
-                            \${p.town || '宜蘭縣'}
-                        </span>
-                    </td>
-                    <td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">
-                        \${escapeHtml(p.caseName || '未命名')}
-                    </td>
-                    <td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">
-                        <span>\${escapeHtml(p.builder || '--')}</span>
-                        \${rep}
-                    </td>
-                    <td class="py-3 px-3 text-center whitespace-nowrap">
-                        <span class="font-serif-tc font-black text-sm sm:text-base text-[#7A5338]">\${s.avgPricePerPing ? s.avgPricePerPing + ' 萬/坪' : '--'}</span>
-                    </td>
-                    <td class="py-3 px-3 text-center whitespace-nowrap">
-                        <span class="font-mono font-bold text-xs sm:text-sm text-[#1C1B18]">\${s.maxPricePerPing ? s.maxPricePerPing + ' 萬/坪' : '--'}</span>
-                    </td>
-                    <td class="py-3 px-3 text-center font-mono text-xs text-[#5C564C] whitespace-nowrap">
-                        \${priceRangeStr}
-                    </td>
-                    <td class="py-3 px-3 text-center whitespace-nowrap">
-                        <div class="font-mono text-xs font-semibold text-[#1C1B18]">\${s.soldUnits} / \${p.household || s.totalHouseholds} 戶</div>
-                        <div class="text-[10.5px] font-bold \${s.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]'}">
-                            \${s.isSoldOut ? '完銷 100%' : \`\${s.salesRate}%\`}
-                        </div>
-                    </td>
-                    <td class="py-3 px-3 text-center whitespace-nowrap">
-                        \${l.hasLandData ? \`<span class="font-mono font-bold text-xs text-[#2C4A24]">\${l.avgLandPricePerPing} 萬/坪</span>\` : \`<span class="text-xs text-[#A8A090]">--</span>\`}
-                    </td>
-                    <td class="py-3 px-3 text-center whitespace-nowrap">
-                        <button onclick="openDetailModal('\${p.id}'); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">
-                            詳情 ➔
-                        </button>
-                    </td>
-                \`;
+                // 總價區間與均價
+                let totalRangeStr = '--';
+                if (s.minTotalPrice && s.maxTotalPrice && s.minTotalPrice !== s.maxTotalPrice) {
+                    totalRangeStr = s.minTotalPrice.toLocaleString() + ' ~ ' + s.maxTotalPrice.toLocaleString() + ' 萬';
+                } else if (s.minTotalPrice || s.maxTotalPrice) {
+                    totalRangeStr = (s.minTotalPrice || s.maxTotalPrice).toLocaleString() + ' 萬';
+                } else if (s.avgTotalPrice) {
+                    totalRangeStr = Math.round(s.avgTotalPrice).toLocaleString() + ' 萬';
+                }
+
+                // 最新成交時間
+                const latestDate = s.latestTransactionDate || '--';
+
+                const avgPriceSubtext = s.avgPricePerPing ? '<div class="text-[10.5px] text-[#8C8477] font-mono">均價 ' + s.avgPricePerPing + ' 萬</div>' : '';
+                const avgTotalSubtext = s.avgTotalPrice ? '<div class="text-[10.5px] text-[#7A7366] font-mono">均總 ' + Math.round(s.avgTotalPrice).toLocaleString() + ' 萬</div>' : '';
+                const landSubtext = l.hasLandData ? '<span class="font-mono font-bold text-xs text-[#2C4A24]">' + l.avgLandPricePerPing + ' 萬/坪</span>' : '<span class="text-xs text-[#A8A090]">--</span>';
+                const salesRateClass = s.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]';
+                const salesRateText = s.isSoldOut ? '完銷 100%' : (s.salesRate + '%');
+
+                tr.innerHTML = 
+                    '<td class="py-3 px-3 text-center whitespace-nowrap font-mono">' + rankBadge + '</td>' +
+                    '<td class="py-3 px-3 whitespace-nowrap">' +
+                        '<span class="badge border ' + townColor + ' text-xs px-2 py-0.2 font-serif-tc font-bold">' +
+                            escapeHtml(p.town || '宜蘭縣') +
+                        '</span>' +
+                    '</td>' +
+                    '<td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">' +
+                        escapeHtml(p.caseName || '未命名') +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">' +
+                        '<span>' + escapeHtml(p.builder || '--') + '</span>' +
+                        rep +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-mono text-xs font-semibold text-[#1C1B18]">' + latestDate + '</span>' +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-serif-tc font-black text-sm sm:text-base text-[#7A5338]">' + (s.medianPricePerPing ? s.medianPricePerPing + ' 萬/坪' : '--') + '</span>' +
+                        avgPriceSubtext +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center font-mono text-xs text-[#5C564C] whitespace-nowrap">' +
+                        priceRangeStr +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-mono font-bold text-xs sm:text-sm text-[#1C1B18]">' + totalRangeStr + '</span>' +
+                        avgTotalSubtext +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<div class="font-mono text-xs font-semibold text-[#1C1B18]">' + s.soldUnits + ' / ' + (p.household || s.totalHouseholds) + ' 戶</div>' +
+                        '<div class="text-[10.5px] font-bold ' + salesRateClass + '">' + salesRateText + '</div>' +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        landSubtext +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<button onclick="openDetailModal(' + p.id + '); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">' +
+                            '詳情 ➔' +
+                        '</button>' +
+                    '</td>';
                 tbody.appendChild(tr);
             });
         }
-function renderTopHotSellingProjects(targetTableId) {
+
+        function renderTopHotSellingProjects(targetTableId) {
             if (!targetTableId) targetTableId = 'updateTopHotProjectsTableBody';
             const tbody = document.getElementById(targetTableId);
             if (!tbody) return;
