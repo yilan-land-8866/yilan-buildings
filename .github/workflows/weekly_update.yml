@@ -1,10 +1,14 @@
-name: Weekly Real Price & Project Auto Update
+name: Real Price & Pre-sale Auto Update (Weekly + MOI Release Days)
 
 on:
   schedule:
-    # 台灣時間每週一清晨 04:00 (UTC 星期日 20:00) 自動執行
+    # 1. 台灣時間每週一清晨 04:00 (UTC 星期日 20:00) 週期性全量更新
     - cron: '0 20 * * 0'
-  workflow_dispatch: # 支援在 Actions 頁面手動點擊按鈕隨時更新
+    # 2. 每月 1、11、21 日 內政部實價登錄上午發布後自動抓取 (台灣時間 10:30 / UTC 02:30)
+    - cron: '30 2 1,11,21 * *'
+    # 3. 每月 1、11、21 日 內政部實價登錄下午補正確認抓取 (台灣時間 15:30 / UTC 07:30)
+    - cron: '30 7 1,11,21 * *'
+  workflow_dispatch: # 支援在 GitHub Actions 網頁隨時手動點擊按鈕即時更新
 
 permissions:
   contents: write
@@ -39,7 +43,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
             CURRENT_DATE=$(TZ="Asia/Taipei" date +"%Y/%m/%d %H:%M")
-            git commit -m "🤖 週期自動更新：宜蘭建案備查與實價登錄 ($CURRENT_DATE)"
+            git commit -m "🤖 自動更新：宜蘭建案備查與實價登錄 ($CURRENT_DATE)"
             git push origin main
             echo "✓ 成功發布最新更新至 GitHub Pages！"
           else
