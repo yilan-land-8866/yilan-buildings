@@ -2775,7 +2775,9 @@ const htmlTemplate = `<!DOCTYPE html>
                 const sCount = document.getElementById('modalSalesCountText');
                 if (sCount) {
                     let extraTx = '';
-                    if (s.rawTxCount && s.rawTxCount > s.soldUnits) {
+                    if (s.parkingCount > 0) {
+                        extraTx = ' (含純車位 ' + s.parkingCount + ' 筆 · 累計 ' + s.rawTxCount + ' 筆)';
+                    } else if (s.rawTxCount && s.rawTxCount > s.soldUnits) {
                         extraTx = ' (累計登錄 ' + s.rawTxCount + ' 筆)';
                     }
                     sCount.innerText = '實登已售 ' + s.soldUnits + ' / ' + (s.totalHouseholds || p.household || s.soldUnits) + ' 戶' + extraTx;
@@ -2842,19 +2844,28 @@ const htmlTemplate = `<!DOCTYPE html>
                     txList.slice(0, 60).forEach(tx => {
                         const row = document.createElement('tr');
                         row.className = 'hover:bg-[#FAF8F5] transition text-xs';
+                        const isPkg = tx.isParking || tx.source === '預售車位' || tx.source === '車位';
+                        const typeBadge = isPkg 
+                            ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#F4ECF7] text-[#6C3483] border border-[#D7BDE2]">車位</span>' 
+                            : (tx.source === '成屋/買賣實登' 
+                                ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#EBF5FB] text-[#2874A6] border border-[#AED6F1]">成屋</span>' 
+                                : '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#BDD9B4]">預售</span>');
+                        const floorText = isPkg
+                            ? (tx.floor ? (tx.floor.includes('車位') ? tx.floor : tx.floor + ' (車位)') : '獨立車位')
+                            : (tx.floor === '全' ? '透天全棟' : (tx.floor ? (tx.floor.includes('層') || tx.floor.includes('樓') ? tx.floor : tx.floor + 'F') : '--'));
+                        const layoutText = isPkg ? '獨立車位' : escapeHtml(tx.layout || '--');
+                        const areaText = (isPkg && (!tx.areaPing || tx.areaPing === 0)) ? '--' : (tx.areaPing ? tx.areaPing + ' 坪' : '--');
+                        const unitPriceText = (isPkg && (!tx.pricePerPing || tx.pricePerPing === 0)) ? '--' : (tx.pricePerPing ? tx.pricePerPing + ' 萬' : '--');
+
                         row.innerHTML = 
                             '<td class="py-2 px-2.5 font-mono font-medium text-[#1C1B18] whitespace-nowrap">' + (tx.dateRoc || '--') + '</td>' +
-                            '<td class="py-2 px-2 text-center whitespace-nowrap">' + 
-                                (tx.source === '成屋/買賣實登' 
-                                    ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#EBF5FB] text-[#2874A6] border border-[#AED6F1]">成屋</span>' 
-                                    : '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#BDD9B4]">預售</span>') + 
-                            '</td>' +
+                            '<td class="py-2 px-2 text-center whitespace-nowrap">' + typeBadge + '</td>' +
                             '<td class="py-2 px-2.5 font-medium text-[#38342D] max-w-xs truncate" title="' + escapeHtml(tx.unit) + '">' + escapeHtml(tx.unit || '未揭示') + '</td>' +
-                            '<td class="py-2 px-2 text-center font-mono text-[#6E675B]">' + (tx.floor === '全' ? '透天全棟' : (tx.floor ? (tx.floor.includes('層') || tx.floor.includes('樓') ? tx.floor : tx.floor + 'F') : '--')) + '</td>' +
-                            '<td class="py-2 px-2 text-right font-mono">' + (tx.areaPing ? tx.areaPing + ' 坪' : '--') + '</td>' +
-                            '<td class="py-2 px-2 text-right font-mono font-bold text-[#7A5338]">' + (tx.pricePerPing ? tx.pricePerPing + ' 萬' : '--') + '</td>' +
+                            '<td class="py-2 px-2 text-center font-mono text-[#6E675B]">' + floorText + '</td>' +
+                            '<td class="py-2 px-2 text-right font-mono">' + areaText + '</td>' +
+                            '<td class="py-2 px-2 text-right font-mono font-bold text-[#7A5338]">' + unitPriceText + '</td>' +
                             '<td class="py-2 px-2 text-right font-mono font-bold text-[#1C1B18]">' + (tx.totalPrice ? tx.totalPrice.toLocaleString() + ' 萬' : '--') + '</td>' +
-                            '<td class="py-2 px-2 text-center text-[#6E675B] whitespace-nowrap">' + escapeHtml(tx.layout || '--') + '</td>' +
+                            '<td class="py-2 px-2 text-center text-[#6E675B] whitespace-nowrap">' + layoutText + '</td>' +
                             '<td class="py-2 px-2 text-[#7A7366] text-[10.5px] whitespace-nowrap">' + escapeHtml(tx.parking || '無車位') + '</td>';
                         txBody.appendChild(row);
                     });

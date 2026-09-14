@@ -82,6 +82,16 @@ function runMatching() {
 
         if (!address || (totalPrice === 0 && unitPriceM2 === 0)) return;
 
+        // Check if pure parking space transfer (純車位移轉)
+        let isParking = false;
+        if (target === '車位') {
+            if (!(areaM2 > 50 && room && room !== '0' && totalPrice > 4000000)) {
+                isParking = true;
+            }
+        } else if (areaM2 === 0 && room === '0' && (floor.includes('地下') || floor === '車位') && totalPrice > 0 && totalPrice <= 3500000) {
+            isParking = true;
+        }
+
         const pricePerPing = unitPriceM2 > 0 ? parseFloat(((unitPriceM2 * 3.305785) / 10000).toFixed(1)) : 0;
         const totalPriceWan = totalPrice > 0 ? parseFloat((totalPrice / 10000).toFixed(1)) : 0;
         const areaPing = areaM2 > 0 ? parseFloat((areaM2 * 0.3025).toFixed(1)) : 0;
@@ -99,7 +109,8 @@ function runMatching() {
         const t = town || '宜蘭縣';
         if (!txByTownB[t]) txByTownB[t] = [];
         txByTownB[t].push({
-            source: '預售屋實登',
+            source: isParking ? '預售車位' : '預售屋實登',
+            isParking,
             town,
             address,
             normAddr: normalizeText(address),
@@ -112,7 +123,7 @@ function runMatching() {
             pricePerPing,
             totalPriceWan,
             areaPing,
-            layout,
+            layout: isParking ? '獨立車位' : layout,
             floor,
             parking,
             note
@@ -176,6 +187,7 @@ function runMatching() {
         const bType = getVal(row, ['建物型態']).trim();
         if (bType.includes('工廠') || bType.includes('倉庫') || bType.includes('農舍')) return;
         if (bldgAreaM2 <= 0) return;
+        if (target === '車位') return;
 
         const buildYearMonth = getVal(row, ['建築完成年月']).trim();
         let buildYearRoc = 0;
@@ -351,8 +363,12 @@ function runMatching() {
             totalMatchedProjects++;
             allTransactions.sort((a, b) => (b.rawDate || '').localeCompare(a.rawDate || ''));
 
-            const validPrices = allTransactions.filter(t => t.pricePerPing > 0).map(t => t.pricePerPing);
-            const validTotals = allTransactions.filter(t => t.totalPriceWan > 0).map(t => t.totalPriceWan);
+            const residentialTxs = allTransactions.filter(t => !t.isParking);
+            const parkingTxs = allTransactions.filter(t => t.isParking);
+
+            // Calculate price stats based strictly on RESIDENTIAL units (exclude pure parking)
+            const validPrices = residentialTxs.filter(t => t.pricePerPing > 0).map(t => t.pricePerPing);
+            const validTotals = residentialTxs.filter(t => t.totalPriceWan > 0).map(t => t.totalPriceWan);
 
             const avgPrice = validPrices.length > 0 ? parseFloat((validPrices.reduce((a, b) => a + b, 0) / validPrices.length).toFixed(1)) : 0;
             const minPrice = validPrices.length > 0 ? Math.min(...validPrices) : 0;
@@ -363,11 +379,11 @@ function runMatching() {
             const maxTotal = validTotals.length > 0 ? Math.max(...validTotals) : 0;
 
             // Full Lifecycle Sold Units:
-            // Combines pre-sale contracts and completed sales.
+            // Combines pre-sale contracts and completed sales for RESIDENTIAL UNITS (excluding pure parking stalls).
             // Capped at planned households to strictly prevent duplicate contract inflation.
-            const plannedHouseholds = p.household || allTransactions.length;
-            const effectiveSoldUnits = (p.household > 0) ? Math.min(allTransactions.length, p.household) : allTransactions.length;
-            const salesRate = plannedHouseholds > 0 ? Math.min(parseFloat(((effectiveSoldUnits / plannedHouseholds) * 100).toFixed(1)), 100) : 100;
+            const plannedHouseholds = p.household || residentialTxs.length;
+            const effectiveSoldUnits = (p.household > 0) ? Math.min(residentialTxs.length, p.household) : residentialTxs.length;
+            const salesRate = plannedHouseholds > 0 ? Math.min(parseFloat(((effectiveSoldUnits / plannedHouseholds) * 100).toFixed(1)), 100) : (residentialTxs.length > 0 ? 100 : 0);
             const isSoldOut = (salesRate >= 100);
 
             if (isSoldOut) totalSoldOutProjects++;
@@ -377,8 +393,10 @@ function runMatching() {
                 hasSalesData: true,
                 soldUnits: effectiveSoldUnits,
                 rawTxCount: allTransactions.length,
-                presaleCount: matchedB.length,
-                completedCount: matchedA_Bldg.length,
+                residentialCount: residentialTxs.length,
+                parkingCount: parkingTxs.length,
+                presaleCount: matchedB.filter(t => !t.isParking).length,
+                completedCount: matchedA_Bldg.filter(t => !t.isParking).length,
                 totalHouseholds: plannedHouseholds,
                 salesRate: salesRate,
                 isSoldOut: isSoldOut,
@@ -391,6 +409,7 @@ function runMatching() {
                 latestTransactionDate: allTransactions[0].dateRoc,
                 transactions: allTransactions.map(t => ({
                     source: t.source,
+                    isParking: !!t.isParking,
                     dateRoc: t.dateRoc,
                     unit: t.address,
                     floor: t.floor,
@@ -406,6 +425,8 @@ function runMatching() {
                 hasSalesData: false,
                 soldUnits: 0,
                 rawTxCount: 0,
+                residentialCount: 0,
+                parkingCount: 0,
                 presaleCount: 0,
                 completedCount: 0,
                 totalHouseholds: p.household || 0,
@@ -515,6 +536,7 @@ function runMatching() {
             '起造建商': p.builder,
             '申報總戶數': p.household || '未填寫',
             '實登已售戶數': s.hasSalesData ? s.soldUnits : 0,
+            '純車位移轉筆數': s.hasSalesData ? (s.parkingCount || 0) : 0,
             '銷售進度狀態': statusText,
             '銷售率(%)': s.hasSalesData ? `${s.salesRate}%` : '尚無實登',
             '建案平均單價(萬/坪)': s.hasSalesData && s.avgPricePerPing ? s.avgPricePerPing : '--',
