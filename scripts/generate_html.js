@@ -1023,6 +1023,7 @@ const htmlTemplate = `<!DOCTYPE html>
                             <thead class="bg-[#FAF8F5] text-[#38342D] font-serif-tc font-bold sticky top-0 border-b border-[#DCD4C5]">
                                 <tr>
                                     <th class="py-2 px-2.5">交易年月</th>
+                                    <th class="py-2 px-2 text-center">類別</th>
                                     <th class="py-2 px-2.5">棟別 / 門牌</th>
                                     <th class="py-2 px-2 text-center">樓層</th>
                                     <th class="py-2 px-2 text-right">建坪</th>
@@ -2772,7 +2773,13 @@ const htmlTemplate = `<!DOCTYPE html>
             const progBar = document.getElementById('modalProgressBar');
             if (hasSales) {
                 const sCount = document.getElementById('modalSalesCountText');
-                if (sCount) sCount.innerText = '實登已售 ' + s.soldUnits + ' / ' + (s.totalHouseholds || p.household || s.soldUnits) + ' 戶';
+                if (sCount) {
+                    let extraTx = '';
+                    if (s.rawTxCount && s.rawTxCount > s.soldUnits) {
+                        extraTx = ' (累計登錄 ' + s.rawTxCount + ' 筆)';
+                    }
+                    sCount.innerText = '實登已售 ' + s.soldUnits + ' / ' + (s.totalHouseholds || p.household || s.soldUnits) + ' 戶' + extraTx;
+                }
                 const sRate = document.getElementById('modalSalesRateText');
                 if (sRate) sRate.innerText = s.salesRate + '%';
                 if (progBar) progBar.style.width = s.salesRate + '%';
@@ -2830,13 +2837,18 @@ const htmlTemplate = `<!DOCTYPE html>
                 if (txCountBadge) txCountBadge.innerText = txList.length + ' 筆交易';
 
                 if (txList.length === 0) {
-                    txBody.innerHTML = '<tr><td colspan="8" class="text-center py-5 text-[#7A7366]">目前尚未有實價登錄成交明細紀錄</td></tr>';
+                    txBody.innerHTML = '<tr><td colspan="9" class="text-center py-5 text-[#7A7366]">目前尚未有實價登錄成交明細紀錄</td></tr>';
                 } else {
                     txList.slice(0, 60).forEach(tx => {
                         const row = document.createElement('tr');
                         row.className = 'hover:bg-[#FAF8F5] transition text-xs';
                         row.innerHTML = 
                             '<td class="py-2 px-2.5 font-mono font-medium text-[#1C1B18] whitespace-nowrap">' + (tx.dateRoc || '--') + '</td>' +
+                            '<td class="py-2 px-2 text-center whitespace-nowrap">' + 
+                                (tx.source === '成屋/買賣實登' 
+                                    ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#EBF5FB] text-[#2874A6] border border-[#AED6F1]">成屋</span>' 
+                                    : '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#BDD9B4]">預售</span>') + 
+                            '</td>' +
                             '<td class="py-2 px-2.5 font-medium text-[#38342D] max-w-xs truncate" title="' + escapeHtml(tx.unit) + '">' + escapeHtml(tx.unit || '未揭示') + '</td>' +
                             '<td class="py-2 px-2 text-center font-mono text-[#6E675B]">' + (tx.floor ? tx.floor + 'F' : '--') + '</td>' +
                             '<td class="py-2 px-2 text-right font-mono">' + (tx.areaPing ? tx.areaPing + ' 坪' : '--') + '</td>' +

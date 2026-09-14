@@ -339,30 +339,10 @@ function runMatching() {
             }
         }
 
-        // Deduplicate physical units
-        const uniqueUnitMap = new Map();
-        const allTransactions = [];
+        // Combine PRE-SALE (matchedB) and COMPLETED HOUSING (matchedA_Bldg)
+        const allTransactions = [...matchedB, ...matchedA_Bldg];
 
-        matchedB.forEach(tx => {
-            const unitKey = `${tx.address}_${tx.floor || '全'}_${tx.areaPing}`;
-            if (!uniqueUnitMap.has(unitKey)) {
-                uniqueUnitMap.set(unitKey, tx);
-            }
-            allTransactions.push(tx);
-        });
-
-        matchedA_Bldg.forEach(tx => {
-            const unitKey = `${tx.address}_${tx.floor || '全'}_${tx.areaPing}`;
-            if (!uniqueUnitMap.has(unitKey)) {
-                uniqueUnitMap.set(unitKey, tx);
-                allTransactions.push(tx);
-            }
-        });
-
-        const distinctUnits = Array.from(uniqueUnitMap.values());
-        const rawDistinctCount = distinctUnits.length;
-
-        if (rawDistinctCount > 0) {
+        if (allTransactions.length > 0) {
             totalMatchedProjects++;
             allTransactions.sort((a, b) => (b.rawDate || '').localeCompare(a.rawDate || ''));
 
@@ -377,8 +357,11 @@ function runMatching() {
             const minTotal = validTotals.length > 0 ? Math.min(...validTotals) : 0;
             const maxTotal = validTotals.length > 0 ? Math.max(...validTotals) : 0;
 
-            const plannedHouseholds = p.household || rawDistinctCount;
-            const effectiveSoldUnits = (p.household > 0) ? Math.min(rawDistinctCount, p.household) : rawDistinctCount;
+            // Full Lifecycle Sold Units:
+            // Combines pre-sale contracts and completed sales.
+            // Capped at planned households to strictly prevent duplicate contract inflation.
+            const plannedHouseholds = p.household || allTransactions.length;
+            const effectiveSoldUnits = (p.household > 0) ? Math.min(allTransactions.length, p.household) : allTransactions.length;
             const salesRate = plannedHouseholds > 0 ? Math.min(parseFloat(((effectiveSoldUnits / plannedHouseholds) * 100).toFixed(1)), 100) : 100;
             const isSoldOut = (salesRate >= 100);
 
@@ -389,6 +372,8 @@ function runMatching() {
                 hasSalesData: true,
                 soldUnits: effectiveSoldUnits,
                 rawTxCount: allTransactions.length,
+                presaleCount: matchedB.length,
+                completedCount: matchedA_Bldg.length,
                 totalHouseholds: plannedHouseholds,
                 salesRate: salesRate,
                 isSoldOut: isSoldOut,
@@ -416,6 +401,8 @@ function runMatching() {
                 hasSalesData: false,
                 soldUnits: 0,
                 rawTxCount: 0,
+                presaleCount: 0,
+                completedCount: 0,
                 totalHouseholds: p.household || 0,
                 salesRate: 0,
                 isSoldOut: false,
