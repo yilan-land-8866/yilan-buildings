@@ -221,6 +221,14 @@ function runMatching() {
     let totalSoldOutProjects = 0;
     let totalProjectsWithLand = 0;
 
+    const townProjectsMap = {};
+    projects.forEach(p => {
+        const t = p.town || '';
+        if (!townProjectsMap[t]) townProjectsMap[t] = [];
+        townProjectsMap[t].push(p);
+        p._caseNameNorm = normalizeText(p.caseName);
+    });
+
     projects.forEach(p => {
         const pTown = p.town || '';
         const pCaseNameNorm = normalizeText(p.caseName);
@@ -243,8 +251,26 @@ function runMatching() {
             let isMatch = false;
 
             if (pCaseNameNorm.length >= 2 && !isGenericCaseName) {
-                if (tx.normCase && tx.normCase.includes(pCaseNameNorm)) isMatch = true;
-                else if (tx.normAddr.includes(pCaseNameNorm) || tx.normNote.includes(pCaseNameNorm)) isMatch = true;
+                if (tx.normCase) {
+                    if (tx.normCase === pCaseNameNorm) {
+                        isMatch = true;
+                    } else if (tx.normCase.includes(pCaseNameNorm) || pCaseNameNorm.includes(tx.normCase)) {
+                        const townList = townProjectsMap[pTown] || [];
+                        const hasBetter = townList.some(otherP => {
+                            if (otherP.id === p.id) return false;
+                            const otherNorm = otherP._caseNameNorm;
+                            if (!otherNorm || otherNorm.length < 2) return false;
+                            if (otherNorm === tx.normCase) return true;
+                            if ((tx.normCase.includes(otherNorm) || otherNorm.includes(tx.normCase)) && otherNorm.length > pCaseNameNorm.length) {
+                                return true;
+                            }
+                            return false;
+                        });
+                        if (!hasBetter) isMatch = true;
+                    }
+                } else if (tx.normAddr.includes(pCaseNameNorm) || tx.normNote.includes(pCaseNameNorm)) {
+                    isMatch = true;
+                }
             }
 
             if (!isMatch && parsedLands.length > 0) {
@@ -283,7 +309,15 @@ function runMatching() {
 
             if (pCaseNameNorm.length >= 3 && !isGenericCaseName) {
                 if (tx.normAddr.includes(pCaseNameNorm) || tx.normNote.includes(pCaseNameNorm)) {
-                    isMatch = true;
+                    const townList = townProjectsMap[pTown] || [];
+                    const hasBetter = townList.some(otherP => {
+                        if (otherP.id === p.id) return false;
+                        const otherNorm = otherP._caseNameNorm;
+                        if (!otherNorm || otherNorm.length <= pCaseNameNorm.length) return false;
+                        if (tx.normAddr.includes(otherNorm) || tx.normNote.includes(otherNorm)) return true;
+                        return false;
+                    });
+                    if (!hasBetter) isMatch = true;
                 }
             }
 
