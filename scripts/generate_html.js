@@ -1755,7 +1755,22 @@ const htmlTemplate = `<!DOCTYPE html>
             populateBuilderDropdown();
             renderBuildersView();
             performSearch();
+
+            // Support direct linking via hash (#stats, #builders, #update, #search) or url param ?tab=
+            const hashTab = (window.location.hash || '').replace('#', '').toLowerCase();
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetTab = urlParams.get('tab') || (['stats', 'builders', 'update', 'search'].includes(hashTab) ? hashTab : null);
+            if (targetTab && targetTab !== 'search') {
+                switchView(targetTab);
+            }
         }
+
+        window.addEventListener('hashchange', () => {
+            const h = (window.location.hash || '').replace('#', '').toLowerCase();
+            if (['stats', 'builders', 'update', 'search'].includes(h) && h !== currentView) {
+                switchView(h);
+            }
+        });
 
         function updateDynamicKPIs(data) {
             const list = data || filteredProjects || allProjects;
@@ -2586,6 +2601,13 @@ const htmlTemplate = `<!DOCTYPE html>
                     if (statsView) statsView.classList.remove('hidden');
                     if (statsBtn) statsBtn.className = 'px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl bg-[#1C1B18] text-[#FAF8F5] flex items-center justify-center gap-1 sm:gap-1.5 transition shadow-xs';
                     renderStatsCharts();
+                }
+            }
+
+            if (window.history && window.history.replaceState) {
+                const curHash = (window.location.hash || '').replace('#', '').toLowerCase();
+                if (curHash !== view) {
+                    window.history.replaceState(null, '', '#' + view);
                 }
             }
         }
