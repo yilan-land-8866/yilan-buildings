@@ -433,12 +433,12 @@ const htmlTemplate = `<!DOCTYPE html>
                     <div>
                         <select id="filterSalesRate" class="w-full text-xs sm:text-sm bg-[#FAF8F5] border border-[#D0C7B8] rounded-xl p-2.5 text-[#1C1B18] focus:bg-[#FFFFFF] focus:outline-none font-medium" onchange="performSearch()">
                             <option value="">全部實登銷售進度 (不限)</option>
-                            <option value="100">已完銷 100% (55 案)</option>
+                            <option value="100">已完銷 100%</option>
                             <option value="90">熱銷 90% 以上 (接近完銷)</option>
                             <option value="60-89">銷售 60% ~ 89% (熱賣中)</option>
                             <option value="1-59">銷售 1% ~ 59% (銷售中)</option>
-                            <option value="has_sales">已有實價登錄成交 (455 案)</option>
-                            <option value="no_sales">尚無實登交易紀錄 (122 案)</option>
+                            <option value="has_sales">已有實價登錄成交</option>
+                            <option value="no_sales">尚無實登交易紀錄</option>
                         </select>
                     </div>
                 </div>
