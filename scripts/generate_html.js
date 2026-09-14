@@ -2850,7 +2850,7 @@ const htmlTemplate = `<!DOCTYPE html>
                                     : '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#BDD9B4]">預售</span>') + 
                             '</td>' +
                             '<td class="py-2 px-2.5 font-medium text-[#38342D] max-w-xs truncate" title="' + escapeHtml(tx.unit) + '">' + escapeHtml(tx.unit || '未揭示') + '</td>' +
-                            '<td class="py-2 px-2 text-center font-mono text-[#6E675B]">' + (tx.floor ? tx.floor + 'F' : '--') + '</td>' +
+                            '<td class="py-2 px-2 text-center font-mono text-[#6E675B]">' + (tx.floor === '全' ? '透天全棟' : (tx.floor ? (tx.floor.includes('層') || tx.floor.includes('樓') ? tx.floor : tx.floor + 'F') : '--')) + '</td>' +
                             '<td class="py-2 px-2 text-right font-mono">' + (tx.areaPing ? tx.areaPing + ' 坪' : '--') + '</td>' +
                             '<td class="py-2 px-2 text-right font-mono font-bold text-[#7A5338]">' + (tx.pricePerPing ? tx.pricePerPing + ' 萬' : '--') + '</td>' +
                             '<td class="py-2 px-2 text-right font-mono font-bold text-[#1C1B18]">' + (tx.totalPrice ? tx.totalPrice.toLocaleString() + ' 萬' : '--') + '</td>' +
@@ -2919,7 +2919,7 @@ const htmlTemplate = `<!DOCTYPE html>
             }
 
             const mH = document.getElementById('modalHousehold');
-            if (mH) mH.innerText = p.household ? (p.household + ' 戶') : '未填寫';
+            if (mH) mH.innerText = p.householdDetail || (p.household ? (p.household + ' 戶') : '未填寫');
             const mHSub = document.getElementById('modalHouseholdSoldSub');
             if (mHSub) mHSub.innerText = hasSales ? ('已銷售 ' + s.soldUnits + ' 戶 (去化率 ' + s.salesRate + '%)') : '尚無實登交易';
             

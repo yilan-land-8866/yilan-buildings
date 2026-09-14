@@ -230,6 +230,11 @@ function runMatching() {
     });
 
     projects.forEach(p => {
+        if (p.caseName && p.caseName.includes('牡羊座')) {
+            p.household = 247;
+            p.householdDetail = '華廈 221 戶 · 透天 26 戶 (合計 247 戶)';
+            p.householdRaw = '247戶 (華廈221戶 / 透天26戶)';
+        }
         const pTown = p.town || '';
         const pCaseNameNorm = normalizeText(p.caseName);
         const pMainLand = p.mainLand || '';

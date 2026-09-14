@@ -6785,7 +6785,7 @@
     "location": "海山東路",
     "builder": "青山興業股份有限公司",
     "household": 247,
-    "householdRaw": "247",
+    "householdRaw": "247戶 (華廈221戶 / 透天26戶)",
     "useZoning": "住宅區",
     "zoningInfo": {
       "planType": "都市計畫內 (都市土地)",
@@ -9864,7 +9864,8 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "thearies牡羊座"
+    "_caseNameNorm": "thearies牡羊座",
+    "householdDetail": "華廈 221 戶 · 透天 26 戶 (合計 247 戶)"
   },
   {
     "id": 19,
