@@ -12,6 +12,16 @@ function buildHTML() {
     const jsonData = fs.readFileSync(jsonPath, 'utf-8');
     const buildersData = fs.readFileSync(buildersDbPath, 'utf-8');
 
+    // 動態取得當前台灣時間日期 (YYYY/MM/DD)
+    const now = new Date();
+    const taipeiFormatter = new Intl.DateTimeFormat('zh-TW', {
+        timeZone: 'Asia/Taipei',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    const updateDateStr = taipeiFormatter.format(now).replace(/-/g, '/');
+
 
 
 
@@ -240,7 +250,7 @@ const htmlTemplate = `<!DOCTYPE html>
                             </h1>
                             <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] sm:text-xs font-mono font-semibold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0] shrink-0">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#4A5D44] animate-pulse"></span>
-                                更新：2026/09/11
+                                更新：${updateDateStr}
                             </span>
                         </div>
                         <p class="text-xs sm:text-sm text-[#6E675B] hidden md:block font-normal truncate mt-0.5">
@@ -931,7 +941,7 @@ const htmlTemplate = `<!DOCTYPE html>
     <!-- Footer -->
     <footer class="bg-[#FFFFFF] border-t border-[#DCD4C5] py-6 mt-12 text-center text-xs text-[#6E675B] no-print space-y-1">
         <p class="font-serif-tc font-bold text-[#38342D] tracking-wide">宜蘭縣建案備查與實價登錄銷售檢索系統</p>
-        <p class="text-xs text-[#7A7366]">資料來源：內政部不動產交易實價查詢服務網 ＆ 經濟部商工登記資料庫 · 最新更新日期：<b class="text-[#2C4A24] font-mono font-bold">2026/08/31</b></p>
+        <p class="text-xs text-[#7A7366]">資料來源：內政部不動產交易實價查詢服務網 ＆ 經濟部商工登記資料庫 · 最新更新日期：<b class="text-[#2C4A24] font-mono font-bold">${updateDateStr}</b></p>
     </footer>
 
     <!-- DETAIL MODAL -->
