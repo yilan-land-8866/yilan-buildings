@@ -11,6 +11,146 @@ function buildHTML() {
     console.log('📄 [Step 3/4] 編譯產生 index.html 與 宜蘭建案檢索系統.html...');
     const jsonData = fs.readFileSync(jsonPath, 'utf-8');
     const buildersData = fs.readFileSync(buildersDbPath, 'utf-8');
+    const allProjParsed = JSON.parse(jsonData);
+
+    function parseRocDate(str) {
+        if (!str) return null;
+        const parts = str.split('/');
+        if (parts.length !== 3) return null;
+        const y = parseInt(parts[0], 10) + 1911;
+        const m = parseInt(parts[1], 10) - 1;
+        const d = parseInt(parts[2], 10);
+        return new Date(y, m, d);
+    }
+
+    function diffMonths(d1, d2) {
+        if (!d1 || !d2) return null;
+        return (d2 - d1) / (1000 * 60 * 60 * 24 * 30.4375);
+    }
+
+    const researchProjects = [];
+    const withBothList = [];
+
+    allProjParsed.forEach(p => {
+        const hasLand = p.landStats && p.landStats.hasLandData && p.landStats.txCount > 0;
+        const hasSales = p.salesStats && p.salesStats.hasSalesData && p.salesStats.soldUnits > 0;
+
+        if (hasLand) {
+            const avgLandPrice = p.landStats.avgLandPricePerPing;
+            const avgSalesPrice = hasSales ? p.salesStats.avgPricePerPing : null;
+
+            if (avgLandPrice > 0) {
+                const salesTx = (p.salesStats && p.salesStats.transactions) || [];
+                const landTx = (p.landStats && p.landStats.transactions) || [];
+                const salesDates = salesTx.map(t => parseRocDate(t.dateRoc)).filter(Boolean).sort((a,b) => a - b);
+                const landDates = landTx.map(t => parseRocDate(t.dateRoc)).filter(Boolean).sort((a,b) => a - b);
+
+                const firstSaleDateObj = salesDates.length > 0 ? salesDates[0] : null;
+                const latestLandDateObj = landDates.length > 0 ? landDates[landDates.length - 1] : parseRocDate(p.landStats.latestLandDate);
+
+                const leadMonthsVal = (latestLandDateObj && firstSaleDateObj) ? diffMonths(latestLandDateObj, firstSaleDateObj) : null;
+                const leadMonths = leadMonthsVal !== null ? Math.round(leadMonthsVal * 10) / 10 : null;
+
+                const predPrice = parseFloat((0.595 * avgLandPrice + 18.42).toFixed(1));
+                let diff = null;
+                let diffPct = null;
+                if (hasSales && avgSalesPrice > 0) {
+                    diff = parseFloat((avgSalesPrice - predPrice).toFixed(1));
+                    diffPct = parseFloat(((diff / predPrice) * 100).toFixed(1));
+                }
+
+                const item = {
+                    id: p.id,
+                    caseName: p.caseName,
+                    town: p.town,
+                    builder: p.builder,
+                    household: p.household,
+                    status: hasSales ? 'sold' : 'reserve',
+                    avgLandPrice,
+                    avgSalesPrice,
+                    predPrice,
+                    diff,
+                    diffPct,
+                    priceRatio: (hasSales && avgSalesPrice > 0) ? parseFloat((avgSalesPrice / avgLandPrice).toFixed(2)) : null,
+                    soldUnits: hasSales ? p.salesStats.soldUnits : 0,
+                    salesRate: hasSales ? p.salesStats.salesRate : 0,
+                    isSoldOut: hasSales ? p.salesStats.isSoldOut : false,
+                    latestLandDate: p.landStats.latestLandDate || '',
+                    firstSaleDate: salesTx.length > 0 ? salesTx[salesTx.length-1].dateRoc : '',
+                    latestSaleDate: salesTx.length > 0 ? salesTx[0].dateRoc : '',
+                    leadMonths: leadMonths,
+                    firstSaleYearRoc: firstSaleDateObj ? (firstSaleDateObj.getFullYear() - 1911) : null
+                };
+
+                researchProjects.push(item);
+                if (hasSales && avgSalesPrice > 0) {
+                    withBothList.push(item);
+                }
+            }
+        }
+    });
+
+    // Township Matrix Summary
+    const byTown = {};
+    withBothList.forEach(p => {
+        if (!byTown[p.town]) byTown[p.town] = [];
+        byTown[p.town].push(p);
+    });
+
+    const townNotesMap = {
+        '冬山鄉': '推案量全縣第一，剛性自住買盤穩固，去化健康',
+        '五結鄉': '緊鄰羅東第一環，二結重劃區推案活絡，房地比 2.67 倍',
+        '員山鄉': '宜蘭市外溢主要受惠區，透天別墅主力，價格親民',
+        '宜蘭市': '政經核心，建案均價全縣最高，大樓與別墅並存',
+        '壯圍鄉': '低地價轉化成屋，房地單價倍數放大全縣最高 (3.14x)',
+        '礁溪鄉': '溫泉宅高單價 (最高40+萬) 與外圍透天二元市場',
+        '三星鄉': '休閒別墅與自住退休族青睞，房地比 2.84 倍',
+        '蘇澳鎮': '基地取得單價全縣最親民 (7.3萬)，總價門檻親民',
+        '頭城鎮': '烏石港重劃區開發時程全縣最快 (16.0個月)，度假景觀宅',
+        '羅東鎮': '土地寸土寸金，地價佔比極高，房地倍數全縣最低 (1.35x)'
+    };
+
+    const townshipMatrix = Object.keys(byTown).map(town => {
+        const list = byTown[town];
+        const avgLand = list.reduce((a,b) => a + b.avgLandPrice, 0) / list.length;
+        const avgSales = list.reduce((a,b) => a + b.avgSalesPrice, 0) / list.length;
+        const avgRatio = list.reduce((a,b) => a + b.priceRatio, 0) / list.length;
+        const validDeltas = list.map(p => p.leadMonths).filter(v => v !== null && v >= 0 && v <= 120);
+        const avgMonths = validDeltas.length > 0 ? (validDeltas.reduce((a,b) => a + b, 0) / validDeltas.length) : 0;
+        return {
+            town,
+            count: list.length,
+            avgLand: Math.round(avgLand * 10) / 10,
+            avgSales: Math.round(avgSales * 10) / 10,
+            avgRatio: Math.round(avgRatio * 100) / 100,
+            avgMonths: Math.round(avgMonths * 10) / 10,
+            notes: townNotesMap[town] || '自住與投資型產品兼具'
+        };
+    }).sort((a,b) => b.count - a.count);
+
+    // Yearly Price Trend Summary
+    const bySaleYear = {};
+    withBothList.forEach(p => {
+        if (!p.firstSaleYearRoc) return;
+        if (!bySaleYear[p.firstSaleYearRoc]) bySaleYear[p.firstSaleYearRoc] = [];
+        bySaleYear[p.firstSaleYearRoc].push(p);
+    });
+
+    const yearlyTrend = Object.keys(bySaleYear).sort((a,b) => a - b).map(y => {
+        const arr = bySaleYear[y];
+        const avgLand = arr.reduce((a,b) => a + b.avgLandPrice, 0) / arr.length;
+        const avgSales = arr.reduce((a,b) => a + b.avgSalesPrice, 0) / arr.length;
+        const validM = arr.map(p => p.leadMonths).filter(m => m !== null && m >= 0 && m <= 120);
+        const avgM = validM.length > 0 ? (validM.reduce((a,b) => a + b, 0) / validM.length) : 0;
+        return {
+            yearRoc: String(y),
+            yearAd: parseInt(y, 10) + 1911,
+            count: arr.length,
+            avgLand: Math.round(avgLand * 10) / 10,
+            avgSales: Math.round(avgSales * 10) / 10,
+            avgMonths: Math.round(avgM * 10) / 10
+        };
+    });
 
     // 動態取得當前台灣時間日期 (YYYY/MM/DD)
     const now = new Date();
@@ -711,60 +851,314 @@ const htmlTemplate = `<!DOCTYPE html>
             </div>
         </div>
 
-        <!-- VIEW 3: STATISTICS DASHBOARD VIEW (行情數據圖鑑) -->
-        <div id="statsView" class="hidden space-y-6">
+        <!-- VIEW 3: 行情統計與基地實價關聯深度研究儀表板 (statsView) -->
+        <div id="statsView" class="hidden space-y-8">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <!-- Town Distribution Chart -->
-                <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
-                    <h3 class="text-sm sm:text-base font-serif-tc font-bold text-[#1C1B18] mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-[#7A5338]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
-                        <span>各鄉鎮市推案數量統計</span>
-                    </h3>
-                    <div class="h-60 sm:h-68">
-                        <canvas id="chartTownCases"></canvas>
-                    </div>
-                </div>
+            <!-- SECTION 1: 經驗定價模型與白話解讀橫幅 (Hero Formula Banner) -->
+            <div class="bg-gradient-to-r from-[#241E19] via-[#352B23] to-[#241E19] rounded-3xl p-6 sm:p-8 text-[#FAF8F5] shadow-md border border-[#4A3D31]">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-4xl">
+                        <div class="flex items-center gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold font-mono bg-[#E5C392] text-[#241E19]">實證大數據經驗模型</span>
+                            <span class="text-xs text-[#D5C7B5]">全縣 581 建案 · 367 筆基地實價勾稽 · 295 筆雙向成交驗證</span>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl lg:text-3xl font-serif-tc font-black tracking-wide text-[#FFFFFF] flex items-center gap-2">
+                            <span>📐 宜蘭建案「基地地價 ➔ 預售成交價」定價回歸公式</span>
+                        </h2>
+                        
+                        <!-- Formula Display Box -->
+                        <div class="bg-[#1C1713]/80 border border-[#524436] rounded-2xl p-4 sm:p-5 mt-2">
+                            <div class="text-center sm:text-left">
+                                <span class="text-xs sm:text-sm font-semibold text-[#D5C7B5] block mb-1">精確線性回歸經驗公式：</span>
+                                <div class="text-xl sm:text-2xl md:text-3xl font-serif-tc font-bold text-[#F4DCB9] tracking-wider">
+                                    建案成交均價 <span class="text-xs font-normal text-[#D5C7B5]">(萬/坪)</span> ＝ 0.595 × 基地成交單價 ＋ 18.42 萬/坪
+                                </div>
+                            </div>
+                        </div>
 
-                <!-- Town Avg Unit Price Chart -->
-                <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
-                    <h3 class="text-sm sm:text-base font-serif-tc font-bold text-[#1C1B18] mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-[#8C6D2B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span>各鄉鎮市實價登錄平均單價排行 (萬/坪)</span>
-                    </h3>
-                    <div class="h-60 sm:h-68">
-                        <canvas id="chartTownPrice"></canvas>
+                        <!-- 3 Intuitive Cards for Layman Explanation -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+                            <div class="bg-[#FFFFFF]/10 backdrop-blur-sm rounded-xl p-3.5 border border-[#FFFFFF]/15">
+                                <div class="flex items-center gap-2 text-[#E5C392] font-bold text-xs sm:text-sm mb-1">
+                                    <span>🏗️ 18.42 萬/坪：硬底成本線</span>
+                                </div>
+                                <p class="text-xs text-[#E0D8CB] leading-relaxed">
+                                    不管地價多低，在宜蘭蓋房有鋼筋營造工料（每坪 13~16 萬）、建築師廣告管銷（8~10%）與建商基本利潤，這構成推案的最低售價底線。
+                                </p>
+                            </div>
+                            <div class="bg-[#FFFFFF]/10 backdrop-blur-sm rounded-xl p-3.5 border border-[#FFFFFF]/15">
+                                <div class="flex items-center gap-2 text-[#E5C392] font-bold text-xs sm:text-sm mb-1">
+                                    <span>📈 0.595 斜率：地價轉嫁率</span>
+                                </div>
+                                <p class="text-xs text-[#E0D8CB] leading-relaxed">
+                                    基地單價每上漲 10 萬元/坪，經建築容積率（如建蔽 60%、容積 180~200%）分攤稀釋後，最終終端預售單價約反映 5.95 萬元。
+                                </p>
+                            </div>
+                            <div class="bg-[#FFFFFF]/10 backdrop-blur-sm rounded-xl p-3.5 border border-[#FFFFFF]/15">
+                                <div class="flex items-center gap-2 text-[#E5C392] font-bold text-xs sm:text-sm mb-1">
+                                    <span>⚖️ 實價 vs 預估：一眼判斷開價</span>
+                                </div>
+                                <p class="text-xs text-[#E0D8CB] leading-relaxed">
+                                    實際均價高於預估代表建商具品牌/地段溢價能力；低於預估代表讓利親民或平價促銷；儲備案則可推估未來的合理開價起點！
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Key Stat Widget -->
+                    <div class="bg-[#FFFFFF]/10 backdrop-blur-sm rounded-2xl p-5 border border-[#FFFFFF]/20 text-center shrink-0 min-w-[200px] flex flex-col justify-center">
+                        <div class="text-xs font-semibold text-[#D5C7B5] uppercase">模型統計信賴度</div>
+                        <div class="text-3xl sm:text-4xl font-serif-tc font-black text-[#F4DCB9] mt-1">r = 0.67</div>
+                        <div class="text-xs text-[#48C774] font-bold mt-1">高度顯著正相關</div>
+                        <div class="text-[11px] text-[#D5C7B5] mt-2 border-t border-[#FFFFFF]/15 pt-2">
+                            判定係數 R² ＝ 0.45<br>地價直接解釋 45% 房價落點
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <!-- Zoning System Distribution -->
+            <!-- SECTION 2: 6 大核心市場 KPI 指標卡片 (Summary Metrics Grid) -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+                <div class="bg-[#FFFFFF] p-4 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                    <div class="text-xs text-[#6E675B] font-semibold">實證分析樣本數</div>
+                    <div class="text-2xl font-serif-tc font-bold text-[#1C1B18] mt-1">295 <span class="text-xs font-normal text-[#6E675B]">案</span></div>
+                    <div class="text-[11px] font-bold text-[#2C4A24] mt-1">另有 72 筆儲備建案</div>
+                </div>
+                <div class="bg-[#FFFFFF] p-4 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                    <div class="text-xs text-[#6E675B] font-semibold">基地成交中位單價</div>
+                    <div class="text-2xl font-serif-tc font-bold text-[#8C6D2B] mt-1">10.0 <span class="text-xs font-normal text-[#6E675B]">萬/坪</span></div>
+                    <div class="text-[11px] text-[#6E675B] mt-1">全縣均值 11.7 萬/坪</div>
+                </div>
+                <div class="bg-[#FFFFFF] p-4 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                    <div class="text-xs text-[#6E675B] font-semibold">建案預售中位均價</div>
+                    <div class="text-2xl font-serif-tc font-bold text-[#2874A6] mt-1">24.4 <span class="text-xs font-normal text-[#6E675B]">萬/坪</span></div>
+                    <div class="text-[11px] text-[#6E675B] mt-1">全縣均值 25.3 萬/坪</div>
+                </div>
+                <div class="bg-[#FFFFFF] p-4 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                    <div class="text-xs text-[#6E675B] font-semibold">平均房地倍數比</div>
+                    <div class="text-2xl font-serif-tc font-bold text-[#7A5338] mt-1">2.50 <span class="text-xs font-normal text-[#6E675B]">倍</span></div>
+                    <div class="text-[11px] text-[#6E675B] mt-1">中位數 2.40 倍</div>
+                </div>
+                <div class="bg-[#FFFFFF] p-4 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                    <div class="text-xs text-[#6E675B] font-semibold">平均開發推案時程</div>
+                    <div class="text-2xl font-serif-tc font-bold text-[#A04000] mt-1">21.3 <span class="text-xs font-normal text-[#6E675B]">個月</span></div>
+                    <div class="text-[11px] text-[#6E675B] mt-1">購地至首售約 1.8 年</div>
+                </div>
+                <div class="bg-[#FFFFFF] p-4 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                    <div class="text-xs text-[#6E675B] font-semibold">五年累積房價漲幅</div>
+                    <div class="text-2xl font-serif-tc font-bold text-[#2C4A24] mt-1">+33.3%</div>
+                    <div class="text-[11px] text-[#6E675B] mt-1">由 21.3 ➔ 28.4 萬/坪</div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: 4 大深度研究圖表 (Charts Grid) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                <!-- Chart 1: Scatter & Regression Trendline -->
                 <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
-                    <h3 class="text-sm sm:text-base font-serif-tc font-bold text-[#1C1B18] mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-[#7A5338]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.5H4.5V21"/></svg>
-                        <span>土地規劃體系與分區結構分布</span>
-                    </h3>
-                    <div class="h-60 sm:h-68">
-                        <canvas id="chartZoningDistribution"></canvas>
+                    <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-serif-tc font-bold text-[#1C1B18] flex items-center gap-2">
+                                <span>📊 基地單價 vs 建案均價 散佈圖與回歸趨勢線</span>
+                            </h3>
+                            <p class="text-xs text-[#6E675B] mt-0.5">295 筆雙向成交樣本與線性回歸模型擬合</p>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-[#EBF5FB] text-[#2874A6] border border-[#AED6F1]">r = 0.67</span>
+                    </div>
+                    <div class="h-68 sm:h-76">
+                        <canvas id="chartScatterRegression"></canvas>
                     </div>
                 </div>
 
-                <!-- Top Builders Chart -->
+                <!-- Chart 2: Regional Township Comparison -->
                 <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
-                    <h3 class="text-sm sm:text-base font-serif-tc font-bold text-[#1C1B18] mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-[#7A5338]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.496m5.007 0a2.25 2.25 0 002.25-2.25V5.25A2.25 2.25 0 0014.503 3H9.496a2.25 2.25 0 00-2.25 2.25v7.875a2.25 2.25 0 002.25 2.25z"/></svg>
-                        <span>推案量領先建設公司 (Top 10)</span>
-                    </h3>
-                    <div class="h-60 sm:h-68">
-                        <canvas id="chartTopBuilders"></canvas>
+                    <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-serif-tc font-bold text-[#1C1B18] flex items-center gap-2">
+                                <span>🏙️ 各行政區：基地平均單價 vs 建案成交均價 對比</span>
+                            </h3>
+                            <p class="text-xs text-[#6E675B] mt-0.5">單位：萬元/坪 (按推案樣本數排序)</p>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-[#FAF3EB] text-[#8C6D2B] border border-[#DECDBE]">十大鄉鎮對比</span>
+                    </div>
+                    <div class="h-68 sm:h-76">
+                        <canvas id="chartTownLandSales"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 3: Yearly Price Evolution -->
+                <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                    <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-serif-tc font-bold text-[#1C1B18] flex items-center gap-2">
+                                <span>📈 歷年價格走勢演變 (民國 110 ~ 115 年)</span>
+                            </h3>
+                            <p class="text-xs text-[#6E675B] mt-0.5">建案預售成交均價 vs 基地購地單價 (萬/坪)</p>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#BDD9B4]">穩健走揚</span>
+                    </div>
+                    <div class="h-68 sm:h-76">
+                        <canvas id="chartYearlyPriceTrend"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 4: Lead Time Evolution -->
+                <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                    <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-serif-tc font-bold text-[#1C1B18] flex items-center gap-2">
+                                <span>⏳ 建商推案週期演變 (購地至首筆預售成交)</span>
+                            </h3>
+                            <p class="text-xs text-[#6E675B] mt-0.5">單位：個月 (推案週期由 15.8 個月逐年拉長至 26.6 個月)</p>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-[#FADBD8] text-[#78281F] border border-[#F5B7B1]">推案週期拉長</span>
+                    </div>
+                    <div class="h-68 sm:h-76">
+                        <canvas id="chartLeadTimeTrend"></canvas>
                     </div>
                 </div>
             </div>
+
+            <!-- SECTION 4: 十大行政區房地結構綜合矩陣表 (Township Matrix Table) -->
+            <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs">
+                <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
+                            <span>📋 十大行政區房地結構綜合指標矩陣</span>
+                        </h3>
+                        <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
+                            城鄉地價、預售房價、房地倍數比與平均推案週期完整對照（依推案樣本數排序）
+                        </p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#F7F4EE] text-[#38342D] border border-[#DCD4C5]">
+                        295 案雙向統計
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto rounded-xl border border-[#EBE5DA]">
+                    <table class="w-full text-left text-xs sm:text-sm text-[#24211D]">
+                        <thead class="bg-[#F2ECE1] text-[#38342D] font-serif-tc font-bold border-b border-[#DCD4C5]">
+                            <tr>
+                                <th class="py-3 px-3.5 whitespace-nowrap">行政區</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">樣本數</th>
+                                <th class="py-3 px-3 text-right whitespace-nowrap">基地平均單價</th>
+                                <th class="py-3 px-3 text-right whitespace-nowrap">建案成交均價</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">房地倍數比</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">平均開發時程</th>
+                                <th class="py-3 px-4 whitespace-nowrap">區域市場特性解析</th>
+                            </tr>
+                        </thead>
+                        <tbody id="researchTownMatrixBody" class="divide-y divide-[#EBE5DA]">
+                            <!-- Populated dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECTION 5: 【核心功能】建案實價關聯明細資料庫檢索（含公式預測售價 & 實際溢折價指標） -->
+            <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#DCD4C5] shadow-xs space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
+                            <span>🔍 建案實價關聯明細資料庫檢索（含公式預估價與溢折價分析）</span>
+                        </h3>
+                        <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
+                            點選建案可開啟完整實登明細；透過公式預估售價與實際成交對比，一眼看穿是溢價案還是讓利超值案！
+                        </p>
+                    </div>
+
+                    <!-- Filter Controls -->
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <!-- Status Toggle Buttons -->
+                        <div class="flex bg-[#F2ECE1] p-1 rounded-xl text-xs font-semibold border border-[#DCD4C5]">
+                            <button id="rBtnStatusAll" onclick="filterResearchStatus('all')" class="px-3 py-1.5 rounded-lg bg-[#FFFFFF] text-[#1C1B18] shadow-xs transition">全部 (367)</button>
+                            <button id="rBtnStatusSold" onclick="filterResearchStatus('sold')" class="px-3 py-1.5 rounded-lg text-[#6E675B] hover:text-[#1C1B18] transition">已開賣 (295)</button>
+                            <button id="rBtnStatusReserve" onclick="filterResearchStatus('reserve')" class="px-3 py-1.5 rounded-lg text-[#6E675B] hover:text-[#1C1B18] transition">儲備中 (72)</button>
+                        </div>
+
+                        <!-- Town Filter -->
+                        <select id="rTownFilter" onchange="applyResearchFilters()" class="text-xs bg-[#FAF8F5] border border-[#D0C7B8] rounded-xl px-3 py-2 text-[#1C1B18] font-medium focus:bg-[#FFFFFF] focus:outline-none">
+                            <option value="">全部鄉鎮</option>
+                        </select>
+
+                        <!-- Search Input -->
+                        <div class="relative">
+                            <input type="text" id="rSearchInput" oninput="applyResearchFilters()" placeholder="搜尋建案、建商、地號、路名..." class="text-xs bg-[#FAF8F5] border border-[#D0C7B8] rounded-xl pl-8 pr-3 py-2 w-48 sm:w-64 text-[#1C1B18] placeholder-[#9E9689] focus:bg-[#FFFFFF] focus:outline-none">
+                            <svg class="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-[#9E9689]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Container -->
+                <div class="overflow-x-auto rounded-xl border border-[#EBE5DA] max-h-[640px] overflow-y-auto">
+                    <table class="w-full text-left text-xs sm:text-sm text-[#24211D]">
+                        <thead class="bg-[#F2ECE1] text-[#38342D] font-serif-tc font-bold border-b border-[#DCD4C5] sticky top-0 z-10">
+                            <tr>
+                                <th class="py-3 px-2.5 text-center whitespace-nowrap">序</th>
+                                <th class="py-3 px-3 whitespace-nowrap cursor-pointer select-none" onclick="sortResearchTable('caseName')">建案名稱 ↕</th>
+                                <th class="py-3 px-2.5 whitespace-nowrap">鄉鎮</th>
+                                <th class="py-3 px-3 whitespace-nowrap">投資興建商</th>
+                                <th class="py-3 px-2 text-center whitespace-nowrap">戶數</th>
+                                <th class="py-3 px-2.5 text-right whitespace-nowrap text-[#8C6D2B] cursor-pointer select-none" onclick="sortResearchTable('avgLandPrice')">基地單價 ↕</th>
+                                <th class="py-3 px-3 text-right whitespace-nowrap font-bold text-[#4A5D44] bg-[#EFEAE1] cursor-pointer select-none" onclick="sortResearchTable('predPrice')">公式預估售價 ↕</th>
+                                <th class="py-3 px-3 text-right whitespace-nowrap font-bold text-[#1C1B18] cursor-pointer select-none" onclick="sortResearchTable('avgSalesPrice')">實際成交均價 ↕</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap font-bold cursor-pointer select-none" onclick="sortResearchTable('diff')">實際 vs 預估 (溢折價) ↕</th>
+                                <th class="py-3 px-2 text-center whitespace-nowrap cursor-pointer select-none" onclick="sortResearchTable('priceRatio')">房地倍數 ↕</th>
+                                <th class="py-3 px-2.5 text-center whitespace-nowrap">購地日 ➔ 首售日</th>
+                                <th class="py-3 px-2 text-center whitespace-nowrap">開發時程</th>
+                                <th class="py-3 px-2.5 text-center whitespace-nowrap cursor-pointer select-none" onclick="sortResearchTable('salesRate')">實登銷售率 ↕</th>
+                                <th class="py-3 px-2 text-center whitespace-nowrap">狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody id="researchDataTableBody" class="divide-y divide-[#EBE5DA]">
+                            <!-- Populated dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Table Footer Info -->
+                <div class="flex items-center justify-between text-xs text-[#6E675B] pt-1">
+                    <span id="rTableCountDisplay">顯示 367 筆建案</span>
+                    <span class="text-[11px] text-[#9E9689]">公式：預估售價 ＝ 0.595 × 基地單價 ＋ 18.42 萬/坪 · 點擊建案名稱可展開實登成交明細</span>
+                </div>
+            </div>
+
+            <!-- SECTION 6: 全縣建照推案大盤分析 (Macro Baseline Charts) -->
+            <div class="pt-4 border-t border-[#DCD4C5]">
+                <div class="mb-4">
+                    <h3 class="text-base sm:text-lg font-serif-tc font-black text-[#1C1B18] tracking-wide flex items-center gap-2">
+                        <span>🏛️ 全縣建照推案大盤分析（分區結構與活躍建商）</span>
+                    </h3>
+                    <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
+                        全宜蘭 581 個建照建案之土地使用分區體系分佈與推案量領先建設公司
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Zoning System Distribution -->
+                    <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                        <h4 class="text-sm font-serif-tc font-bold text-[#1C1B18] mb-3 flex items-center gap-2">
+                            <span>土地規劃體系與分區結構分布</span>
+                        </h4>
+                        <div class="h-60 sm:h-68">
+                            <canvas id="chartZoningDistribution"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Top Builders Chart -->
+                    <div class="bg-[#FFFFFF] p-5 sm:p-6 rounded-2xl border border-[#DCD4C5] shadow-xs">
+                        <h4 class="text-sm font-serif-tc font-bold text-[#1C1B18] mb-3 flex items-center gap-2">
+                            <span>推案量領先建設公司 (Top 10)</span>
+                        </h4>
+                        <div class="h-60 sm:h-68">
+                            <canvas id="chartTopBuilders"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    
-        <!-- VIEW 4: RANKING & UPDATE VIEW (排行榜) -->
+            <!-- VIEW 4: RANKING & UPDATE VIEW (排行榜) -->
         <div id="updateView" class="hidden space-y-6">
 
             <!-- SECTION 1: 十大熱銷建案排行榜 (近6個月更新日回推) -->
@@ -1178,6 +1572,9 @@ const htmlTemplate = `<!DOCTYPE html>
     <script id="embeddedDataScript">
         window.YILAN_CASES_DATA = ${jsonData};
         window.YILAN_BUILDERS_DATA = ${buildersData};
+        window.RESEARCH_PROJECTS = ${JSON.stringify(researchProjects)};
+        window.TOWNSHIP_MATRIX = ${JSON.stringify(townshipMatrix)};
+        window.YEARLY_PRICE_TREND = ${JSON.stringify(yearlyTrend)};
     </script>
 
     <!-- Application Logic Script -->
@@ -2185,6 +2582,7 @@ const htmlTemplate = `<!DOCTYPE html>
                     if (buildersBtn) buildersBtn.className = 'px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl bg-[#1C1B18] text-[#FAF8F5] flex items-center justify-center gap-1 sm:gap-1.5 transition shadow-xs';
                     renderBuildersView();
                 } else {
+                    if (kpiSection) kpiSection.classList.add('hidden');
                     if (statsView) statsView.classList.remove('hidden');
                     if (statsBtn) statsBtn.className = 'px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl bg-[#1C1B18] text-[#FAF8F5] flex items-center justify-center gap-1 sm:gap-1.5 transition shadow-xs';
                     renderStatsCharts();
@@ -2193,6 +2591,847 @@ const htmlTemplate = `<!DOCTYPE html>
         }
 
         function renderWeeklyUpdateView() {
+            // 1. Render Section 1: Top 10 Hot Selling Projects
+            renderTopHotSellingProjects('updateTopHotProjectsTableBody');
+            renderTopPriceProjects('updateTopPriceProjectsTableBody');
+
+            // 2. Render Section 3: Recent 5 Pre-sale Buildcases (最新備查建案登錄 依序五名 表格版)
+            const sortedByDeclare = [...allProjects].filter(p => p.declareDateRaw || p.declareDate);
+            sortedByDeclare.sort((a, b) => {
+                const da = String(a.declareDateRaw || a.declareDate || '');
+                const db = String(b.declareDateRaw || b.declareDate || '');
+                return db.localeCompare(da);
+            });
+            const recentProjects = sortedByDeclare.slice(0, 5);
+
+            const tableBody = document.getElementById('updateNewProjectsTableBody');
+            if (tableBody) {
+                tableBody.innerHTML = '';
+                recentProjects.forEach((p, idx) => {
+                    const bInfo = buildersMap[p.builder] || {};
+                    const rep = (bInfo.representative || bInfo.rep) ? ('<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">' + escapeHtml(bInfo.representative || bInfo.rep) + '</span>') : '';
+                    const s = p.salesStats || {};
+                    const l = p.landStats || {};
+                    const hasSales = s.hasSalesData && s.soldUnits > 0;
+                    const townColor = townColors[p.town] || 'bg-[#FFFFFF] text-[#38342D] border-[#DCD4C5]';
+
+                    let rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">' + (idx + 1) + '</span>';
+                    if (idx === 0) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>';
+                    else if (idx === 1) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>';
+                    else if (idx === 2) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>';
+
+                    let salesTag = '';
+                    if (hasSales) {
+                        salesTag = '<div class="font-mono text-xs font-semibold text-[#1C1B18]">' + s.soldUnits + ' / ' + (p.household || s.totalHouseholds) + ' 戶</div>' +
+                                   '<div class="text-[10.5px] font-bold ' + (s.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]') + '">' + (s.isSoldOut ? '完銷 100%' : (s.salesRate + '%')) + '</div>';
+                    } else {
+                        salesTag = '<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-[#FAF8F5] text-[#7A7366] border border-[#DCD4C5]">尚無成交揭露</span>';
+                    }
+
+                    const landSubtext = l.hasLandData ? ('<span class="font-mono font-bold text-xs text-[#2C4A24]">' + l.avgLandPricePerPing + ' 萬/坪</span>') : '<span class="text-xs text-[#A8A090]">--</span>';
+
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-[#F7F3EB] transition-colors cursor-pointer group';
+                    row.onclick = () => openDetailModal(p.id);
+
+                    row.innerHTML = 
+                        '<td class="py-3 px-3 text-center whitespace-nowrap font-mono">' + rankBadge + '</td>' +
+                        '<td class="py-3 px-3 whitespace-nowrap">' +
+                            '<span class="badge border ' + townColor + ' text-xs px-2 py-0.2 font-serif-tc font-bold">' +
+                                escapeHtml(p.town || '宜蘭縣') +
+                            '</span>' +
+                        '</td>' +
+                        '<td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">' +
+                            escapeHtml(p.caseName || '未命名') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">' +
+                            '<span>' + escapeHtml(p.builder || '--') + '</span>' +
+                            rep +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap font-mono font-black text-xs sm:text-sm text-[#1C1B18]">' +
+                            escapeHtml(p.declareDate || p.declareDateRaw || '--') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap font-mono text-xs text-[#38342D]">' +
+                            escapeHtml(p.permitDate || p.permitDateRaw || '--') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap font-mono font-black text-xs sm:text-sm text-[#7A5338]">' +
+                            (p.household || '--') + ' 戶' +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-xs font-mono text-[#5C564C] whitespace-nowrap">' +
+                            escapeHtml(p.permitNo || '--') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-xs text-[#38342D] max-w-[200px] truncate" title="' + escapeHtml(p.mainLand || '') + '">' +
+                            escapeHtml(p.mainLand || '未載明') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                            salesTag +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                            landSubtext +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                            '<button onclick="openDetailModal(' + p.id + '); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">' +
+                                '詳情 ➔' +
+                            '</button>' +
+                        '</td>';
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // 3. Render Section 4: Recent 30 Transactions (固定近期30筆)
+            const allTx = [];
+            allProjects.forEach(p => {
+                const s = p.salesStats || {};
+                const txList = s.transactions || [];
+                txList.forEach(t => {
+                    allTx.push({
+                        projectId: p.id,
+                        caseName: p.caseName,
+                        town: p.town,
+                        builder: p.builder,
+                        ...t
+                    });
+                });
+            });
+
+            // Sort all transactions by date descending and take top 30
+            allTx.sort((a, b) => String(b.dateRoc || '').localeCompare(String(a.dateRoc || '')));
+            const recentTx = allTx.slice(0, 30);
+
+            const txTableBody = document.getElementById('updateNewTxTableBody');
+            if (txTableBody) {
+                txTableBody.innerHTML = '';
+                recentTx.forEach(t => {
+                    const bInfo = buildersMap[t.builder] || {};
+                    const rep = (bInfo.representative || bInfo.rep) ? (' (' + (bInfo.representative || bInfo.rep) + ')') : '';
+                    
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-[#FAF8F5] transition text-xs sm:text-sm';
+                    row.innerHTML = 
+                        '<td class="py-3 px-3 text-center whitespace-nowrap font-mono font-bold text-[#1C1B18]">' +
+                            escapeHtml(t.dateRoc || '') +
+                        '</td>' +
+                        '<td class="py-3 px-3 whitespace-nowrap">' +
+                            '<span class="px-2 py-0.5 rounded text-xs font-bold bg-[#EAE4D8] text-[#38342D]">' + escapeHtml(t.town) + '</span>' +
+                        '</td>' +
+                        '<td class="py-3 px-3.5 whitespace-nowrap font-bold text-[#1C1B18]">' +
+                            '<a href="javascript:void(0)" onclick="openDetailModal(' + t.projectId + ')" class="hover:text-[#4A5D44] hover:underline flex items-center gap-1">' +
+                                escapeHtml(t.caseName) +
+                            '</a>' +
+                        '</td>' +
+                        '<td class="py-3 px-3 whitespace-nowrap text-xs text-[#5C564C]">' +
+                            escapeHtml(t.builder) + escapeHtml(rep) +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-[#38342D] max-w-[220px] truncate" title="' + escapeHtml(t.unit || '') + '">' +
+                            escapeHtml(t.unit || '--') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-right font-mono text-[#38342D] whitespace-nowrap">' +
+                            (t.areaPing ? t.areaPing + ' 坪' : '--') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-right font-mono font-bold text-[#7A5338] whitespace-nowrap">' +
+                            (t.pricePerPing ? t.pricePerPing + ' 萬/坪' : '--') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-right font-mono font-black text-[#1C1B18] whitespace-nowrap">' +
+                            (t.totalPrice ? t.totalPrice.toLocaleString() + ' 萬' : '--') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center text-xs text-[#6E675B] whitespace-nowrap">' +
+                            escapeHtml(t.layout || '') + (t.parking ? ' | ' + escapeHtml(t.parking) : '') +
+                        '</td>' +
+                        '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                            '<button onclick="openDetailModal(' + t.projectId + ')" class="px-2.5 py-1 text-xs font-bold rounded-md bg-[#1C1B18] text-[#FAF8F5] hover:bg-[#4A5D44] transition shadow-2xs">' +
+                                '查看' +
+                            '</button>' +
+                        '</td>';
+                    txTableBody.appendChild(row);
+                });
+            }
+        }
+
+        function renderTopPriceProjects(targetTableId) {
+            if (!targetTableId) targetTableId = 'updateTopPriceProjectsTableBody';
+            const tbody = document.getElementById(targetTableId);
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            function calculateMedian(arr) {
+                if (!arr || arr.length === 0) return 0;
+                const sorted = [...arr].sort((a, b) => a - b);
+                const mid = Math.floor(sorted.length / 2);
+                if (sorted.length % 2 !== 0) {
+                    return Math.round(sorted[mid] * 10) / 10;
+                } else {
+                    return Math.round(((sorted[mid - 1] + sorted[mid]) / 2) * 10) / 10;
+                }
+            }
+
+            // 計算各建案成交單價中位數
+            allProjects.forEach(p => {
+                const s = p.salesStats;
+                if (s && s.transactions && s.transactions.length > 0) {
+                    const prices = s.transactions.map(t => Number(t.pricePerPing)).filter(v => !isNaN(v) && v > 0);
+                    s.medianPricePerPing = calculateMedian(prices);
+                } else if (s && s.avgPricePerPing) {
+                    s.medianPricePerPing = s.avgPricePerPing;
+                } else if (s) {
+                    s.medianPricePerPing = 0;
+                }
+            });
+
+            const candidates = allProjects.filter(p => p.salesStats && p.salesStats.medianPricePerPing > 0);
+            // 以成交單價中位數排名 (若相同以平均單價次之排序)
+            candidates.sort((a, b) => {
+                if (b.salesStats.medianPricePerPing !== a.salesStats.medianPricePerPing) {
+                    return b.salesStats.medianPricePerPing - a.salesStats.medianPricePerPing;
+                }
+                return (b.salesStats.avgPricePerPing || 0) - (a.salesStats.avgPricePerPing || 0);
+            });
+
+            const top10 = candidates.slice(0, 10);
+
+            top10.forEach((p, idx) => {
+                const s = p.salesStats;
+                const l = p.landStats || {};
+                const bInfo = buildersMap[p.builder] || {};
+                const townColor = townColors[p.town] || 'bg-[#FFFFFF] text-[#38342D] border-[#DCD4C5]';
+
+                let rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">' + (idx + 1) + '</span>';
+                if (idx === 0) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>';
+                else if (idx === 1) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>';
+                else if (idx === 2) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>';
+
+                const rep = (bInfo.representative || bInfo.rep) ? '<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">' + escapeHtml(bInfo.representative || bInfo.rep) + '</span>' : '';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-[#F7F3EB] transition-colors cursor-pointer group';
+                tr.onclick = () => openDetailModal(p.id);
+
+                // 單價區間
+                const priceRangeStr = (s.minPricePerPing && s.maxPricePerPing && s.minPricePerPing !== s.maxPricePerPing)
+                    ? (s.minPricePerPing + ' ~ ' + s.maxPricePerPing + ' 萬/坪')
+                    : (s.medianPricePerPing ? (s.medianPricePerPing + ' 萬/坪') : '--');
+
+                // 總價區間與均價
+                let totalRangeStr = '--';
+                if (s.minTotalPrice && s.maxTotalPrice && s.minTotalPrice !== s.maxTotalPrice) {
+                    totalRangeStr = s.minTotalPrice.toLocaleString() + ' ~ ' + s.maxTotalPrice.toLocaleString() + ' 萬';
+                } else if (s.minTotalPrice || s.maxTotalPrice) {
+                    totalRangeStr = (s.minTotalPrice || s.maxTotalPrice).toLocaleString() + ' 萬';
+                } else if (s.avgTotalPrice) {
+                    totalRangeStr = Math.round(s.avgTotalPrice).toLocaleString() + ' 萬';
+                }
+
+                // 最新成交時間
+                const latestDate = s.latestTransactionDate || '--';
+
+                const avgPriceSubtext = s.avgPricePerPing ? '<div class="text-[10.5px] text-[#8C8477] font-mono">均價 ' + s.avgPricePerPing + ' 萬</div>' : '';
+                const avgTotalSubtext = s.avgTotalPrice ? '<div class="text-[10.5px] text-[#7A7366] font-mono">均總 ' + Math.round(s.avgTotalPrice).toLocaleString() + ' 萬</div>' : '';
+                const landSubtext = l.hasLandData ? '<span class="font-mono font-bold text-xs text-[#2C4A24]">' + l.avgLandPricePerPing + ' 萬/坪</span>' : '<span class="text-xs text-[#A8A090]">--</span>';
+                const salesRateClass = s.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]';
+                const salesRateText = s.isSoldOut ? '完銷 100%' : (s.salesRate + '%');
+
+                tr.innerHTML = 
+                    '<td class="py-3 px-3 text-center whitespace-nowrap font-mono">' + rankBadge + '</td>' +
+                    '<td class="py-3 px-3 whitespace-nowrap">' +
+                        '<span class="badge border ' + townColor + ' text-xs px-2 py-0.2 font-serif-tc font-bold">' +
+                            escapeHtml(p.town || '宜蘭縣') +
+                        '</span>' +
+                    '</td>' +
+                    '<td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">' +
+                        escapeHtml(p.caseName || '未命名') +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">' +
+                        '<span>' + escapeHtml(p.builder || '--') + '</span>' +
+                        rep +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-mono text-xs font-semibold text-[#1C1B18]">' + latestDate + '</span>' +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-serif-tc font-black text-sm sm:text-base text-[#7A5338]">' + (s.medianPricePerPing ? s.medianPricePerPing + ' 萬/坪' : '--') + '</span>' +
+                        avgPriceSubtext +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center font-mono text-xs text-[#5C564C] whitespace-nowrap">' +
+                        priceRangeStr +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-mono font-bold text-xs sm:text-sm text-[#1C1B18]">' + totalRangeStr + '</span>' +
+                        avgTotalSubtext +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<div class="font-mono text-xs font-semibold text-[#1C1B18]">' + s.soldUnits + ' / ' + (p.household || s.totalHouseholds) + ' 戶</div>' +
+                        '<div class="text-[10.5px] font-bold ' + salesRateClass + '">' + salesRateText + '</div>' +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        landSubtext +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<button onclick="openDetailModal(' + p.id + '); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">' +
+                            '詳情 ➔' +
+                        '</button>' +
+                    '</td>';
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderTopHotSellingProjects(targetTableId) {
+            if (!targetTableId) targetTableId = 'updateTopHotProjectsTableBody';
+            const tbody = document.getElementById(targetTableId);
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            function rocToDate(rocStr) {
+                if (!rocStr) return null;
+                const parts = rocStr.split('/');
+                if (parts.length < 3) return null;
+                const yr = parseInt(parts[0]) + 1911;
+                const m = parseInt(parts[1]) - 1;
+                const d = parseInt(parts[2]);
+                return new Date(yr, m, d);
+            }
+
+            // 取得系統更新基準日（以頁面頂部更新日期為準）
+            let baseUpdateDate = new Date();
+            const headerBadge = Array.from(document.querySelectorAll('header span')).find(el => el.textContent.includes('更新：'));
+            if (headerBadge) {
+                const m = headerBadge.textContent.match(/(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/);
+                if (m) {
+                    baseUpdateDate = new Date(parseInt(m[1]), parseInt(m[2]) - 1, parseInt(m[3]));
+                }
+            }
+
+            // 近 6 個月統計截止點（以更新日回推 6 個月）
+            const cutoffDate = new Date(baseUpdateDate.getFullYear(), baseUpdateDate.getMonth() - 6, baseUpdateDate.getDate());
+
+            const candidates = [];
+
+            allProjects.forEach(p => {
+                const s = p.salesStats;
+                if (!s || !s.transactions) return;
+
+                const recentTx = s.transactions.filter(t => {
+                    const d = rocToDate(t.dateRoc);
+                    return d && d >= cutoffDate;
+                });
+
+                if (recentTx.length > 0) {
+                    candidates.push({
+                        project: p,
+                        recentCount: recentTx.length,
+                        latestDate: recentTx[0].dateRoc,
+                        soldUnits: s.soldUnits,
+                        totalHouseholds: p.household || s.totalHouseholds,
+                        salesRate: s.salesRate,
+                        isSoldOut: s.isSoldOut,
+                        avgPrice: s.avgPricePerPing
+                    });
+                }
+            });
+
+            candidates.sort((a, b) => {
+                if (b.recentCount !== a.recentCount) return b.recentCount - a.recentCount;
+                return (b.latestDate || '').localeCompare(a.latestDate || '');
+            });
+
+            const top10 = candidates.slice(0, 10);
+
+            top10.forEach((item, idx) => {
+                const p = item.project;
+                const s = p.salesStats;
+                const l = p.landStats || {};
+                const bInfo = buildersMap[p.builder] || {};
+                const townColor = townColors[p.town] || 'bg-[#FFFFFF] text-[#38342D] border-[#DCD4C5]';
+
+                let rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#FAF8F5] text-[#5C564C] border border-[#D5C7B5]">' + (idx + 1) + '</span>';
+                if (idx === 0) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E5C392] text-[#4A2F1C] shadow-xs">🥇</span>';
+                else if (idx === 1) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#D8D2C4] text-[#2C2924] shadow-xs">🥈</span>';
+                else if (idx === 2) rankBadge = '<span class="w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs bg-[#E8C5A8] text-[#592D14] shadow-xs">🥉</span>';
+
+                const rep = (bInfo.representative || bInfo.rep) ? ('<span class="text-[10.5px] font-serif-tc font-bold text-[#7A5338] bg-[#F7EFE8] px-1.5 py-0.2 rounded border border-[#DECDBE] ml-1">' + escapeHtml(bInfo.representative || bInfo.rep) + '</span>') : '';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-[#F7F3EB] transition-colors cursor-pointer group';
+                tr.onclick = () => openDetailModal(p.id);
+
+                const landSubtext = l.hasLandData ? ('<span class="font-mono font-bold text-xs text-[#2C4A24]">' + l.avgLandPricePerPing + ' 萬/坪</span>') : '<span class="text-xs text-[#A8A090]">--</span>';
+                const salesRateClass = item.isSoldOut ? 'text-[#2C4A24]' : 'text-[#4A5D44]';
+                const salesRateText = item.isSoldOut ? '完銷 100%' : (s.salesRate + '%');
+
+                tr.innerHTML = 
+                    '<td class="py-3 px-3 text-center whitespace-nowrap font-mono">' + rankBadge + '</td>' +
+                    '<td class="py-3 px-3 whitespace-nowrap">' +
+                        '<span class="badge border ' + townColor + ' text-xs px-2 py-0.2 font-serif-tc font-bold">' +
+                            escapeHtml(p.town || '宜蘭縣') +
+                        '</span>' +
+                    '</td>' +
+                    '<td class="py-3 px-3.5 font-serif-tc font-black text-xs sm:text-sm text-[#1C1B18] group-hover:text-[#7A5338] whitespace-nowrap transition-colors">' +
+                        escapeHtml(p.caseName || '未命名') +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-[#38342D] font-medium whitespace-nowrap text-xs">' +
+                        '<span>' + escapeHtml(p.builder || '--') + '</span>' +
+                        rep +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap font-mono text-xs text-[#38342D]">' +
+                        escapeHtml(item.latestDate || '--') +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-mono font-black text-xs sm:text-sm text-[#2C4A24] bg-[#EEF5EC] px-2.5 py-1 rounded-full border border-[#BDD9B4]">+' + item.recentCount + ' 戶</span>' +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<div class="font-mono text-xs font-semibold text-[#1C1B18]">' + s.soldUnits + ' / ' + (p.household || s.totalHouseholds) + ' 戶</div>' +
+                        '<div class="text-[10.5px] font-bold ' + salesRateClass + '">' + salesRateText + '</div>' +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-serif-tc font-bold text-xs sm:text-sm text-[#7A5338]">' + (s.avgPricePerPing ? s.avgPricePerPing + ' 萬/坪' : '--') + '</span>' +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        landSubtext +
+                    '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<button onclick="openDetailModal(' + p.id + '); event.stopPropagation();" class="text-xs font-semibold text-[#7A5338] hover:text-[#4A2F1C] bg-[#F7EFE8] hover:bg-[#EAE0D4] px-2.5 py-1 rounded-lg transition border border-[#DECDBE]">' +
+                            '詳情 ➔' +
+                        '</button>' +
+                    '</td>';
+                tbody.appendChild(tr);
+            });
+        }
+
+
+        // ==========================================
+        // RESEARCH DASHBOARD & PRICE PREDICTION LOGIC
+        // ==========================================
+        let researchDataList = [];
+        let currentResearchStatus = 'all';
+        let currentResearchSortKey = 'avgLandPrice';
+        let currentResearchSortDir = 'desc';
+
+        function initResearchView() {
+            if (!window.RESEARCH_PROJECTS || window.RESEARCH_PROJECTS.length === 0) return;
+            researchDataList = window.RESEARCH_PROJECTS;
+
+            // 1. Populate Town Filter
+            const rTownSelect = document.getElementById('rTownFilter');
+            if (rTownSelect && rTownSelect.options.length <= 1) {
+                const townCounts = {};
+                researchDataList.forEach(d => {
+                    const t = d.town || '其他';
+                    townCounts[t] = (townCounts[t] || 0) + 1;
+                });
+                const sortedTowns = Object.entries(townCounts).sort((a, b) => b[1] - a[1]);
+                sortedTowns.forEach(([town, cnt]) => {
+                    const opt = document.createElement('option');
+                    opt.value = town;
+                    opt.innerText = town + ' (' + cnt + ')';
+                    rTownSelect.appendChild(opt);
+                });
+            }
+
+            // 2. Populate Township Matrix Table
+            const matrixBody = document.getElementById('researchTownMatrixBody');
+            if (matrixBody && window.TOWNSHIP_MATRIX) {
+                matrixBody.innerHTML = window.TOWNSHIP_MATRIX.map(t => {
+                    return '<tr class="hover:bg-[#FAF8F5] transition text-xs sm:text-sm">' +
+                        '<td class="py-3 px-3.5 font-bold text-[#1C1B18]">' + t.town + '</td>' +
+                        '<td class="py-3 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-xs font-medium bg-[#EBF5FB] text-[#2874A6] border border-[#AED6F1]">' + t.count + ' 案</span></td>' +
+                        '<td class="py-3 px-3 text-right font-medium text-[#8C6D2B] font-mono">' + t.avgLand + ' 萬/坪</td>' +
+                        '<td class="py-3 px-3 text-right font-bold text-[#1C1B18] font-mono">' + t.avgSales + ' 萬/坪</td>' +
+                        '<td class="py-3 px-3 text-center font-bold text-[#7A5338] font-mono">' + t.avgRatio + ' 倍</td>' +
+                        '<td class="py-3 px-3 text-center text-[#6E675B] font-mono">' + (t.avgMonths ? t.avgMonths + ' 個月' : '--') + '</td>' +
+                        '<td class="py-3 px-4 text-xs text-[#5C564C]">' + (t.notes || '--') + '</td>' +
+                    '</tr>';
+                }).join('');
+            }
+
+            // 3. Render Table
+            applyResearchFilters();
+        }
+
+        function filterResearchStatus(status) {
+            currentResearchStatus = status;
+            ['all', 'sold', 'reserve'].forEach(s => {
+                const btn = document.getElementById('rBtnStatus' + s.charAt(0).toUpperCase() + s.slice(1));
+                if (btn) {
+                    if (s === status) {
+                        btn.className = 'px-3 py-1.5 rounded-lg bg-[#FFFFFF] text-[#1C1B18] shadow-xs transition';
+                    } else {
+                        btn.className = 'px-3 py-1.5 rounded-lg text-[#6E675B] hover:text-[#1C1B18] transition';
+                    }
+                }
+            });
+            applyResearchFilters();
+        }
+
+        function sortResearchTable(key) {
+            if (currentResearchSortKey === key) {
+                currentResearchSortDir = currentResearchSortDir === 'desc' ? 'asc' : 'desc';
+            } else {
+                currentResearchSortKey = key;
+                currentResearchSortDir = 'desc';
+            }
+            applyResearchFilters();
+        }
+
+        function applyResearchFilters() {
+            const townFilter = document.getElementById('rTownFilter') ? document.getElementById('rTownFilter').value : '';
+            const searchInput = document.getElementById('rSearchInput') ? document.getElementById('rSearchInput').value.trim().toLowerCase() : '';
+
+            let filtered = researchDataList.filter(d => {
+                if (currentResearchStatus === 'sold' && d.status !== 'sold') return false;
+                if (currentResearchStatus === 'reserve' && d.status !== 'reserve') return false;
+                if (townFilter && d.town !== townFilter) return false;
+                if (searchInput) {
+                    const matchCase = (d.caseName || '').toLowerCase().includes(searchInput);
+                    const matchBuilder = (d.builder || '').toLowerCase().includes(searchInput);
+                    const matchLand = (d.mainLand || '').toLowerCase().includes(searchInput);
+                    const matchLoc = (d.location || '').toLowerCase().includes(searchInput);
+                    if (!matchCase && !matchBuilder && !matchLand && !matchLoc) return false;
+                }
+                return true;
+            });
+
+            // Sorting
+            filtered.sort((a, b) => {
+                let vA = a[currentResearchSortKey];
+                let vB = b[currentResearchSortKey];
+                if (vA === null || vA === undefined) vA = (currentResearchSortDir === 'desc') ? -999999 : 999999;
+                if (vB === null || vB === undefined) vB = (currentResearchSortDir === 'desc') ? -999999 : 999999;
+
+                if (typeof vA === 'string') {
+                    return currentResearchSortDir === 'desc' ? vB.localeCompare(vA) : vA.localeCompare(vB);
+                }
+                return currentResearchSortDir === 'desc' ? (vB - vA) : (vA - vB);
+            });
+
+            renderResearchTable(filtered);
+        }
+
+        function renderResearchTable(list) {
+            const tbody = document.getElementById('researchDataTableBody');
+            const countDisplay = document.getElementById('rTableCountDisplay');
+            if (countDisplay) {
+                countDisplay.innerText = '顯示 ' + list.length + ' 筆建案 (共 ' + researchDataList.length + ' 筆勾稽)';
+            }
+
+            if (!tbody) return;
+            if (list.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="14" class="py-10 text-center text-[#7A7366]">查無符合條件之基地實價關聯建案</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = list.map((d, i) => {
+                const isSold = (d.status === 'sold');
+                
+                // Diff Badge
+                let diffBadge = '';
+                if (!isSold) {
+                    diffBadge = '<span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-[#F4ECF7] text-[#6C3483] border border-[#D7BDE2]" title="尚未開賣，預估合理開價底線約 ' + d.predPrice + ' 萬/坪">預估參考 ' + d.predPrice + '萬</span>';
+                } else if (d.diff > 1.0) {
+                    diffBadge = '<span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-[#FDF2E9] text-[#A04000] border border-[#EDBB99]" title="實際均價比公式預估高出 ' + d.diff + ' 萬/坪">高於預估 +' + d.diff + '萬 (+' + d.diffPct + '%)</span>';
+                } else if (d.diff < -1.0) {
+                    diffBadge = '<span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-[#EAFaf1] text-[#196F3D] border border-[#A9DFBF]" title="實際均價比公式預估低 ' + Math.abs(d.diff) + ' 萬/坪，相對平價讓利">低於預估 ' + d.diff + '萬 (' + d.diffPct + '%)</span>';
+                } else {
+                    diffBadge = '<span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-[#EBF5FB] text-[#2874A6] border border-[#AED6F1]" title="實際售價極為貼合定價模型">貼合預估 ' + (d.diff >= 0 ? '+' : '') + d.diff + '萬</span>';
+                }
+
+                // Lead time text
+                const leadText = (isSold && d.leadMonths !== null && d.leadMonths !== undefined) ? (d.leadMonths + ' 個月') : '--';
+
+                // Sales rate badge
+                let salesBadge = '<span class="text-[#7A7366] text-[10.5px]">儲備未售</span>';
+                if (isSold) {
+                    salesBadge = d.isSoldOut 
+                        ? '<span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#BDD9B4]">100% 完銷</span>'
+                        : '<span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-[#FAF3EB] text-[#7A5338] border border-[#DECDBE]">' + d.salesRate + '% (' + d.soldUnits + '戶)</span>';
+                }
+
+                const statusLabel = isSold ? '<span class="text-[#2C4A24] font-medium text-xs">已開賣</span>' : '<span class="text-[#6C3483] font-medium text-xs">儲備案</span>';
+
+                return '<tr class="hover:bg-[#FAF8F5] transition border-b border-[#EBE5DA] text-xs sm:text-sm">' +
+                    '<td class="py-2.5 px-2.5 text-center text-[#7A7366] font-mono">' + (i + 1) + '</td>' +
+                    '<td class="py-2.5 px-3 font-bold text-[#1C1B18]">' +
+                        '<button onclick="openDetailModal(' + d.id + ')" class="text-left font-bold text-[#1C1B18] hover:text-[#7A5338] transition underline decoration-[#DCD4C5] underline-offset-2 hover:decoration-[#7A5338]">' +
+                            escapeHtml(d.caseName || '未命名') +
+                        '</button>' +
+                    '</td>' +
+                    '<td class="py-2.5 px-2.5 whitespace-nowrap text-[#4A463E]">' + escapeHtml(d.town || '') + '</td>' +
+                    '<td class="py-2.5 px-3 text-[#5C564C] truncate max-w-[130px]" title="' + escapeHtml(d.builder || '') + '">' + escapeHtml(d.builder || '未提供') + '</td>' +
+                    '<td class="py-2.5 px-2 text-center font-mono text-[#5C564C] whitespace-nowrap">' + (d.household ? d.household + '戶' : '--') + '</td>' +
+                    '<td class="py-2.5 px-2.5 text-right font-bold text-[#8C6D2B] font-mono whitespace-nowrap">' + (d.avgLandPrice ? d.avgLandPrice + ' 萬' : '--') + '</td>' +
+                    '<td class="py-2.5 px-3 text-right font-bold text-[#4A5D44] font-mono whitespace-nowrap bg-[#F7F4EE]">' + d.predPrice + ' 萬</td>' +
+                    '<td class="py-2.5 px-3 text-right font-bold text-[#1C1B18] font-mono whitespace-nowrap">' + (isSold ? (d.avgSalesPrice + ' 萬') : '<span class="text-[#9E9689] font-normal">--</span>') + '</td>' +
+                    '<td class="py-2.5 px-3 text-center whitespace-nowrap">' + diffBadge + '</td>' +
+                    '<td class="py-2.5 px-2 text-center font-mono font-medium ' + (isSold ? 'text-[#7A5338]' : 'text-[#9E9689]') + ' whitespace-nowrap">' + (isSold && d.priceRatio ? d.priceRatio + 'x' : '--') + '</td>' +
+                    '<td class="py-2.5 px-2.5 text-center text-[#6E675B] font-mono text-[11px] whitespace-nowrap">' + (d.latestLandDate || '--') + ' ➔ ' + (d.firstSaleDate || '--') + '</td>' +
+                    '<td class="py-2.5 px-2 text-center text-[#5C564C] font-mono text-xs whitespace-nowrap">' + leadText + '</td>' +
+                    '<td class="py-2.5 px-2.5 text-center whitespace-nowrap">' + salesBadge + '</td>' +
+                    '<td class="py-2.5 px-2 text-center whitespace-nowrap">' + statusLabel + '</td>' +
+                '</tr>';
+            }).join('');
+        }
+
+        function renderStatsCharts() {
+            if (typeof Chart === 'undefined') return;
+
+            Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
+            Chart.defaults.color = '#5C564C';
+            Chart.defaults.font.size = 11;
+
+            // 1. Scatter Chart with Trendline
+            if (window.RESEARCH_PROJECTS && window.RESEARCH_PROJECTS.length > 0) {
+                const soldProjects = window.RESEARCH_PROJECTS.filter(d => d.status === 'sold' && d.avgLandPrice > 0 && d.avgSalesPrice > 0);
+                const scatterPoints = soldProjects.map(d => ({ x: d.avgLandPrice, y: d.avgSalesPrice }));
+
+                const minX = 0;
+                const maxX = 42;
+                const trendLinePoints = [
+                    { x: minX, y: parseFloat((0.595 * minX + 18.42).toFixed(1)) },
+                    { x: maxX, y: parseFloat((0.595 * maxX + 18.42).toFixed(1)) }
+                ];
+
+                if (chartInstances.scatter) chartInstances.scatter.destroy();
+                const ctxScatter = document.getElementById('chartScatterRegression')?.getContext('2d');
+                if (ctxScatter) {
+                    chartInstances.scatter = new Chart(ctxScatter, {
+                        type: 'scatter',
+                        data: {
+                            datasets: [
+                                {
+                                    type: 'line',
+                                    label: '線性回歸線 (y = 0.595x + 18.42)',
+                                    data: trendLinePoints,
+                                    borderColor: '#C0392B',
+                                    borderWidth: 2.5,
+                                    borderDash: [5, 5],
+                                    fill: false,
+                                    pointRadius: 0
+                                },
+                                {
+                                    label: '建案雙向成交樣本 (295 案)',
+                                    data: scatterPoints,
+                                    backgroundColor: 'rgba(74, 93, 68, 0.65)',
+                                    borderColor: '#2C4A24',
+                                    borderWidth: 1,
+                                    pointRadius: 4,
+                                    pointHoverRadius: 6
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { position: 'top', labels: { boxWidth: 12 } }
+                            },
+                            scales: {
+                                x: {
+                                    title: { display: true, text: '基地成交單價 (萬元/坪)' },
+                                    min: 0,
+                                    max: 42,
+                                    grid: { color: '#EAE4D8' }
+                                },
+                                y: {
+                                    title: { display: true, text: '建案預售成交均價 (萬元/坪)' },
+                                    min: 10,
+                                    max: 50,
+                                    grid: { color: '#EAE4D8' }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // 2. Town Land vs Sales Bar Chart
+            if (window.TOWNSHIP_MATRIX && window.TOWNSHIP_MATRIX.length > 0) {
+                if (chartInstances.townLandSales) chartInstances.townLandSales.destroy();
+                const ctxTLS = document.getElementById('chartTownLandSales')?.getContext('2d');
+                if (ctxTLS) {
+                    chartInstances.townLandSales = new Chart(ctxTLS, {
+                        type: 'bar',
+                        data: {
+                            labels: window.TOWNSHIP_MATRIX.map(t => t.town),
+                            datasets: [
+                                {
+                                    label: '建案成交均價 (萬/坪)',
+                                    data: window.TOWNSHIP_MATRIX.map(t => t.avgSales),
+                                    backgroundColor: '#7A5338',
+                                    borderRadius: 6
+                                },
+                                {
+                                    label: '基地平均單價 (萬/坪)',
+                                    data: window.TOWNSHIP_MATRIX.map(t => t.avgLand),
+                                    backgroundColor: '#C98A2C',
+                                    borderRadius: 6
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
+                            scales: {
+                                y: { beginAtZero: true, grid: { color: '#EAE4D8' }, title: { display: true, text: '單價 (萬/坪)' } },
+                                x: { grid: { display: false } }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // 3. Yearly Price Trend Line Chart
+            if (window.YEARLY_PRICE_TREND && window.YEARLY_PRICE_TREND.length > 0) {
+                if (chartInstances.yearlyPrice) chartInstances.yearlyPrice.destroy();
+                const ctxYP = document.getElementById('chartYearlyPriceTrend')?.getContext('2d');
+                if (ctxYP) {
+                    chartInstances.yearlyPrice = new Chart(ctxYP, {
+                        type: 'line',
+                        data: {
+                            labels: window.YEARLY_PRICE_TREND.map(y => y.yearRoc + '年 (' + y.yearAd + ')'),
+                            datasets: [
+                                {
+                                    label: '建案成交均價 (萬/坪)',
+                                    data: window.YEARLY_PRICE_TREND.map(y => y.avgSales),
+                                    borderColor: '#4A5D44',
+                                    backgroundColor: 'rgba(74, 93, 68, 0.1)',
+                                    fill: true,
+                                    tension: 0.3,
+                                    pointRadius: 4.5,
+                                    pointBackgroundColor: '#2C4A24'
+                                },
+                                {
+                                    label: '基地取得單價 (萬/坪)',
+                                    data: window.YEARLY_PRICE_TREND.map(y => y.avgLand),
+                                    borderColor: '#C98A2C',
+                                    backgroundColor: 'rgba(201, 138, 44, 0.1)',
+                                    fill: true,
+                                    tension: 0.3,
+                                    pointRadius: 4.5,
+                                    pointBackgroundColor: '#8C6D2B'
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
+                            scales: {
+                                y: { min: 5, max: 35, grid: { color: '#EAE4D8' }, title: { display: true, text: '單價 (萬/坪)' } },
+                                x: { grid: { display: false } }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // 4. Lead Time Bar Chart
+            if (window.YEARLY_PRICE_TREND && window.YEARLY_PRICE_TREND.length > 0) {
+                if (chartInstances.leadTime) chartInstances.leadTime.destroy();
+                const ctxLT = document.getElementById('chartLeadTimeTrend')?.getContext('2d');
+                if (ctxLT) {
+                    chartInstances.leadTime = new Chart(ctxLT, {
+                        type: 'bar',
+                        data: {
+                            labels: window.YEARLY_PRICE_TREND.map(y => y.yearRoc + '年 (' + y.yearAd + ')'),
+                            datasets: [{
+                                label: '購地至首筆預售成交時程 (個月)',
+                                data: window.YEARLY_PRICE_TREND.map(y => y.avgMonths),
+                                backgroundColor: '#A04000',
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
+                            scales: {
+                                y: { beginAtZero: true, grid: { color: '#EAE4D8' }, title: { display: true, text: '時程 (個月)' } },
+                                x: { grid: { display: false } }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // 5. Zoning System Distribution
+            const zCounts = {};
+            allProjects.forEach(p => {
+                const c = p.zoningInfo.category || '未分類';
+                zCounts[c] = (zCounts[c] || 0) + 1;
+            });
+            const sortedZ = Object.entries(zCounts).sort((a, b) => b[1] - a[1]);
+
+            if (chartInstances.zoning) chartInstances.zoning.destroy();
+            const ctxZ = document.getElementById('chartZoningDistribution')?.getContext('2d');
+            if (ctxZ) {
+                chartInstances.zoning = new Chart(ctxZ, {
+                    type: 'bar',
+                    data: {
+                        labels: sortedZ.map(x => x[0]),
+                        datasets: [{
+                            label: '推案數量',
+                            data: sortedZ.map(x => x[1]),
+                            backgroundColor: [
+                                '#7A5338', '#4A5D44', '#8C6D2B', '#3D5266', '#8C4B30',
+                                '#6B5E4F', '#465E48', '#826B50', '#4A5B69', '#73614F'
+                            ],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { beginAtZero: true, grid: { color: '#EAE4D8' }, border: { dash: [4, 4] } },
+                            y: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 6. Active Builders
+            const builderCounts = {};
+            allProjects.forEach(p => {
+                if (p.builder) builderCounts[p.builder] = (builderCounts[p.builder] || 0) + 1;
+            });
+            const top10Builders = Object.entries(builderCounts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+            if (chartInstances.builder) chartInstances.builder.destroy();
+            const ctxBuilder = document.getElementById('chartTopBuilders')?.getContext('2d');
+            if (ctxBuilder) {
+                chartInstances.builder = new Chart(ctxBuilder, {
+                    type: 'bar',
+                    data: {
+                        labels: top10Builders.map(b => {
+                            const bInfo = buildersMap[b[0]];
+                            return bInfo?.representative ? (b[0] + ' (' + bInfo.representative + ')') : b[0];
+                        }),
+                        datasets: [{
+                            label: '推案數量',
+                            data: top10Builders.map(b => b[1]),
+                            backgroundColor: '#3D5266',
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { beginAtZero: true, grid: { color: '#EAE4D8' }, border: { dash: [4, 4] } },
+                            y: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // Also initialize research interactive table
+            initResearchView();
+        }
+
+
+                function renderWeeklyUpdateView() {
             // 1. Render Section 1: Top 10 Hot Selling Projects
             renderTopHotSellingProjects('updateTopHotProjectsTableBody');
             renderTopPriceProjects('updateTopPriceProjectsTableBody');
