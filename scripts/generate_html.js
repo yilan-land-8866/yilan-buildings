@@ -1,4 +1,4 @@
-﻿const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 
 const rootDir = path.resolve(__dirname, '..');
@@ -3006,12 +3006,12 @@ const htmlTemplate = `<!DOCTYPE html>
                     '<td class="py-3 px-3 text-center whitespace-nowrap font-mono text-xs text-[#38342D]">' +
                         escapeHtml(item.latestDate || '--') +
                     '</td>' +
-                    '<td class="py-3 px-3 text-center whitespace-nowrap bg-[#F4F9F2]">' +
-                        '<span class="font-mono font-black text-xs sm:text-sm text-[#2C4A24] bg-[#EEF5EC] px-3 py-1 rounded-full border border-[#BDD9B4] shadow-2xs">+' + item.recentCount + ' 戶</span>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<span class="font-mono font-black text-xs sm:text-sm text-[#2C4A24] bg-[#EEF5EC] px-2.5 py-1 rounded-full border border-[#BDD9B4]">+' + item.recentCount + ' 戶</span>' +
                     '</td>' +
                     '<td class="py-3 px-3 text-center whitespace-nowrap">' +
-                        '<div class="font-mono text-xs font-semibold text-[#5C564C]">' + s.soldUnits + ' / ' + (p.household || s.totalHouseholds) + ' 戶</div>' +
-                        '<div class="text-[10.5px] font-medium ' + salesRateClass + '">' + salesRateText + '</div>' +
+                        '<div class="font-mono text-xs font-semibold text-[#1C1B18]">' + s.soldUnits + ' / ' + (p.household || s.totalHouseholds) + ' 戶</div>' +
+                        '<div class="text-[10.5px] font-bold ' + salesRateClass + '">' + salesRateText + '</div>' +
                     '</td>' +
                     '<td class="py-3 px-3 text-center whitespace-nowrap">' +
                         '<span class="font-serif-tc font-bold text-xs sm:text-sm text-[#7A5338]">' + (s.avgPricePerPing ? s.avgPricePerPing + ' 萬/坪' : '--') + '</span>' +
