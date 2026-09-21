@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>
+一般民眾 - 內政部國土管理署全國建築管理資訊系統入口網
+
+</title>
+	<meta name="application-name" content="內政部國土管理署全國建築管理資訊系統入口網">
+	<link rel="shortcut icon" href="/CPTL/maliportal/images/favicon.ico">
+	
+	<link rel="stylesheet" href="/CPTL/maliportal/css/jquery-ui.theme.min.css">
+	<link rel="stylesheet" href="/CPTL/maliportal/css/magnific-popup.css">
+	<link rel="stylesheet" href="/CPTL/maliportal/css/popWindow.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/CPTL/maliportal/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/CPTL/maliportal/css/portal_index.css">
+	<link rel="stylesheet" href="/CPTL/maliportal/css/loading.css">	
+	<script type="text/javascript" src="/CPTL/maliportal/js/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="/CPTL/maliportal/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/CPTL/maliportal/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/CPTL/maliportal/js/jquery.magnific-popup.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css">
+	<script type="text/javascript" src="/CPTL/platform/public/js/platform_ajax.js"></script>
+<script type="text/javascript" src="/CPTL/platform/public/js/platform_util.js"></script>
+<script type="text/javascript" src="/CPTL/platform/public/js/platform_Grid.js"></script>
+<script type="text/javascript" src="/CPTL/platform/public/js/platform_pageControl.js"></script>
+<script type="text/javascript" src="/CPTL/platform/public/js/platform_Rowmaintain.js"></script>	
+<script type="text/javascript" src="/CPTL/platform/public/js/HotKey.js"></script>
+<script type="text/javascript" src="/CPTL/platform/public/js/popupWindow.js"></script>
+<script type="text/javascript" src="/CPTL/maliportal/js/imgLiquid-min.js"></script>
+<script type="text/javascript" src="/CPTL/platform/public/js/jquery/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/CPTL/platform/public/js/jquery/jquery.ui.datepicker-zh-TW.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>
+<script type="text/javascript" src="/CPTL/maliportal/js/portalindex_script.js"></script>
+
+</head>
+
+<input type="hidden" id="P_SYSID"   name="P_SYSID"  value="CPTL"  >
+
+
+<script nonce='null' >
+<!--
+  var ContextPath="/CPTL";
+  var rootIdNode="";
+  var CodeID = "";
+  var CodeName = "";
+  var sidjphumrsqf="dfed135b61eba1d3fe51fb47ddb16186";
+  var SYSID = document.all("P_SYSID").value;
+  var $jq= jQuery.noConflict(); //jquery 重新定義
+//-->
+</script>
+
+
+<script  nonce='null'>
+
+function jQueryCalendar(){
+	  var $dateField = jQuery('input[id^="RC_"]');
+
+	  try { $dateField.datepicker("destroy"); } catch(e){}
+
+	  $dateField.each(function(){
+	    jQuery(this).nextAll('img.ui-datepicker-trigger').remove();
+	  });
+
+	  try { $dateField.datepicker(); } catch(e){}
+
+	 
+	    if (typeof window.toggleDpTrigger !== 'function') return;
+
+	    $dateField.each(function(){
+	      var $inp = jQuery(this);
+
+	      // 用 prop / disabled 判斷比較準
+	      var isRO = $inp.prop('readOnly') || $inp.hasClass('readonly');
+	      var isDIS = $inp.is(':disabled');
+
+	      // 如果你這頁是「編輯模式」確定要可輸入，才強制解除
+	      // 否則不要硬改，交給權限/流程控制
+	      if (!isRO && !isDIS) {
+	        $inp.prop('readOnly', false);
+	      }
+
+	      // ✅ 關鍵：傳 DOM element，不要傳 jQuery object
+	      window.toggleDpTrigger(this);
+	    });
+	  
+	}
+ 
+	jQuery(function(){
+	  jQueryCalendar();
+	});
+
+
+//針對若有設定 data-clear=basic 設定離開時拿掉異常字串
+inputblur();
+</script>
+
+
+<div id="_P_POPUPDIV" style="display:none">
+</div>
+<div id="process_container" style="display:none"> 
+	<div id="process_loader"> 
+	 <div id="process_text"> </div> 
+	</div>
+</div> 
+<script nonce='null'>
+//處理中
+var p_processid;
+var process_pos=0; 
+var process_dir=2; 
+var process_len=0;
+function doProcessloader(mesg){
+	
+	//p_processid = setInterval("process_animate()",20);
+	popup("process_container");
+	var hh =document.body.clientHeight;
+	var ww = document.body.clientWidth;
+	hh = (hh/2) - 10 ;
+	ww =0;
+	document.getElementById("process_container").style.top=hh+'px';
+	document.getElementById("process_container").style.left=ww+'px';
+	if (mesg != ""){
+	   document.getElementById("process_loader").style.display="block";
+	   document.getElementById("process_text").innerHTML = "<center><storng><h3>《"+mesg+"》</h3></storng></center>";
+	}
+	else {
+		document.getElementById("process_loader").style.display="none";
+	}
+	
+}
+function process_animate() 
+{ 
+   var elem = document.getElementById('progress'); 
+   if(elem != null) { 
+	if (process_pos==0) process_len += process_dir; 
+	if (process_len>32 || process_pos>79) process_pos += process_dir; 
+	if (process_pos>79) process_len -= process_dir; 
+	if (process_pos>79 && process_len==0) process_pos=0;
+	
+	elem.style.left = 300+process_pos; 
+	elem.style.width = process_len;
+	//document.getElementById("process_text").innerHTML = "<center>left:"+process_pos+",width:"+process_len+"</center>";
+   } 
+} 
+function removeProcessloader() { 
+	//this.clearInterval(p_processid);
+	popup("process_container");
+}
+</script> 
+
+
+
+<script>
+function getBulletin03(){
+	var url = ContextPath+"/cpt0101list.do";
+	var paras = new Array();
+	paras.push(encodeNameAndValue("CLASS","03"));
+	paras.push(encodeNameAndValue("QUERYTYPE","NEW"));
+	loadAjaxForm(tabs_group01,url,paras.join("&"));
+}
+function getBulletin04(){
+	var url = ContextPath+"/cpt0101list.do";
+	var paras = new Array();
+	paras.push(encodeNameAndValue("CLASS","04"));
+	paras.push(encodeNameAndValue("QUERYTYPE","NEW"));
+	loadAjaxForm(tabs_group02,url,paras.join("&"));
+}
+function getBulletin07(){
+	var url = ContextPath+"/cpt0101list.do";
+	var paras = new Array();
+	paras.push(encodeNameAndValue("CLASS","07"));
+	paras.push(encodeNameAndValue("QUERYTYPE","NEW"));
+	loadAjaxForm(tabs_group03,url,paras.join("&"));
+}
+function getParamCpt0401m(){
+    form.action = ContextPath+"/cptl/getParamsCpt04Action.do?SYS=CPTL&SUBSYS=cpt0401m&TYPE=001&SUBTYPE=***";
+    sendRequestwithXml(form);
+    var obj = getResult();
+    /* if(getISOK(obj)=="true"){
+    	var aim=document.getElementById("tabs_business01");
+    	aim.innerHTML= getValue(obj,"CPT0401M");
+    	var aim2=document.getElementById("tabs_business02");
+    	aim2.innerHTML= getValue(obj,"CPT0501M");
+    	var aim3=document.getElementById("tabs_business03");
+    	aim3.innerHTML= getValue(obj,"CPT0601M");
+
+    } */
+}
+function getPubParsAction(){
+	form.action = ContextPath+"/cptl/getBulletinAction.do?CLASS=04&QUERYTYPE=NEW";
+    sendRequestwithXml(form);
+}
+
+function getParamCpt0501m(){
+    form.action = ContextPath+"/cptl/getParamsCpt05Action.do?SYS=CPTL&SUBSYS=cpt0501m&TYPE=001&SUBTYPE=***";
+    sendRequestwithXml(form);
+    /* var obj = getResult();
+    alert(getISOK(obj));
+    if(getISOK(obj)=="true"){
+    	var aim=document.getElementById("tabs_business01");
+    	aim.innerHTML= getValue(obj,"CPT0501M");
+    	alert(aim.innerHTML);
+    } */
+}
+
+function doCpt01Submit(inType,inValue) {
+    	var url = ContextPath+"/cpt0101f000.do";
+    	var paras = new Array();
+    	paras.push(encodeNameAndValue("CLASS","03"));
+    	paras.push(encodeNameAndValue("QUERYTYPE","DETAIL"));
+    	paras.push(encodeNameAndValue("SEQNO",inValue));
+    	loadPopWindow(url,paras.join("&"));
+}
+function doCpt02Submit(inType,inParams){
+	switch(inType){
+	case "cpt0201m":
+		var locationform = document.createElement("form");
+		locationform.target = "xwin";
+		locationform.method = "post";
+		locationform.id = "location";
+		locationform.action = ContextPath+"/"+inType+".do";
+	    document.body.appendChild(locationform);
+	    locationform.submit();
+		break;
+	case "cpt0201mPop":
+		var url = ContextPath+inParams;
+		loadPopWindow(url,null);
+		break;
+	case "cpt0202m":
+		var locationform = document.createElement("form");
+		locationform.target = "xwin";
+		locationform.method = "post";
+		locationform.id = "location";
+		locationform.action = ContextPath+"/"+inType+".do";
+	    document.body.appendChild(locationform);
+	    locationform.submit();
+		break;
+	default :
+		break;
+	}
+}
+
+function doCpt04Submit(inType,inParams){
+	switch(inType){
+	case "LocationformForDo":
+		var locationform = document.createElement("form");
+		//locationform.target = "xwin";
+		locationform.method = "post";
+		//locationform.id = "location";
+		locationform.action = ContextPath+"/"+inParams+".do";
+	    document.body.appendChild(locationform);
+	    locationform.submit(); 
+		break;
+	case "LocationformForHerfAddContext":
+		var locationform = document.createElement("form");
+		//locationform.target = "xwin";
+		locationform.method = "post";
+		//locationform.id = "location";
+		locationform.action = ContextPath+inParams;
+	    document.body.appendChild(locationform);
+	    locationform.submit();
+		break;
+	case "LocationformForHerf":
+		var locationform = document.createElement("form");
+		//locationform.setAttribute('target', '_blank');
+		if(inParams == "https://cloudbm.nlma.gov.tw/cco")
+		{
+			locationform.method = "get";
+			locationform.target = "_blank";
+		}
+		else
+		{
+			locationform.method = "post";
+		}		
+		//locationform.id = "location";
+		locationform.action = inParams;
+		//locationform.setAttribute('action', inParams);
+	    document.body.appendChild(locationform);
+	    locationform.submit();
+		break;
+	case "PopWindow":
+		var url = ContextPath+inParams;
+		loadPopWindow(url,null);
+		break;
+	case "getCSV":
+		var locationform = document.createElement("form");
+		locationform.target = "_blank";
+		locationform.method = "get";
+		locationform.action = "https://cpabm.cpami.gov.tw/opendata/getCSV.do?RPTNAME="+inParams;
+	    document.body.appendChild(locationform);
+	    locationform.submit();
+		break;
+	default :
+		break;
+	}
+}
+
+function doCptSearch()
+{
+	var locationform = document.createElement("form");
+	locationform.target = "xwin";
+	locationform.method = "post";
+	locationform.id = "location";
+	if(document.getElementById("Ipt_Search").value != "")
+	{
+		addHiddenField(locationform, "q", document.getElementById("Ipt_Search").value);
+		locationform.action = ContextPath+"/CptlSearch.do";
+	}
+	else
+	{
+		locationform.action = ContextPath+"/CptlSearch.do?";
+	}
+    document.body.appendChild(locationform);
+    locationform.submit();
+}
+
+function run_submit(){
+	alert("11111");
+}
+
+</script> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body class="index">
+	
+<!--頭部-->
+	<header id="header">
+		<a href="#content" id="gotocenter" title="跳到主要內容" class="sr-only sr-only-focusable">跳到主要內容</a>
+		<div class="container">
+			<div id="header_top" class="header-top justify-content-lg-between row logo_box pt-3">
+				<a href="#" title="menu" class="btn-bar pc-hide">
+					<i class="fa fa-bars" aria-hidden="true"></i>
+				</a>
+				<div id="search" class="btn-search pc-hide">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</div>
+				<!--logo區-->
+				<div class="logo col-xs-12 mb-3">
+					<!--快速鍵-->
+					<a href="#U" id="AU" name="U" title="上方功能區塊" accesskey="U">:::</a>
+					<h1>
+						<a href="/CPTL/index.jsp" title="一般民眾 - 內政部國土管理署全國建築管理資訊系統入口網">
+							<img src="/CPTL/maliportal/images/index/logo.png" alt="">&nbsp;全國建築管理資訊系統入口網
+						</a>
+					</h1>
+				</div>
+				<!--右邊選單-->
+				<div class="rheader mask-close clearafter rightnav col-xs-12 mb-3">
+					<div class="item_box w-100 text-right">
+						<ul>
+							<li><a href="index.jsp" title="回首頁">回首頁</a></li>
+							<li><a href="mailto:cipei@nlma.gov.tw" title="系統服務信箱">系統服務信箱</a></li>
+<!-- 							<li> -->
+<!-- 								<a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForDo','cpt0601m')" title="事件服務請求">事件服務請求</a> -->
+<!-- 							</li> -->
+							<li><a href="CptlGuide.jsp" title="提供瞭解網站整體架構及鍵盤快捷鍵">網站導覽</a></li>
+<!-- 							<li><a href="" title="雙語詞彙">雙語詞彙</a></li> -->
+						</ul>
+					</div>
+					<div class="serch_box">
+						<div class="serch-box col-xs-12 col-lg-12" style="float: right;">
+						</div>
+					</div>
+					<div class="font_box d-flex flex-wrap align-items-center">
+						<ul>
+							<li>
+								<a href="#" title="小字級" data-size="small-font_" class="fontSize">小</a>
+							</li>
+							<li>
+								<a href="#" title="中字級" data-size="middle-font_" class="fontSize active">中</a>
+							</li>
+							<li>
+								<a href="#" title="大字級" data-size="big-font_" class="fontSize">大</a>
+							</li>
+						</ul>
+						<a class="top_share" href="" title="網站分享">
+						<img src="/CPTL/maliportal/images/index/share.svg" alt="網站分享LOGO"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--主選單-->
+		<div class="nav_box_show"></div>
+		<nav id="menu" class="mask-close nav_box">
+			<div class="container">
+				<ul>
+					<li><a href="javascript:void(0);" title="建管業務">
+					建管業務
+					<i class="fa fa-angle-down ml-auto" aria-hidden="true"></i></a>
+						<div class="sub">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<ul class="sub-area">
+											<li>
+												<div class="sub-area-item">
+													<div class="menutitle">建築業務</div>
+													<ul class="menu-item">        
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0401m.do')" title="建築師登記"><span class="icon">．</span>建築師登記</a>
+													    </li>
+													    <li class="menu-item-href">
+														    <a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0412m.do')" title="建築師開業登記資料查詢"><span class="icon">．</span>建築師開業登記資料查詢</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="https://cloudbm.nlma.gov.tw/BLS/applylogin.do" title="建築執照申辦"><span class="icon">．</span>建築執照申辦</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0403m.do')" title="綠建築評估系統"><span class="icon">．</span>綠建築評估系統</a>
+														</li>
+														<!-- <li class="menu-item-href">
+															<a href="http://npbmad.cpami.gov.tw/" class="" title="臺灣國家公園建築執照暨建築物公共安全檢查申報管理系統" target="blank"><span class="icon">．</span>臺灣國家公園建築執照暨建築物公共安全檢查申報管理系統</a> -->
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0404m.do')" title="公安耐震評估檢查"><span class="icon">．</span>公安耐震評估檢查</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0202m.do')" title="建築物公共安全標準檢查資訊"><span class="icon">．</span>建築物公共安全標準檢查資訊</a>
+														</li>
+														<!-- <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cpabm.cpami.gov.tw/apm')" title="公寓大廈報備系統"><span class="icon">．</span>公寓大廈報備系統</a>
+														</li> -->
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','/CPTL/cptapalogin.do')" title="公寓大廈報備系統(新版)"><span class="icon">．</span>公寓大廈報備系統(新版)</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/ELS/ELSQuery.do')" title="建築物昇降設備及機械停車設備"><span class="icon">．</span>建築物昇降設備及機械停車設備</a>
+<!-- 															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cpabm.cpami.gov.tw/wwwpakMgr')" title="建築物昇降設備及機械停車設備"><span class="icon">．</span>建築物昇降設備及機械停車設備</a> -->
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/BLSD/blsd/blsd200q.do')" title="違章建築立即處理資訊系統"><span class="icon">．</span>違章建築立即處理資訊系統</a>
+														</li>
+													</ul>
+												</div>
+												<div class="sub-area-item">
+													<div class="menutitle">建築資訊查詢</div>
+													<ul class="menu-item">        
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0416m.do')" title="建築工程履歷查詢系統"><span class="icon">．</span>建築工程履歷查詢系統</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('PopWindow','/cpt0406m.do')" title="建築商情資料下載"><span class="icon">．</span>建築商情資料下載</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('PopWindow','/cpt0407m.do')" title="全國建築執照存根查詢"><span class="icon">．</span>全國建築執照存根查詢</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('PopWindow','/cpt0414m.do')" title="縣市便民服務網"><span class="icon">．</span>縣市便民服務網</a>
+														</li>
+														<li class="menu-item-href">
+<!-- 															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/opendata/oasapi/')" title="建管OpenData資料介接API說明"><span class="icon">．</span>建管OpenData資料介接API說明</a> -->
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0415m.do')" title="建管OpenData資料介接API說明"><span class="icon">．</span>建管OpenData資料介接API說明</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('PopWindow','/cpt0408m.do')" title="申請書表資訊"><span class="icon">．</span>申請書表資訊</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('PopWindow','/cpt0409m.do')" title="建築相關法規"><span class="icon">．</span>建築相關法規</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('PopWindow','/cpt0410m.do')" title="縣市建管法令咨詢"><span class="icon">．</span>縣市建管法令咨詢</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/cco')" title="專業工程技師簽證許可"><span class="icon">．</span>專業工程技師簽證許可</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0402m.do')" title="建築新技術、新工法、 新設備及新材料認可資訊"><span class="icon">．</span>建築新技術、新工法、 新設備及新材料認可資訊</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/84ca877a-f946-4684-a19d-732a351dc448')" title="內政部行動支付政策"><span class="icon">．</span>內政部行動支付政策</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0413m.do')" title="建築物安全檢查資訊查詢"><span class="icon">．</span>建築物安全檢查資訊查詢</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<a href="javascript:void(0);" title="營造業務">營造業務
+						<i class="fa fa-angle-down ml-auto" aria-hidden="true"></i></a>
+						<div class="sub">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<ul class="sub-area">
+											<li>
+												<div class="sub-area-item">
+													<div class="menutitle">營造業務</div>
+													<ul class="menu-item">        
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/getParamsCpt05Action.do')" title="營管資訊查詢"><span class="icon">．</span>營管資訊查詢</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0502m.do')" title="營造業工地主任執業證資訊查詢"><span class="icon">．</span>營造業工地主任執業證資訊查詢</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0503m.do')" title="營造業評鑑及複評結果查詢"><span class="icon">．</span>營造業評鑑及複評結果查詢</a>
+														</li>
+													</ul>
+												</div>
+												<div class="sub-area-item">
+													<div class="menutitle">&nbsp;</div>
+													<ul class="menu-item">
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0504m.do')" title="營造業法規"><span class="icon">．</span>營造業法規</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0505m.do')" title="營造業書表資料"><span class="icon">．</span>營造業書表資料</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForDo','cpt0504f100')" title="營造業法解釋函令查詢"><span class="icon">．</span>營造業法解釋函令查詢</a>
+														</li>
+													</ul>
+												</div>
+												<div class="sub-area-item">
+													<div class="menutitle">課程講習</div>
+													<ul class="menu-item">        
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/SDT/retlist.do')" title="工地主任職訓課程查詢(回訓)"><span class="icon">．</span>工地主任職訓課程查詢(回訓)</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/SDT/vetlist.do')" title="工地主任職訓課程查詢"><span class="icon">．</span>工地主任職訓課程查詢</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/SDT/tetlist.do')" title="專任工程人員技術講習課程查詢"><span class="icon">．</span>專任工程人員技術講習課程查詢</a>
+														</li>
+														<!-- 
+														<li class="menu-item-href">
+                                                            <a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cpabmtest.mali.com.tw/SDM/sdm/sdm700m_tpg.do')" title="工地主任執業證及回訓證明驗證"><span class="icon">．</span>工地主任執業證及回訓證明驗證</a>
+                                                        </li>
+														 -->
+													</ul>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<a href="javascript:void(0);" title="證照與講習">證照與講習
+						<i class="fa fa-angle-down ml-auto" aria-hidden="true"></i></a>
+						<div class="sub">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<ul class="sub-area">
+											<li>
+												<div class="sub-area-item">
+													<div class="menutitle">資料查詢</div>
+													<ul class="menu-item">        
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0602m.do')" title="公司/機構資料查詢"><span class="icon">．</span>公司/機構資料查詢</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0603m.do')" title="人員資料查詢"><span class="icon">．</span>人員資料查詢</a>
+														</li>
+													</ul>
+												</div>
+												<div class="sub-area-item">
+													<div class="menutitle">培回訓講習</div>
+													<ul class="menu-item">        
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/cco/')" title="公寓大廈管理服務人員回訓"><span class="icon">．</span>公寓大廈管理服務人員回訓</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/cco/')" title="建築物室內裝修專業技術人員換證回訓講習"><span class="icon">．</span>建築物室內裝修專業技術人員換證回訓講習</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/bccs/')" title="建築物昇降設備/機械停車設備檢查員、專業技術人員培回訓系統"><span class="icon">．</span>建築物昇降設備/機械停車設備檢查員、專業技術人員培回訓系統</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/bccs/')" title="建築物公共安全檢查業檢查人認可資格講習"><span class="icon">．</span>建築物公共安全檢查業檢查人認可資格講習</a>
+														</li>
+														<li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerfAddContext','/cpt0604m01.do')" title="建築行為人-委訓單位開班資訊"><span class="icon">．</span>建築行為人-委訓單位開班資訊</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<a href="javascript:void(0);" title="防救災系統">防救災系統
+						<i class="fa fa-angle-down ml-auto" aria-hidden="true"></i></a>
+						<div class="sub">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<ul class="sub-area">
+											<li>
+												<div class="sub-area-item">
+													<div class="menutitle">防救災系統</div>
+													<ul class="menu-item">        
+														<li class="menu-item-href">
+														    <a href="https://cloudbm.nlma.gov.tw/bccs" title="災害後危險建築物緊急評估資訊系統">
+															<span class="icon">．</span>災害後危險建築物緊急評估資訊系統</a>
+														</li>
+													    <li class="menu-item-href">
+															<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/KINX/vetlist.do')" title="建築物耐震能力評估資訊系統">
+															<span class="icon">．</span>建築物耐震能力評估資訊系統</a>
+														</li>
+														<li class="menu-item-href">
+														    <a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/WORX/vetlist.do')" title="工程重機械資訊系統">
+														    <span class="icon">．</span>工程重機械資訊</a>
+														</li>
+													    <li class="menu-item-href">
+													    	<a href="javascript:void(0);" onclick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/ADVS/vetlist.do')" title="招牌廣告巡查系統">
+															<span class="icon">．</span>招牌廣告巡查系統</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<a href="https://cloudbm.nlma.gov.tw/BLS/applylogin.do" title="新線上申請入口專區（另開新視窗）" rel="noopener noreferrer" target="_blank">新線上申請入口專區</a>
+					</li>
+                    <li>
+						<a href="https://cloudbm.nlma.gov.tw/bccs" title="公務專區（另開新視窗）" rel="noopener noreferrer" target="_blank">公務專區</a>
+					</li>
+					
+				</ul>
+				</div>
+				
+		</nav>
+	</header>
+	<!--//頭部-->
+	<!--頭部搜尋-->
+	<div id="search-wrap" class="animated fadeIn serch_box">
+    	<form method="post">
+			<input name="keywordhid" type="hidden" value=""/>
+			<label for="keyword" class="sr-only">關鍵字搜尋：文章關鍵字搜尋</label>
+			<input type="text" id="keyword" name="keyword" placeholder="熱搜：人事 自然人憑證" value="" title="關鍵字搜尋：文章關鍵字搜尋"/>
+			<label for="sKwss_m" class="sr-only">送出關鍵字查詢</label>
+			<button id="sKwss_m" name="sKwss_m" value="送出查詢" title="送出關鍵字查詢"><img src="maliportal/images/index/loupe.svg" alt="關鍵字搜尋圖示"></button>
+			<a href="index.jsp" target="_blank" rel="noopener noreferrer" title="進階搜尋（另開新視窗）"><img class="svg" src="maliportal/images/index/equalizer.svg" alt="進階搜尋圖示"></a>
+		</form>
+    </div>
+	<!--//頭部搜尋-->
+	
+	
+
+	<!--內容-->
+	
+	<div id="content">
+		<a href="#C" title="中央內容區塊" id="AC" accesskey="C" name="C">:::</a>
+		<div class="business mb-lg-5 mb-4">
+			<h2 class="d-flex justify-content-center align-items-center mb-5">
+				一般民眾
+			</h2>
+			<div class="container">
+				<!-- <div class="tabs_box d-none d-lg-block"> -->
+					<div class="tabs_info">
+						<div id="tabs_usertype01" class="tabs_info_item">
+							<!-- <ul class="row"> -->
+							  <ul class="row"><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('PopWindow','/cpt0408m.do')"title="申請書表資訊">申請書表資訊</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('PopWindow','/cpt0409m.do')"title="建築相關法規">建築相關法規</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('PopWindow','/cpt0407m.do')"title="全國建築執照存根查詢">全國建築執照存根查詢</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/opendata/oasapi/')"title="OpenData資料開放平台">OpenData資料開放平台</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerfAddContext','/getParamsCpt05Action.do')"title="營造業資料查詢">營造業資料查詢</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerfAddContext','/cpt0502m.do')"title="工地主任資料查詢">工地主任資料查詢</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerfAddContext','/cpt0504m.do')"title="營造業法規">營造業法規</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerfAddContext','/cpt0505m.do')"title="營造業書表資料">營造業書表資料</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerfAddContext','/cpt0602m.do')"title="公司/機構證照資料查詢">公司/機構證照資料查詢</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerfAddContext','/cpt0603m.do')"title="人員證照資料查詢">人員證照資料查詢</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerf','http://cpabm.cpami.gov.tw/cers/pages/information/renu.html')"title="建築履歷">建築履歷</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerf','https://www.nlma.gov.tw/%E6%94%BF%E5%BA%9C%E8%B3%87%E8%A8%8A%E5%85%AC%E9%96%8B/%E4%B8%BB%E5%8B%95%E5%85%AC%E9%96%8B%E8%B3%87%E8%A8%8A/%E5%87%BD%E9%87%8B%E5%8F%8A%E8%A3%81%E9%87%8F%E5%9F%BA%E6%BA%96/%E8%A7%A3%E9%87%8B%E5%87%BD%E5%BD%99%E7%B7%A8.html')"title="解釋函彙編">解釋函彙編</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerfAddContext','/cpt0412m.do')"title="建築師開業登記資料查詢">建築師開業登記資料查詢</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/ELS/ELSQuery.do')"title="(新)昇降設備/機械停車設備資料查詢">(新)昇降設備/機械停車設備資料查詢</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/DECAD/DECQuery.do')"title="公安案件申報查詢">公安案件申報查詢</a><li class="col-lg-4 col-md-4 col-sm-6 col-6 mb-4"><a href="javascript:void(0);" onClick="doCpt04Submit('LocationformForHerf','https://cloudbm.nlma.gov.tw/BLSD/blsd/blsd200q.do')"title="違章建築立即處理資訊系統">違章建築立即處理資訊系統</a></ul>
+							<!-- </ul>  -->
+						</div>
+					<!-- </div> -->
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+	<form id="form"></form>
+	<!--//內容-->
+	<!--底部-->
+	
+	<script type="text/javascript" src="/CPTL/maliportal/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="/CPTL/maliportal/css/cpt0308_fontstyle.css">
+	<script>
+		$jq(document).ready(function() {
+			var main = new Main();
+		});
+		//開啟已上傳附件
+		function openServerfile(str)
+		{
+			var url = "/CPTL/bulletin/downloadfile.do?"+str;
+			window.location.href=url;
+		}
+		//開啟已上傳附件
+		function viewServerfile(str)
+		{
+			var url = "/CPTL/bulletin/viewfile.do?"+str;
+			window.location.href=url;
+		}
+	</script>
+	</body>
+	
+</html>
