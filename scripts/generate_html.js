@@ -1179,7 +1179,7 @@ const htmlTemplate = `<!DOCTYPE html>
                             <span>十大熱銷建案排行榜</span>
                         </h3>
                         <p class="text-xs text-[#6E675B] mt-0.5 font-medium">
-                            統計以最新成交日回推近半年（近 180 天）實價登錄去化量最多之十大代表建案，實時呈現宜蘭房市最熱銷主力
+                            統計以系統更新日回推近 6 個月內實價登錄去化量最多之十大代表建案，實時呈現宜蘭房市最熱銷主力
                         </p>
                     </div>
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0]">
@@ -1197,8 +1197,8 @@ const htmlTemplate = `<!DOCTYPE html>
                                 <th class="py-3 px-3.5 whitespace-nowrap">建案名稱</th>
                                 <th class="py-3 px-3 whitespace-nowrap">起造建商</th>
                                 <th class="py-3 px-3 text-center whitespace-nowrap">最新成交日</th>
-                                <th class="py-3 px-3 text-center font-bold text-[#2C4A24] bg-[#EEF5EC] border-x border-[#D5E6D2] whitespace-nowrap">🔥 近半年新增實登 (本榜依據)</th>
-                                <th class="py-3 px-3 text-center whitespace-nowrap text-[#5C564C]">全案歷史累計銷況</th>
+                                <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">近6個月新增實登</th>
+                                <th class="py-3 px-3 text-center whitespace-nowrap">累計銷售進度</th>
                                 <th class="py-3 px-3 text-center font-bold text-[#7A5338] whitespace-nowrap">實登成交均價</th>
                                 <th class="py-3 px-3 text-center font-bold text-[#2C4A24] whitespace-nowrap">🌱 基地購地地價</th>
                                 <th class="py-3 px-3 text-center whitespace-nowrap">詳情</th>
