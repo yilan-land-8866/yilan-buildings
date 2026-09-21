@@ -1,0 +1,4614 @@
+[
+  {
+    "pId": 72,
+    "pName": "祥豪富貴（冬山鄉山明段透天住宅）",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "111/06/06",
+      "unit": "宜蘭縣冬山鄉香南路197巷",
+      "floor": "全",
+      "areaPing": 56.3,
+      "pricePerPing": 20.1,
+      "totalPrice": 1134,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 72,
+    "pName": "祥豪富貴（冬山鄉山明段透天住宅）",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "111/04/16",
+      "unit": "宜蘭縣冬山鄉香南路197巷",
+      "floor": "全",
+      "areaPing": 57.26,
+      "pricePerPing": 19.8,
+      "totalPrice": 1134,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 72,
+    "pName": "祥豪富貴（冬山鄉山明段透天住宅）",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "111/03/31",
+      "unit": "宜蘭縣冬山鄉香南路197巷",
+      "floor": "全",
+      "areaPing": 93.74,
+      "pricePerPing": 16.5,
+      "totalPrice": 1550,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 72,
+    "pName": "祥豪富貴（冬山鄉山明段透天住宅）",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "111/03/28",
+      "unit": "宜蘭縣冬山鄉香南路197巷",
+      "floor": "全",
+      "areaPing": 50.52,
+      "pricePerPing": 18.6,
+      "totalPrice": 940,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 113,
+    "pName": "公園自在No2",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "111/08/05",
+      "unit": "宜蘭縣宜蘭市宜科一路279巷",
+      "floor": "全",
+      "areaPing": 57.94,
+      "pricePerPing": 29.9,
+      "totalPrice": 1730,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 180,
+    "pName": "鳳凰101",
+    "town": "宜蘭市",
+    "tx": {
+      "dateRoc": "115/07/24",
+      "rawDate": "1150724",
+      "unit": "E號",
+      "floor": "三層",
+      "areaPing": 10.6,
+      "pricePerPing": 37.5,
+      "totalPrice": 1761,
+      "totalPriceWan": 1761,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面",
+      "address": "宜蘭縣宜蘭市神農路二段",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 180,
+    "pName": "鳳凰101",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/09",
+      "unit": "宜蘭縣宜蘭市神農路二段 (D號)",
+      "floor": "十四層",
+      "areaPing": 68.93,
+      "pricePerPing": 50.8,
+      "totalPrice": 2907,
+      "layout": "4房2廳3衛",
+      "parking": "坡道平面 (320.0萬)"
+    }
+  },
+  {
+    "pId": 180,
+    "pName": "鳳凰101",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/12",
+      "unit": "宜蘭縣宜蘭市神農路二段 (L號)",
+      "floor": "四層",
+      "areaPing": 48.19,
+      "pricePerPing": 39.5,
+      "totalPrice": 1710,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面 (160.0萬)"
+    }
+  },
+  {
+    "pId": 197,
+    "pName": "精品名邸",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/10/04",
+      "unit": "宜蘭縣員山鄉七圳路",
+      "floor": "三層",
+      "areaPing": 36.03,
+      "pricePerPing": 17.8,
+      "totalPrice": 640,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 231,
+    "pName": "寅成NO.2",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/10/21",
+      "unit": "宜蘭縣宜蘭市中山路五段577巷",
+      "floor": "全",
+      "areaPing": 61.14,
+      "pricePerPing": 24.1,
+      "totalPrice": 1475,
+      "layout": "5房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 231,
+    "pName": "寅成NO.2",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/10/14",
+      "unit": "宜蘭縣宜蘭市中山路五段577巷",
+      "floor": "全",
+      "areaPing": 54.04,
+      "pricePerPing": 25.5,
+      "totalPrice": 1380,
+      "layout": "5房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 231,
+    "pName": "寅成NO.2",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/10/08",
+      "unit": "宜蘭縣宜蘭市中山路五段577巷",
+      "floor": "全",
+      "areaPing": 55.23,
+      "pricePerPing": 24.8,
+      "totalPrice": 1368,
+      "layout": "5房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 250,
+    "pName": "美澍家NO.5",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/03/16",
+      "unit": "宜蘭縣冬山鄉鹿埔路755巷 (B棟6號)",
+      "floor": "全",
+      "areaPing": 59.07,
+      "pricePerPing": 21.6,
+      "totalPrice": 1278,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 250,
+    "pName": "美澍家NO.5",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/11/09",
+      "unit": "宜蘭縣冬山鄉鹿埔路755巷",
+      "floor": "全",
+      "areaPing": 62.52,
+      "pricePerPing": 21.7,
+      "totalPrice": 1358,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 250,
+    "pName": "美澍家NO.5",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/11/01",
+      "unit": "宜蘭縣冬山鄉鹿埔路755巷",
+      "floor": "全",
+      "areaPing": 49.09,
+      "pricePerPing": 21.6,
+      "totalPrice": 1058,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 254,
+    "pName": "元舞",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/11/01",
+      "unit": "宜蘭縣壯圍鄉壯濱路二段49巷 (B5棟0號)",
+      "floor": "全",
+      "areaPing": 47.03,
+      "pricePerPing": 22.6,
+      "totalPrice": 1065,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 254,
+    "pName": "元舞",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/11/01",
+      "unit": "宜蘭縣壯圍鄉壯濱路二段49巷 (B6棟0號)",
+      "floor": "全",
+      "areaPing": 47.14,
+      "pricePerPing": 24.7,
+      "totalPrice": 1165,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 254,
+    "pName": "元舞",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/11/01",
+      "unit": "宜蘭縣壯圍鄉壯濱路二段49巷 (A棟0號)",
+      "floor": "全",
+      "areaPing": 102.54,
+      "pricePerPing": 24.6,
+      "totalPrice": 2525,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 254,
+    "pName": "元舞",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/11/01",
+      "unit": "宜蘭縣壯圍鄉壯濱路二段49巷 (B3棟0號)",
+      "floor": "全",
+      "areaPing": 47.03,
+      "pricePerPing": 22.6,
+      "totalPrice": 1065,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 254,
+    "pName": "元舞",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/10/26",
+      "unit": "宜蘭縣壯圍鄉壯濱路二段49巷 (B1棟0號)",
+      "floor": "全",
+      "areaPing": 47.03,
+      "pricePerPing": 22.6,
+      "totalPrice": 1065,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 254,
+    "pName": "元舞",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "112/10/26",
+      "unit": "宜蘭縣壯圍鄉壯濱路二段49巷 (B2棟0號)",
+      "floor": "全",
+      "areaPing": 47.03,
+      "pricePerPing": 22.6,
+      "totalPrice": 1065,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 268,
+    "pName": "綠堤見晴2",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "110/12/26",
+      "unit": "宜蘭縣礁溪鄉十六結路",
+      "floor": "二層",
+      "areaPing": 39.9,
+      "pricePerPing": 19.3,
+      "totalPrice": 770,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 272,
+    "pName": "京采頭城2",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/11",
+      "unit": "宜蘭縣頭城鎮公園路 (1棟5B號)",
+      "floor": "五層",
+      "areaPing": 30.63,
+      "pricePerPing": 31.9,
+      "totalPrice": 976,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 272,
+    "pName": "京采頭城2",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/11",
+      "unit": "宜蘭縣頭城鎮公園路 (1棟4D號)",
+      "floor": "四層",
+      "areaPing": 36.08,
+      "pricePerPing": 31.6,
+      "totalPrice": 1140,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 284,
+    "pName": "The Taurus 金牛座",
+    "town": "蘇澳鎮",
+    "tx": {
+      "dateRoc": "115/07/29",
+      "rawDate": "1150729",
+      "unit": "A5棟6樓號",
+      "floor": "六層",
+      "areaPing": 5.2,
+      "pricePerPing": 22.4,
+      "totalPrice": 537,
+      "totalPriceWan": 537,
+      "layout": "1房1廳1衛",
+      "parking": "坡道平面",
+      "address": "宜蘭縣蘇澳鎮蘇濱路二段",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 284,
+    "pName": "The Taurus 金牛座",
+    "town": "蘇澳鎮",
+    "tx": {
+      "dateRoc": "115/07/29",
+      "rawDate": "1150729",
+      "unit": "A6棟6F號",
+      "floor": "六層",
+      "areaPing": 5.2,
+      "pricePerPing": 22.4,
+      "totalPrice": 537,
+      "totalPriceWan": 537,
+      "layout": "1房1廳1衛",
+      "parking": "坡道平面",
+      "address": "宜蘭縣蘇澳鎮蘇濱路二段",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 284,
+    "pName": "The Taurus 金牛座",
+    "town": "蘇澳鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/14",
+      "unit": "宜蘭縣蘇澳鎮蘇濱路二段 (B1棟13樓號)",
+      "floor": "十三層",
+      "areaPing": 35.45,
+      "pricePerPing": 22.3,
+      "totalPrice": 712,
+      "layout": "2房1廳1衛",
+      "parking": "坡道平面 (110.0萬)"
+    }
+  },
+  {
+    "pId": 301,
+    "pName": "藝埕想享",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/18",
+      "unit": "宜蘭縣冬山鄉義成路二段 (F棟1F號)",
+      "floor": "一層",
+      "areaPing": 30.28,
+      "pricePerPing": 27.9,
+      "totalPrice": 818,
+      "layout": "2房1廳2衛",
+      "parking": "一樓平面 (90.0萬)"
+    }
+  },
+  {
+    "pId": 301,
+    "pName": "藝埕想享",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/18",
+      "unit": "宜蘭縣冬山鄉義成路二段 (C棟2F號)",
+      "floor": "二層",
+      "areaPing": 36.08,
+      "pricePerPing": 28.1,
+      "totalPrice": 988,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (90.0萬)"
+    }
+  },
+  {
+    "pId": 325,
+    "pName": "好適悅III 金邑宸",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/31",
+      "unit": "宜蘭縣員山鄉深洲一路 (A棟2F-1號)",
+      "floor": "二層",
+      "areaPing": 42.09,
+      "pricePerPing": 21.3,
+      "totalPrice": 898,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 339,
+    "pName": "旭川2",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/31",
+      "unit": "宜蘭縣冬山鄉清溝路 (B2棟2F號)",
+      "floor": "二層",
+      "areaPing": 41.49,
+      "pricePerPing": 27.1,
+      "totalPrice": 998,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面 (105.0萬)"
+    }
+  },
+  {
+    "pId": 351,
+    "pName": "香榭麗舍NO.9",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/18",
+      "unit": "宜蘭縣員山鄉長堤路32巷 (A棟5號)",
+      "floor": "三層",
+      "areaPing": 31.56,
+      "pricePerPing": 22.8,
+      "totalPrice": 720,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 352,
+    "pName": "綠之悅",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/14",
+      "unit": "宜蘭縣三星鄉大埔三路 (A棟2號)",
+      "floor": "二層/4層",
+      "areaPing": 33.3,
+      "pricePerPing": 29.8,
+      "totalPrice": 910,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (117.0萬)",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 353,
+    "pName": "天擎陽明",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/27",
+      "unit": "宜蘭縣宜蘭市陽明路62巷 (A棟11號)",
+      "floor": "全",
+      "areaPing": 48.51,
+      "pricePerPing": 36.1,
+      "totalPrice": 1750,
+      "layout": "3房2廳3衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 353,
+    "pName": "天擎陽明",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/12",
+      "unit": "宜蘭縣宜蘭市陽明路62巷 (A棟2號)",
+      "floor": "全",
+      "areaPing": 48.51,
+      "pricePerPing": 36.1,
+      "totalPrice": 1750,
+      "layout": "3房2廳3衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 361,
+    "pName": "多元邑居",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/24",
+      "unit": "宜蘭縣冬山鄉廣安路 (4F-D號)",
+      "floor": "四層",
+      "areaPing": 35.23,
+      "pricePerPing": 26.3,
+      "totalPrice": 950,
+      "layout": "3房1廳2衛",
+      "parking": "一樓平面 (62.0萬)"
+    }
+  },
+  {
+    "pId": 362,
+    "pName": "喜堂",
+    "town": "宜蘭市",
+    "tx": {
+      "dateRoc": "115/07/28",
+      "rawDate": "1150728",
+      "unit": "E棟0號",
+      "floor": "全",
+      "areaPing": 38,
+      "pricePerPing": 33.4,
+      "totalPrice": 3080,
+      "totalPriceWan": 3080,
+      "layout": "5房2廳5衛",
+      "parking": "",
+      "address": "宜蘭縣宜蘭市宜中路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 362,
+    "pName": "喜堂",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/22",
+      "unit": "宜蘭縣宜蘭市宜中路 (D棟0號)",
+      "floor": "全",
+      "areaPing": 70.92,
+      "pricePerPing": 39.2,
+      "totalPrice": 2780,
+      "layout": "3房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/11/01",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (A3棟0號)",
+      "floor": "全",
+      "areaPing": 39.67,
+      "pricePerPing": 22.5,
+      "totalPrice": 893,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/09/30",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (B5棟0號)",
+      "floor": "全",
+      "areaPing": 40.72,
+      "pricePerPing": 25.5,
+      "totalPrice": 1039,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/09/22",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (B4棟0號)",
+      "floor": "全",
+      "areaPing": 40.72,
+      "pricePerPing": 25.5,
+      "totalPrice": 1037,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/09/18",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (B2棟0號)",
+      "floor": "全",
+      "areaPing": 40.72,
+      "pricePerPing": 25,
+      "totalPrice": 1020,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/09/09",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (A5棟0號)",
+      "floor": "全",
+      "areaPing": 40.64,
+      "pricePerPing": 26.2,
+      "totalPrice": 1064,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/09/08",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (A2棟0號)",
+      "floor": "全",
+      "areaPing": 39.67,
+      "pricePerPing": 22.6,
+      "totalPrice": 898,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/09/08",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (B1棟0號)",
+      "floor": "全",
+      "areaPing": 42.04,
+      "pricePerPing": 24.8,
+      "totalPrice": 1043,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/09/07",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (B3棟0號)",
+      "floor": "全",
+      "areaPing": 40.72,
+      "pricePerPing": 25.1,
+      "totalPrice": 1022,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/09/07",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (A4棟0號)",
+      "floor": "全",
+      "areaPing": 39.67,
+      "pricePerPing": 22.6,
+      "totalPrice": 898,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/08/28",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (B6棟0號)",
+      "floor": "全",
+      "areaPing": 48.57,
+      "pricePerPing": 24.3,
+      "totalPrice": 1180,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 366,
+    "pName": "唐承沐亘",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "113/08/11",
+      "unit": "宜蘭縣頭城鎮頭濱路二段 (A1棟0號)",
+      "floor": "全",
+      "areaPing": 40.29,
+      "pricePerPing": 23.1,
+      "totalPrice": 932,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 371,
+    "pName": "羅東春天之綻",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/15",
+      "unit": "宜蘭縣羅東鎮中山路一段 (1棟B3-4F號)",
+      "floor": "四層",
+      "areaPing": 33.01,
+      "pricePerPing": 30.2,
+      "totalPrice": 1003,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (110.0萬)"
+    }
+  },
+  {
+    "pId": 378,
+    "pName": "文心蘭",
+    "town": "羅東鎮",
+    "tx": {
+      "dateRoc": "115/07/24",
+      "rawDate": "1150724",
+      "unit": "1棟B2-4號",
+      "floor": "四層",
+      "areaPing": 15.3,
+      "pricePerPing": 32.9,
+      "totalPrice": 1229,
+      "totalPriceWan": 1229,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面",
+      "address": "宜蘭縣羅東鎮西安街33巷",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 381,
+    "pName": "呈家易居NO.3",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/05",
+      "unit": "宜蘭縣五結鄉孝威路359巷 (D棟4號)",
+      "floor": "四層",
+      "areaPing": 35.72,
+      "pricePerPing": 25.4,
+      "totalPrice": 808,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (80.0萬)"
+    }
+  },
+  {
+    "pId": 381,
+    "pName": "呈家易居NO.3",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/05",
+      "unit": "宜蘭縣五結鄉孝威路359巷 (D棟3號)",
+      "floor": "三層",
+      "areaPing": 35.72,
+      "pricePerPing": 25,
+      "totalPrice": 798,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (80.0萬)"
+    }
+  },
+  {
+    "pId": 383,
+    "pName": "光匯田境",
+    "town": "壯圍鄉",
+    "tx": {
+      "dateRoc": "115/07/26",
+      "rawDate": "1150726",
+      "unit": "C棟2C1號",
+      "floor": "二層",
+      "areaPing": 25.6,
+      "pricePerPing": 25.3,
+      "totalPrice": 890,
+      "totalPriceWan": 890,
+      "layout": "3房2廳2衛",
+      "parking": "",
+      "address": "宜蘭縣壯圍鄉順和路28號旁",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 383,
+    "pName": "光匯田境",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/11",
+      "unit": "宜蘭縣壯圍鄉順和路28號旁 (C棟4C1號)",
+      "floor": "四層",
+      "areaPing": 35.19,
+      "pricePerPing": 26.2,
+      "totalPrice": 923,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 389,
+    "pName": "築樹",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/03",
+      "unit": "宜蘭縣宜蘭市凱旋路 (D棟5號)",
+      "floor": "五層",
+      "areaPing": 52.99,
+      "pricePerPing": 36.4,
+      "totalPrice": 1828,
+      "layout": "4房2廳2衛",
+      "parking": "坡道平面 (160.0萬)"
+    }
+  },
+  {
+    "pId": 390,
+    "pName": "輕時尚3",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/13",
+      "unit": "宜蘭縣五結鄉宜蘭縣五結鄉孝威路348巷 (A棟6-3F號)",
+      "floor": "三層",
+      "areaPing": 37.01,
+      "pricePerPing": 25,
+      "totalPrice": 925,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 399,
+    "pName": "宛美天下2",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/22",
+      "unit": "宜蘭縣羅東鎮公正路300巷 (2A2棟2號)",
+      "floor": "二層",
+      "areaPing": 21.44,
+      "pricePerPing": 40.8,
+      "totalPrice": 900,
+      "layout": "2房1廳2衛",
+      "parking": "一樓平面 (238.0萬)"
+    }
+  },
+  {
+    "pId": 403,
+    "pName": "山海序",
+    "town": "頭城鎮",
+    "tx": {
+      "dateRoc": "115/07/24",
+      "rawDate": "1150724",
+      "unit": "F-8F號",
+      "floor": "八層",
+      "areaPing": 5.8,
+      "pricePerPing": 35.6,
+      "totalPrice": 832,
+      "totalPriceWan": 832,
+      "layout": "1房1廳1衛",
+      "parking": "",
+      "address": "宜蘭縣頭城鎮沙成路2巷69號旁",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 403,
+    "pName": "山海序",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/28",
+      "unit": "宜蘭縣頭城鎮沙成路2巷69號旁 (G-12F號)",
+      "floor": "十二層",
+      "areaPing": 19.29,
+      "pricePerPing": 38.3,
+      "totalPrice": 738,
+      "layout": "1房1廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 403,
+    "pName": "山海序",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/22",
+      "unit": "宜蘭縣頭城鎮沙成路2巷69號旁 (G-09F號)",
+      "floor": "九層",
+      "areaPing": 19.29,
+      "pricePerPing": 35.2,
+      "totalPrice": 680,
+      "layout": "1房1廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 403,
+    "pName": "山海序",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/15",
+      "unit": "宜蘭縣頭城鎮沙成路2巷69號旁 (F-14F號)",
+      "floor": "十四層",
+      "areaPing": 33.52,
+      "pricePerPing": 42.5,
+      "totalPrice": 1115,
+      "layout": "1房1廳1衛",
+      "parking": "坡道平面 (120.0萬)"
+    }
+  },
+  {
+    "pId": 404,
+    "pName": "禮里",
+    "town": "羅東鎮",
+    "tx": {
+      "dateRoc": "115/07/27",
+      "rawDate": "1150727",
+      "unit": "C2號",
+      "floor": "二層",
+      "areaPing": 9.7,
+      "pricePerPing": 37.5,
+      "totalPrice": 970,
+      "totalPriceWan": 970,
+      "layout": "2房1廳2衛",
+      "parking": "",
+      "address": "宜蘭縣羅東鎮康莊路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 405,
+    "pName": "宗硯大砌系列18-透天",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/28",
+      "unit": "宜蘭縣壯圍鄉大福路二段99巷 (F棟4號)",
+      "floor": "全",
+      "areaPing": 40.15,
+      "pricePerPing": 21.6,
+      "totalPrice": 868,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 405,
+    "pName": "宗硯大砌系列18-透天",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/04",
+      "unit": "宜蘭縣壯圍鄉大福路二段99巷 (F棟3號)",
+      "floor": "全",
+      "areaPing": 40.15,
+      "pricePerPing": 21.3,
+      "totalPrice": 855,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 405,
+    "pName": "宗硯大砌系列18-透天",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/30",
+      "unit": "宜蘭縣壯圍鄉大福路二段99巷 (D棟1號)",
+      "floor": "全",
+      "areaPing": 40.15,
+      "pricePerPing": 21.2,
+      "totalPrice": 850,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 405,
+    "pName": "宗硯大砌系列18-透天",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/30",
+      "unit": "宜蘭縣壯圍鄉大福路二段99巷 (D棟2號)",
+      "floor": "全",
+      "areaPing": 40.15,
+      "pricePerPing": 21.2,
+      "totalPrice": 850,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 405,
+    "pName": "宗硯大砌系列18-透天",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/30",
+      "unit": "宜蘭縣壯圍鄉大福路二段99巷 (D棟3號)",
+      "floor": "全",
+      "areaPing": 40.15,
+      "pricePerPing": 21.2,
+      "totalPrice": 850,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 405,
+    "pName": "宗硯大砌系列18-透天",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/17",
+      "unit": "宜蘭縣壯圍鄉大福路二段99巷 (D棟6號)",
+      "floor": "全",
+      "areaPing": 40.15,
+      "pricePerPing": 21.3,
+      "totalPrice": 855,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 405,
+    "pName": "宗硯大砌系列18-透天",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/17",
+      "unit": "宜蘭縣壯圍鄉大福路二段99巷 (F棟2號)",
+      "floor": "全",
+      "areaPing": 40.15,
+      "pricePerPing": 21.2,
+      "totalPrice": 850,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 405,
+    "pName": "宗硯大砌系列18-透天",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/09",
+      "unit": "宜蘭縣壯圍鄉大福路二段99巷 (C棟6號)",
+      "floor": "全",
+      "areaPing": 40.15,
+      "pricePerPing": 21.3,
+      "totalPrice": 855,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 410,
+    "pName": "鳳凰愛買16期",
+    "town": "員山鄉",
+    "tx": {
+      "dateRoc": "115/07/21",
+      "rawDate": "1150721",
+      "unit": "B1棟4F號",
+      "floor": "四層",
+      "areaPing": 11.9,
+      "pricePerPing": 24.6,
+      "totalPrice": 643,
+      "totalPriceWan": 643,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面",
+      "address": "宜蘭縣員山鄉山前路50巷",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 410,
+    "pName": "鳳凰愛買16期",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/16",
+      "unit": "宜蘭縣員山鄉山前路50巷 (A2棟2F號)",
+      "floor": "二層",
+      "areaPing": 26.15,
+      "pricePerPing": 25.7,
+      "totalPrice": 673,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 421,
+    "pName": "艾利永美",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/14",
+      "unit": "宜蘭縣壯圍鄉永美路一段148巷 (A棟A8號)",
+      "floor": "全/3層",
+      "areaPing": 50.9,
+      "pricePerPing": 21.4,
+      "totalPrice": 1088,
+      "layout": "4房2廳5衛",
+      "parking": "",
+      "note": "交易總價包含壯東段552、549地號2筆農地持分交易價款42萬元整",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 421,
+    "pName": "艾利永美",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/31",
+      "unit": "宜蘭縣壯圍鄉永美路一段148巷 (B棟B6號)",
+      "floor": "全",
+      "areaPing": 45.34,
+      "pricePerPing": 25.4,
+      "totalPrice": 1150,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 431,
+    "pName": "築荷5",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/16",
+      "unit": "宜蘭縣員山鄉三鬮路199巷 (B棟13號)",
+      "floor": "全",
+      "areaPing": 47.62,
+      "pricePerPing": 26,
+      "totalPrice": 1238,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 432,
+    "pName": "原翠6",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/03",
+      "unit": "宜蘭縣三星鄉清洲三路16巷 (A1棟0號)",
+      "floor": "四層",
+      "areaPing": 38.14,
+      "pricePerPing": 25.9,
+      "totalPrice": 903,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (85.0萬)"
+    }
+  },
+  {
+    "pId": 435,
+    "pName": "鳳凰愛買15期",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/01",
+      "unit": "宜蘭縣礁溪鄉育龍路 (D1棟1F號)",
+      "floor": "一層",
+      "areaPing": 33.44,
+      "pricePerPing": 34.5,
+      "totalPrice": 1155,
+      "layout": "0房0廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 435,
+    "pName": "鳳凰愛買15期",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/12",
+      "unit": "宜蘭縣礁溪鄉育龍路 (E棟1號)",
+      "floor": "全",
+      "areaPing": 52.52,
+      "pricePerPing": 30.5,
+      "totalPrice": 1600,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 436,
+    "pName": "國磐季",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/23",
+      "unit": "宜蘭縣冬山鄉香和路 (1棟8FA3號)",
+      "floor": "八層",
+      "areaPing": 49.33,
+      "pricePerPing": 31.5,
+      "totalPrice": 1375,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面 (120.0萬)"
+    }
+  },
+  {
+    "pId": 448,
+    "pName": "鳳凰愛買17期",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/03",
+      "unit": "宜蘭縣宜蘭市慈安路 (B棟5F號)",
+      "floor": "五層",
+      "areaPing": 17.81,
+      "pricePerPing": 40.3,
+      "totalPrice": 718,
+      "layout": "2房2廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 453,
+    "pName": "耀丞-城双",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "114/08/03",
+      "unit": "宜蘭縣礁溪鄉永興街 (A棟1號)",
+      "floor": "全",
+      "areaPing": 49.85,
+      "pricePerPing": 27.7,
+      "totalPrice": 1380,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 455,
+    "pName": "丰野．哲隱五期",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/12",
+      "unit": "宜蘭縣三星鄉大德中路 (A棟2-3F號)",
+      "floor": "三層/4層",
+      "areaPing": 35.4,
+      "pricePerPing": 25.8,
+      "totalPrice": 868,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (70.0萬)",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 463,
+    "pName": "夢想家園第五期",
+    "town": "五結鄉",
+    "tx": {
+      "dateRoc": "115/07/22",
+      "rawDate": "1150722",
+      "unit": "4F-A3號",
+      "floor": "四層",
+      "areaPing": 15.3,
+      "pricePerPing": 28.2,
+      "totalPrice": 1000,
+      "totalPriceWan": 1000,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面",
+      "address": "宜蘭縣五結鄉二結路",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 463,
+    "pName": "夢想家園第五期",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/25",
+      "unit": "宜蘭縣五結鄉二結路 (2F-A2號)",
+      "floor": "二層",
+      "areaPing": 38.23,
+      "pricePerPing": 28.9,
+      "totalPrice": 1040,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (110.0萬)"
+    }
+  },
+  {
+    "pId": 467,
+    "pName": "大琚",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/17",
+      "unit": "宜蘭縣宜蘭市民族路493巷 (B棟1-07號)",
+      "floor": "七層/13層",
+      "areaPing": 25.8,
+      "pricePerPing": 37.9,
+      "totalPrice": 980,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 467,
+    "pName": "大琚",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/02",
+      "unit": "宜蘭縣宜蘭市民族路493巷 (A棟2-01號)",
+      "floor": "一層",
+      "areaPing": 35.52,
+      "pricePerPing": 36.3,
+      "totalPrice": 1290,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 467,
+    "pName": "大琚",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/27",
+      "unit": "宜蘭縣宜蘭市民族路493巷 (B棟6-10號)",
+      "floor": "十層",
+      "areaPing": 36.88,
+      "pricePerPing": 38.2,
+      "totalPrice": 1270,
+      "layout": "2房2廳2衛",
+      "parking": "坡道平面 (155.0萬)"
+    }
+  },
+  {
+    "pId": 469,
+    "pName": "龍潭天下",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/18",
+      "unit": "宜蘭縣礁溪鄉龍潭路556巷底 (A棟5號)",
+      "floor": "全",
+      "areaPing": 48.91,
+      "pricePerPing": 27,
+      "totalPrice": 1320,
+      "layout": "3房2廳3衛",
+      "parking": "其他"
+    }
+  },
+  {
+    "pId": 470,
+    "pName": "皇程首賦",
+    "town": "宜蘭市",
+    "tx": {
+      "dateRoc": "115/07/30",
+      "rawDate": "1150730",
+      "unit": "A棟3號",
+      "floor": "五層",
+      "areaPing": 9.6,
+      "pricePerPing": 42.6,
+      "totalPrice": 1754,
+      "totalPriceWan": 1754,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面",
+      "address": "宜蘭縣宜蘭市東港路二段",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 470,
+    "pName": "皇程首賦",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/15",
+      "unit": "宜蘭縣宜蘭市東港路二段 (A棟5號)",
+      "floor": "四層/14層",
+      "areaPing": 35.7,
+      "pricePerPing": 43.6,
+      "totalPrice": 1284,
+      "layout": "2房2廳2衛",
+      "parking": "坡道平面 (175.0萬)",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 470,
+    "pName": "皇程首賦",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/27",
+      "unit": "宜蘭縣宜蘭市東港路二段 (A棟8號)",
+      "floor": "十二層",
+      "areaPing": 48.22,
+      "pricePerPing": 44.5,
+      "totalPrice": 1865,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面 (175.0萬)"
+    }
+  },
+  {
+    "pId": 470,
+    "pName": "皇程首賦",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/26",
+      "unit": "宜蘭縣宜蘭市東港路二段 (A棟2號)",
+      "floor": "四層",
+      "areaPing": 48.18,
+      "pricePerPing": 41.6,
+      "totalPrice": 1751,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面 (175.0萬)"
+    }
+  },
+  {
+    "pId": 470,
+    "pName": "皇程首賦",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/26",
+      "unit": "宜蘭縣宜蘭市東港路二段 (A棟6號)",
+      "floor": "六層",
+      "areaPing": 34.91,
+      "pricePerPing": 44.2,
+      "totalPrice": 1274,
+      "layout": "2房2廳2衛",
+      "parking": "坡道平面 (150.0萬)"
+    }
+  },
+  {
+    "pId": 470,
+    "pName": "皇程首賦",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/23",
+      "unit": "宜蘭縣宜蘭市東港路二段 (A棟7號)",
+      "floor": "六層",
+      "areaPing": 47.79,
+      "pricePerPing": 41.8,
+      "totalPrice": 1725,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面 (155.0萬)"
+    }
+  },
+  {
+    "pId": 470,
+    "pName": "皇程首賦",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/17",
+      "unit": "宜蘭縣宜蘭市東港路二段 (A棟8號)",
+      "floor": "十一層",
+      "areaPing": 48.22,
+      "pricePerPing": 42.5,
+      "totalPrice": 1777,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面 (165.0萬)"
+    }
+  },
+  {
+    "pId": 470,
+    "pName": "皇程首賦",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/14",
+      "unit": "宜蘭縣宜蘭市東港路二段 (A棟6號)",
+      "floor": "九層",
+      "areaPing": 34.91,
+      "pricePerPing": 44.3,
+      "totalPrice": 1288,
+      "layout": "2房2廳2衛",
+      "parking": "坡道平面 (160.0萬)"
+    }
+  },
+  {
+    "pId": 470,
+    "pName": "皇程首賦",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/09",
+      "unit": "宜蘭縣宜蘭市東港路二段 (A棟8號)",
+      "floor": "十四層",
+      "areaPing": 47.4,
+      "pricePerPing": 47,
+      "totalPrice": 1932,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面 (150.0萬)"
+    }
+  },
+  {
+    "pId": 470,
+    "pName": "皇程首賦",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/07",
+      "unit": "宜蘭縣宜蘭市東港路二段 (A棟6號)",
+      "floor": "五層",
+      "areaPing": 35.72,
+      "pricePerPing": 43.8,
+      "totalPrice": 1281,
+      "layout": "2房2廳2衛",
+      "parking": "坡道平面 (165.0萬)"
+    }
+  },
+  {
+    "pId": 475,
+    "pName": "富登新21",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/21",
+      "unit": "宜蘭縣壯圍鄉永美路二段 (B1棟1號)",
+      "floor": "一層",
+      "areaPing": 30.3,
+      "pricePerPing": 29,
+      "totalPrice": 880,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 475,
+    "pName": "富登新21",
+    "town": "壯圍鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/21",
+      "unit": "宜蘭縣壯圍鄉永美路二段 (A2棟1號)",
+      "floor": "一層",
+      "areaPing": 30.3,
+      "pricePerPing": 27.1,
+      "totalPrice": 820,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 478,
+    "pName": "人文精品",
+    "town": "頭城鎮",
+    "tx": {
+      "dateRoc": "115/07/25",
+      "rawDate": "1150725",
+      "unit": "A6棟0號",
+      "floor": "全",
+      "areaPing": 27.7,
+      "pricePerPing": 23,
+      "totalPrice": 1380,
+      "totalPriceWan": 1380,
+      "layout": "3房2廳4衛",
+      "parking": "",
+      "address": "宜蘭縣頭城鎮吉祥路176巷",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 479,
+    "pName": "幸福苑",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/30",
+      "unit": "宜蘭縣冬山鄉幸福三路 (c棟4號)",
+      "floor": "二層",
+      "areaPing": 26.3,
+      "pricePerPing": 27.3,
+      "totalPrice": 718,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 479,
+    "pName": "幸福苑",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/30",
+      "unit": "宜蘭縣冬山鄉幸福三路 (c棟2號)",
+      "floor": "一層",
+      "areaPing": 26.93,
+      "pricePerPing": 31.1,
+      "totalPrice": 838,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 479,
+    "pName": "幸福苑",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/28",
+      "unit": "宜蘭縣冬山鄉幸福三路 (B棟1號)",
+      "floor": "一層",
+      "areaPing": 32.01,
+      "pricePerPing": 30.2,
+      "totalPrice": 967,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 479,
+    "pName": "幸福苑",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/28",
+      "unit": "宜蘭縣冬山鄉幸福三路 (B棟2號)",
+      "floor": "三層",
+      "areaPing": 33.81,
+      "pricePerPing": 27.8,
+      "totalPrice": 940,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 479,
+    "pName": "幸福苑",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/13",
+      "unit": "宜蘭縣冬山鄉幸福三路 (A棟1號)",
+      "floor": "全",
+      "areaPing": 69.55,
+      "pricePerPing": 31,
+      "totalPrice": 2158,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 479,
+    "pName": "幸福苑",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/01",
+      "unit": "宜蘭縣冬山鄉幸福三路 (c棟2號)",
+      "floor": "二層",
+      "areaPing": 26.93,
+      "pricePerPing": 28.1,
+      "totalPrice": 758,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 479,
+    "pName": "幸福苑",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/01",
+      "unit": "宜蘭縣冬山鄉幸福三路 (c棟3號)",
+      "floor": "三層",
+      "areaPing": 26.39,
+      "pricePerPing": 28.9,
+      "totalPrice": 762,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 479,
+    "pName": "幸福苑",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/23",
+      "unit": "宜蘭縣冬山鄉幸福三路 (A棟2號)",
+      "floor": "全",
+      "areaPing": 64.17,
+      "pricePerPing": 29.8,
+      "totalPrice": 1915,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 483,
+    "pName": "旭泰禾豐莊園",
+    "town": "礁溪鄉",
+    "tx": {
+      "dateRoc": "115/07/27",
+      "rawDate": "1150727",
+      "unit": "C1棟1F號",
+      "floor": "一層",
+      "areaPing": 19,
+      "pricePerPing": 36.3,
+      "totalPrice": 1340,
+      "totalPriceWan": 1340,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面",
+      "address": "宜蘭縣礁溪鄉車路頭八路53號旁",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 484,
+    "pName": "太子興．賞",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/22",
+      "unit": "宜蘭縣宜蘭市梅洲一路與水源路69巷 (B棟B1-4F號)",
+      "floor": "四層",
+      "areaPing": 33.77,
+      "pricePerPing": 28.6,
+      "totalPrice": 940,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (90.0萬)"
+    }
+  },
+  {
+    "pId": 484,
+    "pName": "太子興．賞",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/26",
+      "unit": "宜蘭縣宜蘭市梅洲一路與水源路69巷 (B棟B2-2F號)",
+      "floor": "二層",
+      "areaPing": 36.86,
+      "pricePerPing": 26.5,
+      "totalPrice": 968,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (100.0萬)"
+    }
+  },
+  {
+    "pId": 485,
+    "pName": "寬闊-星灩寓",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/12",
+      "unit": "宜蘭縣三星鄉培英路 (2棟A2號)",
+      "floor": "二層",
+      "areaPing": 19.56,
+      "pricePerPing": 32.6,
+      "totalPrice": 638,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 488,
+    "pName": "小國民原夢",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/26",
+      "unit": "宜蘭縣五結鄉國民南路 (B3-2F號)",
+      "floor": "二層",
+      "areaPing": 21.04,
+      "pricePerPing": 27.3,
+      "totalPrice": 575,
+      "layout": "2房1廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 488,
+    "pName": "小國民原夢",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/17",
+      "unit": "宜蘭縣五結鄉國民南路 (B1-3F號)",
+      "floor": "三層",
+      "areaPing": 48.99,
+      "pricePerPing": 31.2,
+      "totalPrice": 1345,
+      "layout": "3房2廳3衛",
+      "parking": "一樓平面 (100.0萬)"
+    }
+  },
+  {
+    "pId": 489,
+    "pName": "美澍川NO.9",
+    "town": "冬山鄉",
+    "tx": {
+      "dateRoc": "115/07/30",
+      "rawDate": "1150730",
+      "unit": "E棟3號",
+      "floor": "四層",
+      "areaPing": 12.4,
+      "pricePerPing": 26.5,
+      "totalPrice": 980,
+      "totalPriceWan": 980,
+      "layout": "2房2廳2衛",
+      "parking": "坡道平面",
+      "address": "宜蘭縣冬山鄉武罕七路",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 489,
+    "pName": "美澍川NO.9",
+    "town": "冬山鄉",
+    "tx": {
+      "dateRoc": "115/07/22",
+      "rawDate": "1150722",
+      "unit": "B棟1號",
+      "floor": "一層",
+      "areaPing": 13,
+      "pricePerPing": 31.2,
+      "totalPrice": 1190,
+      "totalPriceWan": 1190,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面",
+      "address": "宜蘭縣冬山鄉武罕七路",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 489,
+    "pName": "美澍川NO.9",
+    "town": "冬山鄉",
+    "tx": {
+      "dateRoc": "115/07/22",
+      "rawDate": "1150722",
+      "unit": "D棟3號",
+      "floor": "一層",
+      "areaPing": 13.5,
+      "pricePerPing": 30.9,
+      "totalPrice": 1222,
+      "totalPriceWan": 1222,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面",
+      "address": "宜蘭縣冬山鄉武罕七路",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 489,
+    "pName": "美澍川NO.9",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/25",
+      "unit": "宜蘭縣冬山鄉武罕七路 (B棟1號)",
+      "floor": "二層",
+      "areaPing": 47.07,
+      "pricePerPing": 26.1,
+      "totalPrice": 1168,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面 (125.0萬)"
+    }
+  },
+  {
+    "pId": 493,
+    "pName": "海藍境",
+    "town": "蘇澳鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/08",
+      "unit": "宜蘭縣蘇澳鎮思村路 (B棟3號)",
+      "floor": "二層",
+      "areaPing": 22.78,
+      "pricePerPing": 21.9,
+      "totalPrice": 498,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 494,
+    "pName": "御松園",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/14",
+      "unit": "宜蘭縣宜蘭市女中路三段320巷 (D1棟0號)",
+      "floor": "八層",
+      "areaPing": 37,
+      "pricePerPing": 40.7,
+      "totalPrice": 1356,
+      "layout": "3房3廳2衛",
+      "parking": "坡道平面 (190.0萬)"
+    }
+  },
+  {
+    "pId": 494,
+    "pName": "御松園",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/05",
+      "unit": "宜蘭縣宜蘭市女中路三段320巷 (A2棟0號)",
+      "floor": "七層",
+      "areaPing": 44.11,
+      "pricePerPing": 39.7,
+      "totalPrice": 1600,
+      "layout": "3房3廳2衛",
+      "parking": "坡道平面 (180.0萬)"
+    }
+  },
+  {
+    "pId": 505,
+    "pName": "鳳凰愛買20期",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/03",
+      "unit": "宜蘭縣員山鄉枕山路 (A棟2號)",
+      "floor": "全",
+      "areaPing": 41.9,
+      "pricePerPing": 23.9,
+      "totalPrice": 1000,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 505,
+    "pName": "鳳凰愛買20期",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/20",
+      "unit": "宜蘭縣員山鄉枕山路 (C棟3號)",
+      "floor": "全",
+      "areaPing": 43.02,
+      "pricePerPing": 23,
+      "totalPrice": 990,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 505,
+    "pName": "鳳凰愛買20期",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/17",
+      "unit": "宜蘭縣員山鄉枕山路 (D棟1號)",
+      "floor": "全",
+      "areaPing": 45.05,
+      "pricePerPing": 25.1,
+      "totalPrice": 1131,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 505,
+    "pName": "鳳凰愛買20期",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/16",
+      "unit": "宜蘭縣員山鄉枕山路 (C棟9號)",
+      "floor": "全",
+      "areaPing": 43.02,
+      "pricePerPing": 23,
+      "totalPrice": 990,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 505,
+    "pName": "鳳凰愛買20期",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/12",
+      "unit": "宜蘭縣員山鄉枕山路 (A棟15號)",
+      "floor": "全",
+      "areaPing": 43.01,
+      "pricePerPing": 26.9,
+      "totalPrice": 1155,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 508,
+    "pName": "鳳凰愛買21期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/16",
+      "unit": "宜蘭縣冬山鄉丸山路 (J棟2F號)",
+      "floor": "二層",
+      "areaPing": 34.79,
+      "pricePerPing": 17.9,
+      "totalPrice": 622,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 509,
+    "pName": "鳳凰愛買22期",
+    "town": "礁溪鄉",
+    "tx": {
+      "dateRoc": "115/07/25",
+      "rawDate": "1150725",
+      "unit": "A棟8號",
+      "floor": "三層",
+      "areaPing": 11.9,
+      "pricePerPing": 24.5,
+      "totalPrice": 788,
+      "totalPriceWan": 788,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "address": "宜蘭縣礁溪鄉大忠路37巷",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 509,
+    "pName": "鳳凰愛買22期",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/04",
+      "unit": "宜蘭縣礁溪鄉大忠路37巷 (A棟2號)",
+      "floor": "三層",
+      "areaPing": 29.78,
+      "pricePerPing": 24.5,
+      "totalPrice": 730,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 510,
+    "pName": "青豐",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/19",
+      "unit": "宜蘭縣三星鄉大洲二路 (B棟B6-2F號)",
+      "floor": "二層/4層",
+      "areaPing": 23.5,
+      "pricePerPing": 25.3,
+      "totalPrice": 595,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "note": "大洲二段934、935、936地號等三筆土地於114年合併，合併後又進行分割。",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 510,
+    "pName": "青豐",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/15",
+      "unit": "宜蘭縣三星鄉大洲二路 (B棟B2-3F號)",
+      "floor": "三層/4層",
+      "areaPing": 24.3,
+      "pricePerPing": 25.7,
+      "totalPrice": 626,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "note": "大洲二段934、935、936地號等三筆土地於114年合併，合併後又進行分割。",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 510,
+    "pName": "青豐",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/20",
+      "unit": "宜蘭縣三星鄉大洲二路 (B棟B3-4F號)",
+      "floor": "四層",
+      "areaPing": 24.71,
+      "pricePerPing": 26.8,
+      "totalPrice": 662,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 510,
+    "pName": "青豐",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/16",
+      "unit": "宜蘭縣三星鄉大洲二路 (A2棟)",
+      "floor": "全",
+      "areaPing": 51.04,
+      "pricePerPing": 26.1,
+      "totalPrice": 1330,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 510,
+    "pName": "青豐",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/09",
+      "unit": "宜蘭縣三星鄉大洲二路 (A7棟)",
+      "floor": "全",
+      "areaPing": 51.04,
+      "pricePerPing": 24.5,
+      "totalPrice": 1250,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 510,
+    "pName": "青豐",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/08",
+      "unit": "宜蘭縣三星鄉大洲二路 (C棟C6-2F號)",
+      "floor": "二層",
+      "areaPing": 23.48,
+      "pricePerPing": 25.1,
+      "totalPrice": 590,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 510,
+    "pName": "青豐",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/23",
+      "unit": "宜蘭縣三星鄉大洲二路 (B棟B1-3F號)",
+      "floor": "三層",
+      "areaPing": 25.26,
+      "pricePerPing": 26.1,
+      "totalPrice": 660,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 511,
+    "pName": "鳳凰愛買23期",
+    "town": "礁溪鄉",
+    "tx": {
+      "dateRoc": "115/07/25",
+      "rawDate": "1150725",
+      "unit": "F棟3F號",
+      "floor": "三層",
+      "areaPing": 9.4,
+      "pricePerPing": 21.3,
+      "totalPrice": 522,
+      "totalPriceWan": 522,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "address": "宜蘭縣礁溪鄉淇武蘭路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 511,
+    "pName": "鳳凰愛買23期",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/18",
+      "unit": "宜蘭縣礁溪鄉淇武蘭路 (A棟4F號)",
+      "floor": "四層/4層",
+      "areaPing": 30.5,
+      "pricePerPing": 20.3,
+      "totalPrice": 620,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "note": "停車空間依社區分管契約使用。",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 511,
+    "pName": "鳳凰愛買23期",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/06",
+      "unit": "宜蘭縣礁溪鄉淇武蘭路 (A棟3F號)",
+      "floor": "三層",
+      "areaPing": 30.49,
+      "pricePerPing": 19.3,
+      "totalPrice": 590,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 511,
+    "pName": "鳳凰愛買23期",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/02",
+      "unit": "宜蘭縣礁溪鄉淇武蘭路 (G棟2F號)",
+      "floor": "二層",
+      "areaPing": 29.74,
+      "pricePerPing": 18.8,
+      "totalPrice": 560,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 511,
+    "pName": "鳳凰愛買23期",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/01",
+      "unit": "宜蘭縣礁溪鄉淇武蘭路 (A棟2F號)",
+      "floor": "二層",
+      "areaPing": 30.49,
+      "pricePerPing": 18.4,
+      "totalPrice": 560,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 511,
+    "pName": "鳳凰愛買23期",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/26",
+      "unit": "宜蘭縣礁溪鄉淇武蘭路 (H棟3F號)",
+      "floor": "三層",
+      "areaPing": 29.91,
+      "pricePerPing": 19.7,
+      "totalPrice": 590,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 511,
+    "pName": "鳳凰愛買23期",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/25",
+      "unit": "宜蘭縣礁溪鄉淇武蘭路 (G棟3F號)",
+      "floor": "三層",
+      "areaPing": 29.74,
+      "pricePerPing": 19.8,
+      "totalPrice": 590,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 511,
+    "pName": "鳳凰愛買23期",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/06",
+      "unit": "宜蘭縣礁溪鄉淇武蘭路 (D棟3F號)",
+      "floor": "三層",
+      "areaPing": 32.56,
+      "pricePerPing": 21.8,
+      "totalPrice": 710,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 512,
+    "pName": "香榭麗舍NO.10",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/26",
+      "unit": "宜蘭縣冬山鄉鹿得二路 (A棟3號)",
+      "floor": "全",
+      "areaPing": 42.15,
+      "pricePerPing": 29.7,
+      "totalPrice": 1250,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 512,
+    "pName": "香榭麗舍NO.10",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/10",
+      "unit": "宜蘭縣冬山鄉鹿得二路 (H3號)",
+      "floor": "三層",
+      "areaPing": 25.12,
+      "pricePerPing": 22.9,
+      "totalPrice": 575,
+      "layout": "2房1廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 513,
+    "pName": "黎明大苑",
+    "town": "宜蘭市",
+    "tx": {
+      "dateRoc": "115/07/25",
+      "rawDate": "1150725",
+      "unit": "A棟A8號",
+      "floor": "全",
+      "areaPing": 29.5,
+      "pricePerPing": 34.7,
+      "totalPrice": 1800,
+      "totalPriceWan": 1800,
+      "layout": "4房2廳5衛",
+      "parking": "",
+      "address": "宜蘭縣宜蘭市黎明二路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 513,
+    "pName": "黎明大苑",
+    "town": "宜蘭市",
+    "tx": {
+      "dateRoc": "115/07/21",
+      "rawDate": "1150721",
+      "unit": "B棟B9號",
+      "floor": "全",
+      "areaPing": 37.3,
+      "pricePerPing": 35.9,
+      "totalPrice": 2159,
+      "totalPriceWan": 2159,
+      "layout": "3房2廳3衛",
+      "parking": "",
+      "address": "宜蘭縣宜蘭市黎明二路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 513,
+    "pName": "黎明大苑",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/25",
+      "unit": "宜蘭縣宜蘭市黎明二路 (A棟A7號)",
+      "floor": "全",
+      "areaPing": 51.85,
+      "pricePerPing": 34.7,
+      "totalPrice": 1800,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 514,
+    "pName": "博愛日日春",
+    "town": "冬山鄉",
+    "tx": {
+      "dateRoc": "115/07/21",
+      "rawDate": "1150721",
+      "unit": "A棟1號",
+      "floor": "二層",
+      "areaPing": 9.4,
+      "pricePerPing": 24.4,
+      "totalPrice": 591,
+      "totalPriceWan": 591,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "address": "宜蘭縣冬山鄉珍珠一段477地號",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 514,
+    "pName": "博愛日日春",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/15",
+      "unit": "宜蘭縣冬山鄉珍珠三路 (A棟1號)",
+      "floor": "三層/4層",
+      "areaPing": 24.2,
+      "pricePerPing": 25.1,
+      "totalPrice": 607,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 514,
+    "pName": "博愛日日春",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/02",
+      "unit": "宜蘭縣冬山鄉珍珠一段477地號 (D3棟2號)",
+      "floor": "二層",
+      "areaPing": 32.11,
+      "pricePerPing": 22.6,
+      "totalPrice": 726,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 514,
+    "pName": "博愛日日春",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/11",
+      "unit": "宜蘭縣冬山鄉珍珠三路 (D棟1號)",
+      "floor": "四層",
+      "areaPing": 33.73,
+      "pricePerPing": 23.1,
+      "totalPrice": 778,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 517,
+    "pName": "掬月6",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/22",
+      "unit": "宜蘭縣冬山鄉美和路一段 (B棟3F-B號)",
+      "floor": "三層",
+      "areaPing": 35.13,
+      "pricePerPing": 24.6,
+      "totalPrice": 865,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 517,
+    "pName": "掬月6",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/21",
+      "unit": "宜蘭縣冬山鄉美和路一段 (A棟1F-A號)",
+      "floor": "一層",
+      "areaPing": 29.95,
+      "pricePerPing": 25.4,
+      "totalPrice": 760,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 518,
+    "pName": "謙羽3",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/30",
+      "unit": "宜蘭縣五結鄉利成路二段 (B棟3號)",
+      "floor": "三層",
+      "areaPing": 24.74,
+      "pricePerPing": 25,
+      "totalPrice": 635,
+      "layout": "2房2廳1衛",
+      "parking": "一樓平面 (120.0萬)"
+    }
+  },
+  {
+    "pId": 518,
+    "pName": "謙羽3",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/13",
+      "unit": "宜蘭縣五結鄉利成路二段 (E棟2號)",
+      "floor": "二層",
+      "areaPing": 22.06,
+      "pricePerPing": 24.8,
+      "totalPrice": 546,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 524,
+    "pName": "久誼久陞Ⅲ富境",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/19",
+      "unit": "宜蘭縣冬山鄉福丸段156-2地號 (A5棟)",
+      "floor": "全/3層",
+      "areaPing": 46.1,
+      "pricePerPing": 26.6,
+      "totalPrice": 1228,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 525,
+    "pName": "永玥和序",
+    "town": "宜蘭市",
+    "tx": {
+      "dateRoc": "115/07/23",
+      "rawDate": "1150723",
+      "unit": "A棟4號",
+      "floor": "四層",
+      "areaPing": 9.9,
+      "pricePerPing": 43,
+      "totalPrice": 1315,
+      "totalPriceWan": 1315,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "address": "宜蘭縣宜蘭市健康路三段",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 525,
+    "pName": "永玥和序",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/17",
+      "unit": "宜蘭縣宜蘭市健康路三段 (B棟4號)",
+      "floor": "四層",
+      "areaPing": 37.04,
+      "pricePerPing": 43.2,
+      "totalPrice": 1600,
+      "layout": "3房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 525,
+    "pName": "永玥和序",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/17",
+      "unit": "宜蘭縣宜蘭市健康路三段 (A棟3號)",
+      "floor": "三層",
+      "areaPing": 30.6,
+      "pricePerPing": 40.5,
+      "totalPrice": 1239.4,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 526,
+    "pName": "松佑鑫時代",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/05",
+      "unit": "宜蘭縣員山鄉思源路97巷 (A棟5號)",
+      "floor": "四層",
+      "areaPing": 39.46,
+      "pricePerPing": 21.6,
+      "totalPrice": 750,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (65.0萬)"
+    }
+  },
+  {
+    "pId": 526,
+    "pName": "松佑鑫時代",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/23",
+      "unit": "宜蘭縣員山鄉思源路97巷 (A棟3號)",
+      "floor": "三層",
+      "areaPing": 21.36,
+      "pricePerPing": 22.3,
+      "totalPrice": 477,
+      "layout": "1房2廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 526,
+    "pName": "松佑鑫時代",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/16",
+      "unit": "宜蘭縣員山鄉思源路97巷 (A棟5號)",
+      "floor": "三層",
+      "areaPing": 39.46,
+      "pricePerPing": 21.2,
+      "totalPrice": 740,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (65.0萬)"
+    }
+  },
+  {
+    "pId": 526,
+    "pName": "松佑鑫時代",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/14",
+      "unit": "宜蘭縣員山鄉思源路97巷 (A棟5號)",
+      "floor": "二層",
+      "areaPing": 31.78,
+      "pricePerPing": 21.2,
+      "totalPrice": 675,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 528,
+    "pName": "朗頌",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/05",
+      "unit": "宜蘭縣員山鄉永廣路 (A棟9號)",
+      "floor": "全",
+      "areaPing": 44.5,
+      "pricePerPing": 22.9,
+      "totalPrice": 1018,
+      "layout": "5房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 529,
+    "pName": "初日",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/24",
+      "unit": "宜蘭縣冬山鄉梅花路 (F棟0號)",
+      "floor": "全",
+      "areaPing": 60.65,
+      "pricePerPing": 27.4,
+      "totalPrice": 1660,
+      "layout": "4房2廳5衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 531,
+    "pName": "圓美磐筑",
+    "town": "蘇澳鎮",
+    "tx": {
+      "dateRoc": "115/07/26",
+      "rawDate": "1150726",
+      "unit": "4棟5F-5A5號",
+      "floor": "五層",
+      "areaPing": 9.8,
+      "pricePerPing": 21.3,
+      "totalPrice": 837,
+      "totalPriceWan": 837,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面",
+      "address": "宜蘭縣蘇澳鎮和平路",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 531,
+    "pName": "圓美磐筑",
+    "town": "蘇澳鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/18",
+      "unit": "宜蘭縣蘇澳鎮和平路 (4棟5A8號)",
+      "floor": "五層/9層",
+      "areaPing": 40,
+      "pricePerPing": 21.4,
+      "totalPrice": 800,
+      "layout": "3房2廳2衛",
+      "parking": "坡道平面 (115.0萬)",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 531,
+    "pName": "圓美磐筑",
+    "town": "蘇澳鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/17",
+      "unit": "宜蘭縣蘇澳鎮和平路 (4棟5A2號)",
+      "floor": "五層/9層",
+      "areaPing": 27.7,
+      "pricePerPing": 21.1,
+      "totalPrice": 585,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 531,
+    "pName": "圓美磐筑",
+    "town": "蘇澳鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/23",
+      "unit": "宜蘭縣蘇澳鎮和平路 (4棟4A6號)",
+      "floor": "四層",
+      "areaPing": 27.91,
+      "pricePerPing": 20.9,
+      "totalPrice": 582,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 531,
+    "pName": "圓美磐筑",
+    "town": "蘇澳鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/19",
+      "unit": "宜蘭縣蘇澳鎮和平路 (4棟3F-3A6號)",
+      "floor": "三層",
+      "areaPing": 35.92,
+      "pricePerPing": 20.9,
+      "totalPrice": 682,
+      "layout": "2房2廳2衛",
+      "parking": "坡道平面 (100.0萬)"
+    }
+  },
+  {
+    "pId": 531,
+    "pName": "圓美磐筑",
+    "town": "蘇澳鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/15",
+      "unit": "宜蘭縣蘇澳鎮和平路 (4棟3F-3A3號)",
+      "floor": "三層",
+      "areaPing": 33.66,
+      "pricePerPing": 20.5,
+      "totalPrice": 636,
+      "layout": "2房2廳1衛",
+      "parking": "坡道平面 (110.0萬)"
+    }
+  },
+  {
+    "pId": 535,
+    "pName": "享建築",
+    "town": "蘇澳鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/18",
+      "unit": "宜蘭縣蘇澳鎮新榮路49巷51號旁 (B棟4-505號)",
+      "floor": "四層",
+      "areaPing": 29.75,
+      "pricePerPing": 23.4,
+      "totalPrice": 650,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (105.0萬)"
+    }
+  },
+  {
+    "pId": 535,
+    "pName": "享建築",
+    "town": "蘇澳鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/13",
+      "unit": "宜蘭縣蘇澳鎮新榮路49巷51號旁 (A棟2-201號)",
+      "floor": "二層",
+      "areaPing": 40.12,
+      "pricePerPing": 22,
+      "totalPrice": 833,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (115.0萬)"
+    }
+  },
+  {
+    "pId": 535,
+    "pName": "享建築",
+    "town": "蘇澳鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/24",
+      "unit": "宜蘭縣蘇澳鎮新榮路49巷51號旁 (B棟3-305號)",
+      "floor": "三層",
+      "areaPing": 23.32,
+      "pricePerPing": 22.8,
+      "totalPrice": 531,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 536,
+    "pName": "力璟.無疆大境2",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/06",
+      "unit": "宜蘭縣宜蘭市公園東路51巷 (D2棟0號)",
+      "floor": "全",
+      "areaPing": 63.23,
+      "pricePerPing": 42.2,
+      "totalPrice": 2670,
+      "layout": "2房2廳4衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 536,
+    "pName": "力璟.無疆大境2",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/22",
+      "unit": "宜蘭縣宜蘭市公園東路51巷 (E1棟0號)",
+      "floor": "全",
+      "areaPing": 62.02,
+      "pricePerPing": 41.5,
+      "totalPrice": 2572,
+      "layout": "2房2廳4衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 536,
+    "pName": "力璟.無疆大境2",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/13",
+      "unit": "宜蘭縣宜蘭市公園東路51巷 (F3棟0號)",
+      "floor": "全",
+      "areaPing": 61.7,
+      "pricePerPing": 39.2,
+      "totalPrice": 2419,
+      "layout": "4房2廳4衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 540,
+    "pName": "海樂地3",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/01",
+      "unit": "宜蘭縣羅東鎮愛國路 (A3棟4樓號)",
+      "floor": "四層",
+      "areaPing": 28.35,
+      "pricePerPing": 39.5,
+      "totalPrice": 1120,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 540,
+    "pName": "海樂地3",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/13",
+      "unit": "宜蘭縣羅東鎮愛國路 (B1棟2樓號)",
+      "floor": "二層",
+      "areaPing": 35.72,
+      "pricePerPing": 38.5,
+      "totalPrice": 1351,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (150.0萬)"
+    }
+  },
+  {
+    "pId": 540,
+    "pName": "海樂地3",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/09",
+      "unit": "宜蘭縣羅東鎮愛國路 (F5棟5樓號)",
+      "floor": "五層",
+      "areaPing": 37.44,
+      "pricePerPing": 39.2,
+      "totalPrice": 1395,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (175.0萬)"
+    }
+  },
+  {
+    "pId": 540,
+    "pName": "海樂地3",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/30",
+      "unit": "宜蘭縣羅東鎮愛國路 (F3棟4樓號)",
+      "floor": "四層",
+      "areaPing": 37.44,
+      "pricePerPing": 39,
+      "totalPrice": 1382,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (170.0萬)"
+    }
+  },
+  {
+    "pId": 540,
+    "pName": "海樂地3",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/28",
+      "unit": "宜蘭縣羅東鎮愛國路 (B2棟3樓號)",
+      "floor": "三層",
+      "areaPing": 35.72,
+      "pricePerPing": 38.8,
+      "totalPrice": 1360,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (150.0萬)"
+    }
+  },
+  {
+    "pId": 540,
+    "pName": "海樂地3",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/28",
+      "unit": "宜蘭縣羅東鎮愛國路 (A2棟3樓號)",
+      "floor": "三層",
+      "areaPing": 32.51,
+      "pricePerPing": 38.8,
+      "totalPrice": 1245,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (145.0萬)"
+    }
+  },
+  {
+    "pId": 540,
+    "pName": "海樂地3",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/27",
+      "unit": "宜蘭縣羅東鎮愛國路 (B3棟4樓號)",
+      "floor": "四層",
+      "areaPing": 35.72,
+      "pricePerPing": 39.2,
+      "totalPrice": 1373,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (150.0萬)"
+    }
+  },
+  {
+    "pId": 540,
+    "pName": "海樂地3",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/26",
+      "unit": "宜蘭縣羅東鎮愛國路 (A5棟5樓號)",
+      "floor": "五層",
+      "areaPing": 32.51,
+      "pricePerPing": 39.7,
+      "totalPrice": 1271,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (145.0萬)"
+    }
+  },
+  {
+    "pId": 540,
+    "pName": "海樂地3",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/22",
+      "unit": "宜蘭縣羅東鎮愛國路 (E3棟4號)",
+      "floor": "四層",
+      "areaPing": 32.18,
+      "pricePerPing": 39.3,
+      "totalPrice": 1250,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (135.0萬)"
+    }
+  },
+  {
+    "pId": 540,
+    "pName": "海樂地3",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/22",
+      "unit": "宜蘭縣羅東鎮愛國路 (E3棟4樓號)",
+      "floor": "四層",
+      "areaPing": 32.18,
+      "pricePerPing": 39.3,
+      "totalPrice": 1250,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (135.0萬)"
+    }
+  },
+  {
+    "pId": 541,
+    "pName": "鳳凰愛買25期",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/04",
+      "unit": "宜蘭縣羅東鎮中山路二段 (A1棟4F號)",
+      "floor": "四層",
+      "areaPing": 18.89,
+      "pricePerPing": 36.6,
+      "totalPrice": 691,
+      "layout": "2房2廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 542,
+    "pName": "聚蒔光",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/27",
+      "unit": "宜蘭縣頭城鎮新武路 (C-3F號)",
+      "floor": "三層",
+      "areaPing": 25.17,
+      "pricePerPing": 30.1,
+      "totalPrice": 758,
+      "layout": "2房2廳1衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 542,
+    "pName": "聚蒔光",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/27",
+      "unit": "宜蘭縣頭城鎮新武路 (C-4F號)",
+      "floor": "四層",
+      "areaPing": 25.17,
+      "pricePerPing": 30.5,
+      "totalPrice": 768,
+      "layout": "2房2廳1衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 542,
+    "pName": "聚蒔光",
+    "town": "頭城鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/13",
+      "unit": "宜蘭縣頭城鎮新武路 (B-3F號)",
+      "floor": "三層",
+      "areaPing": 28.09,
+      "pricePerPing": 30.4,
+      "totalPrice": 855,
+      "layout": "2房2廳1衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 544,
+    "pName": "向陽居NO.6",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/19",
+      "unit": "宜蘭縣冬山鄉補城路426巷 (I棟1號)",
+      "floor": "全",
+      "areaPing": 50.23,
+      "pricePerPing": 22.1,
+      "totalPrice": 1110,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 544,
+    "pName": "向陽居NO.6",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/18",
+      "unit": "宜蘭縣冬山鄉補城路426巷 (B棟1號)",
+      "floor": "全",
+      "areaPing": 54.31,
+      "pricePerPing": 20.4,
+      "totalPrice": 1110,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 544,
+    "pName": "向陽居NO.6",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/18",
+      "unit": "宜蘭縣冬山鄉補城路426巷 (D棟1號)",
+      "floor": "全",
+      "areaPing": 54.06,
+      "pricePerPing": 21.3,
+      "totalPrice": 1150,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 544,
+    "pName": "向陽居NO.6",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/11",
+      "unit": "宜蘭縣冬山鄉補城路426巷 (E棟1號)",
+      "floor": "全",
+      "areaPing": 60.34,
+      "pricePerPing": 19.6,
+      "totalPrice": 1180,
+      "layout": "5房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 544,
+    "pName": "向陽居NO.6",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/10",
+      "unit": "宜蘭縣冬山鄉補城路426巷 (G棟1號)",
+      "floor": "全",
+      "areaPing": 50.23,
+      "pricePerPing": 20.9,
+      "totalPrice": 1050,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 547,
+    "pName": "太子興．賞II",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/20",
+      "unit": "宜蘭縣宜蘭市梅洲一路與水源路69巷 (C棟A5-2F號)",
+      "floor": "二層/5層",
+      "areaPing": 32.1,
+      "pricePerPing": 25.7,
+      "totalPrice": 818,
+      "layout": "2房2廳1衛",
+      "parking": "一樓平面 (100.0萬)",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 547,
+    "pName": "太子興．賞II",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/06",
+      "unit": "宜蘭縣宜蘭市梅洲一路與水源路69巷 (C棟A1-2F號)",
+      "floor": "二層",
+      "areaPing": 32.09,
+      "pricePerPing": 25,
+      "totalPrice": 798,
+      "layout": "2房2廳1衛",
+      "parking": "一樓平面 (100.0萬)"
+    }
+  },
+  {
+    "pId": 547,
+    "pName": "太子興．賞II",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/06",
+      "unit": "宜蘭縣宜蘭市梅洲一路與水源路69巷 (C棟A5-3F號)",
+      "floor": "三層",
+      "areaPing": 34.28,
+      "pricePerPing": 27,
+      "totalPrice": 863,
+      "layout": "2房2廳1衛",
+      "parking": "一樓平面 (110.0萬)"
+    }
+  },
+  {
+    "pId": 549,
+    "pName": "東榮二段",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/05/27",
+      "unit": "宜蘭縣羅東鎮欣榮路75巷 (A棟4F號)",
+      "floor": "四層",
+      "areaPing": 118.63,
+      "pricePerPing": 31.6,
+      "totalPrice": 3750,
+      "layout": "3房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "dateRoc": "115/07/25",
+      "rawDate": "1150725",
+      "unit": "A3棟4號",
+      "floor": "四層",
+      "areaPing": 6.7,
+      "pricePerPing": 25.5,
+      "totalPrice": 399,
+      "totalPriceWan": 399,
+      "layout": "2房1廳1衛",
+      "parking": "",
+      "address": "宜蘭縣三星鄉尾塹二段382.383地號",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/20",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (A4棟4號)",
+      "floor": "四層/4層",
+      "areaPing": 16.1,
+      "pricePerPing": 24.8,
+      "totalPrice": 399,
+      "layout": "2房1廳1衛",
+      "parking": "",
+      "note": "合約土地面積係依建築執照基地面積計算，未來道路退縮分割後土地面積應依照比例一併移轉",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/09",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (B3棟4號)",
+      "floor": "四層",
+      "areaPing": 15.79,
+      "pricePerPing": 25.3,
+      "totalPrice": 399,
+      "layout": "2房1廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/27",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (A2棟4號)",
+      "floor": "四層",
+      "areaPing": 20.92,
+      "pricePerPing": 23.8,
+      "totalPrice": 459,
+      "layout": "2房1廳1衛",
+      "parking": "一樓平面 (60.0萬)"
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/19",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (A3棟2號)",
+      "floor": "二層",
+      "areaPing": 15.65,
+      "pricePerPing": 25.5,
+      "totalPrice": 399,
+      "layout": "2房1廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/12",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (B4棟4號)",
+      "floor": "四層",
+      "areaPing": 16.01,
+      "pricePerPing": 24.9,
+      "totalPrice": 399,
+      "layout": "2房1廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/11",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (A4棟3號)",
+      "floor": "三層",
+      "areaPing": 16.08,
+      "pricePerPing": 24.8,
+      "totalPrice": 399,
+      "layout": "2房1廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/10",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (A2棟2號)",
+      "floor": "二層",
+      "areaPing": 20.92,
+      "pricePerPing": 23.8,
+      "totalPrice": 459,
+      "layout": "2房1廳1衛",
+      "parking": "一樓平面 (60.0萬)"
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/07",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (B1棟3號)",
+      "floor": "三層",
+      "areaPing": 21.82,
+      "pricePerPing": 22.6,
+      "totalPrice": 459,
+      "layout": "2房1廳1衛",
+      "parking": "一樓平面 (60.0萬)"
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/06",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (B2棟2號)",
+      "floor": "二層",
+      "areaPing": 16.67,
+      "pricePerPing": 23.9,
+      "totalPrice": 399,
+      "layout": "2房1廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/06",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (A1棟3號)",
+      "floor": "三層",
+      "areaPing": 18.94,
+      "pricePerPing": 24.2,
+      "totalPrice": 459,
+      "layout": "2房1廳1衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/06",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (A1棟4號)",
+      "floor": "四層",
+      "areaPing": 22.19,
+      "pricePerPing": 22.1,
+      "totalPrice": 459,
+      "layout": "2房1廳1衛",
+      "parking": "一樓平面 (60.0萬)"
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/06",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (B1棟4號)",
+      "floor": "四層",
+      "areaPing": 21.82,
+      "pricePerPing": 22.6,
+      "totalPrice": 459,
+      "layout": "2房1廳1衛",
+      "parking": "一樓平面 (60.0萬)"
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/06",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (B1棟2號)",
+      "floor": "二層",
+      "areaPing": 18.56,
+      "pricePerPing": 24.7,
+      "totalPrice": 459,
+      "layout": "2房1廳1衛",
+      "parking": "一樓平面 (60.0萬)"
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/05",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (B4棟3號)",
+      "floor": "三層",
+      "areaPing": 19.26,
+      "pricePerPing": 26.4,
+      "totalPrice": 459,
+      "layout": "2房1廳1衛",
+      "parking": "一樓平面 (60.0萬)"
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/04",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (A2棟3號)",
+      "floor": "三層",
+      "areaPing": 20.92,
+      "pricePerPing": 23.8,
+      "totalPrice": 459,
+      "layout": "2房1廳1衛",
+      "parking": "一樓平面 (60.0萬)"
+    }
+  },
+  {
+    "pId": 550,
+    "pName": "謙藏3",
+    "town": "三星鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/04",
+      "unit": "宜蘭縣三星鄉尾塹二段382.383地號 (B2棟3號)",
+      "floor": "三層",
+      "areaPing": 19.93,
+      "pricePerPing": 25.3,
+      "totalPrice": 459,
+      "layout": "2房1廳1衛",
+      "parking": "一樓平面 (60.0萬)"
+    }
+  },
+  {
+    "pId": 551,
+    "pName": "文風翠庭第22期",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/19",
+      "unit": "宜蘭縣員山鄉惠深二路一段66巷 (C1棟0號)",
+      "floor": "全/3層",
+      "areaPing": 53.8,
+      "pricePerPing": 26.4,
+      "totalPrice": 1418,
+      "layout": "4房2廳4衛",
+      "parking": "",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 551,
+    "pName": "文風翠庭第22期",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/12",
+      "unit": "宜蘭縣員山鄉惠深二路一段66巷 (D5棟0號)",
+      "floor": "全/3層",
+      "areaPing": 50.6,
+      "pricePerPing": 27.1,
+      "totalPrice": 1370,
+      "layout": "4房2廳4衛",
+      "parking": "",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 551,
+    "pName": "文風翠庭第22期",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/13",
+      "unit": "宜蘭縣員山鄉惠深二路一段66巷 (D2棟0號)",
+      "floor": "全",
+      "areaPing": 50.55,
+      "pricePerPing": 27.3,
+      "totalPrice": 1380,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 551,
+    "pName": "文風翠庭第22期",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/07",
+      "unit": "宜蘭縣員山鄉惠深二路一段66巷 (D3棟0號)",
+      "floor": "全",
+      "areaPing": 50.55,
+      "pricePerPing": 27.3,
+      "totalPrice": 1380,
+      "layout": "4房2廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 553,
+    "pName": "宗硯大砌系列19",
+    "town": "礁溪鄉",
+    "tx": {
+      "dateRoc": "115/07/24",
+      "rawDate": "1150724",
+      "unit": "B棟2號",
+      "floor": "全",
+      "areaPing": 21.3,
+      "pricePerPing": 23.2,
+      "totalPrice": 998,
+      "totalPriceWan": 998,
+      "layout": "4房2廳3衛",
+      "parking": "",
+      "address": "宜蘭縣礁溪鄉龍潭村龍泉路234巷",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 553,
+    "pName": "宗硯大砌系列19",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/27",
+      "unit": "宜蘭縣礁溪鄉龍潭村龍泉路234巷 (A棟3號)",
+      "floor": "全",
+      "areaPing": 39.71,
+      "pricePerPing": 26.1,
+      "totalPrice": 1038,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 553,
+    "pName": "宗硯大砌系列19",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/27",
+      "unit": "宜蘭縣礁溪鄉龍潭村龍泉路234巷 (A棟1號)",
+      "floor": "全",
+      "areaPing": 38.67,
+      "pricePerPing": 25.3,
+      "totalPrice": 980,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 553,
+    "pName": "宗硯大砌系列19",
+    "town": "礁溪鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/27",
+      "unit": "宜蘭縣礁溪鄉龍潭村龍泉路234巷 (B棟1號)",
+      "floor": "全",
+      "areaPing": 40.14,
+      "pricePerPing": 24.4,
+      "totalPrice": 980,
+      "layout": "4房2廳3衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 555,
+    "pName": "嵩禾拾穗",
+    "town": "五結鄉",
+    "tx": {
+      "dateRoc": "115/07/30",
+      "rawDate": "1150730",
+      "unit": "A4-4F棟0號",
+      "floor": "四層",
+      "areaPing": 9.4,
+      "pricePerPing": 30.9,
+      "totalPrice": 708,
+      "totalPriceWan": 708,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "address": "宜蘭縣五結鄉自強東路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 555,
+    "pName": "嵩禾拾穗",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/27",
+      "unit": "宜蘭縣五結鄉自強東路 (C3-3F棟0號)",
+      "floor": "三層",
+      "areaPing": 29.45,
+      "pricePerPing": 35.2,
+      "totalPrice": 1038,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (100.0萬)"
+    }
+  },
+  {
+    "pId": 555,
+    "pName": "嵩禾拾穗",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/21",
+      "unit": "宜蘭縣五結鄉自強東路 (B4-4F棟0號)",
+      "floor": "四層",
+      "areaPing": 20.38,
+      "pricePerPing": 32.9,
+      "totalPrice": 670,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 555,
+    "pName": "嵩禾拾穗",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/21",
+      "unit": "宜蘭縣五結鄉自強東路 (C2-2F棟0號)",
+      "floor": "二層",
+      "areaPing": 29.45,
+      "pricePerPing": 33.9,
+      "totalPrice": 998,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (100.0萬)"
+    }
+  },
+  {
+    "pId": 555,
+    "pName": "嵩禾拾穗",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/21",
+      "unit": "宜蘭縣五結鄉自強東路 (D2-2F棟0號)",
+      "floor": "二層",
+      "areaPing": 32.76,
+      "pricePerPing": 33,
+      "totalPrice": 1080,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (100.0萬)"
+    }
+  },
+  {
+    "pId": 555,
+    "pName": "嵩禾拾穗",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/12",
+      "unit": "宜蘭縣五結鄉自強東路 (D4-4F棟0號)",
+      "floor": "四層",
+      "areaPing": 32.76,
+      "pricePerPing": 34.5,
+      "totalPrice": 1130,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (110.0萬)"
+    }
+  },
+  {
+    "pId": 555,
+    "pName": "嵩禾拾穗",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/11",
+      "unit": "宜蘭縣五結鄉自強東路 (C4-4F棟0號)",
+      "floor": "四層",
+      "areaPing": 29.45,
+      "pricePerPing": 35.2,
+      "totalPrice": 1038,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (100.0萬)"
+    }
+  },
+  {
+    "pId": 555,
+    "pName": "嵩禾拾穗",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/09",
+      "unit": "宜蘭縣五結鄉自強東路 (A3-3F棟0號)",
+      "floor": "三層",
+      "areaPing": 22.91,
+      "pricePerPing": 30,
+      "totalPrice": 688,
+      "layout": "2房2廳2衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 555,
+    "pName": "嵩禾拾穗",
+    "town": "五結鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/01",
+      "unit": "宜蘭縣五結鄉自強東路 (D3-3F棟0號)",
+      "floor": "三層",
+      "areaPing": 32.76,
+      "pricePerPing": 33.6,
+      "totalPrice": 1100,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (100.0萬)"
+    }
+  },
+  {
+    "pId": 556,
+    "pName": "靚永美7",
+    "town": "冬山鄉",
+    "tx": {
+      "dateRoc": "115/07/27",
+      "rawDate": "1150727",
+      "unit": "B棟3號",
+      "floor": "全",
+      "areaPing": 29.2,
+      "pricePerPing": 27.1,
+      "totalPrice": 1428,
+      "totalPriceWan": 1428,
+      "layout": "4房3廳4衛",
+      "parking": "",
+      "address": "宜蘭縣冬山鄉武罕五路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 556,
+    "pName": "靚永美7",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/03",
+      "unit": "宜蘭縣冬山鄉武罕五路 (C棟1號)",
+      "floor": "全",
+      "areaPing": 53.68,
+      "pricePerPing": 28.4,
+      "totalPrice": 1523,
+      "layout": "5房3廳4衛",
+      "parking": ""
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "dateRoc": "115/07/27",
+      "rawDate": "1150727",
+      "unit": "C棟8號",
+      "floor": "全",
+      "areaPing": 35.4,
+      "pricePerPing": 24.7,
+      "totalPrice": 1360,
+      "totalPriceWan": 1360,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面",
+      "address": "宜蘭縣冬山鄉美和路二段46巷",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "dateRoc": "115/07/24",
+      "rawDate": "1150724",
+      "unit": "B棟8號",
+      "floor": "全",
+      "areaPing": 34.1,
+      "pricePerPing": 23,
+      "totalPrice": 1270,
+      "totalPriceWan": 1270,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面",
+      "address": "宜蘭縣冬山鄉美和路二段46巷",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/18",
+      "unit": "宜蘭縣冬山鄉美和路二段46巷 (C棟3號)",
+      "floor": "全/3層",
+      "areaPing": 55.1,
+      "pricePerPing": 24.5,
+      "totalPrice": 1350,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面",
+      "note": "主建物內含車位面積13.75平方公尺。",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/06",
+      "unit": "宜蘭縣冬山鄉美和路二段46巷 (C棟7號)",
+      "floor": "全",
+      "areaPing": 55.12,
+      "pricePerPing": 23.9,
+      "totalPrice": 1320,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/02",
+      "unit": "宜蘭縣冬山鄉美和路二段46巷 (B棟7號)",
+      "floor": "全",
+      "areaPing": 55.12,
+      "pricePerPing": 22.5,
+      "totalPrice": 1240,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/29",
+      "unit": "宜蘭縣冬山鄉美和路二段46巷 (C棟2號)",
+      "floor": "全",
+      "areaPing": 55.12,
+      "pricePerPing": 24.7,
+      "totalPrice": 1360,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/23",
+      "unit": "宜蘭縣冬山鄉美和路二段46巷 (B棟3號)",
+      "floor": "全",
+      "areaPing": 55.12,
+      "pricePerPing": 22.9,
+      "totalPrice": 1260,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/22",
+      "unit": "宜蘭縣冬山鄉美和路二段46巷 (C棟5號)",
+      "floor": "全",
+      "areaPing": 55.12,
+      "pricePerPing": 23.9,
+      "totalPrice": 1320,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/20",
+      "unit": "宜蘭縣冬山鄉美和路二段46巷 (C棟6號)",
+      "floor": "全",
+      "areaPing": 55.12,
+      "pricePerPing": 23.4,
+      "totalPrice": 1290,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/18",
+      "unit": "宜蘭縣冬山鄉美和路二段46巷 (B棟2號)",
+      "floor": "全",
+      "areaPing": 55.12,
+      "pricePerPing": 23.2,
+      "totalPrice": 1280,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/13",
+      "unit": "宜蘭縣冬山鄉美和路二段46巷 (B棟5號)",
+      "floor": "全",
+      "areaPing": 55.12,
+      "pricePerPing": 22.3,
+      "totalPrice": 1230,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 559,
+    "pName": "鳳凰愛買26期",
+    "town": "冬山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/06/13",
+      "unit": "宜蘭縣冬山鄉美和路二段46巷 (B棟6號)",
+      "floor": "全",
+      "areaPing": 55.12,
+      "pricePerPing": 23.3,
+      "totalPrice": 1285,
+      "layout": "4房2廳5衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 561,
+    "pName": "頤和知序",
+    "town": "員山鄉",
+    "tx": {
+      "dateRoc": "115/07/31",
+      "rawDate": "1150731",
+      "unit": "A棟A3-4F號",
+      "floor": "四層",
+      "areaPing": 11.6,
+      "pricePerPing": 28.9,
+      "totalPrice": 752,
+      "totalPriceWan": 752,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "address": "宜蘭縣員山鄉尚智路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 561,
+    "pName": "頤和知序",
+    "town": "員山鄉",
+    "tx": {
+      "dateRoc": "115/07/28",
+      "rawDate": "1150728",
+      "unit": "A棟A3-5F號",
+      "floor": "五層",
+      "areaPing": 11.6,
+      "pricePerPing": 29.3,
+      "totalPrice": 882,
+      "totalPriceWan": 882,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面",
+      "address": "宜蘭縣員山鄉尚智路",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 561,
+    "pName": "頤和知序",
+    "town": "員山鄉",
+    "tx": {
+      "dateRoc": "115/07/27",
+      "rawDate": "1150727",
+      "unit": "A棟A8-2F號",
+      "floor": "二層",
+      "areaPing": 7.9,
+      "pricePerPing": 28,
+      "totalPrice": 494,
+      "totalPriceWan": 494,
+      "layout": "1房2廳1衛",
+      "parking": "",
+      "address": "宜蘭縣員山鄉尚智路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 561,
+    "pName": "頤和知序",
+    "town": "員山鄉",
+    "tx": {
+      "dateRoc": "115/07/24",
+      "rawDate": "1150724",
+      "unit": "A棟A8-3F號",
+      "floor": "三層",
+      "areaPing": 7.9,
+      "pricePerPing": 28.8,
+      "totalPrice": 508,
+      "totalPriceWan": 508,
+      "layout": "1房2廳1衛",
+      "parking": "",
+      "address": "宜蘭縣員山鄉尚智路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 561,
+    "pName": "頤和知序",
+    "town": "員山鄉",
+    "tx": {
+      "dateRoc": "115/07/21",
+      "rawDate": "1150721",
+      "unit": "A棟A5-3F號",
+      "floor": "三層",
+      "areaPing": 11.6,
+      "pricePerPing": 28.9,
+      "totalPrice": 752,
+      "totalPriceWan": 752,
+      "layout": "2房2廳2衛",
+      "parking": "",
+      "address": "宜蘭縣員山鄉尚智路",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 561,
+    "pName": "頤和知序",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/20",
+      "unit": "宜蘭縣員山鄉尚智路 (A棟A1-5F號)",
+      "floor": "五層/7層",
+      "areaPing": 29.2,
+      "pricePerPing": 29.4,
+      "totalPrice": 866,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (120.0萬)",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 561,
+    "pName": "頤和知序",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/12",
+      "unit": "宜蘭縣員山鄉尚智路 (A棟A8-6F號)",
+      "floor": "六層/7層",
+      "areaPing": 23.6,
+      "pricePerPing": 29.4,
+      "totalPrice": 670,
+      "layout": "1房2廳1衛",
+      "parking": "一樓平面 (150.0萬)",
+      "note": "",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 561,
+    "pName": "頤和知序",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/10",
+      "unit": "宜蘭縣員山鄉尚智路 (A棟A7-7F號)",
+      "floor": "七層",
+      "areaPing": 30.17,
+      "pricePerPing": 29.3,
+      "totalPrice": 881,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (110.0萬)"
+    }
+  },
+  {
+    "pId": 561,
+    "pName": "頤和知序",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/10",
+      "unit": "宜蘭縣員山鄉尚智路 (A棟A7-5F號)",
+      "floor": "五層",
+      "areaPing": 30.17,
+      "pricePerPing": 28.9,
+      "totalPrice": 871,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面 (110.0萬)"
+    }
+  },
+  {
+    "pId": 561,
+    "pName": "頤和知序",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/08",
+      "unit": "宜蘭縣員山鄉尚智路 (A棟A6-5F號)",
+      "floor": "五層",
+      "areaPing": 37.29,
+      "pricePerPing": 29.5,
+      "totalPrice": 1095,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面 (110.0萬)"
+    }
+  },
+  {
+    "pId": 564,
+    "pName": "圓鼎禾豐",
+    "town": "宜蘭市",
+    "tx": {
+      "dateRoc": "115/07/29",
+      "rawDate": "1150729",
+      "unit": "1棟2FB2號",
+      "floor": "二層",
+      "areaPing": 20.6,
+      "pricePerPing": 34.1,
+      "totalPrice": 988,
+      "totalPriceWan": 988,
+      "layout": "3房2廳2衛",
+      "parking": "",
+      "address": "宜蘭縣宜蘭市延平一路198巷",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 564,
+    "pName": "圓鼎禾豐",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/14",
+      "unit": "宜蘭縣宜蘭市延平一路198巷 (1棟3FB2號)",
+      "floor": "三層/3層",
+      "areaPing": 29,
+      "pricePerPing": 34.1,
+      "totalPrice": 988,
+      "layout": "3房2廳2衛",
+      "parking": "",
+      "note": "車位隨到隨停",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 564,
+    "pName": "圓鼎禾豐",
+    "town": "宜蘭市",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/12",
+      "unit": "宜蘭縣宜蘭市延平一路198巷 (1棟2FA2號)",
+      "floor": "二層/3層",
+      "areaPing": 23.1,
+      "pricePerPing": 33.6,
+      "totalPrice": 778,
+      "layout": "2房2廳1衛",
+      "parking": "",
+      "note": "車位隨到隨停",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 571,
+    "pName": "佳荷5",
+    "town": "員山鄉",
+    "tx": {
+      "dateRoc": "115/07/31",
+      "rawDate": "1150731",
+      "unit": "A棟2號",
+      "floor": "全",
+      "areaPing": 29.5,
+      "pricePerPing": 23.5,
+      "totalPrice": 1298,
+      "totalPriceWan": 1298,
+      "layout": "4房2廳5衛",
+      "parking": "",
+      "address": "宜蘭縣員山鄉惠好路16巷",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 571,
+    "pName": "佳荷5",
+    "town": "員山鄉",
+    "tx": {
+      "dateRoc": "115/07/27",
+      "rawDate": "1150727",
+      "unit": "A棟1號",
+      "floor": "全",
+      "areaPing": 30.4,
+      "pricePerPing": 25.1,
+      "totalPrice": 1388,
+      "totalPriceWan": 1388,
+      "layout": "4房2廳5衛",
+      "parking": "",
+      "address": "宜蘭縣員山鄉惠好路16巷",
+      "target": "房地(土地+建物)",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 571,
+    "pName": "佳荷5",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/15",
+      "unit": "宜蘭縣員山鄉惠好路16巷 (B棟7號)",
+      "floor": "全/4層",
+      "areaPing": 47.5,
+      "pricePerPing": 23.7,
+      "totalPrice": 1128,
+      "layout": "4房2廳4衛",
+      "parking": "一樓平面",
+      "note": "主建物含車位面積19.70平方公尺",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 571,
+    "pName": "佳荷5",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/13",
+      "unit": "宜蘭縣員山鄉惠好路16巷 (B棟6號)",
+      "floor": "全/4層",
+      "areaPing": 47.5,
+      "pricePerPing": 23.7,
+      "totalPrice": 1128,
+      "layout": "4房2廳4衛",
+      "parking": "一樓平面",
+      "note": "主建物含車位面積19.70平方公尺",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 571,
+    "pName": "佳荷5",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/13",
+      "unit": "宜蘭縣員山鄉惠好路16巷 (B棟5號)",
+      "floor": "全/4層",
+      "areaPing": 47.5,
+      "pricePerPing": 23.3,
+      "totalPrice": 1108,
+      "layout": "4房2廳4衛",
+      "parking": "一樓平面",
+      "note": "主建物含車位面積19.70平方公尺",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 571,
+    "pName": "佳荷5",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/12",
+      "unit": "宜蘭縣員山鄉惠好路16巷 (A棟5號)",
+      "floor": "全/4層",
+      "areaPing": 47.5,
+      "pricePerPing": 24.2,
+      "totalPrice": 1148,
+      "layout": "4房2廳4衛",
+      "parking": "一樓平面",
+      "note": "主建物含車位面積19.70平方公尺",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 571,
+    "pName": "佳荷5",
+    "town": "員山鄉",
+    "tx": {
+      "source": "預售實登",
+      "dateRoc": "115/07/12",
+      "unit": "宜蘭縣員山鄉惠好路16巷 (B棟1號)",
+      "floor": "全/4層",
+      "areaPing": 46.7,
+      "pricePerPing": 22.7,
+      "totalPrice": 1058,
+      "layout": "4房2廳4衛",
+      "parking": "一樓平面",
+      "note": "主建物含車位面積19.58平方公尺",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 578,
+    "pName": "鳳凰愛買27期",
+    "town": "礁溪鄉",
+    "tx": {
+      "dateRoc": "115/07/31",
+      "rawDate": "1150731",
+      "unit": "C棟4F號",
+      "floor": "四層",
+      "areaPing": 10.4,
+      "pricePerPing": 28.7,
+      "totalPrice": 750,
+      "totalPriceWan": 750,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面",
+      "address": "宜蘭縣礁溪鄉白雲二路132巷",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 578,
+    "pName": "鳳凰愛買27期",
+    "town": "礁溪鄉",
+    "tx": {
+      "dateRoc": "115/07/24",
+      "rawDate": "1150724",
+      "unit": "B棟2F號",
+      "floor": "二層",
+      "areaPing": 8.7,
+      "pricePerPing": 25.4,
+      "totalPrice": 570,
+      "totalPriceWan": 570,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面",
+      "address": "宜蘭縣礁溪鄉白雲二路132巷",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  },
+  {
+    "pId": 578,
+    "pName": "鳳凰愛買27期",
+    "town": "礁溪鄉",
+    "tx": {
+      "dateRoc": "115/07/23",
+      "rawDate": "1150723",
+      "unit": "B棟4F號",
+      "floor": "四層",
+      "areaPing": 8.7,
+      "pricePerPing": 28.5,
+      "totalPrice": 640,
+      "totalPriceWan": 640,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面",
+      "address": "宜蘭縣礁溪鄉白雲二路132巷",
+      "target": "房地(土地+建物)+車位",
+      "isNewBatch": true
+    }
+  }
+]

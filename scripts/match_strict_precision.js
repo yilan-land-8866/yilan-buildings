@@ -55,6 +55,38 @@ function runMatching() {
     const rawTxA = JSON.parse(fs.readFileSync(rawAFile, 'utf-8'));
     const rawTxB = JSON.parse(fs.readFileSync(rawBFile, 'utf-8'));
 
+    // Load historical seed transactions to protect past intermediate 10-day batches
+    const seedFile = path.join(__dirname, 'historical_incremental_tx.json');
+    let historicalSeed = [];
+    if (fs.existsSync(seedFile)) {
+        try {
+            historicalSeed = JSON.parse(fs.readFileSync(seedFile, 'utf-8'));
+        } catch (e) {}
+    }
+    const seedByProject = {};
+    historicalSeed.forEach(item => {
+        const pName = item.pName || item.caseName;
+        if (pName) {
+            if (!seedByProject[pName]) seedByProject[pName] = [];
+            seedByProject[pName].push(item.tx || item);
+        }
+    });
+
+    function makeTxKey(t) {
+        const d = (t.dateRoc || '').trim();
+        const fl = (t.floor || '').trim();
+        const tp = Math.round(t.totalPriceWan !== undefined ? t.totalPriceWan : (t.totalPrice || 0));
+        const ap = t.areaPing ? parseFloat(t.areaPing).toFixed(1) : '0';
+        return `${d}_${fl}_${tp}_${ap}`;
+    }
+
+    function makeLandKey(t) {
+        const d = (t.dateRoc || '').trim();
+        const tp = Math.round(t.totalPriceWan !== undefined ? t.totalPriceWan : (t.totalPrice || 0));
+        const ap = t.areaPing ? parseFloat(t.areaPing).toFixed(1) : '0';
+        return `${d}_${tp}_${ap}`;
+    }
+
     const txByTownB = {};
     const txByTownA_Building = {};
     const txByTownA_Land = {};
@@ -356,12 +388,110 @@ function runMatching() {
             }
         }
 
-        // Combine PRE-SALE (matchedB) and COMPLETED HOUSING (matchedA_Bldg)
-        const allTransactions = [...matchedB, ...matchedA_Bldg];
+        // Combine newly matched transactions (Pre-sale + Completed Housing)
+        const newlyMatchedTxs = [...matchedB, ...matchedA_Bldg].map(t => ({
+            source: t.source,
+            isParking: !!t.isParking,
+            dateRoc: t.dateRoc,
+            rawDate: t.rawDate,
+            unit: t.address,
+            floor: t.floor,
+            areaPing: t.areaPing,
+            pricePerPing: t.pricePerPing,
+            totalPrice: t.totalPriceWan,
+            totalPriceWan: t.totalPriceWan,
+            layout: t.layout,
+            parking: t.parking
+        }));
+
+        // Collect existing transactions from data.json + seed transactions from intermediate 10-day batches
+        const existingTxs = (p.salesStats && Array.isArray(p.salesStats.transactions)) ? p.salesStats.transactions : [];
+        const seedTxs = seedByProject[p.caseName] || [];
+
+        // Build priorPool idempotently: take max(count(existing), count(seed)) for each key
+        const existCounts = {};
+        const existByKey = {};
+        existingTxs.forEach(t => {
+            const k = makeTxKey(t);
+            existCounts[k] = (existCounts[k] || 0) + 1;
+            if (!existByKey[k]) existByKey[k] = [];
+            existByKey[k].push(t);
+        });
+
+        const seedCounts = {};
+        const seedByKey = {};
+        seedTxs.forEach(t => {
+            const k = makeTxKey(t);
+            seedCounts[k] = (seedCounts[k] || 0) + 1;
+            if (!seedByKey[k]) seedByKey[k] = [];
+            seedByKey[k].push(t);
+        });
+
+        const priorPool = [];
+        const priorKeys = new Set([...Object.keys(existCounts), ...Object.keys(seedCounts)]);
+        priorKeys.forEach(k => {
+            const eList = existByKey[k] || [];
+            const sList = seedByKey[k] || [];
+            if (eList.length >= sList.length) {
+                priorPool.push(...eList);
+            } else {
+                priorPool.push(...eList, ...sList.slice(eList.length));
+            }
+        });
+
+        // Multiset merge: take all newly matched, and if prior pool had more instances for any key, preserve the extras
+        const newCounts = {};
+        const newByKey = {};
+        newlyMatchedTxs.forEach(t => {
+            const k = makeTxKey(t);
+            newCounts[k] = (newCounts[k] || 0) + 1;
+            if (!newByKey[k]) newByKey[k] = [];
+            newByKey[k].push(t);
+        });
+
+        const priorCounts = {};
+        const priorByKey = {};
+        priorPool.forEach(t => {
+            const k = makeTxKey(t);
+            priorCounts[k] = (priorCounts[k] || 0) + 1;
+            if (!priorByKey[k]) priorByKey[k] = [];
+            priorByKey[k].push(t);
+        });
+
+        const allTransactions = [];
+        const allKeys = new Set([...Object.keys(newCounts), ...Object.keys(priorCounts)]);
+        allKeys.forEach(k => {
+            const nList = newByKey[k] || [];
+            const pList = priorByKey[k] || [];
+            allTransactions.push(...nList);
+            if (pList.length > nList.length) {
+                const extra = pList.slice(nList.length);
+                extra.forEach(t => {
+                    allTransactions.push({
+                        source: t.source || '預售屋實登',
+                        isParking: !!t.isParking,
+                        dateRoc: t.dateRoc,
+                        rawDate: t.rawDate || (t.dateRoc ? t.dateRoc.replace(/\//g, '') : ''),
+                        unit: t.unit || t.address || '',
+                        floor: t.floor || '',
+                        areaPing: t.areaPing || 0,
+                        pricePerPing: t.pricePerPing || 0,
+                        totalPrice: t.totalPriceWan !== undefined ? t.totalPriceWan : (t.totalPrice || 0),
+                        totalPriceWan: t.totalPriceWan !== undefined ? t.totalPriceWan : (t.totalPrice || 0),
+                        layout: t.layout || '',
+                        parking: t.parking || ''
+                    });
+                });
+            }
+        });
 
         if (allTransactions.length > 0) {
             totalMatchedProjects++;
-            allTransactions.sort((a, b) => (b.rawDate || '').localeCompare(a.rawDate || ''));
+            allTransactions.sort((a, b) => {
+                const da = a.rawDate || (a.dateRoc ? a.dateRoc.replace(/\//g, '') : '');
+                const db = b.rawDate || (b.dateRoc ? b.dateRoc.replace(/\//g, '') : '');
+                return db.localeCompare(da);
+            });
 
             const residentialTxs = allTransactions.filter(t => !t.isParking);
             const parkingTxs = allTransactions.filter(t => t.isParking);
@@ -395,8 +525,8 @@ function runMatching() {
                 rawTxCount: allTransactions.length,
                 residentialCount: residentialTxs.length,
                 parkingCount: parkingTxs.length,
-                presaleCount: matchedB.filter(t => !t.isParking).length,
-                completedCount: matchedA_Bldg.filter(t => !t.isParking).length,
+                presaleCount: allTransactions.filter(t => !t.isParking && (t.source || '').includes('預售')).length,
+                completedCount: allTransactions.filter(t => !t.isParking && !(t.source || '').includes('預售')).length,
                 totalHouseholds: plannedHouseholds,
                 salesRate: salesRate,
                 isSoldOut: isSoldOut,
@@ -408,16 +538,16 @@ function runMatching() {
                 maxTotalPrice: maxTotal,
                 latestTransactionDate: allTransactions[0].dateRoc,
                 transactions: allTransactions.map(t => ({
-                    source: t.source,
+                    source: t.source || '預售屋實登',
                     isParking: !!t.isParking,
                     dateRoc: t.dateRoc,
-                    unit: t.address,
-                    floor: t.floor,
-                    areaPing: t.areaPing,
-                    pricePerPing: t.pricePerPing,
-                    totalPrice: t.totalPriceWan,
-                    layout: t.layout,
-                    parking: t.parking
+                    unit: t.unit || t.address || '',
+                    floor: t.floor || '',
+                    areaPing: t.areaPing || 0,
+                    pricePerPing: t.pricePerPing || 0,
+                    totalPrice: t.totalPriceWan !== undefined ? t.totalPriceWan : (t.totalPrice || 0),
+                    layout: t.layout || '',
+                    parking: t.parking || ''
                 }))
             };
         } else {
@@ -467,29 +597,87 @@ function runMatching() {
             }
         }
 
-        if (matchedLandTx.length > 0) {
-            totalProjectsWithLand++;
-            matchedLandTx.sort((a, b) => (b.rawDate || '').localeCompare(a.rawDate || ''));
+        // Multiset merge for land transactions
+        const newlyMatchedLand = matchedLandTx.map(t => ({
+            dateRoc: t.dateRoc,
+            rawDate: t.rawDate,
+            landParcel: t.address,
+            pricePerPing: t.pricePerPing,
+            totalPrice: t.totalPriceWan,
+            totalPriceWan: t.totalPriceWan,
+            areaPing: t.areaPing,
+            note: t.note
+        }));
 
-            const validLandPrices = matchedLandTx.filter(t => t.pricePerPing > 0).map(t => t.pricePerPing);
-            const validLandTotals = matchedLandTx.filter(t => t.totalPriceWan > 0).map(t => t.totalPriceWan);
-            const totalLandArea = matchedLandTx.reduce((a, b) => a + (b.areaPing || 0), 0);
+        const existingLandTxs = (p.landStats && Array.isArray(p.landStats.transactions)) ? p.landStats.transactions : [];
+        const landNewCounts = {};
+        const landNewByKey = {};
+        newlyMatchedLand.forEach(t => {
+            const k = makeLandKey(t);
+            landNewCounts[k] = (landNewCounts[k] || 0) + 1;
+            if (!landNewByKey[k]) landNewByKey[k] = [];
+            landNewByKey[k].push(t);
+        });
+
+        const landPriorCounts = {};
+        const landPriorByKey = {};
+        existingLandTxs.forEach(t => {
+            const k = makeLandKey(t);
+            landPriorCounts[k] = (landPriorCounts[k] || 0) + 1;
+            if (!landPriorByKey[k]) landPriorByKey[k] = [];
+            landPriorByKey[k].push(t);
+        });
+
+        const allLandTxs = [];
+        const allLandKeys = new Set([...Object.keys(landNewCounts), ...Object.keys(landPriorCounts)]);
+        allLandKeys.forEach(k => {
+            const nList = landNewByKey[k] || [];
+            const pList = landPriorByKey[k] || [];
+            allLandTxs.push(...nList);
+            if (pList.length > nList.length) {
+                const extra = pList.slice(nList.length);
+                extra.forEach(t => {
+                    allLandTxs.push({
+                        dateRoc: t.dateRoc,
+                        rawDate: t.rawDate || (t.dateRoc ? t.dateRoc.replace(/\//g, '') : ''),
+                        landParcel: t.landParcel || t.address || '',
+                        pricePerPing: t.pricePerPing || 0,
+                        totalPrice: t.totalPriceWan !== undefined ? t.totalPriceWan : (t.totalPrice || 0),
+                        totalPriceWan: t.totalPriceWan !== undefined ? t.totalPriceWan : (t.totalPrice || 0),
+                        areaPing: t.areaPing || 0,
+                        note: t.note || ''
+                    });
+                });
+            }
+        });
+
+        if (allLandTxs.length > 0) {
+            totalProjectsWithLand++;
+            allLandTxs.sort((a, b) => {
+                const da = a.rawDate || (a.dateRoc ? a.dateRoc.replace(/\//g, '') : '');
+                const db = b.rawDate || (b.dateRoc ? b.dateRoc.replace(/\//g, '') : '');
+                return db.localeCompare(da);
+            });
+
+            const validLandPrices = allLandTxs.filter(t => t.pricePerPing > 0).map(t => t.pricePerPing);
+            const validLandTotals = allLandTxs.filter(t => t.totalPriceWan > 0).map(t => t.totalPriceWan);
+            const totalLandArea = allLandTxs.reduce((a, b) => a + (b.areaPing || 0), 0);
 
             const avgLandPrice = validLandPrices.length > 0 ? parseFloat((validLandPrices.reduce((a, b) => a + b, 0) / validLandPrices.length).toFixed(1)) : 0;
             const totalLandCost = validLandTotals.length > 0 ? parseFloat(validLandTotals.reduce((a, b) => a + b, 0).toFixed(1)) : 0;
 
             p.landStats = {
                 hasLandData: true,
-                txCount: matchedLandTx.length,
-                latestLandDate: matchedLandTx[0].dateRoc,
+                txCount: allLandTxs.length,
+                latestLandDate: allLandTxs[0].dateRoc,
                 avgLandPricePerPing: avgLandPrice,
                 minLandPrice: Math.min(...validLandPrices),
                 maxLandPrice: Math.max(...validLandPrices),
                 totalLandCostWan: totalLandCost,
                 totalLandAreaPing: parseFloat(totalLandArea.toFixed(1)),
-                transactions: matchedLandTx.map(t => ({
+                transactions: allLandTxs.map(t => ({
                     dateRoc: t.dateRoc,
-                    landParcel: t.address,
+                    landParcel: t.landParcel,
                     pricePerPing: t.pricePerPing,
                     totalPrice: t.totalPriceWan,
                     areaPing: t.areaPing,
