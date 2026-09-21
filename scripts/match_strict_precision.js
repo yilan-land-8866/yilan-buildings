@@ -12,13 +12,31 @@ function normalizeText(str) {
     if (!str) return '';
     return String(str)
         .replace(/[０-９]/g, d => String.fromCharCode(d.charCodeAt(0) - 0xFEE0))
+        .replace(/Ⅰ/g, '1')
+        .replace(/Ⅱ/g, '2')
+        .replace(/Ⅲ/g, '3')
+        .replace(/Ⅳ/g, '4')
+        .replace(/Ⅴ/g, '5')
         .replace(/(?<![a-z0-9])no\.?\s*(?=\d)/gi, '')
-        .replace(/[\s\-_－—·\.]/g, '')
+        .replace(/[\s\-_－—–―·・．\.]/g, '')
+        .replace(/[【】]/g, '')
         .replace(/臺/g, '台')
         .replace(/（/g, '(')
         .replace(/）/g, ')')
         .replace(/，/g, ',')
         .toLowerCase();
+}
+
+function caseNameMatches(rawNorm, projectNorm) {
+    if (!rawNorm || !projectNorm) return false;
+    if (rawNorm === projectNorm) return true;
+    if (rawNorm.includes('?') && rawNorm.length >= 3) {
+        const parts = rawNorm.split('?');
+        const regexStr = '^' + parts.map(s => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')).join('.?') + '$';
+        const re = new RegExp(regexStr);
+        if (re.test(projectNorm)) return true;
+    }
+    return false;
 }
 
 function parseSectionAndNum(landStr) {
@@ -303,7 +321,7 @@ function runMatching() {
 
             if (pCaseNameNorm.length >= 2 && !isGenericCaseName) {
                 if (tx.normCase) {
-                    if (tx.normCase === pCaseNameNorm) {
+                    if (caseNameMatches(tx.normCase, pCaseNameNorm)) {
                         isMatch = true;
                     } else if (tx.normCase.includes(pCaseNameNorm) || pCaseNameNorm.includes(tx.normCase)) {
                         const townList = townProjectsMap[pTown] || [];
