@@ -41,16 +41,20 @@ async function main() {
     const excelPath = path.join(rootDir, '宜蘭建案實價登錄銷售統計.xlsx');
     const excelStats = fs.existsSync(excelPath);
 
-    // Verify critical case integrity (e.g. 鳳凰愛買27期)
+    // Verify critical case integrity (e.g. 鳳凰愛買27期, 美澍家10)
     const p27 = dataJson.find(p => p.caseName === '鳳凰愛買27期');
     const p27Sold = p27 && p27.salesStats ? p27.salesStats.soldUnits : 0;
 
+    const p520 = dataJson.find(p => p.id === 520 || p.caseName === '美澍家10');
+    const p520Sold = p520 && p520.salesStats ? p520.salesStats.soldUnits : 0;
+
     console.log(`  - 建案資料庫: 共 ${dataJson.length} 筆建案`);
     console.log(`  - 關鍵指標檢查 (鳳凰愛買27期): 實登售出 ${p27Sold} 戶 ${p27Sold >= 3 ? '✓' : '❌ 異常'}`);
+    console.log(`  - 關鍵指標檢查 (美澍家10): 實登售出 ${p520Sold} 戶 ${p520Sold >= 6 ? '✓' : '❌ 異常'}`);
     console.log(`  - index.html: ${(indexHtml.length / (1024 * 1024)).toFixed(2)} MB`);
     console.log(`  - Excel 統計表: ${excelStats ? '正常產生 ✓' : '異常 ❌'}`);
 
-    if (dataJson.length < 580 || p27Sold < 3 || indexHtml.length < 1000000 || !excelStats) {
+    if (dataJson.length < 580 || p27Sold < 3 || p520Sold < 6 || indexHtml.length < 1000000 || !excelStats) {
         throw new Error('❌ 健康檢查未通過，資料可能不完整或有遺漏！');
     }
 

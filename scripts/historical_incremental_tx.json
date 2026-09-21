@@ -4610,5 +4610,101 @@
       "target": "房地(土地+建物)+車位",
       "isNewBatch": true
     }
+  },
+  {
+    "pId": 520,
+    "pName": "美澍家10",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售屋實登",
+      "dateRoc": "115/08/10",
+      "unit": "宜蘭縣羅東鎮月眉路",
+      "floor": "四層",
+      "areaPing": 31.1,
+      "pricePerPing": 36.1,
+      "totalPrice": 1058,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 520,
+    "pName": "美澍家10",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售屋實登",
+      "dateRoc": "115/08/03",
+      "unit": "宜蘭縣羅東鎮月眉路",
+      "floor": "三層",
+      "areaPing": 38,
+      "pricePerPing": 35.5,
+      "totalPrice": 1287,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 520,
+    "pName": "美澍家10",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售屋實登",
+      "dateRoc": "115/04/27",
+      "unit": "宜蘭縣羅東鎮月眉路",
+      "floor": "四層",
+      "areaPing": 40.6,
+      "pricePerPing": 36.7,
+      "totalPrice": 1420,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 520,
+    "pName": "美澍家10",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售屋實登",
+      "dateRoc": "115/04/05",
+      "unit": "宜蘭縣羅東鎮月眉路",
+      "floor": "三層",
+      "areaPing": 31.1,
+      "pricePerPing": 35.6,
+      "totalPrice": 1045,
+      "layout": "2房2廳2衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 520,
+    "pName": "美澍家10",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售屋實登",
+      "dateRoc": "115/03/29",
+      "unit": "宜蘭縣羅東鎮月眉路",
+      "floor": "三層",
+      "areaPing": 42.5,
+      "pricePerPing": 34.2,
+      "totalPrice": 1395,
+      "layout": "3房2廳2衛",
+      "parking": "一樓平面"
+    }
+  },
+  {
+    "pId": 520,
+    "pName": "美澍家10",
+    "town": "羅東鎮",
+    "tx": {
+      "source": "預售屋實登",
+      "dateRoc": "115/03/14",
+      "unit": "宜蘭縣羅東鎮月眉路",
+      "floor": "全",
+      "areaPing": 65.7,
+      "pricePerPing": 36.3,
+      "totalPrice": 2380,
+      "layout": "4房2廳5衛",
+      "parking": "土地1建物1車位0"
+    }
   }
 ]

@@ -11,7 +11,9 @@ const excelPath = path.join(rootDir, '宜蘭建案實價登錄銷售統計.xlsx'
 function normalizeText(str) {
     if (!str) return '';
     return String(str)
-        .replace(/[\s\-_－—·]/g, '')
+        .replace(/[０-９]/g, d => String.fromCharCode(d.charCodeAt(0) - 0xFEE0))
+        .replace(/(?<![a-z0-9])no\.?\s*(?=\d)/gi, '')
+        .replace(/[\s\-_－—·\.]/g, '')
         .replace(/臺/g, '台')
         .replace(/（/g, '(')
         .replace(/）/g, ')')

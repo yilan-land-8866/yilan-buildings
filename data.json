@@ -3372,7 +3372,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "歡喜家園no.21"
+    "_caseNameNorm": "歡喜家園21"
   },
   {
     "id": 8,
@@ -7197,7 +7197,7 @@
         }
       ]
     },
-    "_caseNameNorm": "青井澤no.12"
+    "_caseNameNorm": "青井澤12"
   },
   {
     "id": 18,
@@ -16658,7 +16658,7 @@
         }
       ]
     },
-    "_caseNameNorm": "長堤no.11"
+    "_caseNameNorm": "長堤11"
   },
   {
     "id": 34,
@@ -23292,7 +23292,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "大吉大利no.3"
+    "_caseNameNorm": "大吉大利3"
   },
   {
     "id": 56,
@@ -30458,7 +30458,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "晏京築青no.2華廈"
+    "_caseNameNorm": "晏京築青2華廈"
   },
   {
     "id": 76,
@@ -30819,7 +30819,7 @@
         }
       ]
     },
-    "_caseNameNorm": "久誼首席no.1"
+    "_caseNameNorm": "久誼首席1"
   },
   {
     "id": 77,
@@ -31193,7 +31193,7 @@
         }
       ]
     },
-    "_caseNameNorm": "晏京築青no.2別墅"
+    "_caseNameNorm": "晏京築青2別墅"
   },
   {
     "id": 78,
@@ -32848,7 +32848,7 @@
         }
       ]
     },
-    "_caseNameNorm": "圓滿no.5"
+    "_caseNameNorm": "圓滿5"
   },
   {
     "id": 83,
@@ -33393,7 +33393,7 @@
         }
       ]
     },
-    "_caseNameNorm": "歡喜家園no.22"
+    "_caseNameNorm": "歡喜家園22"
   },
   {
     "id": 85,
@@ -34640,7 +34640,7 @@
         }
       ]
     },
-    "_caseNameNorm": "香榭麗舍no.7"
+    "_caseNameNorm": "香榭麗舍7"
   },
   {
     "id": 87,
@@ -35051,7 +35051,7 @@
         }
       ]
     },
-    "_caseNameNorm": "香榭麗舍no.6"
+    "_caseNameNorm": "香榭麗舍6"
   },
   {
     "id": 88,
@@ -38279,7 +38279,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "鳳凰墅no.9新建工程"
+    "_caseNameNorm": "鳳凰墅9新建工程"
   },
   {
     "id": 97,
@@ -42801,7 +42801,7 @@
         }
       ]
     },
-    "_caseNameNorm": "微笑登陽no.2"
+    "_caseNameNorm": "微笑登陽2"
   },
   {
     "id": 109,
@@ -43739,20 +43739,20 @@
     "salesStats": {
       "hasSalesData": true,
       "soldUnits": 3,
-      "rawTxCount": 3,
-      "residentialCount": 3,
+      "rawTxCount": 6,
+      "residentialCount": 6,
       "parkingCount": 0,
-      "presaleCount": 3,
+      "presaleCount": 6,
       "completedCount": 0,
       "totalHouseholds": 3,
       "salesRate": 100,
       "isSoldOut": true,
-      "avgPricePerPing": 30.3,
-      "minPricePerPing": 29.9,
+      "avgPricePerPing": 30,
+      "minPricePerPing": 28.8,
       "maxPricePerPing": 31.1,
-      "avgTotalPrice": 1763.3,
+      "avgTotalPrice": 1851.3,
       "minTotalPrice": 1730,
-      "maxTotalPrice": 1800,
+      "maxTotalPrice": 2000,
       "latestTransactionDate": "112/06/29",
       "transactions": [
         {
@@ -43780,16 +43780,52 @@
           "parking": "土地1建物1車位0"
         },
         {
-          "source": "預售實登",
+          "source": "預售屋實登",
           "isParking": false,
           "dateRoc": "111/08/05",
           "unit": "宜蘭縣宜蘭市宜科一路279巷",
           "floor": "全",
-          "areaPing": 57.94,
+          "areaPing": 57.9,
           "pricePerPing": 29.9,
           "totalPrice": 1730,
           "layout": "4房2廳4衛",
-          "parking": ""
+          "parking": "土地1建物1車位0"
+        },
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "111/06/05",
+          "unit": "宜蘭縣宜蘭市公園三路",
+          "floor": "全",
+          "areaPing": 65.4,
+          "pricePerPing": 30.6,
+          "totalPrice": 2000,
+          "layout": "4房2廳5衛",
+          "parking": "土地1建物1車位0"
+        },
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "110/12/31",
+          "unit": "宜蘭縣宜蘭市公園三路",
+          "floor": "全",
+          "areaPing": 64.8,
+          "pricePerPing": 28.8,
+          "totalPrice": 1868,
+          "layout": "4房2廳5衛",
+          "parking": "土地1建物1車位0"
+        },
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "110/11/25",
+          "unit": "宜蘭縣宜蘭市公園三路",
+          "floor": "全",
+          "areaPing": 65.4,
+          "pricePerPing": 29.8,
+          "totalPrice": 1950,
+          "layout": "4房2廳5衛",
+          "parking": "土地1建物1車位0"
         }
       ]
     },
@@ -43804,7 +43840,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "公園自在no2"
+    "_caseNameNorm": "公園自在2"
   },
   {
     "id": 114,
@@ -49461,7 +49497,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "力璟.無疆大境"
+    "_caseNameNorm": "力璟無疆大境"
   },
   {
     "id": 126,
@@ -49978,7 +50014,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "吉祥郡no.8"
+    "_caseNameNorm": "吉祥郡8"
   },
   {
     "id": 128,
@@ -58953,7 +58989,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "順和苑no.2"
+    "_caseNameNorm": "順和苑2"
   },
   {
     "id": 149,
@@ -59821,7 +59857,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "朗朗居no.2"
+    "_caseNameNorm": "朗朗居2"
   },
   {
     "id": 150,
@@ -63811,7 +63847,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "長堤no.13"
+    "_caseNameNorm": "長堤13"
   },
   {
     "id": 158,
@@ -69605,7 +69641,7 @@
         }
       ]
     },
-    "_caseNameNorm": "歡喜家園no.23"
+    "_caseNameNorm": "歡喜家園23"
   },
   {
     "id": 172,
@@ -72764,7 +72800,7 @@
         }
       ]
     },
-    "_caseNameNorm": "百亨優閣透天別墅no.10"
+    "_caseNameNorm": "百亨優閣透天別墅10"
   },
   {
     "id": 178,
@@ -91674,40 +91710,40 @@
           "parking": "土地3建物1車位0"
         },
         {
-          "source": "預售實登",
+          "source": "預售屋實登",
           "isParking": false,
           "dateRoc": "112/10/21",
           "unit": "宜蘭縣宜蘭市中山路五段577巷",
           "floor": "全",
-          "areaPing": 61.14,
+          "areaPing": 61.1,
           "pricePerPing": 24.1,
           "totalPrice": 1475,
           "layout": "5房2廳5衛",
-          "parking": ""
+          "parking": "土地3建物1車位0"
         },
         {
-          "source": "預售實登",
+          "source": "預售屋實登",
           "isParking": false,
           "dateRoc": "112/10/14",
           "unit": "宜蘭縣宜蘭市中山路五段577巷",
           "floor": "全",
-          "areaPing": 54.04,
+          "areaPing": 54,
           "pricePerPing": 25.5,
           "totalPrice": 1380,
           "layout": "5房2廳5衛",
-          "parking": ""
+          "parking": "土地3建物1車位0"
         },
         {
-          "source": "預售實登",
+          "source": "預售屋實登",
           "isParking": false,
           "dateRoc": "112/10/08",
           "unit": "宜蘭縣宜蘭市中山路五段577巷",
           "floor": "全",
-          "areaPing": 55.23,
+          "areaPing": 55.2,
           "pricePerPing": 24.8,
           "totalPrice": 1368,
           "layout": "5房2廳5衛",
-          "parking": ""
+          "parking": "土地3建物1車位0"
         }
       ]
     },
@@ -91731,7 +91767,7 @@
         }
       ]
     },
-    "_caseNameNorm": "寅成no.2"
+    "_caseNameNorm": "寅成2"
   },
   {
     "id": 232,
@@ -93663,7 +93699,7 @@
         }
       ]
     },
-    "_caseNameNorm": "美澍家no.3"
+    "_caseNameNorm": "美澍家3"
   },
   {
     "id": 236,
@@ -98882,7 +98918,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "美澍家no.5"
+    "_caseNameNorm": "美澍家5"
   },
   {
     "id": 251,
@@ -101015,7 +101051,7 @@
         }
       ]
     },
-    "_caseNameNorm": "香榭麗舍no.8"
+    "_caseNameNorm": "香榭麗舍8"
   },
   {
     "id": 254,
@@ -104426,7 +104462,7 @@
         }
       ]
     },
-    "_caseNameNorm": "麗璟.東門風華"
+    "_caseNameNorm": "麗璟東門風華"
   },
   {
     "id": 263,
@@ -118309,7 +118345,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "順和苑no.5"
+    "_caseNameNorm": "順和苑5"
   },
   {
     "id": 293,
@@ -121497,7 +121533,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "美澍家no.6"
+    "_caseNameNorm": "美澍家6"
   },
   {
     "id": 301,
@@ -138830,7 +138866,7 @@
         }
       ]
     },
-    "_caseNameNorm": "香榭麗舍no.9"
+    "_caseNameNorm": "香榭麗舍9"
   },
   {
     "id": 352,
@@ -139489,7 +139525,7 @@
         }
       ]
     },
-    "_caseNameNorm": "臻愛家no.1"
+    "_caseNameNorm": "臻愛家1"
   },
   {
     "id": 355,
@@ -143137,7 +143173,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "美澍家no.7"
+    "_caseNameNorm": "美澍家7"
   },
   {
     "id": 370,
@@ -144070,7 +144106,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "微笑登陽no.3"
+    "_caseNameNorm": "微笑登陽3"
   },
   {
     "id": 373,
@@ -144495,7 +144531,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "歡喜家園no.25"
+    "_caseNameNorm": "歡喜家園25"
   },
   {
     "id": 375,
@@ -144976,23 +145012,35 @@
     "searchTokens": "冬山鄉 心天地2期 下湖路 吉太國際租賃有限公司 特定農業區甲種建築用地 住家用 鋼筋混凝土造 建管建字第00165號 梅山段531地號 自售:無;代銷:1130901~1151231; 113/09/01 2024-09-01 113/05/13 2024-05-13 梅山段531地號 建管建字第00165號 113/05/13 2024-05-13",
     "salesStats": {
       "hasSalesData": true,
-      "soldUnits": 2,
-      "rawTxCount": 2,
-      "residentialCount": 2,
+      "soldUnits": 3,
+      "rawTxCount": 3,
+      "residentialCount": 3,
       "parkingCount": 0,
-      "presaleCount": 2,
+      "presaleCount": 3,
       "completedCount": 0,
       "totalHouseholds": 7,
-      "salesRate": 28.6,
+      "salesRate": 42.9,
       "isSoldOut": false,
-      "avgPricePerPing": 23.5,
+      "avgPricePerPing": 23.4,
       "minPricePerPing": 23.1,
       "maxPricePerPing": 23.9,
       "avgTotalPrice": 1680,
       "minTotalPrice": 1680,
       "maxTotalPrice": 1680,
-      "latestTransactionDate": "114/01/10",
+      "latestTransactionDate": "114/01/14",
       "transactions": [
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "114/01/14",
+          "unit": "宜蘭縣冬山鄉下湖路",
+          "floor": "全",
+          "areaPing": 72.7,
+          "pricePerPing": 23.1,
+          "totalPrice": 1680,
+          "layout": "5房2廳6衛",
+          "parking": "土地1建物1車位0"
+        },
         {
           "source": "預售屋實登",
           "isParking": false,
@@ -145977,7 +146025,7 @@
         }
       ]
     },
-    "_caseNameNorm": "呈家易居no.3"
+    "_caseNameNorm": "呈家易居3"
   },
   {
     "id": 382,
@@ -150713,7 +150761,7 @@
         }
       ]
     },
-    "_caseNameNorm": "川禾富居no.20"
+    "_caseNameNorm": "川禾富居20"
   },
   {
     "id": 398,
@@ -159662,19 +159710,19 @@
     "searchTokens": "宜蘭市 公園自在no.5 宜科一路310巷 和喜自在建設有限公司 第二種住宅區 住宅 鋼筋混凝土(rc) 建管建師字第90221號 進士段266地號 自售:1131231~1140630;代銷:1131231~1140630; qprnmllmkijgfdg48cg 113/12/31 2024-12-31 113/12/06 2024-12-06 進士段266地號 進士段266-1地號 進士段266-2地號 進士段266-3地號 進士段266-4地號 進士段266-5地號 進士段266-6地號 建管建師字第90221號 113/12/06 2024-12-06 建管建師字第90189號 113/10/30 2024-10-30 建管建師字第90190號 113/10/30 2024-10-30",
     "salesStats": {
       "hasSalesData": true,
-      "soldUnits": 3,
-      "rawTxCount": 3,
-      "residentialCount": 3,
+      "soldUnits": 4,
+      "rawTxCount": 4,
+      "residentialCount": 4,
       "parkingCount": 0,
-      "presaleCount": 3,
+      "presaleCount": 4,
       "completedCount": 0,
       "totalHouseholds": 7,
-      "salesRate": 42.9,
+      "salesRate": 57.1,
       "isSoldOut": false,
-      "avgPricePerPing": 41.6,
-      "minPricePerPing": 41.1,
+      "avgPricePerPing": 41.5,
+      "minPricePerPing": 41,
       "maxPricePerPing": 42.3,
-      "avgTotalPrice": 2713.3,
+      "avgTotalPrice": 2692.5,
       "minTotalPrice": 2630,
       "maxTotalPrice": 2850,
       "latestTransactionDate": "114/12/30",
@@ -159687,6 +159735,18 @@
           "floor": "全",
           "areaPing": 63.9,
           "pricePerPing": 42.3,
+          "totalPrice": 2630,
+          "layout": "4房2廳5衛",
+          "parking": "一樓平面"
+        },
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "114/02/23",
+          "unit": "宜蘭縣宜蘭市宜科一路310巷",
+          "floor": "全",
+          "areaPing": 65.8,
+          "pricePerPing": 41,
           "totalPrice": 2630,
           "layout": "4房2廳5衛",
           "parking": "一樓平面"
@@ -159737,7 +159797,7 @@
         }
       ]
     },
-    "_caseNameNorm": "公園自在no.5"
+    "_caseNameNorm": "公園自在5"
   },
   {
     "id": 430,
@@ -162611,7 +162671,7 @@
         }
       ]
     },
-    "_caseNameNorm": "美澍川no.8"
+    "_caseNameNorm": "美澍川8"
   },
   {
     "id": 439,
@@ -163891,7 +163951,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "麗璟.東門風華2"
+    "_caseNameNorm": "麗璟東門風華2"
   },
   {
     "id": 446,
@@ -166578,7 +166638,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "富德家no.10"
+    "_caseNameNorm": "富德家10"
   },
   {
     "id": 459,
@@ -167594,7 +167654,7 @@
         }
       ]
     },
-    "_caseNameNorm": "富德家no.7"
+    "_caseNameNorm": "富德家7"
   },
   {
     "id": 465,
@@ -167687,7 +167747,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "富德家no.3"
+    "_caseNameNorm": "富德家3"
   },
   {
     "id": 466,
@@ -171306,7 +171366,7 @@
         }
       ]
     },
-    "_caseNameNorm": "順和苑no.6"
+    "_caseNameNorm": "順和苑6"
   },
   {
     "id": 477,
@@ -174360,7 +174420,7 @@
         }
       ]
     },
-    "_caseNameNorm": "美澍川no.9"
+    "_caseNameNorm": "美澍川9"
   },
   {
     "id": 490,
@@ -175188,7 +175248,7 @@
         }
       ]
     },
-    "_caseNameNorm": "品見築no.9日日吉祥"
+    "_caseNameNorm": "品見築9日日吉祥"
   },
   {
     "id": 496,
@@ -180697,7 +180757,7 @@
         }
       ]
     },
-    "_caseNameNorm": "香榭麗舍no.10"
+    "_caseNameNorm": "香榭麗舍10"
   },
   {
     "id": 513,
@@ -181970,24 +182030,97 @@
     ],
     "searchTokens": "羅東鎮 美澍家10 月眉路 北岳建設股份有限公司 特定農業區甲種建築用地 住家用、集合住宅 鋼筋混凝土造 建管建師字第90353號 新群一段1515地號 自售:無;代銷:1141231~1171231; qppnmllkkikgfdg18cg 114/12/11 2025-12-11 114/10/13 2025-10-13 新群一段1515地號 新群一段1515-1地號 新群一段1515-10地號 新群一段1515-2地號 新群一段1515-3地號 新群一段1515-4地號 新群一段1515-5地號 新群一段1515-6地號 新群一段1515-7地號 新群一段1515-8地號 新群一段1515-9地號 建管建師字第90353號 114/10/13 2025-10-13 建管建師字第90354號 114/10/13 2025-10-13 建管建師字第90355號 114/10/13 2025-10-13",
     "salesStats": {
-      "hasSalesData": false,
-      "soldUnits": 0,
-      "rawTxCount": 0,
-      "residentialCount": 0,
+      "hasSalesData": true,
+      "soldUnits": 6,
+      "rawTxCount": 6,
+      "residentialCount": 6,
       "parkingCount": 0,
-      "presaleCount": 0,
+      "presaleCount": 6,
       "completedCount": 0,
       "totalHouseholds": 38,
-      "salesRate": 0,
+      "salesRate": 15.8,
       "isSoldOut": false,
-      "avgPricePerPing": 0,
-      "minPricePerPing": 0,
-      "maxPricePerPing": 0,
-      "avgTotalPrice": 0,
-      "minTotalPrice": 0,
-      "maxTotalPrice": 0,
-      "latestTransactionDate": "",
-      "transactions": []
+      "avgPricePerPing": 35.7,
+      "minPricePerPing": 34.2,
+      "maxPricePerPing": 36.7,
+      "avgTotalPrice": 1430.8,
+      "minTotalPrice": 1045,
+      "maxTotalPrice": 2380,
+      "latestTransactionDate": "115/08/10",
+      "transactions": [
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "115/08/10",
+          "unit": "宜蘭縣羅東鎮月眉路",
+          "floor": "四層",
+          "areaPing": 31.1,
+          "pricePerPing": 36.1,
+          "totalPrice": 1058,
+          "layout": "2房2廳2衛",
+          "parking": "一樓平面"
+        },
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "115/08/03",
+          "unit": "宜蘭縣羅東鎮月眉路",
+          "floor": "三層",
+          "areaPing": 38,
+          "pricePerPing": 35.5,
+          "totalPrice": 1287,
+          "layout": "3房2廳2衛",
+          "parking": "一樓平面"
+        },
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "115/04/27",
+          "unit": "宜蘭縣羅東鎮月眉路",
+          "floor": "四層",
+          "areaPing": 40.6,
+          "pricePerPing": 36.7,
+          "totalPrice": 1420,
+          "layout": "3房2廳2衛",
+          "parking": "一樓平面"
+        },
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "115/04/05",
+          "unit": "宜蘭縣羅東鎮月眉路",
+          "floor": "三層",
+          "areaPing": 31.1,
+          "pricePerPing": 35.6,
+          "totalPrice": 1045,
+          "layout": "2房2廳2衛",
+          "parking": "一樓平面"
+        },
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "115/03/29",
+          "unit": "宜蘭縣羅東鎮月眉路",
+          "floor": "三層",
+          "areaPing": 42.5,
+          "pricePerPing": 34.2,
+          "totalPrice": 1395,
+          "layout": "3房2廳2衛",
+          "parking": "一樓平面"
+        },
+        {
+          "source": "預售屋實登",
+          "isParking": false,
+          "dateRoc": "115/03/14",
+          "unit": "宜蘭縣羅東鎮月眉路",
+          "floor": "全",
+          "areaPing": 65.7,
+          "pricePerPing": 36.3,
+          "totalPrice": 2380,
+          "layout": "4房2廳5衛",
+          "parking": "土地1建物1車位0"
+        }
+      ]
     },
     "landStats": {
       "hasLandData": false,
@@ -182199,7 +182332,7 @@
         }
       ]
     },
-    "_caseNameNorm": "百亨優閣電梯華廈no13"
+    "_caseNameNorm": "百亨優閣電梯華廈13"
   },
   {
     "id": 523,
@@ -184807,7 +184940,7 @@
         }
       ]
     },
-    "_caseNameNorm": "力璟.無疆大境2"
+    "_caseNameNorm": "力璟無疆大境2"
   },
   {
     "id": 537,
@@ -186216,7 +186349,7 @@
         }
       ]
     },
-    "_caseNameNorm": "向陽居no.6"
+    "_caseNameNorm": "向陽居6"
   },
   {
     "id": 545,
@@ -188645,7 +188778,7 @@
         }
       ]
     },
-    "_caseNameNorm": "順和苑no.7"
+    "_caseNameNorm": "順和苑7"
   },
   {
     "id": 558,
@@ -189620,7 +189753,7 @@
       "totalLandAreaPing": 0,
       "transactions": []
     },
-    "_caseNameNorm": "寅成no.3"
+    "_caseNameNorm": "寅成3"
   },
   {
     "id": 563,
@@ -191359,7 +191492,7 @@
         }
       ]
     },
-    "_caseNameNorm": "臻愛家no.2"
+    "_caseNameNorm": "臻愛家2"
   },
   {
     "id": 574,
@@ -191456,7 +191589,7 @@
         }
       ]
     },
-    "_caseNameNorm": "品生活no5上品"
+    "_caseNameNorm": "品生活5上品"
   },
   {
     "id": 575,
