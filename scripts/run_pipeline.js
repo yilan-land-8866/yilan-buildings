@@ -1,5 +1,12 @@
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
+
+function getFileHash(filePath) {
+    if (!fs.existsSync(filePath)) return '';
+    const content = fs.readFileSync(filePath);
+    return crypto.createHash('md5').update(content).digest('hex');
+}
 
 async function main() {
     console.log('=====================================================');
@@ -8,6 +15,19 @@ async function main() {
     console.log('=====================================================\n');
 
     const t0 = Date.now();
+    const rootDir = path.resolve(__dirname, '..');
+    const isForce = process.argv.includes('--force') || process.env.GITHUB_EVENT_NAME === 'workflow_dispatch';
+
+    // Record hashes before download
+    const rawBPath = path.join(rootDir, 'data', 'raw_transactions_b.json');
+    const rawAPath = path.join(rootDir, 'data', 'raw_transactions_a.json');
+    const buildcasePath = path.join(rootDir, 'g_lvr_buildcase.xls');
+    const dataJsonPath = path.join(rootDir, 'data.json');
+
+    const hashRawBBefore = getFileHash(rawBPath);
+    const hashRawABefore = getFileHash(rawAPath);
+    const hashBuildcaseBefore = getFileHash(buildcasePath);
+    const hashDataJsonBefore = getFileHash(dataJsonPath);
 
     // Step 1: Download & sync latest pre-sale declaration list (建案備查清冊)
     const { syncLatestBuildcases } = require('./fetch_buildcase');
@@ -21,6 +41,23 @@ async function main() {
 
     console.log('\n-----------------------------------------------------');
 
+    // Check if downloaded source files changed
+    const hashRawBAfter = getFileHash(rawBPath);
+    const hashRawAAfter = getFileHash(rawAPath);
+    const hashBuildcaseAfter = getFileHash(buildcasePath);
+
+    const isSourceChanged = (hashRawBBefore !== hashRawBAfter) ||
+                            (hashRawABefore !== hashRawAAfter) ||
+                            (hashBuildcaseBefore !== hashBuildcaseAfter);
+
+    if (!isSourceChanged && !isForce) {
+        console.log('ℹ️ [Step 3/5] 經比對內政部官方伺服器本次無新資料（預售交易、移轉登記與備查清冊皆維持原樣）。');
+        console.log('ℹ️ 本次跳過資料庫重新勾稽與網頁編譯，保持現有發布狀態。若為排程執行，將待下午 15:30 或下一旬再次檢查。');
+        console.log('=====================================================');
+        return;
+    }
+
+    console.log('✨ [Step 3/5] 偵測到內政部最新資料釋出（或強制執行），開始執行特徵勾稽與銷售統計...');
     // Step 3: Strict precision matching with cumulative transaction protection
     const { runMatching } = require('./match_strict_precision');
     runMatching();
@@ -35,7 +72,6 @@ async function main() {
 
     // Step 5: Health Check & Verification
     console.log('🔍 [Step 5/5] 執行自動健康檢查與資料完整性驗證...');
-    const rootDir = path.resolve(__dirname, '..');
     const dataJson = JSON.parse(fs.readFileSync(path.join(rootDir, 'data.json'), 'utf-8'));
     const indexHtml = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf-8');
     const excelPath = path.join(rootDir, '宜蘭建案實價登錄銷售統計.xlsx');

@@ -1,12 +1,10 @@
-name: Real Price & Pre-sale Auto Update (Weekly + MOI Release Days)
+name: Real Price & Pre-sale Auto Update (1st, 11th, 21st)
 
 on:
   schedule:
-    # 1. 台灣時間每週一清晨 04:00 (UTC 星期日 20:00) 週期性全量更新
-    - cron: '0 20 * * 0'
-    # 2. 每月 1、11、21 日 內政部實價登錄上午發布後自動抓取 (台灣時間 10:30 / UTC 02:30)
+    # 1. 每月 1、11、21 日 內政部實價登錄上午發布後自動抓取 (台灣時間 10:30 / UTC 02:30)
     - cron: '30 2 1,11,21 * *'
-    # 3. 每月 1、11、21 日 內政部實價登錄下午補正確認抓取 (台灣時間 15:30 / UTC 07:30)
+    # 2. 每月 1、11、21 日 內政部實價登錄下午補正確認抓取 (若上午未發布或有補正，於台灣時間 15:30 / UTC 07:30 再次抓取)
     - cron: '30 7 1,11,21 * *'
   workflow_dispatch: # 支援在 GitHub Actions 網頁隨時手動點擊按鈕即時更新
 
