@@ -388,10 +388,11 @@ const htmlTemplate = `<!DOCTYPE html>
                             <h1 class="text-base sm:text-2xl md:text-3xl font-serif-tc font-black tracking-tight sm:tracking-wide text-[#1C1B18] leading-tight truncate">
                                 宜蘭縣建案備查與實價登錄檢索
                             </h1>
-                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] sm:text-xs font-mono font-semibold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0] shrink-0">
+                            <button type="button" onclick="openChangelog()" title="查看每期更新日誌" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] sm:text-xs font-mono font-semibold bg-[#EEF4EC] text-[#2C4A24] border border-[#C5D9C0] hover:bg-[#DDEBD8] shrink-0">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#4A5D44] animate-pulse"></span>
                                 更新：${updateDateStr}
-                            </span>
+                                <span class="font-sans underline underline-offset-2 ml-0.5">更新日誌</span>
+                            </button>
                         </div>
                         <p class="text-xs sm:text-sm text-[#6E675B] hidden md:block font-normal truncate mt-0.5">
                             整合預售屋申報備查、實價登錄銷售率、成交單價區間、基地購地成本與建商負責人資料庫
@@ -3844,6 +3845,89 @@ const htmlTemplate = `<!DOCTYPE html>
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#039;');
         }
+    </script>
+    <!-- 每期更新日誌 小提醒視窗 -->
+    <div id="clPanel" role="dialog" aria-labelledby="clTitle" aria-hidden="true" class="hidden fixed z-50 bottom-3 right-3 left-3 sm:left-auto sm:w-[400px] max-h-[70vh] flex flex-col bg-[#FFFFFF] border border-[#DCD4C5] rounded-2xl shadow-xl text-[#1C1B18]">
+        <div class="flex items-center justify-between gap-2 px-4 pt-3 pb-2 border-b border-[#EAE4D8]">
+            <div class="min-w-0">
+                <div id="clTitle" class="font-serif-tc font-black text-base truncate">本期更新</div>
+                <div id="clSub" class="text-[11px] text-[#6E675B] font-mono truncate"></div>
+            </div>
+            <button type="button" onclick="clClose()" aria-label="關閉" class="shrink-0 w-8 h-8 rounded-lg text-[#6E675B] hover:bg-[#EAE4D8] flex items-center justify-center text-lg leading-none">&times;</button>
+        </div>
+        <div id="clBody" class="px-4 py-3 overflow-y-auto text-[13px] leading-relaxed"></div>
+        <div class="flex items-center justify-between gap-2 px-4 py-2 border-t border-[#EAE4D8]">
+            <button type="button" id="clToggle" onclick="clToggleHistory()" class="text-xs font-semibold text-[#4A5D44] hover:underline">查看過往日誌</button>
+            <button type="button" onclick="clClose()" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#1C1B18] text-[#FAF8F5]">知道了</button>
+        </div>
+    </div>
+    <script>
+        (function () {
+            var CL_KEY = 'yb_changelog_seen';
+            var clData = null, clShowAll = false;
+            function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c]; }); }
+            function entryHtml(e, full) {
+                var h = [];
+                if (e.noNewData) {
+                    h.push('<p class="text-[#6E675B]">' + esc(e.summary || '本期無新資料') + '</p>');
+                } else {
+                    var pt = e.presaleTx || { total: 0, byCase: [] };
+                    if (e.saleRegPeriod || e.presalePeriod) {
+                        h.push('<p class="text-[12px] text-[#6E675B]">內政部本期：' + (e.saleRegPeriod ? '買賣登記 ' + esc(e.saleRegPeriod) : '') + (e.saleRegPeriod && e.presalePeriod ? '；' : '') + (e.presalePeriod ? '預售屋交易 ' + esc(e.presalePeriod) : '') + '</p>');
+                    }
+                    if (pt.total) {
+                        h.push('<p class="mt-1"><b>預售屋成交 +' + pt.total + ' 筆</b>，' + pt.caseCount + ' 個建案' + (pt.tradeDateFrom ? '（交易日 ' + esc(pt.tradeDateFrom) + '–' + esc(pt.tradeDateTo) + '）' : '') + '</p>');
+                        var lim = full ? pt.byCase.length : 5;
+                        var items = pt.byCase.slice(0, lim).map(function (c) { return '<li>' + esc(c.caseName) + ' <span class="text-[#6E675B]">' + esc(c.town) + '</span> <b class="font-mono">' + c.count + '</b> 筆</li>'; });
+                        h.push('<ul class="mt-1 pl-4 list-disc">' + items.join('') + '</ul>');
+                        if (pt.byCase.length > lim) h.push('<p class="text-[12px] text-[#6E675B]">…另 ' + (pt.byCase.length - lim) + ' 個建案</p>');
+                    } else {
+                        h.push('<p class="mt-1">預售屋成交：無新增</p>');
+                    }
+                    var a = e.addedCases || [], r = e.removedCases || [];
+                    if (!a.length && !r.length) {
+                        h.push('<p class="mt-1">建案備查無變動' + (e.totalCases ? '（共 ' + e.totalCases + ' 案）' : '') + '</p>');
+                    } else {
+                        h.push('<p class="mt-1"><b>建案備查 新增 ' + a.length + ' 案' + (r.length ? '、移除 ' + r.length + ' 案' : '') + '</b>' + (e.totalCases ? '（共 ' + e.totalCases + ' 案）' : '') + '</p>');
+                        if (a.length) h.push('<p class="text-[12px]">新增：' + a.map(function (c) { return esc(c.caseName) + '（' + esc(c.town) + '）'; }).join('、') + '</p>');
+                        if (r.length) h.push('<p class="text-[12px]">移除：' + r.map(function (c) { return esc(c.caseName) + '（' + esc(c.town) + '）'; }).join('、') + '</p>');
+                    }
+                }
+                if (e.remark) h.push('<p class="mt-1 text-[11px] text-[#8A8275]">' + esc(e.remark) + '</p>');
+                return h.join('');
+            }
+            function render() {
+                var es = clData.entries, latest = es[0];
+                document.getElementById('clTitle').textContent = clShowAll ? '更新日誌' : '本期更新 ' + latest.release;
+                document.getElementById('clSub').textContent = clShowAll ? '共 ' + es.length + ' 期，新到舊' : '每月 1、11、21 日依內政部資料自動更新';
+                document.getElementById('clToggle').textContent = clShowAll ? '只看本期' : '查看過往日誌';
+                document.getElementById('clToggle').style.display = es.length > 1 ? '' : 'none';
+                var body = document.getElementById('clBody');
+                if (clShowAll) {
+                    body.innerHTML = es.map(function (e, i) { return '<div class="' + (i ? 'mt-3 pt-3 border-t border-[#EAE4D8]' : '') + '"><div class="font-mono font-bold text-[12px] text-[#2C4A24]">' + esc(e.release) + '</div>' + entryHtml(e, true) + '</div>'; }).join('');
+                } else {
+                    body.innerHTML = entryHtml(latest, false);
+                }
+                body.scrollTop = 0;
+            }
+            function show() { if (!clData || !clData.entries.length) return; render(); var p = document.getElementById('clPanel'); p.classList.remove('hidden'); p.setAttribute('aria-hidden', 'false'); }
+            window.clClose = function () {
+                var p = document.getElementById('clPanel'); p.classList.add('hidden'); p.setAttribute('aria-hidden', 'true');
+                try { if (clData && clData.entries.length) localStorage.setItem(CL_KEY, clData.entries[0].release); } catch (e) {}
+            };
+            window.clToggleHistory = function () { clShowAll = !clShowAll; render(); };
+            window.openChangelog = function () { clShowAll = true; if (clData) show(); else load(true); };
+            function load(force) {
+                fetch('changelog.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+                    if (!d || !d.entries || !d.entries.length) return;
+                    clData = d;
+                    var seen = null; try { seen = localStorage.getItem(CL_KEY); } catch (e) {}
+                    if (force || seen !== d.entries[0].release) show();
+                }).catch(function () {});
+            }
+            document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !document.getElementById('clPanel').classList.contains('hidden')) window.clClose(); });
+            load(false);
+        })();
     </script>
 </body>
 </html>`;

@@ -1,0 +1,794 @@
+{
+  "entries": [
+    {
+      "release": "2026/10/11",
+      "noNewData": false,
+      "moiNote": "資料內容：登記日期 115年9月21日至 115年9月30日之買賣案件，及訂約日期 115年8月21日至 115年8月31日之租賃案件，及交易日期115年8月21日至 115年8月31日之預售屋案件",
+      "saleRegPeriod": "115/9/21–115/9/30",
+      "presalePeriod": "115/8/21–115/8/31",
+      "totalCases": 587,
+      "addedCases": [],
+      "removedCases": [],
+      "presaleTx": {
+        "total": 30,
+        "caseCount": 19,
+        "tradeDateFrom": "115/08/21",
+        "tradeDateTo": "115/08/31",
+        "byTown": {
+          "員山鄉": 7,
+          "冬山鄉": 6,
+          "宜蘭市": 7,
+          "蘇澳鎮": 2,
+          "三星鄉": 2,
+          "五結鄉": 1,
+          "壯圍鄉": 2,
+          "礁溪鄉": 1,
+          "羅東鎮": 2
+        },
+        "byCase": [
+          {
+            "caseName": "頤和知序",
+            "town": "員山鄉",
+            "count": 5,
+            "minPricePerPing": 29,
+            "maxPricePerPing": 29.7
+          },
+          {
+            "caseName": "向陽居NO.6",
+            "town": "冬山鄉",
+            "count": 4,
+            "minPricePerPing": 19.6,
+            "maxPricePerPing": 21.9
+          },
+          {
+            "caseName": "御松園",
+            "town": "宜蘭市",
+            "count": 4,
+            "minPricePerPing": 45.7,
+            "maxPricePerPing": 47
+          },
+          {
+            "caseName": "圓美磐筑",
+            "town": "蘇澳鎮",
+            "count": 2,
+            "minPricePerPing": 21.8,
+            "maxPricePerPing": 22.1
+          },
+          {
+            "caseName": "寬闊-星灩寓",
+            "town": "三星鄉",
+            "count": 1,
+            "minPricePerPing": 22.1,
+            "maxPricePerPing": 22.1
+          },
+          {
+            "caseName": "謙藏3",
+            "town": "三星鄉",
+            "count": 1,
+            "minPricePerPing": 24.8,
+            "maxPricePerPing": 24.8
+          },
+          {
+            "caseName": "呈家易居NO.3",
+            "town": "五結鄉",
+            "count": 1,
+            "minPricePerPing": 24.6,
+            "maxPricePerPing": 24.6
+          },
+          {
+            "caseName": "博愛日日春",
+            "town": "冬山鄉",
+            "count": 1,
+            "minPricePerPing": 24.7,
+            "maxPricePerPing": 24.7
+          },
+          {
+            "caseName": "掬月6",
+            "town": "冬山鄉",
+            "count": 1,
+            "minPricePerPing": 26.7,
+            "maxPricePerPing": 26.7
+          },
+          {
+            "caseName": "光匯田境",
+            "town": "壯圍鄉",
+            "count": 1,
+            "minPricePerPing": 25.9,
+            "maxPricePerPing": 25.9
+          },
+          {
+            "caseName": "村聲",
+            "town": "壯圍鄉",
+            "count": 1,
+            "minPricePerPing": 31.7,
+            "maxPricePerPing": 31.7
+          },
+          {
+            "caseName": "大琚",
+            "town": "宜蘭市",
+            "count": 1,
+            "minPricePerPing": 35.6,
+            "maxPricePerPing": 35.6
+          },
+          {
+            "caseName": "黎明大苑",
+            "town": "宜蘭市",
+            "count": 1,
+            "minPricePerPing": 34.8,
+            "maxPricePerPing": 34.8
+          },
+          {
+            "caseName": "太子興．賞II",
+            "town": "宜蘭市",
+            "count": 1,
+            "minPricePerPing": 27.4,
+            "maxPricePerPing": 27.4
+          },
+          {
+            "caseName": "香榭麗舍NO.9",
+            "town": "員山鄉",
+            "count": 1,
+            "minPricePerPing": 24.7,
+            "maxPricePerPing": 24.7
+          },
+          {
+            "caseName": "文風翠庭第22期",
+            "town": "員山鄉",
+            "count": 1,
+            "minPricePerPing": 27.1,
+            "maxPricePerPing": 27.1
+          },
+          {
+            "caseName": "鳳凰愛買22期",
+            "town": "礁溪鄉",
+            "count": 1,
+            "minPricePerPing": 23.1,
+            "maxPricePerPing": 23.1
+          },
+          {
+            "caseName": "美澍家10",
+            "town": "羅東鎮",
+            "count": 1,
+            "minPricePerPing": 35.8,
+            "maxPricePerPing": 35.8
+          },
+          {
+            "caseName": "鳳凰愛買25期",
+            "town": "羅東鎮",
+            "count": 1,
+            "minPricePerPing": 37,
+            "maxPricePerPing": 37
+          }
+        ]
+      },
+      "remark": "由網站歷史版本比對（10/1 版 → 10/11 版）得出。"
+    },
+    {
+      "release": "2026/10/01",
+      "noNewData": false,
+      "moiNote": "",
+      "totalCases": 587,
+      "addedCases": [
+        {
+          "caseName": "晴川境",
+          "town": "三星鄉",
+          "builder": "騰豐建設股份有限公司",
+          "household": 0
+        },
+        {
+          "caseName": "金澤．山嵐境",
+          "town": "冬山鄉",
+          "builder": "金澤建設股份有限公司",
+          "household": 0
+        },
+        {
+          "caseName": "敘白勻川",
+          "town": "五結鄉",
+          "builder": "向泰建設有限公司",
+          "household": 0
+        },
+        {
+          "caseName": "筑丰",
+          "town": "五結鄉",
+          "builder": "原和溙開發實業有限公司",
+          "household": 0
+        },
+        {
+          "caseName": "鳳凰愛買28期",
+          "town": "壯圍鄉",
+          "builder": "多佳建設股份有限公司",
+          "household": 0
+        },
+        {
+          "caseName": "京采天下",
+          "town": "宜蘭市",
+          "builder": "京棋建設開發股份有限公司",
+          "household": 0
+        }
+      ],
+      "removedCases": [],
+      "presaleTx": {
+        "total": 268,
+        "caseCount": 80,
+        "tradeDateFrom": "115/05/11",
+        "tradeDateTo": "115/08/19",
+        "byTown": {
+          "三星鄉": 31,
+          "冬山鄉": 50,
+          "宜蘭市": 46,
+          "員山鄉": 41,
+          "羅東鎮": 19,
+          "五結鄉": 18,
+          "礁溪鄉": 23,
+          "蘇澳鎮": 16,
+          "壯圍鄉": 13,
+          "頭城鎮": 11
+        },
+        "byCase": [
+          {
+            "caseName": "謙藏3",
+            "town": "三星鄉",
+            "count": 19,
+            "minPricePerPing": 22.1,
+            "maxPricePerPing": 26.4
+          },
+          {
+            "caseName": "鳳凰愛買26期",
+            "town": "冬山鄉",
+            "count": 12,
+            "minPricePerPing": 22.3,
+            "maxPricePerPing": 24.7
+          },
+          {
+            "caseName": "皇程首賦",
+            "town": "宜蘭市",
+            "count": 11,
+            "minPricePerPing": 41.6,
+            "maxPricePerPing": 47
+          },
+          {
+            "caseName": "頤和知序",
+            "town": "員山鄉",
+            "count": 11,
+            "minPricePerPing": 28,
+            "maxPricePerPing": 32.4
+          },
+          {
+            "caseName": "海樂地3",
+            "town": "羅東鎮",
+            "count": 11,
+            "minPricePerPing": 38.5,
+            "maxPricePerPing": 39.7
+          },
+          {
+            "caseName": "嵩禾拾穗",
+            "town": "五結鄉",
+            "count": 9,
+            "minPricePerPing": 30,
+            "maxPricePerPing": 35.2
+          },
+          {
+            "caseName": "幸福苑",
+            "town": "冬山鄉",
+            "count": 8,
+            "minPricePerPing": 27.3,
+            "maxPricePerPing": 31.1
+          },
+          {
+            "caseName": "佳荷5",
+            "town": "員山鄉",
+            "count": 8,
+            "minPricePerPing": 22.7,
+            "maxPricePerPing": 25.1
+          },
+          {
+            "caseName": "鳳凰愛買23期",
+            "town": "礁溪鄉",
+            "count": 8,
+            "minPricePerPing": 18.4,
+            "maxPricePerPing": 21.8
+          },
+          {
+            "caseName": "圓美磐筑",
+            "town": "蘇澳鎮",
+            "count": 8,
+            "minPricePerPing": 20.5,
+            "maxPricePerPing": 30
+          },
+          {
+            "caseName": "青豐",
+            "town": "三星鄉",
+            "count": 7,
+            "minPricePerPing": 24.5,
+            "maxPricePerPing": 26.8
+          },
+          {
+            "caseName": "宗硯大砌系列18-透天",
+            "town": "壯圍鄉",
+            "count": 7,
+            "minPricePerPing": 21.2,
+            "maxPricePerPing": 21.6
+          },
+          {
+            "caseName": "博愛日日春",
+            "town": "冬山鄉",
+            "count": 5,
+            "minPricePerPing": 22.4,
+            "maxPricePerPing": 25.1
+          },
+          {
+            "caseName": "向陽居NO.6",
+            "town": "冬山鄉",
+            "count": 5,
+            "minPricePerPing": 19.6,
+            "maxPricePerPing": 22.1
+          },
+          {
+            "caseName": "鳳凰愛買20期",
+            "town": "員山鄉",
+            "count": 5,
+            "minPricePerPing": 23,
+            "maxPricePerPing": 26.9
+          },
+          {
+            "caseName": "美澍川NO.9",
+            "town": "冬山鄉",
+            "count": 4,
+            "minPricePerPing": 26.1,
+            "maxPricePerPing": 31.2
+          },
+          {
+            "caseName": "永玥和序",
+            "town": "宜蘭市",
+            "count": 4,
+            "minPricePerPing": 38.6,
+            "maxPricePerPing": 43.2
+          },
+          {
+            "caseName": "太子興．賞II",
+            "town": "宜蘭市",
+            "count": 4,
+            "minPricePerPing": 25,
+            "maxPricePerPing": 27
+          },
+          {
+            "caseName": "圓鼎禾豐",
+            "town": "宜蘭市",
+            "count": 4,
+            "minPricePerPing": 33.6,
+            "maxPricePerPing": 34.7
+          },
+          {
+            "caseName": "松佑鑫時代",
+            "town": "員山鄉",
+            "count": 4,
+            "minPricePerPing": 21.2,
+            "maxPricePerPing": 22.3
+          },
+          {
+            "caseName": "文風翠庭第22期",
+            "town": "員山鄉",
+            "count": 4,
+            "minPricePerPing": 26.4,
+            "maxPricePerPing": 27.3
+          },
+          {
+            "caseName": "山海序",
+            "town": "頭城鎮",
+            "count": 4,
+            "minPricePerPing": 35.2,
+            "maxPricePerPing": 42.5
+          },
+          {
+            "caseName": "宗硯大砌系列19",
+            "town": "礁溪鄉",
+            "count": 4,
+            "minPricePerPing": 23.2,
+            "maxPricePerPing": 26.1
+          },
+          {
+            "caseName": "鳳凰愛買27期",
+            "town": "礁溪鄉",
+            "count": 4,
+            "minPricePerPing": 25.4,
+            "maxPricePerPing": 30
+          },
+          {
+            "caseName": "The Taurus 金牛座",
+            "town": "蘇澳鎮",
+            "count": 4,
+            "minPricePerPing": 22.3,
+            "maxPricePerPing": 22.4
+          },
+          {
+            "caseName": "鳳凰101",
+            "town": "宜蘭市",
+            "count": 3,
+            "minPricePerPing": 37.5,
+            "maxPricePerPing": 50.8
+          },
+          {
+            "caseName": "大琚",
+            "town": "宜蘭市",
+            "count": 3,
+            "minPricePerPing": 36.3,
+            "maxPricePerPing": 38.2
+          },
+          {
+            "caseName": "黎明大苑",
+            "town": "宜蘭市",
+            "count": 3,
+            "minPricePerPing": 34.7,
+            "maxPricePerPing": 35.9
+          },
+          {
+            "caseName": "力璟.無疆大境2",
+            "town": "宜蘭市",
+            "count": 3,
+            "minPricePerPing": 39.2,
+            "maxPricePerPing": 42.2
+          },
+          {
+            "caseName": "協通光韻",
+            "town": "宜蘭市",
+            "count": 3,
+            "minPricePerPing": 27.3,
+            "maxPricePerPing": 35.6
+          },
+          {
+            "caseName": "聚蒔光",
+            "town": "頭城鎮",
+            "count": 3,
+            "minPricePerPing": 30.1,
+            "maxPricePerPing": 30.5
+          },
+          {
+            "caseName": "美澍家10",
+            "town": "羅東鎮",
+            "count": 3,
+            "minPricePerPing": 35.9,
+            "maxPricePerPing": 38.1
+          },
+          {
+            "caseName": "享建築",
+            "town": "蘇澳鎮",
+            "count": 3,
+            "minPricePerPing": 22,
+            "maxPricePerPing": 23.4
+          },
+          {
+            "caseName": "丰野．哲隱五期",
+            "town": "三星鄉",
+            "count": 2,
+            "minPricePerPing": 25.2,
+            "maxPricePerPing": 25.8
+          },
+          {
+            "caseName": "呈家易居NO.3",
+            "town": "五結鄉",
+            "count": 2,
+            "minPricePerPing": 25,
+            "maxPricePerPing": 25.4
+          },
+          {
+            "caseName": "夢想家園第五期",
+            "town": "五結鄉",
+            "count": 2,
+            "minPricePerPing": 28.2,
+            "maxPricePerPing": 28.9
+          },
+          {
+            "caseName": "小國民原夢",
+            "town": "五結鄉",
+            "count": 2,
+            "minPricePerPing": 27.3,
+            "maxPricePerPing": 31.2
+          },
+          {
+            "caseName": "謙羽3",
+            "town": "五結鄉",
+            "count": 2,
+            "minPricePerPing": 24.8,
+            "maxPricePerPing": 25
+          },
+          {
+            "caseName": "藝埕想享",
+            "town": "冬山鄉",
+            "count": 2,
+            "minPricePerPing": 27.9,
+            "maxPricePerPing": 28.1
+          },
+          {
+            "caseName": "國磐季",
+            "town": "冬山鄉",
+            "count": 2,
+            "minPricePerPing": 29.3,
+            "maxPricePerPing": 31.5
+          },
+          {
+            "caseName": "鳳凰愛買21期",
+            "town": "冬山鄉",
+            "count": 2,
+            "minPricePerPing": 17,
+            "maxPricePerPing": 17.9
+          },
+          {
+            "caseName": "香榭麗舍NO.10",
+            "town": "冬山鄉",
+            "count": 2,
+            "minPricePerPing": 22.9,
+            "maxPricePerPing": 29.7
+          },
+          {
+            "caseName": "掬月6",
+            "town": "冬山鄉",
+            "count": 2,
+            "minPricePerPing": 24.6,
+            "maxPricePerPing": 25.4
+          },
+          {
+            "caseName": "靚永美7",
+            "town": "冬山鄉",
+            "count": 2,
+            "minPricePerPing": 27.1,
+            "maxPricePerPing": 28.4
+          },
+          {
+            "caseName": "光匯田境",
+            "town": "壯圍鄉",
+            "count": 2,
+            "minPricePerPing": 25.3,
+            "maxPricePerPing": 26.2
+          },
+          {
+            "caseName": "艾利永美",
+            "town": "壯圍鄉",
+            "count": 2,
+            "minPricePerPing": 21.4,
+            "maxPricePerPing": 25.4
+          },
+          {
+            "caseName": "富登新21",
+            "town": "壯圍鄉",
+            "count": 2,
+            "minPricePerPing": 27.1,
+            "maxPricePerPing": 29
+          },
+          {
+            "caseName": "天擎陽明",
+            "town": "宜蘭市",
+            "count": 2,
+            "minPricePerPing": 36.1,
+            "maxPricePerPing": 36.1
+          },
+          {
+            "caseName": "太子興．賞",
+            "town": "宜蘭市",
+            "count": 2,
+            "minPricePerPing": 26.5,
+            "maxPricePerPing": 28.6
+          },
+          {
+            "caseName": "御松園",
+            "town": "宜蘭市",
+            "count": 2,
+            "minPricePerPing": 39.7,
+            "maxPricePerPing": 40.7
+          },
+          {
+            "caseName": "鳳凰愛買16期",
+            "town": "員山鄉",
+            "count": 2,
+            "minPricePerPing": 24.6,
+            "maxPricePerPing": 25.7
+          },
+          {
+            "caseName": "朗頌",
+            "town": "員山鄉",
+            "count": 2,
+            "minPricePerPing": 22.9,
+            "maxPricePerPing": 23.5
+          },
+          {
+            "caseName": "京采頭城2",
+            "town": "頭城鎮",
+            "count": 2,
+            "minPricePerPing": 31.6,
+            "maxPricePerPing": 31.9
+          },
+          {
+            "caseName": "鳳凰愛買15期",
+            "town": "礁溪鄉",
+            "count": 2,
+            "minPricePerPing": 30.5,
+            "maxPricePerPing": 34.5
+          },
+          {
+            "caseName": "旭泰禾豐莊園",
+            "town": "礁溪鄉",
+            "count": 2,
+            "minPricePerPing": 31.1,
+            "maxPricePerPing": 36.3
+          },
+          {
+            "caseName": "鳳凰愛買22期",
+            "town": "礁溪鄉",
+            "count": 2,
+            "minPricePerPing": 24.5,
+            "maxPricePerPing": 24.5
+          },
+          {
+            "caseName": "綠之悅",
+            "town": "三星鄉",
+            "count": 1,
+            "minPricePerPing": 29.8,
+            "maxPricePerPing": 29.8
+          },
+          {
+            "caseName": "原翠6",
+            "town": "三星鄉",
+            "count": 1,
+            "minPricePerPing": 25.9,
+            "maxPricePerPing": 25.9
+          },
+          {
+            "caseName": "寬闊-星灩寓",
+            "town": "三星鄉",
+            "count": 1,
+            "minPricePerPing": 32.6,
+            "maxPricePerPing": 32.6
+          },
+          {
+            "caseName": "輕時尚3",
+            "town": "五結鄉",
+            "count": 1,
+            "minPricePerPing": 25,
+            "maxPricePerPing": 25
+          },
+          {
+            "caseName": "旭川2",
+            "town": "冬山鄉",
+            "count": 1,
+            "minPricePerPing": 27.1,
+            "maxPricePerPing": 27.1
+          },
+          {
+            "caseName": "多元邑居",
+            "town": "冬山鄉",
+            "count": 1,
+            "minPricePerPing": 25.2,
+            "maxPricePerPing": 25.2
+          },
+          {
+            "caseName": "久誼久陞Ⅲ富境",
+            "town": "冬山鄉",
+            "count": 1,
+            "minPricePerPing": 26.6,
+            "maxPricePerPing": 26.6
+          },
+          {
+            "caseName": "初日",
+            "town": "冬山鄉",
+            "count": 1,
+            "minPricePerPing": 27.4,
+            "maxPricePerPing": 27.4
+          },
+          {
+            "caseName": "築樹",
+            "town": "宜蘭市",
+            "count": 1,
+            "minPricePerPing": 36.4,
+            "maxPricePerPing": 36.4
+          },
+          {
+            "caseName": "鳳凰愛買17期",
+            "town": "宜蘭市",
+            "count": 1,
+            "minPricePerPing": 40.3,
+            "maxPricePerPing": 40.3
+          },
+          {
+            "caseName": "好適悅III 金邑宸",
+            "town": "員山鄉",
+            "count": 1,
+            "minPricePerPing": 21.3,
+            "maxPricePerPing": 21.3
+          },
+          {
+            "caseName": "香榭麗舍NO.9",
+            "town": "員山鄉",
+            "count": 1,
+            "minPricePerPing": 22.8,
+            "maxPricePerPing": 22.8
+          },
+          {
+            "caseName": "築荷5",
+            "town": "員山鄉",
+            "count": 1,
+            "minPricePerPing": 26,
+            "maxPricePerPing": 26
+          },
+          {
+            "caseName": "泱泱悅",
+            "town": "員山鄉",
+            "count": 1,
+            "minPricePerPing": 26.7,
+            "maxPricePerPing": 26.7
+          },
+          {
+            "caseName": "宸陽城陽6",
+            "town": "員山鄉",
+            "count": 1,
+            "minPricePerPing": 24.8,
+            "maxPricePerPing": 24.8
+          },
+          {
+            "caseName": "享享生活",
+            "town": "頭城鎮",
+            "count": 1,
+            "minPricePerPing": 26.4,
+            "maxPricePerPing": 26.4
+          },
+          {
+            "caseName": "人文精品",
+            "town": "頭城鎮",
+            "count": 1,
+            "minPricePerPing": 23,
+            "maxPricePerPing": 23
+          },
+          {
+            "caseName": "龍潭天下",
+            "town": "礁溪鄉",
+            "count": 1,
+            "minPricePerPing": 27,
+            "maxPricePerPing": 27
+          },
+          {
+            "caseName": "羅東春天之綻",
+            "town": "羅東鎮",
+            "count": 1,
+            "minPricePerPing": 30.2,
+            "maxPricePerPing": 30.2
+          },
+          {
+            "caseName": "文心蘭",
+            "town": "羅東鎮",
+            "count": 1,
+            "minPricePerPing": 32.9,
+            "maxPricePerPing": 32.9
+          },
+          {
+            "caseName": "宛美天下2",
+            "town": "羅東鎮",
+            "count": 1,
+            "minPricePerPing": 40.8,
+            "maxPricePerPing": 40.8
+          },
+          {
+            "caseName": "禮里",
+            "town": "羅東鎮",
+            "count": 1,
+            "minPricePerPing": 37.5,
+            "maxPricePerPing": 37.5
+          },
+          {
+            "caseName": "鳳凰愛買25期",
+            "town": "羅東鎮",
+            "count": 1,
+            "minPricePerPing": 36.6,
+            "maxPricePerPing": 36.6
+          },
+          {
+            "caseName": "海藍境",
+            "town": "蘇澳鎮",
+            "count": 1,
+            "minPricePerPing": 21.9,
+            "maxPricePerPing": 21.9
+          }
+        ]
+      },
+      "remark": "由網站歷史版本比對（9/21 版 → 10/1 版）得出；成交交易日期跨 115/05/11–08/19，含當期新資料及補登／重新勾稽的成交。內政部當期公告期間未保存於歷史紀錄。"
+    }
+  ],
+  "updatedAt": "2026-10-12T07:54:11.405Z"
+}

@@ -28,6 +28,13 @@ async function main() {
     const hashRawABefore = getFileHash(rawAPath);
     const hashBuildcaseBefore = getFileHash(buildcasePath);
     const hashDataJsonBefore = getFileHash(dataJsonPath);
+    const isDryRun = process.argv.includes('--dry-run');
+    const changelog = require('./changelog');
+    const releaseDate = changelog.taipeiDate();
+    const releaseNotePath = path.join(rootDir, 'data', 'release_note.txt');
+    let oldProjectsSnapshot = [];
+    try { oldProjectsSnapshot = JSON.parse(fs.readFileSync(dataJsonPath, 'utf-8')); } catch (e) {}
+    const readReleaseNote = () => fs.existsSync(releaseNotePath) ? fs.readFileSync(releaseNotePath, 'utf-8').trim() : '';
 
     // Step 1: Download & sync latest pre-sale declaration list (建案備查清冊)
     const { syncLatestBuildcases } = require('./fetch_buildcase');
@@ -53,6 +60,7 @@ async function main() {
     if (!isSourceChanged && !isForce) {
         console.log('ℹ️ [Step 3/5] 經比對內政部官方伺服器本次無新資料（預售交易、移轉登記與備查清冊皆維持原樣）。');
         console.log('ℹ️ 本次跳過資料庫重新勾稽與網頁編譯，保持現有發布狀態。若為排程執行，將待下午 15:30 或下一旬再次檢查。');
+        changelog.upsertEntry({ release: releaseDate, diff: null, releaseNote: readReleaseNote(), dryRun: isDryRun });
         console.log('=====================================================');
         return;
     }
@@ -92,6 +100,14 @@ async function main() {
 
     if (dataJson.length < 580 || p27Sold < 3 || p520Sold < 6 || indexHtml.length < 1000000 || !excelStats) {
         throw new Error('❌ 健康檢查未通過，資料可能不完整或有遺漏！');
+    }
+
+    // Step 6: 每期更新日誌
+    try {
+        const diff = changelog.computeDiff(oldProjectsSnapshot, dataJson);
+        changelog.upsertEntry({ release: releaseDate, diff, releaseNote: readReleaseNote(), dryRun: isDryRun });
+    } catch (e) {
+        console.error('⚠️ 更新日誌產生失敗（不影響資料發布）：', e.message);
     }
 
     const elapsed = ((Date.now() - t0) / 1000).toFixed(1);

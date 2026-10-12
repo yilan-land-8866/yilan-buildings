@@ -49,7 +49,14 @@ function downloadZip(url) {
                         return str;
                     };
 
+                    const gT = entries.find(e => e.entryName.toLowerCase() === 'build_time.xml');
+                    let releaseNote = '';
+                    if (gT) {
+                        const m = gT.getData().toString('utf-8').match(/<lvr_time>([\s\S]*?)<\/lvr_time>/);
+                        if (m) releaseNote = m[1].trim();
+                    }
                     resolve({
+                        releaseNote,
                         textA: parseEntry(gA),
                         textB: parseEntry(gB)
                     });
@@ -149,6 +156,9 @@ async function fetchLatestTransactions() {
             rowsB.forEach(r => r._season = 'current');
             allTxA.push(...rowsA);
             allTxB.push(...rowsB);
+            if (resCurr.releaseNote) {
+                fs.writeFileSync(path.join(outputDir, 'release_note.txt'), resCurr.releaseNote, 'utf-8');
+            }
             console.log(`✓ (當期成屋: ${rowsA.length} 筆, 當期預售: ${rowsB.length} 筆)`);
         } else {
             console.log(`- 無當期增量`);
