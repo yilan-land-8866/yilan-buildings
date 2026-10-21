@@ -1,6 +1,154 @@
 {
   "entries": [
     {
+      "release": "2026/10/21",
+      "noNewData": false,
+      "moiNote": "資料內容：登記日期 115年10月1日至 115年10月10日之買賣案件，及訂約日期 115年9月1日至 115年9月10日之租賃案件，及交易日期115年9月1日至 115年9月10日之預售屋案件",
+      "saleRegPeriod": "115/10/1–115/10/10",
+      "presalePeriod": "115/9/1–115/9/10",
+      "totalCases": 587,
+      "addedCases": [],
+      "removedCases": [],
+      "presaleTx": {
+        "total": 31,
+        "caseCount": 17,
+        "tradeDateFrom": "115/09/02",
+        "tradeDateTo": "115/09/10",
+        "byTown": {
+          "員山鄉": 8,
+          "冬山鄉": 7,
+          "壯圍鄉": 4,
+          "三星鄉": 3,
+          "宜蘭市": 5,
+          "五結鄉": 1,
+          "頭城鎮": 1,
+          "蘇澳鎮": 2
+        },
+        "byCase": [
+          {
+            "caseName": "頤和知序",
+            "town": "員山鄉",
+            "count": 6,
+            "minPricePerPing": 27.7,
+            "maxPricePerPing": 29.9
+          },
+          {
+            "caseName": "臻愛家No.2",
+            "town": "冬山鄉",
+            "count": 4,
+            "minPricePerPing": 28.2,
+            "maxPricePerPing": 28.5
+          },
+          {
+            "caseName": "宗硯大砌系列18-透天",
+            "town": "壯圍鄉",
+            "count": 3,
+            "minPricePerPing": 21.4,
+            "maxPricePerPing": 21.4
+          },
+          {
+            "caseName": "青豐",
+            "town": "三星鄉",
+            "count": 2,
+            "minPricePerPing": 25.5,
+            "maxPricePerPing": 25.6
+          },
+          {
+            "caseName": "博愛日日春",
+            "town": "冬山鄉",
+            "count": 2,
+            "minPricePerPing": 22.2,
+            "maxPricePerPing": 22.8
+          },
+          {
+            "caseName": "皇程首賦",
+            "town": "宜蘭市",
+            "count": 2,
+            "minPricePerPing": 40.9,
+            "maxPricePerPing": 42.9
+          },
+          {
+            "caseName": "佳荷5",
+            "town": "員山鄉",
+            "count": 2,
+            "minPricePerPing": 24.2,
+            "maxPricePerPing": 25.3
+          },
+          {
+            "caseName": "丰野．哲隱五期",
+            "town": "三星鄉",
+            "count": 1,
+            "minPricePerPing": 25.2,
+            "maxPricePerPing": 25.2
+          },
+          {
+            "caseName": "怡華艾菲爾",
+            "town": "五結鄉",
+            "count": 1,
+            "minPricePerPing": 38.9,
+            "maxPricePerPing": 38.9
+          },
+          {
+            "caseName": "幸福苑",
+            "town": "冬山鄉",
+            "count": 1,
+            "minPricePerPing": 27,
+            "maxPricePerPing": 27
+          },
+          {
+            "caseName": "光匯田境",
+            "town": "壯圍鄉",
+            "count": 1,
+            "minPricePerPing": 24.5,
+            "maxPricePerPing": 24.5
+          },
+          {
+            "caseName": "大琚",
+            "town": "宜蘭市",
+            "count": 1,
+            "minPricePerPing": 35.1,
+            "maxPricePerPing": 35.1
+          },
+          {
+            "caseName": "協通光韻",
+            "town": "宜蘭市",
+            "count": 1,
+            "minPricePerPing": 28.9,
+            "maxPricePerPing": 28.9
+          },
+          {
+            "caseName": "宗硯大砌系列20",
+            "town": "宜蘭市",
+            "count": 1,
+            "minPricePerPing": 30.1,
+            "maxPricePerPing": 30.1
+          },
+          {
+            "caseName": "山海序",
+            "town": "頭城鎮",
+            "count": 1,
+            "minPricePerPing": 39.7,
+            "maxPricePerPing": 39.7
+          },
+          {
+            "caseName": "圓美磐筑",
+            "town": "蘇澳鎮",
+            "count": 1,
+            "minPricePerPing": 34.5,
+            "maxPricePerPing": 34.5
+          },
+          {
+            "caseName": "享建築",
+            "town": "蘇澳鎮",
+            "count": 1,
+            "minPricePerPing": 22.9,
+            "maxPricePerPing": 22.9
+          }
+        ]
+      },
+      "generatedAt": "2026-10-21T07:54:41.205Z"
+    },
+    {
       "release": "2026/10/11",
       "noNewData": false,
       "moiNote": "資料內容：登記日期 115年9月21日至 115年9月30日之買賣案件，及訂約日期 115年8月21日至 115年8月31日之租賃案件，及交易日期115年8月21日至 115年8月31日之預售屋案件",
@@ -790,5 +938,5 @@
       "remark": "由網站歷史版本比對（9/21 版 → 10/1 版）得出；成交交易日期跨 115/05/11–08/19，含當期新資料及補登／重新勾稽的成交。內政部當期公告期間未保存於歷史紀錄。"
     }
   ],
-  "updatedAt": "2026-10-12T07:54:11.405Z"
+  "updatedAt": "2026-10-21T07:54:41.205Z"
 }
