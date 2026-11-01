@@ -3,6 +3,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const XLSX = require('xlsx');
+const nameFixes = require('./name_fixes');
 
 const rootDir = path.resolve(__dirname, '..');
 const xlsPath = path.join(rootDir, 'g_lvr_buildcase.xls');
@@ -352,6 +353,7 @@ async function syncLatestBuildcases() {
     }
 
     let newProjectsCount = 0;
+    const newBadBuilders = [];
 
     for (let i = 1; i < rawMain.length; i++) {
         const row = rawMain[i];
@@ -506,10 +508,29 @@ async function syncLatestBuildcases() {
 
         projects.push(newProj);
         newProjectsCount++;
+        if (nameFixes.hasBadChars(builder)) newBadBuilders.push(newProj);
         console.log(`  + 發現新增建案：[${town}] ${caseName} (編號: ${numberCode || permitNo || '--'})`);
     }
 
-    if (newProjectsCount > 0) {
+    // 內政部清冊會把 Big5 以外的字輸出成「?」（例：恒），起造人名稱改查宜蘭縣建築執照開放資料補正
+    const knownFixes = nameFixes.loadFixes();
+    for (const p of newBadBuilders) {
+        if (p.numberCode && knownFixes[p.numberCode] && knownFixes[p.numberCode].builder) continue;
+        const resolved = await nameFixes.resolveBuilderFromPermit(p.builder, p.allPermits);
+        if (resolved) {
+            console.log(`  ✎ 依宜蘭縣建照開放資料補正起造人：${p.builder} → ${resolved}`);
+            if (p.numberCode) {
+                nameFixes.saveFix(p.numberCode, 'builder', resolved, `自動：宜蘭縣建築執照開放資料 ${p.permitNo} 起造人`);
+            } else {
+                p.searchTokens = p.searchTokens.split(p.builder.toLowerCase()).join(resolved.toLowerCase());
+                p.builder = resolved;
+            }
+        }
+    }
+    const fixedCount = nameFixes.applyNameFixes(projects, generateSearchAliases);
+    nameFixes.reportBadNames(projects);
+
+    if (newProjectsCount > 0 || fixedCount > 0) {
         fs.writeFileSync(dataJsonPath, JSON.stringify(projects, null, 2), 'utf-8');
         console.log(`✓ 備查清冊同步完成：新增 ${newProjectsCount} 筆建案，總建案數：${projects.length} 案`);
     } else {
