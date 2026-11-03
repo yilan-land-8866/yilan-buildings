@@ -232,6 +232,12 @@
                         </p>
                     </div>
 
+                    <!-- Mobile Visitor Counter -->
+                    <div class="visit-counter sm:hidden ml-2 shrink-0 flex flex-col items-end leading-tight text-[10px] text-[#6E675B] font-sans" title="本站瀏覽次數（每次開啟頁面計一次）">
+                        <span>今日 <b class="vc-today font-mono text-[#38342D]">-</b></span>
+                        <span>累計 <b class="vc-total font-mono text-[#38342D]">-</b></span>
+                    </div>
+
                     <!-- Mobile Export Excel Button -->
                     <button onclick="exportCurrentViewToExcel()" title="匯出 Excel" class="sm:hidden ml-2 p-1.5 text-xs font-semibold rounded-lg bg-[#FFFFFF] text-[#3E523A] border border-[#C5D4C2] hover:bg-[#EEF4EC] shrink-0 shadow-xs flex items-center justify-center">
                         <svg class="w-4 h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
@@ -273,6 +279,12 @@
                         <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#4A5D44]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
                         <span>匯出</span>
                     </button>
+
+                    <!-- Desktop Visitor Counter -->
+                    <div class="visit-counter hidden sm:flex sm:flex-col sm:items-end ml-1 pl-2.5 border-l border-[#DCD4C5] leading-snug text-[11px] text-[#6E675B] font-sans whitespace-nowrap" title="本站瀏覽次數（每次開啟頁面計一次）">
+                        <span>今日瀏覽 <b class="vc-today font-mono text-[#38342D]">-</b></span>
+                        <span>累計瀏覽 <b class="vc-total font-mono text-[#38342D]">-</b></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -216597,6 +216609,34 @@
             document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !document.getElementById('clPanel').classList.contains('hidden')) window.clClose(); });
             load(false);
         })();
+    </script>
+    <style>html:not(.vc-on) .visit-counter { display: none !important; }</style>
+    <!-- 瀏覽人數計數器（abacus.jasoncameron.dev，免費免註冊） -->
+    <script>
+    (function () {
+        try {
+            var NS = 'yilan-land-8866-yilan-buildings';
+            var BASE = 'https://abacus.jasoncameron.dev/';
+            var live = location.hostname.slice(-10) === '.github.io';
+            var action = live ? 'hit/' : 'get/';
+            var parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+            var ymd = '';
+            ['year', 'month', 'day'].forEach(function (t) { parts.forEach(function (p) { if (p.type === t) ymd += p.value; }); });
+            function call(key) {
+                var ctrl = window.AbortController ? new AbortController() : null;
+                var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 8000) : null;
+                return fetch(BASE + action + NS + '/' + key, ctrl ? { signal: ctrl.signal, cache: 'no-store' } : { cache: 'no-store' })
+                    .then(function (r) { if (timer) clearTimeout(timer); if (!r.ok) throw new Error(r.status); return r.json(); })
+                    .then(function (j) { if (typeof j.value !== 'number') throw new Error('bad'); return j.value; });
+            }
+            Promise.all([call('d-' + ymd), call('total')]).then(function (v) {
+                function fill(cls, n) { document.querySelectorAll('.' + cls).forEach(function (el) { el.textContent = n.toLocaleString('zh-TW'); }); }
+                fill('vc-today', v[0]);
+                fill('vc-total', v[1]);
+                document.documentElement.classList.add('vc-on');
+            }).catch(function () { /* 計數服務失敗時不顯示 */ });
+        } catch (e) { /* 不影響頁面 */ }
+    })();
     </script>
 </body>
 </html>
