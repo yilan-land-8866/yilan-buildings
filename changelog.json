@@ -1,6 +1,197 @@
 {
   "entries": [
     {
+      "release": "2026/11/21",
+      "noNewData": false,
+      "moiNote": "資料內容：登記日期 115年11月1日至 115年11月10日之買賣案件，及訂約日期 115年10月1日至 115年10月10日之租賃案件，及交易日期115年10月1日至 115年10月10日之預售屋案件",
+      "saleRegPeriod": "115/11/1–115/11/10",
+      "presalePeriod": "115/10/1–115/10/10",
+      "totalCases": 592,
+      "addedCases": [],
+      "removedCases": [],
+      "presaleTx": {
+        "total": 30,
+        "caseCount": 23,
+        "tradeDateFrom": "115/10/02",
+        "tradeDateTo": "115/10/10",
+        "byTown": {
+          "宜蘭市": 5,
+          "員山鄉": 5,
+          "五結鄉": 4,
+          "壯圍鄉": 2,
+          "頭城鎮": 5,
+          "三星鄉": 3,
+          "冬山鄉": 2,
+          "礁溪鄉": 2,
+          "蘇澳鎮": 2
+        },
+        "byCase": [
+          {
+            "caseName": "青庭La Vie",
+            "town": "宜蘭市",
+            "count": 3,
+            "minPricePerPing": 31.8,
+            "maxPricePerPing": 33.4
+          },
+          {
+            "caseName": "頤和知序",
+            "town": "員山鄉",
+            "count": 3,
+            "minPricePerPing": 28.8,
+            "maxPricePerPing": 32.2
+          },
+          {
+            "caseName": "鎮安序",
+            "town": "五結鄉",
+            "count": 2,
+            "minPricePerPing": 30.2,
+            "maxPricePerPing": 32
+          },
+          {
+            "caseName": "村聲",
+            "town": "壯圍鄉",
+            "count": 2,
+            "minPricePerPing": 29.2,
+            "maxPricePerPing": 29.9
+          },
+          {
+            "caseName": "享享生活",
+            "town": "頭城鎮",
+            "count": 2,
+            "minPricePerPing": 25.2,
+            "maxPricePerPing": 25.2
+          },
+          {
+            "caseName": "丰野．哲隱五期",
+            "town": "三星鄉",
+            "count": 1,
+            "minPricePerPing": 22.7,
+            "maxPricePerPing": 22.7
+          },
+          {
+            "caseName": "青豐",
+            "town": "三星鄉",
+            "count": 1,
+            "minPricePerPing": 26.1,
+            "maxPricePerPing": 26.1
+          },
+          {
+            "caseName": "謙藏3",
+            "town": "三星鄉",
+            "count": 1,
+            "minPricePerPing": 21.1,
+            "maxPricePerPing": 21.1
+          },
+          {
+            "caseName": "怡華艾菲爾",
+            "town": "五結鄉",
+            "count": 1,
+            "minPricePerPing": 38.1,
+            "maxPricePerPing": 38.1
+          },
+          {
+            "caseName": "嵩禾拾穗",
+            "town": "五結鄉",
+            "count": 1,
+            "minPricePerPing": 36.4,
+            "maxPricePerPing": 36.4
+          },
+          {
+            "caseName": "國磐季",
+            "town": "冬山鄉",
+            "count": 1,
+            "minPricePerPing": 28.2,
+            "maxPricePerPing": 28.2
+          },
+          {
+            "caseName": "幸福苑",
+            "town": "冬山鄉",
+            "count": 1,
+            "minPricePerPing": 27.7,
+            "maxPricePerPing": 27.7
+          },
+          {
+            "caseName": "鳳凰愛買17期",
+            "town": "宜蘭市",
+            "count": 1,
+            "minPricePerPing": 39.5,
+            "maxPricePerPing": 39.5
+          },
+          {
+            "caseName": "皇程首賦",
+            "town": "宜蘭市",
+            "count": 1,
+            "minPricePerPing": 40.9,
+            "maxPricePerPing": 40.9
+          },
+          {
+            "caseName": "松佑鑫時代",
+            "town": "員山鄉",
+            "count": 1,
+            "minPricePerPing": 23.2,
+            "maxPricePerPing": 23.2
+          },
+          {
+            "caseName": "朗頌",
+            "town": "員山鄉",
+            "count": 1,
+            "minPricePerPing": 22.9,
+            "maxPricePerPing": 22.9
+          },
+          {
+            "caseName": "遇上荷蘭",
+            "town": "頭城鎮",
+            "count": 1,
+            "minPricePerPing": 31.9,
+            "maxPricePerPing": 31.9
+          },
+          {
+            "caseName": "山海序",
+            "town": "頭城鎮",
+            "count": 1,
+            "minPricePerPing": 29.5,
+            "maxPricePerPing": 29.5
+          },
+          {
+            "caseName": "宜林臻品",
+            "town": "頭城鎮",
+            "count": 1,
+            "minPricePerPing": 22.7,
+            "maxPricePerPing": 22.7
+          },
+          {
+            "caseName": "踏踏鹿",
+            "town": "礁溪鄉",
+            "count": 1,
+            "minPricePerPing": 34.5,
+            "maxPricePerPing": 34.5
+          },
+          {
+            "caseName": "鳳凰愛買27期",
+            "town": "礁溪鄉",
+            "count": 1,
+            "minPricePerPing": 31.6,
+            "maxPricePerPing": 31.6
+          },
+          {
+            "caseName": "海藍境",
+            "town": "蘇澳鎮",
+            "count": 1,
+            "minPricePerPing": 21.2,
+            "maxPricePerPing": 21.2
+          },
+          {
+            "caseName": "群亦澄亦2",
+            "town": "蘇澳鎮",
+            "count": 1,
+            "minPricePerPing": 23.8,
+            "maxPricePerPing": 23.8
+          }
+        ]
+      },
+      "generatedAt": "2026-11-21T10:01:18.311Z"
+    },
+    {
       "release": "2026/11/11",
       "noNewData": false,
       "moiNote": "資料內容：登記日期 115年10月21日至 115年10月31日之買賣案件，及訂約日期 115年9月21日至 115年9月30日之租賃案件，及交易日期115年9月21日至 115年9月30日之預售屋案件",
@@ -1300,5 +1491,5 @@
       "remark": "由網站歷史版本比對（9/21 版 → 10/1 版）得出；成交交易日期跨 115/05/11–08/19，含當期新資料及補登／重新勾稽的成交。內政部當期公告期間未保存於歷史紀錄。"
     }
   ],
-  "updatedAt": "2026-11-11T09:41:45.497Z"
+  "updatedAt": "2026-11-21T10:01:18.311Z"
 }
